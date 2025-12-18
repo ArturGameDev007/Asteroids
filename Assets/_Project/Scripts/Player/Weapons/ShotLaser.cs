@@ -18,9 +18,7 @@ namespace Assets.Scripts.Player.Weapons
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
-            {
                 Shoot();
-            }
         }
 
         private void Shoot()
@@ -34,7 +32,6 @@ namespace Assets.Scripts.Player.Weapons
             {
                 Debug.Log("Нет зарядов лазера.");
             }
-
         }
     }
 }

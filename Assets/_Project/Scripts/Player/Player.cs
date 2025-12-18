@@ -2,43 +2,44 @@ using Assets.Scripts.EnemySpace;
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerController))]
-[RequireComponent(typeof(HandlerCrashWithEnemy))]
-public class Player : MonoBehaviour
+namespace Assets.Scripts.Player
 {
-    private PlayerController _player;
-    private HandlerCrashWithEnemy _collisionHandler;
-
-    public event Action GameOver;
-
-    private void Awake()
+    [RequireComponent(typeof(PlayerController))]
+    [RequireComponent(typeof(HandlerCrashWithEnemy))]
+    public class Player : MonoBehaviour
     {
-        _player = GetComponent<PlayerController>();
-        _collisionHandler = GetComponent<HandlerCrashWithEnemy>();
-    }
+        private PlayerController _player;
+        private HandlerCrashWithEnemy _collisionHandler;
 
-    private void OnEnable()
-    {
-        _collisionHandler.CollisionHandler += ProcessCollision;
-    }
+        public event Action GameOver;
 
-    private void OnDisable()
-    {
-
-        _collisionHandler.CollisionHandler -= ProcessCollision;
-    }
-
-
-    public void Reset()
-    {
-        _player.Reset();
-    }
-
-    private void ProcessCollision(IEnemy enemy)
-    {
-        if (enemy is Enemy)
+        private void Awake()
         {
-            GameOver?.Invoke();
+            _player = GetComponent<PlayerController>();
+            _collisionHandler = GetComponent<HandlerCrashWithEnemy>();
+        }
+
+        private void OnEnable()
+        {
+            _collisionHandler.CollisionHandler += ProcessCollision;
+        }
+
+        private void OnDisable()
+        {
+            _collisionHandler.CollisionHandler -= ProcessCollision;
+        }
+
+        public void Reset()
+        {
+            _player.Reset();
+        }
+
+        private void ProcessCollision(IEnemy enemy)
+        {
+            if (enemy is Enemy)
+            {
+                GameOver?.Invoke();
+            }
         }
     }
 }

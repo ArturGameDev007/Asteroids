@@ -1,79 +1,71 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+namespace Assets.Scripts.Player
 {
-    [SerializeField] private Rigidbody2D _head2D;
-
-    [SerializeField] private InputController _controllerInput;
-
-    [SerializeField] private float _rotationSpeed;
-    [SerializeField] private float _thrustForce;
-
-    private Vector3 _startPosition;
-
-    private float _xAngle = 0f;
-    private float _yAngle = 0f;
-
-    private void Awake()
+    [RequireComponent(typeof(InputController))]
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class PlayerController : MonoBehaviour
     {
-        _head2D = GetComponent<Rigidbody2D>();
-        _controllerInput = GetComponent<InputController>();
-    }
+        [SerializeField] private Rigidbody2D _head2D;
 
-    private void Start()
-    {
-        _startPosition = transform.position;
+        [SerializeField] private InputController _controllerInput;
 
-        Reset();
-    }
+        [SerializeField] private float _rotationSpeed;
+        [SerializeField] private float _thrustForce;
 
-    private void Update()
-    {
-        HandleRotation();
-    }
+        private Vector3 _startPosition;
 
-    private void FixedUpdate()
-    {
-        Move();
-    }
+        private float _xAngle = 0f;
+        private float _yAngle = 0f;
 
-    private void Move()
-    {
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-            _head2D.AddForce(transform.up * (_thrustForce * Time.deltaTime));
+        private void Awake()
+        {
+            _head2D = GetComponent<Rigidbody2D>();
+            _controllerInput = GetComponent<InputController>();
+        }
 
-        if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.A))
-            transform.Rotate(Vector3.back * (_rotationSpeed * Time.deltaTime), transform.rotation.x);
+        private void Start()
+        {
+            _startPosition = transform.position;
 
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-            transform.Rotate(Vector3.forward * (_rotationSpeed * Time.deltaTime), transform.rotation.x);
-    }
+            Reset();
+        }
 
-    //private void Move()
-    //{
-    //    float moveVertical = _controllerInput.VerticalInput;
+        private void Update()
+        {
+            HandleRotation();
+        }
 
-    //    if (moveVertical > 0)
-    //    {
-    //        Vector2 thrustDirection = transform.up;
+        private void FixedUpdate()
+        {
+            Move();
+        }
 
-    //        _head2D.AddForce(thrustDirection * _thrustForce);
-    //    }
-    //}
+        private void Move()
+        {
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                _head2D.AddForce(transform.up * (_thrustForce * Time.deltaTime));
 
-    private void HandleRotation()
-    {
-        float rotationHorizontal = _controllerInput.HorizontalInput;
-        float rotationAmount = -rotationHorizontal * _rotationSpeed * Time.deltaTime;
-        transform.Rotate(_xAngle, _yAngle, rotationAmount);
-    }
+            if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.A))
+                transform.Rotate(Vector3.back * (_rotationSpeed * Time.deltaTime), transform.rotation.x);
 
-    public void Reset()
-    {
-        transform.position = _startPosition;
-        transform.rotation = Quaternion.identity;
-        _head2D.velocity = Vector2.zero;
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                transform.Rotate(Vector3.forward * (_rotationSpeed * Time.deltaTime), transform.rotation.x);
+        }
+
+        private void HandleRotation()
+        {
+            float rotationHorizontal = _controllerInput.HorizontalInput;
+            float rotationAmount = -rotationHorizontal * _rotationSpeed * Time.deltaTime;
+            transform.Rotate(_xAngle, _yAngle, rotationAmount);
+        }
+
+        public void Reset()
+        {
+            transform.position = _startPosition;
+            transform.rotation = Quaternion.identity;
+            _head2D.velocity = Vector2.zero;
+        }
     }
 }
 

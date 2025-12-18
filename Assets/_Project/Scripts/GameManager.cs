@@ -1,3 +1,4 @@
+using Assets.Scripts.Player;
 using Assets.Scripts.Player.Weapons;
 using Assets.Scripts.UI.GameScreen;
 using UnityEngine;

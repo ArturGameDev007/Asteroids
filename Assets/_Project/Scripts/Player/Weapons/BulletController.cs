@@ -9,9 +9,7 @@ namespace Assets.Scripts.Player.Weapons
         private void FixedUpdate()
         {
             if (Input.GetKeyDown(KeyCode.Space))
-            {
                 Shot();
-            }
         }
 
         private void Shot()

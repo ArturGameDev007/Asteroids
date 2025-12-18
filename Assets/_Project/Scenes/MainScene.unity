@@ -420,6 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 304896028}
+  _player: {fileID: 340683182}
   _prefab:
   - {fileID: 8789278343424712742, guid: 851e842e4e4f2c341abf89a4f0472a8d, type: 3}
   - {fileID: 181689331425005305, guid: 68a4a0e7d19928745b3e0dadee7bdb46, type: 3}

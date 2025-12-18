@@ -9,9 +9,7 @@ namespace Assets.Scripts.EnemySpace
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Enemy enemy))
-            {
                 _pool.PutObject(enemy);
-            }
         }
     }
 }

@@ -1,50 +1,52 @@
 using UnityEngine;
 
-public class ScreenWrap : MonoBehaviour
+namespace Assets.Scripts.Player
 {
-
-    private float _screenWidth;
-    private float _screenHeight;
-    private float _objectWidth;
-    private float _objectHeight;
-
-    private Camera _main;
-
-    private void Start()
+    public class ScreenWrap : MonoBehaviour
     {
-        _main = GetComponent<Camera>();
-        _main = Camera.main;
+        private float _screenWidth;
+        private float _screenHeight;
+        private float _objectWidth;
+        private float _objectHeight;
 
-        BoundsScreen();
-    }
+        private Camera _main;
 
-    private void Update()
-    {
-        CheckForScreenWrap();
-    }
+        private void Start()
+        {
+            _main = GetComponent<Camera>();
+            _main = Camera.main;
 
-    private void BoundsScreen()
-    {
-        Vector3 screenBounds = _main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _main.transform.position.z));
-        _screenWidth = screenBounds.x;
-        _screenHeight = screenBounds.y;
-    }
+            BoundsScreen();
+        }
 
-    private void CheckForScreenWrap()
-    {
-        Vector3 newPosition = transform.position;
+        private void Update()
+        {
+            CheckForScreenWrap();
+        }
 
-        if (newPosition.x > _screenWidth + _objectWidth)
-            newPosition.x = -_screenWidth - _objectWidth;
-        else if (newPosition.x < -_screenWidth - _objectWidth)
-            newPosition.x = _screenWidth + _objectWidth;
+        private void BoundsScreen()
+        {
+            Vector3 screenBounds = _main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _main.transform.position.z));
+            _screenWidth = screenBounds.x;
+            _screenHeight = screenBounds.y;
+        }
 
-        if (newPosition.y > _screenHeight + _objectHeight)
-            newPosition.y = -_screenHeight - _objectHeight;
-        else if (newPosition.y < -_screenHeight - _objectHeight)
-            newPosition.y = _screenHeight + _objectHeight;
+        private void CheckForScreenWrap()
+        {
+            Vector3 newPosition = transform.position;
 
-        transform.position = newPosition;
+            if (newPosition.x > _screenWidth + _objectWidth)
+                newPosition.x = -_screenWidth - _objectWidth;
+            else if (newPosition.x < -_screenWidth - _objectWidth)
+                newPosition.x = _screenWidth + _objectWidth;
+
+            if (newPosition.y > _screenHeight + _objectHeight)
+                newPosition.y = -_screenHeight - _objectHeight;
+            else if (newPosition.y < -_screenHeight - _objectHeight)
+                newPosition.y = _screenHeight + _objectHeight;
+
+            transform.position = newPosition;
+        }
     }
 }
 
