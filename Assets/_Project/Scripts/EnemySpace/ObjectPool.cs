@@ -6,6 +6,8 @@ namespace Assets.Scripts.EnemySpace
     public class ObjectPool : MonoBehaviour
     {
         [SerializeField] private Transform _container;
+        [SerializeField] private Transform _player;
+
         [SerializeField] private List<Enemy> _prefab;
 
         private Queue<Enemy> _pool;
@@ -22,11 +24,14 @@ namespace Assets.Scripts.EnemySpace
             if (_pool.Count == 0)
             {
                 int indexEnemy = Random.Range(0, _prefab.Count);
-                var enemy = Instantiate(_prefab[indexEnemy]);
+                var createEnemy = Instantiate(_prefab[indexEnemy]);
 
-                enemy.transform.parent = _container;
+                if (createEnemy.TryGetComponent(out FlyingSaurcersController enemy))
+                    enemy.Construsct(_player);
 
-                return enemy;
+                createEnemy.transform.parent = _container;
+
+                return createEnemy;
             }
 
             return _pool.Dequeue();

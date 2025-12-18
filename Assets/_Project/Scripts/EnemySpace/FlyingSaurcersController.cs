@@ -16,14 +16,6 @@ namespace Assets.Scripts.EnemySpace
         private float _distanceToPlayer;
         private float _minDistanceForDetected = 10f;
 
-        private void Awake()
-        {
-            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-
-            if (playerObject != null)
-                _player = playerObject.transform;
-        }
-
         private void Start()
         {
             _flyingPosition = transform.position;
@@ -31,7 +23,13 @@ namespace Assets.Scripts.EnemySpace
 
         private void Update()
         {
-            Move();
+            if (_player != null)
+                Move();
+        }
+
+        public void Construsct(Transform player)
+        {
+            _player = player;
         }
 
         protected override void Move()
