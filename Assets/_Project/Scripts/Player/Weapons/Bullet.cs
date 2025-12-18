@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.EnemySpace;
-using Assets.Scripts.UI.GameScreen;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Weapons
@@ -10,7 +9,7 @@ namespace Assets.Scripts.Player.Weapons
         {
             if (other.TryGetComponent(out Enemy enemy))
             {
-                ScoreManager.Instance.AddScore(PointForKill);
+                Manager.AddScore(PointForKill);
                 DestroyOfEnemies(enemy);
                 Destroy(gameObject);
             }

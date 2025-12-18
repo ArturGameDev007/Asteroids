@@ -5,17 +5,17 @@ namespace Assets.Scripts.UI.GameScreen
 {
     public class ScoreManager : MonoBehaviour
     {
-        public static ScoreManager Instance;
+        //public static ScoreManager Instance;
 
         [SerializeField] private ViewScore _viewScore;
         [SerializeField] private int _score = 0;
 
         public event Action<int> ScoreLoaded;
 
-        private void Awake()
-        {
-            Instance = this;
-        }
+        //private void Awake()
+        //{
+        //    Instance = this;
+        //}
 
         private void Start()
         {
