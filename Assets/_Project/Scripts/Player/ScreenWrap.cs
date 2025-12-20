@@ -10,6 +10,7 @@ namespace Assets.Scripts.Player
         private float _objectHeight;
 
         private Camera _main;
+        private Vector3 _position;
 
         private void Start()
         {
@@ -22,11 +23,12 @@ namespace Assets.Scripts.Player
         private void Update()
         {
             CheckForScreenWrap();
+            _position = _main.transform.position;
         }
 
         private void BoundsScreen()
         {
-            Vector3 screenBounds = _main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _main.transform.position.z));
+            Vector3 screenBounds = _main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _position.z));
             _screenWidth = screenBounds.x;
             _screenHeight = screenBounds.y;
         }

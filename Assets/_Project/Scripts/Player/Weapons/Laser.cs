@@ -6,18 +6,15 @@ namespace Assets.Scripts.Player.Weapons
 {
     public class Laser : TypesOfWeapon
     {
-        //private int _pointForKill = 10;
+        //ScoreManager manager = new ScoreManager();
+
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Enemy enemy))
             {
                 DestroyOfEnemies(enemy);
-            }
-
-            if (other.TryGetComponent(out ScoreManager player))
-            {
-                player.AddScore(PointForKill);
+                ScoreManager.Instance.AddScore(PointForKill);
             }
         }
 

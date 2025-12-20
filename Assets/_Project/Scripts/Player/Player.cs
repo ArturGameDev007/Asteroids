@@ -1,5 +1,4 @@
 using Assets.Scripts.EnemySpace;
-using Assets.Scripts.UI.GameScreen;
 using System;
 using UnityEngine;
 
@@ -9,8 +8,6 @@ namespace Assets.Scripts.Player
     [RequireComponent(typeof(HandlerCrashWithEnemy))]
     public class Player : MonoBehaviour
     {
-        [SerializeField] private ScoreManager _manager;
-
         private PlayerController _player;
         private HandlerCrashWithEnemy _collisionHandler;
 

@@ -53,7 +53,6 @@ namespace Assets.Scripts.Player.Weapons
             while (_reloadTime > timer)
             {
                 _reloadTime -= Time.deltaTime;
-
                 yield return null;
             }
 
@@ -64,12 +63,14 @@ namespace Assets.Scripts.Player.Weapons
 
         private void Laser()
         {
-            if (CurrentAmmonLaser > 0)
+            int minCountLazer = 0;
+
+            if (CurrentAmmonLaser > minCountLazer)
             {
                 CreateShoot(_prefabLaser, _pointShootForlaser.position, _pointShootForlaser.rotation);
-                CurrentAmmonLaser -= 1;
+                CurrentAmmonLaser--;
 
-                if (CurrentAmmonLaser == 0)
+                if (CurrentAmmonLaser == minCountLazer)
                     _coroutine = StartCoroutine(ReloadLaser());
             }
         }

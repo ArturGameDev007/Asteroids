@@ -21,9 +21,12 @@ namespace Assets.Scripts.EnemySpace
 
         public Enemy GetObject()
         {
-            if (_pool.Count == 0)
+            int numberZero = 0;
+            int minCountPool = 0;
+
+            if (_pool.Count == numberZero)
             {
-                int indexEnemy = Random.Range(0, _prefab.Count);
+                int indexEnemy = Random.Range(minCountPool, _prefab.Count);
                 var createEnemy = Instantiate(_prefab[indexEnemy]);
 
                 if (createEnemy.TryGetComponent(out FlyingSaurcersController enemy))

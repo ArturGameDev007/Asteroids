@@ -23,7 +23,9 @@ namespace Assets.Scripts.Player.Weapons
 
         private void Shoot()
         {
-            if (_currentCountLaser > 0)
+            int minCountlazer = 0;
+
+            if (_currentCountLaser > minCountlazer)
             {
                 Instantiate(_prefab, _point.position, _point.rotation);
                 _currentCountLaser--;

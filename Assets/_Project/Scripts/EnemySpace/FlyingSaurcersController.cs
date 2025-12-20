@@ -51,11 +51,14 @@ namespace Assets.Scripts.EnemySpace
 
         private void RotateTowardPlayer()
         {
+            float rotateX = 0;
+            float rotateY = 0;
+
             Vector3 directionToPlayer = _player.transform.position - _flyingPosition;
 
             float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
-            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(rotateX, rotateY, angle));
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }

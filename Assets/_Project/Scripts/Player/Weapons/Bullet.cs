@@ -1,11 +1,12 @@
 ﻿using Assets.Scripts.EnemySpace;
+using Assets.Scripts.UI.GameScreen;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Weapons
 {
     public class Bullet : TypesOfWeapon
     {
-        //private int _pointForKill = 10;
+        //ScoreManager manager = new ScoreManager();
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -13,11 +14,9 @@ namespace Assets.Scripts.Player.Weapons
             {
                 DestroyOfEnemies(enemy);
                 Destroy(gameObject);
-            }
+                ScoreManager.Instance.AddScore(PointForKill);
 
-            if (other.TryGetComponent(out Player player))
-            {
-                player.AddScore(PointForKill);
+                //manager.AddScore(PointForKill);
             }
         }
 

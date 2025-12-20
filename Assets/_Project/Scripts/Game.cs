@@ -4,14 +4,14 @@ using Assets.Scripts.UI.GameScreen;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class Game : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private InputForShoot _shoot;
     [SerializeField] private EndGameScreen _endGameScreen;
     [SerializeField] private ScoreManager _manager;
 
-    public bool IsGameOver = false;
+    [field: SerializeField] public bool IsGameOver = false;
 
     private void OnEnable()
     {

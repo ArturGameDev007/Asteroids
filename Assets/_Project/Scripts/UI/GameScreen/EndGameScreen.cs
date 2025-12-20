@@ -5,9 +5,12 @@ public class EndGameScreen : Window
 {
     public event Action RestartButtonClick;
 
+    private float _stopTimeGame = 0f;
+    private float _startTimeGame = 1f;
+
     public override void Open()
     {
-        Time.timeScale = 0f;
+        Time.timeScale = _stopTimeGame;
 
         PanelCanvas.gameObject.SetActive(true);
         ActionButton.interactable = true;
@@ -15,7 +18,7 @@ public class EndGameScreen : Window
 
     public override void Close()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = _startTimeGame;
 
         PanelCanvas.gameObject.SetActive(false);
         ActionButton.interactable = false;
