@@ -11,12 +11,23 @@ namespace Assets.Scripts.UI.GameScreen
         private void OnEnable()
         {
             ActionButton.onClick.AddListener(OnButtonCLick);
+
         }
 
         private void OnDisable()
         {
             ActionButton.onClick.RemoveListener(OnButtonCLick);
         }
+
+        //private void Enable()
+        //{
+        //    ActionButton.onClick.AddListener(OnButtonCLick);
+        //}
+
+        //private void Disable()
+        //{
+        //    ActionButton.onClick.RemoveListener(OnButtonCLick);
+        //}
 
         public abstract void Open();
 

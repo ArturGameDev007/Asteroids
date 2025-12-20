@@ -925,6 +925,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI-EndGameScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3491601382450380812, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
       propertyPath: _manager
       value: 
@@ -1008,6 +1012,10 @@ PrefabInstance:
     - target: {fileID: 4128760670663854505, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942242090126097425, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+      propertyPath: <ActionButton>k__BackingField
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
