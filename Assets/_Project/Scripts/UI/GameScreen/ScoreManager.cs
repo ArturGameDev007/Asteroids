@@ -7,10 +7,10 @@ namespace Assets.Scripts.UI.GameScreen
     {
         public static ScoreManager Instance { get; private set; }
 
+        public event Action<int> OnScoreLoaded;
+
         [SerializeField] private ViewScore _viewScore;
         [SerializeField] private int _score = 0;
-
-        public event Action<int> ScoreLoaded;
 
         private int _minCountScore = 0;
 
@@ -27,7 +27,7 @@ namespace Assets.Scripts.UI.GameScreen
         public void AddScore(int value)
         {
             _score += value;
-            ScoreLoaded?.Invoke(value);
+            OnScoreLoaded?.Invoke(value);
         }
 
         public void GetScore()

@@ -10,12 +10,12 @@ namespace Assets.Scripts.UI.GameScreen
 
         private void OnEnable()
         {
-            _manager.ScoreLoaded += OnShowInfoFinalScore;
+            _manager.OnScoreLoaded += OnShowInfoFinalScore;
         }
 
         private void OnDisable()
         {
-            _manager.ScoreLoaded -= OnShowInfoFinalScore;
+            _manager.OnScoreLoaded -= OnShowInfoFinalScore;
         }
 
         public void OnShowInfoFinalScore(int value)

@@ -9,10 +9,12 @@ namespace Assets.Scripts.Player.Weapons
         private readonly int _inputMouseLeft = 0;
         private readonly int _inputMouseRight = 1;
 
+        public event Action<int> OnLaserChanged;
+        public event Action<float> OnReplenishedLaserOverTime;
+
         [SerializeField] private GameObject _prefabLaser;
         [SerializeField] private GameObject _bulletPrefab;
 
-        [Space(10)]
         [SerializeField] private Transform _pointShootForlaser;
         [SerializeField] private Transform _pointShootForBullet;
 
@@ -20,9 +22,6 @@ namespace Assets.Scripts.Player.Weapons
 
         [SerializeField] private float _reloadTime = 5f;
         [SerializeField] private bool _isRealoding = false;
-
-        public event Action<int> LaserChanged;
-        public event Action<float> ReplenishedLaserOverTime;
 
         private Coroutine _coroutine;
 
@@ -88,8 +87,8 @@ namespace Assets.Scripts.Player.Weapons
 
         private void ShowInfo()
         {
-            LaserChanged?.Invoke(CurrentAmmonLaser);
-            ReplenishedLaserOverTime?.Invoke(_reloadTime);
+            OnLaserChanged?.Invoke(CurrentAmmonLaser);
+            OnReplenishedLaserOverTime?.Invoke(_reloadTime);
         }
     }
 }

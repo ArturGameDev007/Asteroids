@@ -13,14 +13,14 @@ namespace Assets.Scripts.UI.PerformanceShip
 
         private void OnEnable()
         {
-            _laser.LaserChanged += OnShowInfoLaser;
-            _laser.ReplenishedLaserOverTime += OnShowRallbackLaser;
+            _laser.OnLaserChanged += OnShowInfoLaser;
+            _laser.OnReplenishedLaserOverTime += OnShowRallbackLaser;
         }
 
         private void OnDisable()
         {
-            _laser.LaserChanged += OnShowInfoLaser;
-            _laser.ReplenishedLaserOverTime -= OnShowRallbackLaser;
+            _laser.OnLaserChanged += OnShowInfoLaser;
+            _laser.OnReplenishedLaserOverTime -= OnShowRallbackLaser;
         }
 
         private void OnShowInfoLaser(int value)

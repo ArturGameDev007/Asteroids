@@ -8,7 +8,6 @@ namespace Assets.Scripts.Player.Weapons
     {
         //ScoreManager manager = new ScoreManager();
 
-
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Enemy enemy))

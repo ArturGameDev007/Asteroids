@@ -41,6 +41,13 @@ namespace Assets.Scripts.Player
             Move();
         }
 
+        public void Reset()
+        {
+            transform.position = _startPosition;
+            transform.rotation = Quaternion.identity;
+            _head2D.velocity = Vector2.zero;
+        }
+
         private void Move()
         {
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
@@ -58,13 +65,6 @@ namespace Assets.Scripts.Player
             float rotationHorizontal = _controllerInput.HorizontalInput;
             float rotationAmount = -rotationHorizontal * _rotationSpeed * Time.deltaTime;
             transform.Rotate(_xAngle, _yAngle, rotationAmount);
-        }
-
-        public void Reset()
-        {
-            transform.position = _startPosition;
-            transform.rotation = Quaternion.identity;
-            _head2D.velocity = Vector2.zero;
         }
     }
 }

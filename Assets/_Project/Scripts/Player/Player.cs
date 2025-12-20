@@ -8,10 +8,10 @@ namespace Assets.Scripts.Player
     [RequireComponent(typeof(HandlerCrashWithEnemy))]
     public class Player : MonoBehaviour
     {
+        public event Action OnGameOver;
+
         private PlayerController _player;
         private HandlerCrashWithEnemy _collisionHandler;
-
-        public event Action GameOver;
 
         private void Awake()
         {
@@ -21,12 +21,12 @@ namespace Assets.Scripts.Player
 
         private void OnEnable()
         {
-            _collisionHandler.CollisionHandler += ProcessCollision;
+            _collisionHandler.OnCollisionHandler += ProcessCollision;
         }
 
         private void OnDisable()
         {
-            _collisionHandler.CollisionHandler -= ProcessCollision;
+            _collisionHandler.OnCollisionHandler -= ProcessCollision;
         }
 
         public void Reset()
@@ -38,7 +38,7 @@ namespace Assets.Scripts.Player
         {
             if (enemy is Enemy)
             {
-                GameOver?.Invoke();
+                OnGameOver?.Invoke();
             }
         }
     }

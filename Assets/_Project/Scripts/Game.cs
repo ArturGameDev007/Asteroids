@@ -15,20 +15,21 @@ public class Game : MonoBehaviour
 
     private void OnEnable()
     {
-        _endGameScreen.RestartButtonClick += OnRestartButtonClick;
-        _player.GameOver += OnGameOver;
+        _endGameScreen.OnRestartButtonClick += OnRestartButtonClick;
+        _player.OnGameOver += OnGameOver;
     }
 
     private void OnDisable()
     {
-        _endGameScreen.RestartButtonClick -= OnRestartButtonClick;
-        _player.GameOver -= OnGameOver;
+        _endGameScreen.OnRestartButtonClick -= OnRestartButtonClick;
+        _player.OnGameOver -= OnGameOver;
     }
 
     private void OnGameOver()
     {
         _endGameScreen.Open();
         _manager.GetScore();
+
         IsGameOver = true;
         _shoot.enabled = false;
     }
@@ -42,6 +43,7 @@ public class Game : MonoBehaviour
     private void StartGame()
     {
         _player.Reset();
+
         _shoot.enabled = true;
         IsGameOver = false;
 
