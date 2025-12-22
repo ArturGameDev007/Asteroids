@@ -14,9 +14,11 @@ namespace Assets.Scripts.Player.Weapons
         [SerializeField] private GameObject _prefabLaser;
         [SerializeField] private GameObject _bulletPrefab;
 
+        [Space(10)]
         [SerializeField] private Transform _pointShootForlaser;
         [SerializeField] private Transform _pointShootForBullet;
 
+        [Space(10)]
         [SerializeField] private GenerateLaser _laserAmmo;
         [SerializeField] private WeaponShooter _shooter;
 

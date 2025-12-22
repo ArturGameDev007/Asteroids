@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Player.Weapons;
+﻿using Assets._Project.Scripts.Player.Weapons;
 using TMPro;
 using UnityEngine;
 
@@ -9,28 +9,30 @@ namespace Assets.Scripts.UI.PerformanceShip
         [SerializeField] private TextMeshProUGUI _textlaser;
         [SerializeField] private TextMeshProUGUI _rollbackLasera;
 
-        [SerializeField] private InputForShoot _laser;
+        [SerializeField] private GenerateLaser _laser;
 
         private void OnEnable()
         {
             _laser.OnLaserChanged += OnShowInfoLaser;
-            _laser.OnReplenishedLaserOverTime += OnShowRallbackLaser;
+            _laser.OnReloadProgress += OnShowRallbackLaser;
         }
 
         private void OnDisable()
         {
-            _laser.OnLaserChanged += OnShowInfoLaser;
-            _laser.OnReplenishedLaserOverTime -= OnShowRallbackLaser;
+            _laser.OnLaserChanged -= OnShowInfoLaser;
+            _laser.OnReloadProgress -= OnShowRallbackLaser;
         }
 
         private void OnShowInfoLaser(int value)
         {
-            _textlaser.text = "Laser" + "<br>" + "Ammon: " + value.ToString();
+            //_textlaser.text = "Laser" + "<br>" + "Ammon: " + value.ToString();
+            _textlaser.text = $"Laser Ammon: {value.ToString()}";
         }
 
         private void OnShowRallbackLaser(float time)
         {
-            _rollbackLasera.text = "Rollback Laser: " + time.ToString("F1") + "s";
+            //_rollbackLasera.text = "Rollback Laser: " + time.ToString("F1") + "s";
+            _rollbackLasera.text = $"Rollback Laser: {time.ToString("F1")}s";
         }
     }
 }
