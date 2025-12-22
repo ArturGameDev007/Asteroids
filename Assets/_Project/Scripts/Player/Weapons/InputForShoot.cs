@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using Assets._Project.Scripts.Player.Weapons;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Weapons
@@ -9,8 +8,8 @@ namespace Assets.Scripts.Player.Weapons
         private readonly int _inputMouseLeft = 0;
         private readonly int _inputMouseRight = 1;
 
-        public event Action<int> OnLaserChanged;
-        public event Action<float> OnReplenishedLaserOverTime;
+        //public event Action<int> OnLaserChanged;
+        //public event Action<float> OnReplenishedLaserOverTime;
 
         [SerializeField] private GameObject _prefabLaser;
         [SerializeField] private GameObject _bulletPrefab;
@@ -18,76 +17,74 @@ namespace Assets.Scripts.Player.Weapons
         [SerializeField] private Transform _pointShootForlaser;
         [SerializeField] private Transform _pointShootForBullet;
 
-        [SerializeField] private int MaxAmountLaser = 20;
+        [SerializeField] private GenerateLaser _laserAmmo;
+        [SerializeField] private WeaponShooter _shooter;
 
-        [SerializeField] private float _reloadTime = 5f;
-        [SerializeField] private bool _isRealoding = false;
+        //[SerializeField] private int MaxAmountLaser = 20;
 
-        private Coroutine _coroutine;
+        //[SerializeField] private float _reloadTime = 5f;
+        //[SerializeField] private bool _isRealoding = false;
 
-        public int CurrentAmmonLaser { get; private set; }
+        //private Coroutine _coroutine;
 
-        private void Start()
-        {
-            CurrentAmmonLaser = MaxAmountLaser;
-        }
+        //public int CurrentAmmonLaser { get; private set; }
 
         private void Update()
         {
-            ShowInfo();
-
             if (Input.GetMouseButtonDown(_inputMouseLeft))
-                ShootFromBullet();
+                _shooter.CreateShoot(_bulletPrefab, _pointShootForBullet);
+
             if (Input.GetMouseButtonDown(_inputMouseRight))
-                Laser();
+                if (_laserAmmo.TrySpendAmmo())
+                    _shooter.CreateShoot(_prefabLaser, _pointShootForlaser);
         }
 
-        private IEnumerator ReloadLaser()
-        {
-            _isRealoding = true;
+        //private IEnumerator ReloadLaser()
+        //{
+        //    _isRealoding = true;
 
-            float timer = 0f;
-            float restoredTime = 5f;
+        //    float timer = 0f;
+        //    float restoredTime = 5f;
 
-            while (_reloadTime > timer)
-            {
-                _reloadTime -= Time.deltaTime;
-                yield return null;
-            }
+        //    while (_reloadTime > timer)
+        //    {
+        //        _reloadTime -= Time.deltaTime;
+        //        yield return null;
+        //    }
 
-            CurrentAmmonLaser = MaxAmountLaser;
-            _reloadTime = restoredTime;
-            _isRealoding = false;
-        }
+        //    CurrentAmmonLaser = MaxAmountLaser;
+        //    _reloadTime = restoredTime;
+        //    _isRealoding = false;
+        //}
 
-        private void Laser()
-        {
-            int minCountLazer = 0;
+        //private void Laser()
+        //{
+        //    int minCountLazer = 0;
 
-            if (CurrentAmmonLaser > minCountLazer)
-            {
-                CreateShoot(_prefabLaser, _pointShootForlaser.position, _pointShootForlaser.rotation);
-                CurrentAmmonLaser--;
+        //    if (CurrentAmmonLaser > minCountLazer)
+        //    {
+        //        CreateShoot(_prefabLaser, _pointShootForlaser.position, _pointShootForlaser.rotation);
+        //        CurrentAmmonLaser--;
 
-                if (CurrentAmmonLaser == minCountLazer)
-                    _coroutine = StartCoroutine(ReloadLaser());
-            }
-        }
+        //        if (CurrentAmmonLaser == minCountLazer)
+        //            _coroutine = StartCoroutine(ReloadLaser());
+        //    }
+        //}
 
-        private void ShootFromBullet()
-        {
-            CreateShoot(_bulletPrefab, _pointShootForBullet.position, _pointShootForBullet.rotation);
-        }
+        //private void ShootFromBullet()
+        //{
+        //    CreateShoot(_bulletPrefab, _pointShootForBullet.position, _pointShootForBullet.rotation);
+        //}
 
-        private void CreateShoot(GameObject weapon, Vector3 position, Quaternion rotation)
-        {
-            Instantiate(weapon, position, rotation);
-        }
+        //private void CreateShoot(GameObject weapon, Vector3 position, Quaternion rotation)
+        //{
+        //    Instantiate(weapon, position, rotation);
+        //}
 
-        private void ShowInfo()
-        {
-            OnLaserChanged?.Invoke(CurrentAmmonLaser);
-            OnReplenishedLaserOverTime?.Invoke(_reloadTime);
-        }
+        //private void ShowInfo()
+        //{
+        //    OnLaserChanged?.Invoke(CurrentAmmonLaser);
+        //    OnReplenishedLaserOverTime?.Invoke(_reloadTime);
+        //}
     }
 }
