@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Player.Weapons;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.UI.GameScreen
@@ -9,6 +10,7 @@ namespace Assets.Scripts.UI.GameScreen
 
         public event Action<int> OnScoreLoaded;
 
+        [SerializeField] private Laser _laser;
         [SerializeField] private ViewScore _viewScore;
         [SerializeField] private int _score = 0;
 
@@ -24,10 +26,20 @@ namespace Assets.Scripts.UI.GameScreen
             _score = _minCountScore;
         }
 
-        public void AddScore(int value)
+        private void OnEnable()
         {
-            _score += value;
-            OnScoreLoaded?.Invoke(value);
+            _laser.OnHit += AddScore;
+        }
+
+        private void OnDisable()
+        {
+            _laser.OnHit -= AddScore;
+        }
+
+        public void AddScore()
+        {
+            _score += 10;
+            OnScoreLoaded?.Invoke(_score);
         }
 
         public void GetScore()

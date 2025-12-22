@@ -483,6 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6805d266f40c8cb4c8f7851b315048ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _laser: {fileID: -704400303534365716, guid: 84b5391dff2e8fd41bfb6478ea67a667, type: 3}
   _viewScore: {fileID: 619980810}
   _score: 0
 --- !u!4 &823857374

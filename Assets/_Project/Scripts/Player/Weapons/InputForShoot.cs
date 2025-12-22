@@ -76,8 +76,7 @@ namespace Assets.Scripts.Player.Weapons
 
         private void ShootFromBullet()
         {
-            if (_bulletPrefab != null)
-                CreateShoot(_bulletPrefab, _pointShootForBullet.position, _pointShootForBullet.rotation);
+            CreateShoot(_bulletPrefab, _pointShootForBullet.position, _pointShootForBullet.rotation);
         }
 
         private void CreateShoot(GameObject weapon, Vector3 position, Quaternion rotation)

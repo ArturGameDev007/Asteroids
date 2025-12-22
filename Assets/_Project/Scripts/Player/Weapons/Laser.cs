@@ -1,19 +1,20 @@
 ﻿using Assets.Scripts.EnemySpace;
-using Assets.Scripts.UI.GameScreen;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Weapons
 {
     public class Laser : TypesOfWeapon
     {
-        //ScoreManager manager = new ScoreManager();
+        public event Action OnHit;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Enemy enemy))
             {
                 DestroyOfEnemies(enemy);
-                ScoreManager.Instance.AddScore(PointForKill);
+                //ScoreManager.Instance.AddScore(PointForKill);
+                OnHit?.Invoke();
             }
         }
 
