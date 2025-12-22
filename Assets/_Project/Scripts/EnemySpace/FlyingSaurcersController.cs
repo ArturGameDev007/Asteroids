@@ -23,8 +23,7 @@ namespace Assets.Scripts.EnemySpace
 
         private void Update()
         {
-            if (_player != null)
-                Move();
+            Move();
         }
 
         public void Construsct(Transform player)
@@ -34,18 +33,15 @@ namespace Assets.Scripts.EnemySpace
 
         protected override void Move()
         {
-            if (_player != null)
+            _directionToPlayer = _player.transform.position - _flyingPosition;
+            _distanceToPlayer = _directionToPlayer.magnitude;
+
+            if (_distanceToPlayer < _minDistanceForDetected)
             {
-                _directionToPlayer = _player.transform.position - _flyingPosition;
-                _distanceToPlayer = _directionToPlayer.magnitude;
+                RotateTowardPlayer();
 
-                if (_distanceToPlayer < _minDistanceForDetected)
-                {
-                    RotateTowardPlayer();
-
-                    _directionMove = Vector2.MoveTowards(transform.position, _player.transform.position, _speed * Time.deltaTime);
-                    transform.position = _directionMove;
-                }
+                _directionMove = Vector2.MoveTowards(transform.position, _player.transform.position, _speed * Time.deltaTime);
+                transform.position = _directionMove;
             }
         }
 

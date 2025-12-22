@@ -36,7 +36,7 @@ namespace Assets.Scripts.Player
 
         private void ProcessCollision(IEnemy enemy)
         {
-            if (enemy is Enemy)
+            if (enemy.GetType() == typeof(Enemy))
             {
                 OnGameOver?.Invoke();
             }

@@ -12,8 +12,7 @@ namespace Assets.Scripts.UI.PerformanceShip
 
         private void Update()
         {
-            if (_coordinateText != null && _targetValue != null && _rigidbody2D != null)
-                Performance();
+            Performance();
         }
 
         private void Performance()
