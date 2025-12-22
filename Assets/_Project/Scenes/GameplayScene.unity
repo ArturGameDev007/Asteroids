@@ -454,17 +454,6 @@ MonoBehaviour:
   _positionX: 10
   _positionY: 8
   _pool: {fileID: 746366994}
---- !u!114 &791562085 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 206905073727006149, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-  m_PrefabInstance: {fileID: 3370116970750321382}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &823857372
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +643,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62fb31ec08985a44a99cbcf7a7337bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &1290556558 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7285421635860712061, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+  m_PrefabInstance: {fileID: 3370116970750321382}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1696226400
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,45 +926,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 206905073727006149, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 206905073727006149, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 206905073727006149, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1290556554}
-    - target: {fileID: 206905073727006149, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 206905073727006149, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Open
-      objectReference: {fileID: 0}
-    - target: {fileID: 206905073727006149, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Assets.Scripts.UI.GameScreen.EndGameScreen, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 206905073727006149, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
       propertyPath: m_Name
       value: UI-EndGameScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3173633154378332447, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3491601382450380812, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
       propertyPath: _manager
@@ -1057,11 +1015,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6942242090126097425, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+      propertyPath: <PanelCanvas>k__BackingField
+      value: 
+      objectReference: {fileID: 1290556558}
+    - target: {fileID: 6942242090126097425, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
       propertyPath: <ActionButton>k__BackingField
       value: 
-      objectReference: {fileID: 791562085}
-    m_RemovedComponents:
-    - {fileID: 1496879245246465166, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
