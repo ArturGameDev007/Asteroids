@@ -6,16 +6,16 @@ namespace Assets.Scripts.UI.GameScreen
     public class ViewScore : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textScore;
-        [SerializeField] private ScoreManager _manager;
+        //[SerializeField] private ScoreManager _manager;
 
         private void OnEnable()
         {
-            _manager.OnScoreLoaded += OnShowInfoFinalScore;
+            ScoreManager.Instance.OnScoreChanged += OnShowInfoFinalScore;
         }
 
         private void OnDisable()
         {
-            _manager.OnScoreLoaded -= OnShowInfoFinalScore;
+            ScoreManager.Instance.OnScoreChanged -= OnShowInfoFinalScore;
         }
 
         public void OnShowInfoFinalScore(int value)

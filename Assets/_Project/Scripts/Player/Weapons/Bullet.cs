@@ -1,23 +1,9 @@
-﻿using Assets.Scripts.EnemySpace;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Player.Weapons
 {
-    public class Bullet : TypesOfWeapon
+    public class Bullet : MonoBehaviour
     {
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.TryGetComponent(out Enemy enemy))
-            {
-                DestroyOfEnemies(enemy);
-                Destroy(gameObject);
-                //ScoreManager.Instance.AddScore(PointForKill);
-            }
-        }
 
-        protected override void DestroyOfEnemies(Enemy enemy)
-        {
-            Destroy(enemy.gameObject);
-        }
     }
 }

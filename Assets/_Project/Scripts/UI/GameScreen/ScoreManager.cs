@@ -8,7 +8,7 @@ namespace Assets.Scripts.UI.GameScreen
     {
         public static ScoreManager Instance { get; private set; }
 
-        public event Action<int> OnScoreLoaded;
+        public event Action<int> OnScoreChanged;
 
         [SerializeField] private Laser _laser;
         [SerializeField] private ViewScore _viewScore;
@@ -26,20 +26,10 @@ namespace Assets.Scripts.UI.GameScreen
             _score = _minCountScore;
         }
 
-        private void OnEnable()
-        {
-            _laser.OnHit += AddScore;
-        }
-
-        private void OnDisable()
-        {
-            _laser.OnHit -= AddScore;
-        }
-
         public void AddScore()
         {
             _score += 10;
-            OnScoreLoaded?.Invoke(_score);
+            OnScoreChanged?.Invoke(_score);
         }
 
         public void GetScore()

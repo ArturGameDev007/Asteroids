@@ -12,8 +12,6 @@ namespace Assets._Project.Scripts.Player.Weapons
         [SerializeField] private int _maxAmountLaser = 20;
         [SerializeField] private float _reloadTime = 5f;
 
-        //[SerializeField] private bool _isRealoding = false;
-
         public int CurrentAmmonLaser { get; private set; }
         public bool IsRealoding { get; private set; }
 

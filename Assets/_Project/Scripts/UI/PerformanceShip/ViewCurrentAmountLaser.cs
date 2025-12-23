@@ -25,13 +25,11 @@ namespace Assets.Scripts.UI.PerformanceShip
 
         private void OnShowInfoLaser(int value)
         {
-            //_textlaser.text = "Laser" + "<br>" + "Ammon: " + value.ToString();
-            _textlaser.text = $"Laser Ammon: {value.ToString()}";
+            _textlaser.text = $"Laser<br>Ammon: {value.ToString()}";
         }
 
         private void OnShowRallbackLaser(float time)
         {
-            //_rollbackLasera.text = "Rollback Laser: " + time.ToString("F1") + "s";
             _rollbackLasera.text = $"Rollback Laser: {time.ToString("F1")}s";
         }
     }
