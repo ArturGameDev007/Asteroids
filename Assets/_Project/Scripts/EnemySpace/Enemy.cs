@@ -1,30 +1,26 @@
-﻿using Assets.Scripts.Player.Weapons;
-using Assets.Scripts.UI.GameScreen;
+﻿using Assets._Project.Scripts.UI.GameScreen;
+using Assets.Scripts.Player.Weapons;
 using UnityEngine;
 
 namespace Assets.Scripts.EnemySpace
 {
     public class Enemy : MonoBehaviour, IEnemy
     {
+        [SerializeField] private ScoreData _scoreData;
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Bullet bullet))
             {
+                _scoreData.AddScore();
                 Destroy(gameObject);
                 Destroy(bullet.gameObject);
-
-                AddScoreForDestroed();
             }
             else if (other.TryGetComponent(out Laser laser))
             {
-                AddScoreForDestroed();
+                _scoreData.AddScore();
                 Destroy(gameObject);
             }
-        }
-
-        private void AddScoreForDestroed()
-        {
-            ScoreManager.Instance.AddScore();
         }
     }
 }

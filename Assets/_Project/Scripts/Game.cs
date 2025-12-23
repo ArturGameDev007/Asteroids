@@ -1,3 +1,4 @@
+using Assets._Project.Scripts.UI.GameScreen;
 using Assets.Scripts.Player;
 using Assets.Scripts.Player.Weapons;
 using Assets.Scripts.UI.GameScreen;
@@ -9,7 +10,8 @@ public class Game : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private InputForShoot _shoot;
     [SerializeField] private EndGameScreen _endGameScreen;
-    [SerializeField] private ScoreManager _manager;
+    //[SerializeField] private ScoreManager _manager;
+    [SerializeField] private ScoreData _scoreData;
 
     [field: SerializeField] public bool IsGameOver = false;
 
@@ -28,7 +30,8 @@ public class Game : MonoBehaviour
     private void OnGameOver()
     {
         _endGameScreen.Open();
-        _manager.GetScore();
+        //_manager.GetScore();
+        _scoreData.GetScore();
 
         IsGameOver = true;
         _shoot.enabled = false;
@@ -43,6 +46,7 @@ public class Game : MonoBehaviour
     private void StartGame()
     {
         _player.Reset();
+        _scoreData.Reset();
 
         _shoot.enabled = true;
         IsGameOver = false;

@@ -5,7 +5,7 @@ namespace Assets.Scripts.UI.GameScreen
 {
     public class ScoreManager : MonoBehaviour
     {
-        public static ScoreManager Instance { get; private set; }
+        //public static ScoreManager Instance { get; private set; }
 
         public event Action<int> OnScoreChanged;
 
@@ -14,10 +14,10 @@ namespace Assets.Scripts.UI.GameScreen
 
         private int _minCountScore = 0;
 
-        private void Awake()
-        {
-            Instance = this;
-        }
+        //private void Awake()
+        //{
+        //    Instance = this;
+        //}
 
         private void Start()
         {

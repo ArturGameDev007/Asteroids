@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Assets._Project.Scripts.UI.GameScreen;
+using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts.UI.GameScreen
@@ -6,20 +7,21 @@ namespace Assets.Scripts.UI.GameScreen
     public class ViewScore : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textScore;
-        [SerializeField] private ScoreManager _manager;
+        [SerializeField] private ScoreData _scoreData;
 
         private void OnEnable()
         {
-            _manager.OnScoreChanged += OnShowInfoFinalScore;
+            _scoreData.OnScoreChanged += OnShowInfoFinalScore;
         }
 
         private void OnDisable()
         {
-            _manager.OnScoreChanged -= OnShowInfoFinalScore;
+            _scoreData.OnScoreChanged -= OnShowInfoFinalScore;
         }
 
         public void OnShowInfoFinalScore(int value)
         {
+            value = _scoreData.GetScore();
             _textScore.text = "Score: " + value.ToString();
         }
     }
