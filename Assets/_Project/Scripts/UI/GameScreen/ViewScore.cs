@@ -12,6 +12,8 @@ namespace Assets.Scripts.UI.GameScreen
         private void OnEnable()
         {
             _scoreData.OnScoreChanged += OnShowInfoFinalScore;
+
+            OnShowInfoFinalScore(_scoreData.GetScore());
         }
 
         private void OnDisable()
@@ -21,8 +23,7 @@ namespace Assets.Scripts.UI.GameScreen
 
         public void OnShowInfoFinalScore(int value)
         {
-            value = _scoreData.GetScore();
-            _textScore.text = "Score: " + value.ToString();
+            _textScore.text = $"Score: {value.ToString()}";
         }
     }
 }

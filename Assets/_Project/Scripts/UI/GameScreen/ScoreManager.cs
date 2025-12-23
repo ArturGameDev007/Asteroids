@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.UI.GameScreen
 {
@@ -7,32 +6,32 @@ namespace Assets.Scripts.UI.GameScreen
     {
         //public static ScoreManager Instance { get; private set; }
 
-        public event Action<int> OnScoreChanged;
+        //public event Action<int> OnScoreChanged;
 
-        [SerializeField] private ViewScore _viewScore;
-        [SerializeField] private int _score = 0;
+        //[SerializeField] private ViewScore _viewScore;
+        //[SerializeField] private int _score = 0;
 
-        private int _minCountScore = 0;
+        //private int _minCountScore = 0;
 
-        //private void Awake()
+        ////private void Awake()
+        ////{
+        ////    Instance = this;
+        ////}
+
+        //private void Start()
         //{
-        //    Instance = this;
+        //    _score = _minCountScore;
         //}
 
-        private void Start()
-        {
-            _score = _minCountScore;
-        }
+        //public void AddScore()
+        //{
+        //    _score += 10;
+        //    OnScoreChanged?.Invoke(_score);
+        //}
 
-        public void AddScore()
-        {
-            _score += 10;
-            OnScoreChanged?.Invoke(_score);
-        }
-
-        public void GetScore()
-        {
-            _viewScore.OnShowInfoFinalScore(_score);
-        }
+        //public void GetScore()
+        //{
+        //    _viewScore.OnShowInfoFinalScore(_score);
+        //}
     }
 }

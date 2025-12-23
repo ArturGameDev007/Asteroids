@@ -10,10 +10,14 @@ public class Game : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private InputForShoot _shoot;
     [SerializeField] private EndGameScreen _endGameScreen;
-    //[SerializeField] private ScoreManager _manager;
     [SerializeField] private ScoreData _scoreData;
 
     [field: SerializeField] public bool IsGameOver = false;
+
+    private void Start()
+    {
+        _scoreData.Reset();
+    }
 
     private void OnEnable()
     {
@@ -30,7 +34,6 @@ public class Game : MonoBehaviour
     private void OnGameOver()
     {
         _endGameScreen.Open();
-        //_manager.GetScore();
         _scoreData.GetScore();
 
         IsGameOver = true;
