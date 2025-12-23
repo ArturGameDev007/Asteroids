@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Player.Weapons;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Assets.Scripts.UI.GameScreen
@@ -10,7 +9,6 @@ namespace Assets.Scripts.UI.GameScreen
 
         public event Action<int> OnScoreChanged;
 
-        [SerializeField] private Laser _laser;
         [SerializeField] private ViewScore _viewScore;
         [SerializeField] private int _score = 0;
 

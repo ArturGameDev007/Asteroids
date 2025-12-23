@@ -39,9 +39,10 @@ namespace Assets._Project.Scripts.Player.Weapons
                 CurrentAmmonLaser--;
 
                 if (CurrentAmmonLaser == minCountLazer)
+                {
                     _coroutine = StartCoroutine(ReloadLaser());
+                }
             }
-
 
             return true;
             //if (IsRealoding || CurrentAmmonLaser <= 0)
