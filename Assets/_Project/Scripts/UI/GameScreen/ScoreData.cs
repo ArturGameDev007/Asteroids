@@ -16,7 +16,6 @@ namespace Assets._Project.Scripts.UI.GameScreen
         public void Reset()
         {
             _currentScore = _zeroCountScore;
-            //OnScoreChanged?.Invoke(_currentScore);
         }
 
         public void AddScore()

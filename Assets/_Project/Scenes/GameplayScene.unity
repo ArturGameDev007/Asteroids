@@ -437,17 +437,6 @@ Transform:
   - {fileID: 746366995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &619980810 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3491601382450380812, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-  m_PrefabInstance: {fileID: 3370116970750321382}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed9bb7fdc1f2996428cd27d05e7a6001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &746366993
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,53 +502,6 @@ MonoBehaviour:
   _positionX: 10
   _positionY: 8
   _pool: {fileID: 746366994}
---- !u!1 &823857372
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 823857374}
-  - component: {fileID: 823857373}
-  m_Layer: 0
-  m_Name: Scoremanager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &823857373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823857372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6805d266f40c8cb4c8f7851b315048ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _laser: {fileID: -704400303534365716, guid: 84b5391dff2e8fd41bfb6478ea67a667, type: 3}
-  _viewScore: {fileID: 619980810}
-  _score: 0
---- !u!4 &823857374
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823857372}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1237284347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -987,7 +929,7 @@ MonoBehaviour:
   _player: {fileID: 340683175}
   _shoot: {fileID: 496244904}
   _endGameScreen: {fileID: 1290556554}
-  _manager: {fileID: 823857373}
+  _scoreData: {fileID: 11400000, guid: 408211c10d7540d488d4ca85e5fb1320, type: 2}
   IsGameOver: 0
 --- !u!1001 &3370116970750321382
 PrefabInstance:
@@ -1001,10 +943,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI-EndGameScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3491601382450380812, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
       propertyPath: _manager
       value: 
-      objectReference: {fileID: 823857373}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491601382450380812, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+      propertyPath: _scoreData
+      value: 
+      objectReference: {fileID: 11400000, guid: 408211c10d7540d488d4ca85e5fb1320, type: 2}
     - target: {fileID: 4128760670663854505, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1092,6 +1042,14 @@ PrefabInstance:
     - target: {fileID: 6942242090126097425, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
       propertyPath: <ActionButton>k__BackingField
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780345850317764562, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780345850317764562, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+      propertyPath: m_fontSize
+      value: 48
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1217,7 +1175,6 @@ SceneRoots:
   - {fileID: 1237284347}
   - {fileID: 7531601158275955055}
   - {fileID: 3370116970750321382}
-  - {fileID: 823857374}
   - {fileID: 597685459}
   - {fileID: 606854094}
   - {fileID: 304896028}

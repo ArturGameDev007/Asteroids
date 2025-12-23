@@ -45,33 +45,10 @@ namespace Assets._Project.Scripts.Player.Weapons
             }
 
             return true;
-            //if (IsRealoding || CurrentAmmonLaser <= 0)
-            //    return false;
-
-            //CurrentAmmonLaser--;
-            //OnLaserChanged?.Invoke(CurrentAmmonLaser);
-
-            //if (CurrentAmmonLaser <= 0)
-            //    _coroutine = StartCoroutine(ReloadLaser());
-
         }
 
         private IEnumerator ReloadLaser()
         {
-            //IsRealoding = true;
-            //float timer = _reloadTime;
-
-            //while (timer > 0)
-            //{
-            //    timer -= Time.deltaTime;
-            //    OnReloadProgress?.Invoke(timer);
-            //    yield return null;
-            //}
-
-            //CurrentAmmonLaser = _maxAmountLaser;
-            //OnLaserChanged?.Invoke(CurrentAmmonLaser);
-            //IsRealoding = false;
-
             IsRealoding = true;
 
             float timer = 0f;
@@ -80,7 +57,6 @@ namespace Assets._Project.Scripts.Player.Weapons
             while (_reloadTime > timer)
             {
                 _reloadTime -= Time.deltaTime;
-                //OnReloadProgress?.Invoke(timer);
                 yield return null;
             }
 
