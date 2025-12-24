@@ -5,10 +5,14 @@ namespace Assets.Scripts.EnemySpace
 {
     public class GeneratorEnemies : MonoBehaviour
     {
+        [Header("ObjectPool Enemies")]
+        [SerializeField] private ObjectPool _pool;
+
+        [Space(10)]
+        [Header("Spawn Positions")]
         [SerializeField] private float _positionX;
         [SerializeField] private float _positionY;
 
-        [SerializeField] private ObjectPool _pool;
 
         private float _delay = 3f;
 

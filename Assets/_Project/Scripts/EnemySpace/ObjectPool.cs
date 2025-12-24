@@ -5,9 +5,12 @@ namespace Assets.Scripts.EnemySpace
 {
     public class ObjectPool : MonoBehaviour
     {
+        [Header("Transform Objects")]
         [SerializeField] private Transform _container;
         [SerializeField] private Transform _player;
 
+        [Space(10)]
+        [Header("List Enemies")]
         [SerializeField] private List<Enemy> _prefab;
 
         private Queue<Enemy> _pool;

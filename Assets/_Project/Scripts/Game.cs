@@ -43,6 +43,7 @@ public class Game : MonoBehaviour
     private void OnRestartButtonClick()
     {
         _endGameScreen.Close();
+
         StartGame();
     }
 
