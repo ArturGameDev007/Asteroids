@@ -11,7 +11,7 @@ namespace Assets.Scripts.Player
         [SerializeField] private InputController _controllerInput;
 
         [SerializeField] private float _rotationSpeed;
-        [SerializeField] private float _thrustForce;
+        [SerializeField] private float _forceInput;
 
         private Vector3 _startPosition;
 
@@ -50,20 +50,21 @@ namespace Assets.Scripts.Player
 
         private void Move()
         {
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-                _head2D.AddForce(transform.up * (_thrustForce * Time.deltaTime));
+            float moveVertical = _controllerInput.VerticalInput;
 
-            if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.A))
-                transform.Rotate(Vector3.back * (_rotationSpeed * Time.deltaTime), transform.rotation.x);
+            if (moveVertical > 0)
+            {
+                Vector2 direction = transform.up;
 
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-                transform.Rotate(Vector3.forward * (_rotationSpeed * Time.deltaTime), transform.rotation.x);
+                _head2D.AddForce(_forceInput * direction);
+            }
         }
 
         private void HandleRotation()
         {
             float rotationHorizontal = _controllerInput.HorizontalInput;
             float rotationAmount = -rotationHorizontal * _rotationSpeed * Time.deltaTime;
+
             transform.Rotate(_xAngle, _yAngle, rotationAmount);
         }
     }
