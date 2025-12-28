@@ -12,20 +12,14 @@ public class Game : MonoBehaviour
     [SerializeField] private EndGameScreen _endGameScreen;
     [SerializeField] private ScoreData _scoreData;
 
-    [field: SerializeField] public bool IsGameOver = false;
-
     private void Start()
     {
         _scoreData.Reset();
-    }
-
-    private void OnEnable()
-    {
         _endGameScreen.OnRestartButtonClick += OnRestartButtonClick;
         _player.OnGameOver += OnGameOver;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _endGameScreen.OnRestartButtonClick -= OnRestartButtonClick;
         _player.OnGameOver -= OnGameOver;
@@ -36,7 +30,6 @@ public class Game : MonoBehaviour
         _endGameScreen.Open();
         _scoreData.GetScore();
 
-        IsGameOver = true;
         _shoot.enabled = false;
     }
 
@@ -53,7 +46,6 @@ public class Game : MonoBehaviour
         _scoreData.Reset();
 
         _shoot.enabled = true;
-        IsGameOver = false;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

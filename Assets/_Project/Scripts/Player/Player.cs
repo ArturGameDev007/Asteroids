@@ -19,19 +19,29 @@ namespace Assets.Scripts.Player
             _collisionHandler = GetComponent<HandlerCrashWithEnemy>();
         }
 
-        private void OnEnable()
+        private void Start()
         {
-            _collisionHandler.OnCollisionHandler += ProcessCollision;
+            Subscribstion();
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            _collisionHandler.OnCollisionHandler -= ProcessCollision;
+            Unsubscribtion();
         }
 
         public void Reset()
         {
             _player.Reset();
+        }
+
+        private void Subscribstion()
+        {
+            _collisionHandler.OnCollisionHandler += ProcessCollision;
+        }
+
+        private void Unsubscribtion()
+        {
+            _collisionHandler.OnCollisionHandler -= ProcessCollision;
         }
 
         private void ProcessCollision(IEnemy enemy)

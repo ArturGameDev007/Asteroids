@@ -9,14 +9,14 @@ namespace Assets.Scripts.UI.GameScreen
         [SerializeField] private TextMeshProUGUI _textScore;
         [SerializeField] private ScoreData _scoreData;
 
-        private void OnEnable()
+        private void Start()
         {
             _scoreData.OnScoreChanged += OnShowInfoFinalScore;
 
             OnShowInfoFinalScore(_scoreData.GetScore());
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _scoreData.OnScoreChanged -= OnShowInfoFinalScore;
         }

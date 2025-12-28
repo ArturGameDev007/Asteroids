@@ -14,13 +14,13 @@ namespace Assets.Scripts.UI.PerformanceShip
         private void OnEnable()
         {
             _laser.OnLaserChanged += OnShowInfoLaser;
-            _laser.OnReloadProgress += OnShowRallbackLaser;
+            _laser.OnReloadProgress += OnShowRollbackLaser;
         }
 
         private void OnDisable()
         {
             _laser.OnLaserChanged -= OnShowInfoLaser;
-            _laser.OnReloadProgress -= OnShowRallbackLaser;
+            _laser.OnReloadProgress -= OnShowRollbackLaser;
         }
 
         private void OnShowInfoLaser(int value)
@@ -28,7 +28,7 @@ namespace Assets.Scripts.UI.PerformanceShip
             _textlaser.text = $"Laser<br>Ammon: {value.ToString()}";
         }
 
-        private void OnShowRallbackLaser(float time)
+        private void OnShowRollbackLaser(float time)
         {
             _rollbackLasera.text = $"Rollback Laser: {time.ToString("F1")}s";
         }
