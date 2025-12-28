@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets._Project.Scripts.UI.GameScreen;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.EnemySpace
@@ -6,12 +7,16 @@ namespace Assets.Scripts.EnemySpace
     public class ObjectPool : MonoBehaviour
     {
         [Header("Transform Objects")]
-        [SerializeField] private Transform _container;
+        [SerializeField] private GameObject _container;
         [SerializeField] private Transform _player;
 
         [Space(10)]
         [Header("List Enemies")]
         [SerializeField] private List<Enemy> _prefab;
+
+        [Space(10)]
+        [Header("Score Data")]
+        [SerializeField] private ScoreData _scoreData;
 
         private Queue<Enemy> _pool;
 
@@ -20,6 +25,8 @@ namespace Assets.Scripts.EnemySpace
         private void Awake()
         {
             _pool = new Queue<Enemy>();
+
+            _container = new GameObject("ContainerForEnemies");
         }
 
         public Enemy GetObject()
@@ -35,7 +42,9 @@ namespace Assets.Scripts.EnemySpace
                 if (createEnemy.TryGetComponent(out FlyingSaurcersController enemy))
                     enemy.Construsct(_player);
 
-                createEnemy.transform.parent = _container;
+                createEnemy.transform.parent = _container.transform;
+
+                createEnemy.Construct(_scoreData);
 
                 return createEnemy;
             }

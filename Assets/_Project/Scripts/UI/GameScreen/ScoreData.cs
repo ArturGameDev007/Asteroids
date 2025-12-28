@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Assets._Project.Scripts.UI.GameScreen
 {
-    [CreateAssetMenu(fileName = "NewScoreData", menuName = "Game/Score data", order = 51)]
-    public class ScoreData : ScriptableObject
+    public class ScoreData : MonoBehaviour
     {
         public event Action<int> OnScoreChanged;
 
@@ -12,6 +11,11 @@ namespace Assets._Project.Scripts.UI.GameScreen
 
         private int _zeroCountScore = 0;
         private int _scoreForKill = 10;
+
+        private void Start()
+        {
+            Reset();
+        }
 
         public void Reset()
         {

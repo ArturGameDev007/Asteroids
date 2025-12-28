@@ -6,19 +6,26 @@ namespace Assets.Scripts.EnemySpace
 {
     public class Enemy : MonoBehaviour, IEnemy
     {
-        [SerializeField] private ScoreData _scoreData;
+        private ScoreData _scoreData;
+
+        public void Construct(ScoreData scoreData)
+        {
+            _scoreData = scoreData;
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Bullet bullet))
             {
-                _scoreData.AddScore();
+                _scoreData?.AddScore();
+
                 Destroy(gameObject);
                 Destroy(bullet.gameObject);
             }
             else if (other.TryGetComponent(out Laser laser))
             {
                 _scoreData.AddScore();
+
                 Destroy(gameObject);
             }
         }
