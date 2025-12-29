@@ -1,7 +1,6 @@
 using Assets._Project.Scripts.UI.GameScreen;
 using Assets.Scripts.Player;
 using Assets.Scripts.Player.Weapons;
-using Assets.Scripts.UI.GameScreen;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,25 +8,29 @@ public class Game : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private InputForShoot _shoot;
-    [SerializeField] private EndGameScreen _endGameScreen;
+    //[SerializeField] private EndGameScreen _endGameScreen;
+    [SerializeField] private WindowEndGame _windowEndGame;
     [SerializeField] private ScoreData _scoreData;
 
     private void Start()
     {
         _scoreData.Reset();
-        _endGameScreen.OnRestartButtonClick += OnRestartButtonClick;
+        _windowEndGame.OnRestartClick += OnRestartButtonClick;
+        //_endGameScreen.OnRestartButtonClick += OnRestartButtonClick;
         _player.OnGameOver += OnGameOver;
     }
 
     private void OnDestroy()
     {
-        _endGameScreen.OnRestartButtonClick -= OnRestartButtonClick;
+        _windowEndGame.OnRestartClick -= OnRestartButtonClick;
         _player.OnGameOver -= OnGameOver;
     }
 
     private void OnGameOver()
     {
-        _endGameScreen.Open();
+        //_endGameScreen.Open();
+
+        _windowEndGame.OpenScreen();
         _scoreData.GetScore();
 
         _shoot.enabled = false;
@@ -35,7 +38,9 @@ public class Game : MonoBehaviour
 
     private void OnRestartButtonClick()
     {
-        _endGameScreen.Close();
+        //_endGameScreen.Close();
+
+        _windowEndGame.CloseScreen();
 
         StartGame();
     }

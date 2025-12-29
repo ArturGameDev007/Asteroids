@@ -358,6 +358,11 @@ Transform:
   - {fileID: 746366995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &691588246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+  m_PrefabInstance: {fileID: 3370116970750321382}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &746366993
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,22 +610,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253985510}
   m_CullTransparentMesh: 1
---- !u!114 &1290556554 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6942242090126097425, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-  m_PrefabInstance: {fileID: 3370116970750321382}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62fb31ec08985a44a99cbcf7a7337bd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!223 &1290556558 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 7285421635860712061, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
   m_PrefabInstance: {fileID: 3370116970750321382}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1290556563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691588246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d94814dbd1d7eb4f91baf11b16e2471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _panelCanvas: {fileID: 0}
+  _actionButton: {fileID: 0}
 --- !u!1 &1696226400
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,7 +896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 340683175}
   _shoot: {fileID: 496244904}
-  _endGameScreen: {fileID: 1290556554}
+  _windowEndGame: {fileID: 1290556563}
   _scoreData: {fileID: 1061072111}
 --- !u!1001 &3370116970750321382
 PrefabInstance:
@@ -1010,10 +1018,14 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 48
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6942242090126097425, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1290556563}
   m_SourcePrefab: {fileID: 100100000, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
 --- !u!1001 &7531601158275955055
 PrefabInstance:
