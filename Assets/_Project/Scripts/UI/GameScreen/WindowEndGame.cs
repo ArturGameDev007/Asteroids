@@ -8,16 +8,13 @@ namespace Assets._Project.Scripts.UI.GameScreen
     {
         public event Action OnRestartClick;
 
-        //[field: SerializeField] public Canvas PanelCanvas { get; private set; }
-        //[field: SerializeField] public Button ActionButton { get; private set; }
-
         [SerializeField] private Canvas _panelCanvas;
         [SerializeField] private Button _actionButton;
 
         private float _stopTimeGame = 0f;
         private float _startTimeGame = 1f;
 
-        private void Awake()
+        private void OnValidate()
         {
             Initialize();
         }

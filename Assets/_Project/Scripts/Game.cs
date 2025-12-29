@@ -8,7 +8,6 @@ public class Game : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private InputForShoot _shoot;
-    //[SerializeField] private EndGameScreen _endGameScreen;
     [SerializeField] private WindowEndGame _windowEndGame;
     [SerializeField] private ScoreData _scoreData;
 
@@ -16,7 +15,6 @@ public class Game : MonoBehaviour
     {
         _scoreData.Reset();
         _windowEndGame.OnRestartClick += OnRestartButtonClick;
-        //_endGameScreen.OnRestartButtonClick += OnRestartButtonClick;
         _player.OnGameOver += OnGameOver;
     }
 
@@ -28,8 +26,6 @@ public class Game : MonoBehaviour
 
     private void OnGameOver()
     {
-        //_endGameScreen.Open();
-
         _windowEndGame.OpenScreen();
         _scoreData.GetScore();
 
@@ -38,8 +34,6 @@ public class Game : MonoBehaviour
 
     private void OnRestartButtonClick()
     {
-        //_endGameScreen.Close();
-
         _windowEndGame.CloseScreen();
 
         StartGame();
