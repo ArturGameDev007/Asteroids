@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7285421635860712061}
   - component: {fileID: 2275616237344249395}
   - component: {fileID: 9009136971575947304}
-  - component: {fileID: 6942242090126097425}
+  - component: {fileID: 701701839646206185}
   m_Layer: 5
   m_Name: UI-EndGameScreen
   m_TagString: Untagged
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6942242090126097425
+--- !u!114 &701701839646206185
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,11 +112,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1027745613698290874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62fb31ec08985a44a99cbcf7a7337bd1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d94814dbd1d7eb4f91baf11b16e2471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PanelCanvas>k__BackingField: {fileID: 1027745613698290874}
-  <ActionButton>k__BackingField: {fileID: 4899644403387639473}
+  _panelCanvas: {fileID: 7285421635860712061}
+  _actionButton: {fileID: 4899644403387639473}
 --- !u!1 &1932604559545053720
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 48
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textScore: {fileID: 8780345850317764562}
-  _manager: {fileID: 0}
+  _scoreData: {fileID: 0}
 --- !u!1 &5069292530658907826
 GameObject:
   m_ObjectHideFlags: 0
