@@ -252,7 +252,7 @@ MonoBehaviour:
   _head2D: {fileID: 0}
   _controllerInput: {fileID: 399270830964315714}
   _rotationSpeed: 30
-  _thrustForce: 30
+  _forceInput: 0.5
 --- !u!114 &399270830964315714
 MonoBehaviour:
   m_ObjectHideFlags: 0
