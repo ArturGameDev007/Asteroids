@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Player
+namespace Scripts.Player
 {
     [RequireComponent(typeof(InputController))]
     [RequireComponent(typeof(Rigidbody2D))]

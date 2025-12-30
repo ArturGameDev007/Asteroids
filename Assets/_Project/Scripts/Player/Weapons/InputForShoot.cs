@@ -1,7 +1,7 @@
-﻿using Assets._Project.Scripts.Player.Weapons;
+﻿using Scripts.Weapons;
 using UnityEngine;
 
-namespace Assets.Scripts.Player.Weapons
+namespace Scripts.Player.Weapons
 {
     public class InputForShoot : MonoBehaviour
     {

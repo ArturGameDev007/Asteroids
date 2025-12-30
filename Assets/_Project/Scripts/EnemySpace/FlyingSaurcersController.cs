@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.EnemySpace
+namespace Scripts.EnemySpace
 {
     public class FlyingSaurcersController : TypesOfEnemies
     {

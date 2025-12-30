@@ -1,8 +1,8 @@
-﻿using Assets._Project.Scripts.Player.Weapons;
+﻿using Scripts.Player.Weapons;
 using TMPro;
 using UnityEngine;
 
-namespace Assets.Scripts.UI.PerformanceShip
+namespace Scripts.PerformanceShip
 {
     public class ViewCurrentAmountLaser : MonoBehaviour
     {

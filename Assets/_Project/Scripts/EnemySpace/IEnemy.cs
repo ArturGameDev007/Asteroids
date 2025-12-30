@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.EnemySpace
+﻿namespace Scripts.EnemySpace
 {
     public interface IEnemy
     {

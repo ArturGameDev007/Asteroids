@@ -1,8 +1,8 @@
-using Assets.Scripts.EnemySpace;
+using Scripts.EnemySpace;
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.Player
+namespace Scripts.Player
 {
     [RequireComponent(typeof(PlayerController))]
     [RequireComponent(typeof(HandlerCrashWithEnemy))]

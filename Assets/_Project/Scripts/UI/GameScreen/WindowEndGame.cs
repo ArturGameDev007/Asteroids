@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets._Project.Scripts.UI.GameScreen
+namespace Scripts.GameScreen
 {
     public class WindowEndGame : MonoBehaviour
     {

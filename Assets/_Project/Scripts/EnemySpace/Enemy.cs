@@ -1,8 +1,8 @@
-﻿using Assets._Project.Scripts.UI.GameScreen;
-using Assets.Scripts.Player.Weapons;
+﻿using Scripts.Player.Weapons;
+using Scripts.UI.GameScreen;
 using UnityEngine;
 
-namespace Assets.Scripts.EnemySpace
+namespace Scripts.EnemySpace
 {
     public class Enemy : MonoBehaviour, IEnemy
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets._Project.Scripts.UI.GameScreen
+namespace Scripts.UI.GameScreen
 {
     public class ScoreData : MonoBehaviour
     {

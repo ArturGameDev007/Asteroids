@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.EnemySpace;
+﻿using Scripts.EnemySpace;
 using UnityEngine;
 
-namespace Assets.Scripts.Player.Weapons
+namespace Scripts.Weapons
 {
     public abstract class TypesOfWeapon : MonoBehaviour
     {

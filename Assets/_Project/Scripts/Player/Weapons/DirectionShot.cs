@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Player.Weapons
+namespace Scripts.Player.Weapons
 {
     public class DirectionShot : MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Assets._Project.Scripts.Player.Weapons
+namespace Scripts.Player.Weapons
 {
     public class GenerateLaser : MonoBehaviour
     {

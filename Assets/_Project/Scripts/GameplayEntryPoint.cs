@@ -1,7 +1,8 @@
-using Assets._Project.Scripts.UI.GameScreen;
-using Assets.Scripts.EnemySpace;
-using Assets.Scripts.Player;
-using Assets.Scripts.Player.Weapons;
+using Scripts.EnemySpace;
+using Scripts.GameScreen;
+using Scripts.Player;
+using Scripts.Player.Weapons;
+using Scripts.UI.GameScreen;
 using UnityEngine;
 
 public class GameplayEntryPoint : MonoBehaviour

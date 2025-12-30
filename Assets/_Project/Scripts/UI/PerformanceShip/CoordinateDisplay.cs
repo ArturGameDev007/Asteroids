@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Assets.Scripts.UI.PerformanceShip
+namespace Scripts.PerformanceShip
 {
     public class CoordinateDisplay : MonoBehaviour
     {

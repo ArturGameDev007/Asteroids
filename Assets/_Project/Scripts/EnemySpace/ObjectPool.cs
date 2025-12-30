@@ -1,8 +1,8 @@
-﻿using Assets._Project.Scripts.UI.GameScreen;
+﻿using Scripts.UI.GameScreen;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.EnemySpace
+namespace Scripts.EnemySpace
 {
     public class ObjectPool : MonoBehaviour
     {
