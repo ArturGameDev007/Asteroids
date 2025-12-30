@@ -18,9 +18,15 @@ namespace Assets.Scripts.EnemySpace
 
         private Coroutine _coroutine;
 
-        private void Start()
+        public void StartSpawning()
         {
             _coroutine = StartCoroutine(GeneratorEnemy(_delay));
+        }
+
+        public void StopSpawning()
+        {
+            StopCoroutine(_coroutine);
+            _coroutine = null;
         }
 
         private IEnumerator GeneratorEnemy(float delay)

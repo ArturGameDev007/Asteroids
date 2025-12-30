@@ -1,24 +1,54 @@
 using Assets._Project.Scripts.UI.GameScreen;
+using Assets.Scripts.EnemySpace;
 using Assets.Scripts.Player;
 using Assets.Scripts.Player.Weapons;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Game : MonoBehaviour
+public class Game
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private InputForShoot _shoot;
-    [SerializeField] private WindowEndGame _windowEndGame;
-    [SerializeField] private ScoreData _scoreData;
+    private ObjectPool _objectPool;
+    private GeneratorEnemies _generatorEnemies;
+    private Player _player;
+    private InputForShoot _shoot;
+    private WindowEndGame _windowEndGame;
+    private ScoreData _scoreData;
 
-    private void Start()
+    public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Player player, InputForShoot shoot, WindowEndGame windowEndGame, ScoreData scoreData)
+    {
+        _objectPool = objectPool;
+        _generatorEnemies = generatorEnemies;
+        _player = player;
+        _shoot = shoot;
+        _windowEndGame = windowEndGame;
+        _scoreData = scoreData;
+    }
+
+    public void Initialize()
     {
         _scoreData.Reset();
+        _objectPool.Initialize();
+
+        Subscription();
+
+        _generatorEnemies.StartSpawning();
+
+
+    }
+
+    public void Dispose()
+    {
+        Unsubscription();
+        _generatorEnemies.StopSpawning();
+    }
+
+    public void Subscription()
+    {
         _windowEndGame.OnRestartClick += OnRestartButtonClick;
         _player.OnGameOver += OnGameOver;
     }
 
-    private void OnDestroy()
+
+    public void Unsubscription()
     {
         _windowEndGame.OnRestartClick -= OnRestartButtonClick;
         _player.OnGameOver -= OnGameOver;
@@ -36,11 +66,6 @@ public class Game : MonoBehaviour
     {
         _windowEndGame.CloseScreen();
 
-        StartGame();
-    }
-
-    private void StartGame()
-    {
         _player.Reset();
         _scoreData.Reset();
 

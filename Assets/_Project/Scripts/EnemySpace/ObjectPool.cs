@@ -22,7 +22,7 @@ namespace Assets.Scripts.EnemySpace
 
         public IEnumerable<Enemy> PoolEnemy => _pool;
 
-        private void Awake()
+        public void Initialize()
         {
             _pool = new Queue<Enemy>();
 
