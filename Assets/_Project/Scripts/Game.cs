@@ -31,6 +31,8 @@ public class Game
         Subscription();
 
         _generatorEnemies.StartSpawning();
+
+        StartGame();
     }
 
     public void Dispose()
@@ -63,10 +65,12 @@ public class Game
     private void OnRestartButtonClick()
     {
         _windowEndGame.CloseScreen();
+        StartGame();
+    }
 
+    private void StartGame()
+    {
         _player.Reset();
-        _scoreData.Reset();
-
         _shoot.enabled = true;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

@@ -13,7 +13,6 @@ namespace Assets.Scripts.EnemySpace
         [SerializeField] private float _positionX;
         [SerializeField] private float _positionY;
 
-
         private float _delay = 3f;
 
         private Coroutine _coroutine;

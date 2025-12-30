@@ -6,12 +6,15 @@ using UnityEngine;
 
 public class GameplayEntryPoint : MonoBehaviour
 {
+    [Header("Systems")]
     [SerializeField] private ObjectPool _objectPool;
     [SerializeField] private GeneratorEnemies _generatorEnemies;
 
+    [Header("Player & Combat")]
     [SerializeField] private Player _player;
     [SerializeField] private InputForShoot _shoot;
 
+    [Header("UI & Data")]
     [SerializeField] private WindowEndGame _windowEndGame;
     [SerializeField] private ScoreData _scoreData;
 
