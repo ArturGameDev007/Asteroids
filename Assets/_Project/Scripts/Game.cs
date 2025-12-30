@@ -38,7 +38,7 @@ public class Game
     public void Dispose()
     {
         Unsubscription();
-        _generatorEnemies.StopSpawning();
+        //_generatorEnemies.StopSpawning();
     }
 
     public void Subscription()
