@@ -26,19 +26,18 @@ public class Game
     public void Initialize()
     {
         _scoreData.Reset();
+        _player.Reset();
         _objectPool.Initialize();
 
         Subscription();
 
+        _shoot.enabled = true;
         _generatorEnemies.StartSpawning();
-
-        StartGame();
     }
 
     public void Dispose()
     {
         Unsubscription();
-        //_generatorEnemies.StopSpawning();
     }
 
     public void Subscription()
@@ -56,6 +55,7 @@ public class Game
 
     private void OnGameOver()
     {
+        _generatorEnemies.StopSpawning();
         _windowEndGame.OpenScreen();
         _scoreData.GetScore();
 
@@ -65,14 +65,6 @@ public class Game
     private void OnRestartButtonClick()
     {
         _windowEndGame.CloseScreen();
-        StartGame();
-    }
-
-    private void StartGame()
-    {
-        _player.Reset();
-        _shoot.enabled = true;
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

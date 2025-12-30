@@ -22,11 +22,10 @@ namespace Assets.Scripts.EnemySpace
             _coroutine = StartCoroutine(GeneratorEnemy(_delay));
         }
 
-        //public void StopSpawning()
-        //{
-        //    StopCoroutine(_coroutine);
-        //    //_coroutine = null;
-        //}
+        public void StopSpawning()
+        {
+            StopCoroutine(_coroutine);
+        }
 
         private IEnumerator GeneratorEnemy(float delay)
         {
