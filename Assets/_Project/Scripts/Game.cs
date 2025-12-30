@@ -31,8 +31,6 @@ public class Game
         Subscription();
 
         _generatorEnemies.StartSpawning();
-
-
     }
 
     public void Dispose()
