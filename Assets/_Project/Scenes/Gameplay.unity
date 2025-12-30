@@ -725,7 +725,7 @@ GameObject:
   - component: {fileID: 1728846276}
   - component: {fileID: 1728846275}
   - component: {fileID: 1728846277}
-  - component: {fileID: 1728846274}
+  - component: {fileID: 1728846278}
   m_Layer: 0
   m_Name: EnemyRemover
   m_TagString: Untagged
@@ -733,19 +733,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1728846274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1728846273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51ac85d822f94594888394e37ed88ea4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pool: {fileID: 746366994}
 --- !u!61 &1728846275
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -833,6 +820,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1728846278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728846273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ac85d822f94594888394e37ed88ea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pool: {fileID: 746366994}
 --- !u!1 &1985787631
 GameObject:
   m_ObjectHideFlags: 0
