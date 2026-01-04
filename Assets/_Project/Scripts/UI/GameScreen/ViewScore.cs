@@ -7,7 +7,8 @@ namespace Scripts.GameScreen
     public class ViewScore : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textScore;
-        [SerializeField] private ScoreData _scoreData;
+
+        private ScoreData _scoreData;
 
         private void Start()
         {

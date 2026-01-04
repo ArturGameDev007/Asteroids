@@ -2,28 +2,22 @@ using UnityEngine;
 
 namespace Scripts.Player
 {
-    public class InputController : MonoBehaviour
+    public class InputController
     {
-        private readonly string _horizontal = "Horizontal";
-        private readonly string _vertical = "Vertical";
+        private const string Horizontal = "Horizontal";
+        private const string Vertical = "Vertical";
 
         public float HorizontalInput { get; private set; }
         public float VerticalInput { get; private set; }
 
-        private void Update()
+        public void Move()
         {
-            Move();
-            RotationDuringMovement();
+            HorizontalInput = Input.GetAxis(Horizontal);
         }
 
-        private void Move()
+        public void RotationDuringMovement()
         {
-            HorizontalInput = Input.GetAxis(_horizontal);
-        }
-
-        private void RotationDuringMovement()
-        {
-            VerticalInput = Input.GetAxis(_vertical);
+            VerticalInput = Input.GetAxis(Vertical);
         }
     }
 }

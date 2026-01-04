@@ -2,16 +2,14 @@ using UnityEngine;
 
 namespace Scripts.Player
 {
-    [RequireComponent(typeof(InputController))]
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private Rigidbody2D _head2D;
+        [SerializeField] private float _rotationSpeed = 70f;
+        [SerializeField] private float _forceInput = 1.5f;
 
-        [SerializeField] private InputController _controllerInput;
-
-        [SerializeField] private float _rotationSpeed;
-        [SerializeField] private float _forceInput;
+        private Rigidbody2D _head2D;
+        private InputController _controllerInput;
 
         private Vector3 _startPosition;
 
@@ -21,7 +19,7 @@ namespace Scripts.Player
         private void Awake()
         {
             _head2D = GetComponent<Rigidbody2D>();
-            _controllerInput = GetComponent<InputController>();
+            _controllerInput = new InputController();
         }
 
         private void Start()
@@ -33,11 +31,13 @@ namespace Scripts.Player
 
         private void Update()
         {
+            _controllerInput.RotationDuringMovement();
             HandleRotation();
         }
 
         private void FixedUpdate()
         {
+            _controllerInput.Move();
             Move();
         }
 

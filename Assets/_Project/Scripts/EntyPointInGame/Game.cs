@@ -24,6 +24,8 @@ namespace Scripts.EntryPointInGame
             _shoot = shoot;
             _windowEndGame = windowEndGame;
             _scoreData = scoreData;
+
+            scoreData = new ScoreData();
         }
 
         public void Initialize()
@@ -32,7 +34,7 @@ namespace Scripts.EntryPointInGame
             _player.Reset();
             _objectPool.Initialize();
 
-            Subscription();
+            Subscribe();
 
             _shoot.enabled = true;
             _generatorEnemies.StartSpawning();
@@ -40,17 +42,17 @@ namespace Scripts.EntryPointInGame
 
         public void Dispose()
         {
-            Unsubscription();
+            Unsubscribe();
         }
 
-        public void Subscription()
+        public void Subscribe()
         {
             _windowEndGame.OnRestartClick += OnRestartButtonClick;
             _player.OnGameOver += OnGameOver;
         }
 
 
-        public void Unsubscription()
+        public void Unsubscribe()
         {
             _windowEndGame.OnRestartClick -= OnRestartButtonClick;
             _player.OnGameOver -= OnGameOver;

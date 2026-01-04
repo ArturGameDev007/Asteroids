@@ -11,13 +11,23 @@ namespace Scripts.PerformanceShip
 
         [SerializeField] private GenerateLaser _laser;
 
-        private void OnEnable()
+        private void Start()
+        {
+            Subscribe();
+        }
+
+        private void OnDestroy()
+        {
+            Unsubscribe();
+        }
+
+        private void Subscribe()
         {
             _laser.OnLaserChanged += OnShowInfoLaser;
             _laser.OnReloadProgress += OnShowRollbackLaser;
         }
 
-        private void OnDisable()
+        private void Unsubscribe()
         {
             _laser.OnLaserChanged -= OnShowInfoLaser;
             _laser.OnReloadProgress -= OnShowRollbackLaser;

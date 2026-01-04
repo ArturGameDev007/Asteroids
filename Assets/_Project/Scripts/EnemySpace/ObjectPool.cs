@@ -14,9 +14,7 @@ namespace Scripts.EnemySpace
         [Header("List Enemies")]
         [SerializeField] private List<Enemy> _prefab;
 
-        [Space(10)]
-        [Header("Score Data")]
-        [SerializeField] private ScoreData _scoreData;
+        private ScoreData _scoreData;
 
         private Queue<Enemy> _pool;
 

@@ -21,12 +21,12 @@ namespace Scripts.Player
 
         private void Start()
         {
-            Subscribstion();
+            Subscribe();
         }
 
         private void OnDestroy()
         {
-            Unsubscribtion();
+            Unsubscribe();
         }
 
         public void Reset()
@@ -34,22 +34,19 @@ namespace Scripts.Player
             _player.Reset();
         }
 
-        private void Subscribstion()
+        private void Subscribe()
         {
             _collisionHandler.OnCollisionHandler += ProcessCollision;
         }
 
-        private void Unsubscribtion()
+        private void Unsubscribe()
         {
             _collisionHandler.OnCollisionHandler -= ProcessCollision;
         }
 
         private void ProcessCollision(IEnemy enemy)
         {
-            if (enemy is Enemy)
-            {
-                OnGameOver?.Invoke();
-            }
+            OnGameOver?.Invoke();
         }
     }
 }

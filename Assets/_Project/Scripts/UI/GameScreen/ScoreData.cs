@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Scripts.UI.GameScreen
 {
-    public class ScoreData : MonoBehaviour
+    [Serializable]
+    public class ScoreData
     {
         public event Action<int> OnScoreChanged;
 
@@ -11,11 +12,6 @@ namespace Scripts.UI.GameScreen
 
         private int _zeroCountScore = 0;
         private int _scoreForKill = 10;
-
-        private void Start()
-        {
-            Reset();
-        }
 
         public void Reset()
         {

@@ -19,9 +19,9 @@ namespace Scripts.EntryPointInGame
 
         [Header("UI & Data")]
         [SerializeField] private WindowEndGame _windowEndGame;
-        [SerializeField] private ScoreData _scoreData;
 
         private Game _game;
+        private ScoreData _scoreData;
 
         private void Awake()
         {
