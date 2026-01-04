@@ -24,7 +24,7 @@ namespace Scripts.EnemySpace
             }
             else if (other.TryGetComponent(out Laser laser))
             {
-                _scoreData.AddScore();
+                _scoreData?.AddScore();
 
                 Destroy(gameObject);
             }

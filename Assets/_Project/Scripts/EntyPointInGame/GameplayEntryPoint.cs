@@ -25,6 +25,7 @@ namespace Scripts.EntryPointInGame
 
         private void Awake()
         {
+            _scoreData = new ScoreData();
             _game = new Game(_objectPool, _generatorEnemies, _player, _shoot, _windowEndGame, _scoreData);
         }
 

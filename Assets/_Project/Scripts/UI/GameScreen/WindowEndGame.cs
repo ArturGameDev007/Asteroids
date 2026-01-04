@@ -9,26 +9,20 @@ namespace Scripts.GameScreen
         public event Action OnRestartClick;
 
         [SerializeField] private Canvas _panelCanvas;
-        [SerializeField] private Button _actionButton;
+        [field: SerializeField] public Button ActionButton { get; private set; }
 
         private float _stopTimeGame = 0f;
         private float _startTimeGame = 1f;
 
-        private void OnValidate()
-        {
-            Initialize();
-        }
-
-        public void Initialize()
+        private void Awake()
         {
             _panelCanvas = GetComponent<Canvas>();
-            _actionButton = GetComponentInChildren<Button>();
-            _actionButton.onClick.AddListener(OnButtonClick);
+            ActionButton.onClick.AddListener(OnButtonClick);
         }
 
-        public void Cleanup()
+        private void OnDestroy()
         {
-            _actionButton.onClick.RemoveListener(OnButtonClick);
+            ActionButton.onClick.RemoveListener(OnButtonClick);
         }
 
         public void OpenScreen()
@@ -36,7 +30,7 @@ namespace Scripts.GameScreen
             Time.timeScale = _stopTimeGame;
 
             _panelCanvas.gameObject.SetActive(true);
-            _actionButton.interactable = true;
+            ActionButton.interactable = true;
         }
 
         public void CloseScreen()
@@ -44,10 +38,10 @@ namespace Scripts.GameScreen
             Time.timeScale = _startTimeGame;
 
             _panelCanvas.gameObject.SetActive(false);
-            _actionButton.interactable = false;
+            ActionButton.interactable = false;
         }
 
-        public void OnButtonClick()
+        private void OnButtonClick()
         {
             OnRestartClick?.Invoke();
         }

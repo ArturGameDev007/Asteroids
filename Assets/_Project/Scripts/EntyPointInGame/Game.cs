@@ -24,13 +24,11 @@ namespace Scripts.EntryPointInGame
             _shoot = shoot;
             _windowEndGame = windowEndGame;
             _scoreData = scoreData;
-
-            scoreData = new ScoreData();
         }
 
         public void Initialize()
         {
-            _scoreData.Reset();
+            _scoreData?.Reset();
             _player.Reset();
             _objectPool.Initialize();
 
@@ -51,7 +49,6 @@ namespace Scripts.EntryPointInGame
             _player.OnGameOver += OnGameOver;
         }
 
-
         public void Unsubscribe()
         {
             _windowEndGame.OnRestartClick -= OnRestartButtonClick;
@@ -62,7 +59,7 @@ namespace Scripts.EntryPointInGame
         {
             _generatorEnemies.StopSpawning();
             _windowEndGame.OpenScreen();
-            _scoreData.GetScore();
+            _scoreData?.GetScore();
 
             _shoot.enabled = false;
         }
