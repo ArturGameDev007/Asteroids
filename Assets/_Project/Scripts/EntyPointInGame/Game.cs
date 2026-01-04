@@ -5,7 +5,7 @@ using Scripts.Player.Weapons;
 using Scripts.UI.GameScreen;
 using UnityEngine.SceneManagement;
 
-namespace Scripts
+namespace Scripts.EntryPointInGame
 {
     public class Game
     {

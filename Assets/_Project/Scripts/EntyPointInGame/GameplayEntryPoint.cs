@@ -5,7 +5,7 @@ using Scripts.Player.Weapons;
 using Scripts.UI.GameScreen;
 using UnityEngine;
 
-namespace Scripts
+namespace Scripts.EntryPointInGame
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
