@@ -852,6 +852,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 701701839646206185, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+      propertyPath: _panelCanvas
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 701701839646206185, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+      propertyPath: _actionButton
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
       propertyPath: m_Name
       value: UI-EndGameScreen
