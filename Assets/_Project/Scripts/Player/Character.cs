@@ -6,7 +6,7 @@ namespace Scripts.Player
 {
     [RequireComponent(typeof(PlayerController))]
     [RequireComponent(typeof(HandlerCrashWithEnemy))]
-    public class Player : MonoBehaviour
+    public class Character : MonoBehaviour
     {
         public event Action OnGameOver;
 
