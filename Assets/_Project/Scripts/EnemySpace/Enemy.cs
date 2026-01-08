@@ -17,14 +17,14 @@ namespace Scripts.EnemySpace
         {
             if (other.TryGetComponent(out Bullet bullet))
             {
-                _scoreData?.AddScore();
+                _scoreData.AddScore();
 
                 Destroy(gameObject);
                 Destroy(bullet.gameObject);
             }
             else if (other.TryGetComponent(out Laser laser))
             {
-                _scoreData?.AddScore();
+                _scoreData.AddScore();
 
                 Destroy(gameObject);
             }

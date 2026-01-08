@@ -8,14 +8,16 @@ namespace Scripts.GameScreen
     {
         [SerializeField] private TextMeshProUGUI _textScore;
 
-        [SerializeField] private ScoreData _scoreData;
+        private ScoreData _scoreData;
 
-        private void Start()
+        public void Create(ScoreData scoreData)
         {
+            _scoreData = scoreData;
             _scoreData.OnScoreChanged += OnShowInfoFinalScore;
 
             OnShowInfoFinalScore(_scoreData.GetScore());
         }
+
 
         private void OnDestroy()
         {

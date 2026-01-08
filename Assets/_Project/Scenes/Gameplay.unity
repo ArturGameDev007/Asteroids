@@ -692,6 +692,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1722916248 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3491601382450380812, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+  m_PrefabInstance: {fileID: 3370116970750321382}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9bb7fdc1f2996428cd27d05e7a6001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1728846273
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +871,7 @@ MonoBehaviour:
   _player: {fileID: 340683175}
   _shoot: {fileID: 496244904}
   _windowEndGame: {fileID: 1290556567}
+  _viewScore: {fileID: 1722916248}
 --- !u!1001 &3370116970750321382
 PrefabInstance:
   m_ObjectHideFlags: 0

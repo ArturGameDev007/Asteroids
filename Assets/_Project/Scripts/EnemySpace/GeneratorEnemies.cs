@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Scripts.UI.GameScreen;
+using System.Collections;
 using UnityEngine;
 
 namespace Scripts.EnemySpace
@@ -15,7 +16,14 @@ namespace Scripts.EnemySpace
 
         private float _delay = 3f;
 
+        private ScoreData _scoreData;
+
         private Coroutine _coroutine;
+
+        public void Initialize(ScoreData scoreData)
+        {
+            _scoreData = scoreData;
+        }
 
         public void StartSpawning()
         {
@@ -44,6 +52,12 @@ namespace Scripts.EnemySpace
             Vector2 positionSpawn = new Vector2(positionX, _positionY);
 
             var enemy = _pool.GetObject();
+
+            if (enemy.TryGetComponent(out Enemy enemyComponent))
+            {
+                enemyComponent.Construct(_scoreData);
+            }
+
             enemy.gameObject.SetActive(true);
 
             enemy.transform.position = positionSpawn;

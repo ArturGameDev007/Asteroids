@@ -19,6 +19,7 @@ namespace Scripts.EntryPointInGame
 
         [Header("UI & Data")]
         [SerializeField] private WindowEndGame _windowEndGame;
+        [SerializeField] private ViewScore _viewScore;
 
         private Game _game;
         private ScoreData _scoreData;
@@ -26,6 +27,11 @@ namespace Scripts.EntryPointInGame
         private void Awake()
         {
             _scoreData = new ScoreData();
+
+            _viewScore.Create(_scoreData);
+
+            _generatorEnemies.Initialize(_scoreData);
+
             _game = new Game(_objectPool, _generatorEnemies, _player, _shoot, _windowEndGame, _scoreData);
         }
 
