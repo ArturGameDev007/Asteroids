@@ -26,7 +26,7 @@ namespace Scripts.Player
         {
             _startPosition = transform.position;
 
-            Reset();
+            Restart();
         }
 
         private void Update()
@@ -41,7 +41,7 @@ namespace Scripts.Player
             Move();
         }
 
-        public void Reset()
+        public void Restart()
         {
             transform.position = _startPosition;
             transform.rotation = Quaternion.identity;

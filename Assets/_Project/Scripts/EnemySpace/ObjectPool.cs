@@ -56,7 +56,7 @@ namespace Scripts.EnemySpace
             enemy.gameObject.SetActive(false);
         }
 
-        public void Reset()
+        public void ClearPool()
         {
             _pool.Clear();
         }

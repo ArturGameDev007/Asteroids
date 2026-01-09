@@ -29,9 +29,9 @@ namespace Scripts.Player
             _collisionHandler.OnCollisionHandler -= ProcessCollision;
         }
 
-        public void Reset()
+        public void ClearState()
         {
-            _player.Reset();
+            _player.Restart();
         }
 
         private void ProcessCollision(IEnemy enemy)

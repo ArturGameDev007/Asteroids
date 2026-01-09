@@ -9,11 +9,11 @@ namespace Scripts.EntryPointInGame
 {
     public class Game
     {
-        private ObjectPool _objectPool;
-        private GeneratorEnemies _generatorEnemies;
-        private Character _player;
-        private InputForShoot _shoot;
-        private WindowEndGame _windowEndGame;
+        private readonly ObjectPool _objectPool;
+        private readonly GeneratorEnemies _generatorEnemies;
+        private readonly Character _player;
+        private readonly InputForShoot _shoot;
+        private readonly WindowEndGame _windowEndGame;
         private ScoreData _scoreData;
 
         public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, InputForShoot shoot, WindowEndGame windowEndGame, ScoreData scoreData)
@@ -29,7 +29,7 @@ namespace Scripts.EntryPointInGame
         public void Initialize()
         {
             _scoreData?.Reset();
-            _player.Reset();
+            _player.ClearState();
             _objectPool.Initialize();
 
             Subscribe();
@@ -58,7 +58,9 @@ namespace Scripts.EntryPointInGame
         private void OnGameOver()
         {
             _generatorEnemies.StopSpawning();
-            _windowEndGame.OpenScreen(_scoreData);
+            _windowEndGame.OpenScreen();
+
+            int finalScore = _scoreData.GetScore;
 
             _shoot.enabled = false;
         }

@@ -1,5 +1,4 @@
-﻿using Scripts.UI.GameScreen;
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,13 +11,12 @@ namespace Scripts.GameScreen
         [SerializeField] private Canvas _panelCanvas;
         [SerializeField] private Button _actionButton;
 
-        public bool IsPaused { get; private set; }
-
         private float _startTimeGame = 1f;
+
+        public bool IsPaused { get; private set; }
 
         private void Awake()
         {
-            _panelCanvas = GetComponent<Canvas>();
             _actionButton.onClick.AddListener(OnButtonClick);
         }
 
@@ -27,7 +25,7 @@ namespace Scripts.GameScreen
             _actionButton.onClick.RemoveListener(OnButtonClick);
         }
 
-        public void OpenScreen(ScoreData scoreData)
+        public void OpenScreen()
         {
             IsPaused = true;
 

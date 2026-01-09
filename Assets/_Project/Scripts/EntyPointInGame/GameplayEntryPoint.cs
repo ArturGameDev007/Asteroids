@@ -43,6 +43,7 @@ namespace Scripts.EntryPointInGame
         private void OnDestroy()
         {
             _game.Dispose();
+            _objectPool.ClearPool();
         }
     }
 }
