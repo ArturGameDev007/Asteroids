@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scripts.UI.GameScreen;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,7 +27,7 @@ namespace Scripts.GameScreen
             _actionButton.onClick.RemoveListener(OnButtonClick);
         }
 
-        public void OpenScreen()
+        public void OpenScreen(ScoreData scoreData)
         {
             IsPaused = true;
 

@@ -58,8 +58,7 @@ namespace Scripts.EntryPointInGame
         private void OnGameOver()
         {
             _generatorEnemies.StopSpawning();
-            _windowEndGame.OpenScreen();
-            _scoreData?.GetScore();
+            _windowEndGame.OpenScreen(_scoreData);
 
             _shoot.enabled = false;
         }

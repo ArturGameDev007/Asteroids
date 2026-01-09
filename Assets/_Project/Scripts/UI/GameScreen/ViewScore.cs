@@ -15,7 +15,7 @@ namespace Scripts.GameScreen
             _scoreData = scoreData;
             _scoreData.OnScoreChanged += OnShowInfoFinalScore;
 
-            OnShowInfoFinalScore(_scoreData.GetScore());
+            OnShowInfoFinalScore(_scoreData.GetScore);
         }
 
 

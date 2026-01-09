@@ -13,6 +13,8 @@ namespace Scripts.UI.GameScreen
         private int _zeroCountScore = 0;
         private int _scoreForKill = 10;
 
+        public int GetScore { get; set; }
+
         public void Reset()
         {
             _currentScore = _zeroCountScore;
@@ -24,9 +26,9 @@ namespace Scripts.UI.GameScreen
             OnScoreChanged?.Invoke(_currentScore);
         }
 
-        public int GetScore()
-        {
-            return _currentScore;
-        }
+        //public int GetScore()
+        //{
+        //    return _currentScore;
+        //}
     }
 }
