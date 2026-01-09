@@ -25,10 +25,5 @@ namespace Scripts.UI.GameScreen
             _currentScore += _scoreForKill;
             OnScoreChanged?.Invoke(_currentScore);
         }
-
-        //public int GetScore()
-        //{
-        //    return _currentScore;
-        //}
     }
 }

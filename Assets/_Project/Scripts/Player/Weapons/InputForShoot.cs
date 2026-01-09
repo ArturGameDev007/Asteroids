@@ -5,8 +5,8 @@ namespace Scripts.Player.Weapons
 {
     public class InputForShoot : MonoBehaviour
     {
-        private const int InputMouseLeft = 0;
-        private const int InputMouseRight = 1;
+        private const int INPUT_MOUSE_LEFT = 0;
+        private const int INPUT_MOUSE_RIGHT = 1;
 
         [SerializeField] private GameObject _prefabLaser;
         [SerializeField] private GameObject _bulletPrefab;
@@ -27,13 +27,13 @@ namespace Scripts.Player.Weapons
 
         private void InputBulletShoot()
         {
-            if (Input.GetMouseButtonDown(InputMouseLeft))
+            if (Input.GetMouseButtonDown(INPUT_MOUSE_LEFT))
                 _shooter.CreateShoot(_bulletPrefab, _pointShootForBullet);
         }
 
         private void InputlaserShoot()
         {
-            if (Input.GetMouseButtonDown(InputMouseRight))
+            if (Input.GetMouseButtonDown(INPUT_MOUSE_RIGHT))
                 if (_laserAmmo.TrySpendAmmo())
                     _shooter.CreateShoot(_prefabLaser, _pointShootForlaser);
         }

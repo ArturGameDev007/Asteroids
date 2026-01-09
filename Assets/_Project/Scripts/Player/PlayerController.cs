@@ -5,6 +5,9 @@ namespace Scripts.Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerController : MonoBehaviour
     {
+        private const float X_ANGLE = 0f;
+        private const float Y_ANGLE = 0f;
+
         [SerializeField] private float _rotationSpeed = 70f;
         [SerializeField] private float _forceInput = 1.5f;
 
@@ -12,9 +15,6 @@ namespace Scripts.Player
         private InputController _controllerInput;
 
         private Vector3 _startPosition;
-
-        private float _xAngle = 0f;
-        private float _yAngle = 0f;
 
         private void Awake()
         {
@@ -31,13 +31,13 @@ namespace Scripts.Player
 
         private void Update()
         {
-            _controllerInput.RotationDuringMovement();
+            _controllerInput.UpdateVerticalInput();
             HandleRotation();
         }
 
         private void FixedUpdate()
         {
-            _controllerInput.Move();
+            _controllerInput.UpdateHorizontalInput();
             Move();
         }
 
@@ -65,7 +65,7 @@ namespace Scripts.Player
             float rotationHorizontal = _controllerInput.HorizontalInput;
             float rotationAmount = -rotationHorizontal * _rotationSpeed * Time.deltaTime;
 
-            transform.Rotate(_xAngle, _yAngle, rotationAmount);
+            transform.Rotate(X_ANGLE, Y_ANGLE, rotationAmount);
         }
     }
 }

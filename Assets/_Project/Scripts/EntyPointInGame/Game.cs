@@ -43,13 +43,13 @@ namespace Scripts.EntryPointInGame
             Unsubscribe();
         }
 
-        public void Subscribe()
+        private void Subscribe()
         {
             _windowEndGame.OnRestartClick += OnRestartButtonClick;
             _player.OnGameOver += OnGameOver;
         }
 
-        public void Unsubscribe()
+        private void Unsubscribe()
         {
             _windowEndGame.OnRestartClick -= OnRestartButtonClick;
             _player.OnGameOver -= OnGameOver;

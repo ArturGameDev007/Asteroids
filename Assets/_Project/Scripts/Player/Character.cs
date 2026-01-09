@@ -21,27 +21,17 @@ namespace Scripts.Player
 
         private void Start()
         {
-            Subscribe();
+            _collisionHandler.OnCollisionHandler += ProcessCollision;
         }
 
         private void OnDestroy()
         {
-            Unsubscribe();
+            _collisionHandler.OnCollisionHandler -= ProcessCollision;
         }
 
         public void Reset()
         {
             _player.Reset();
-        }
-
-        private void Subscribe()
-        {
-            _collisionHandler.OnCollisionHandler += ProcessCollision;
-        }
-
-        private void Unsubscribe()
-        {
-            _collisionHandler.OnCollisionHandler -= ProcessCollision;
         }
 
         private void ProcessCollision(IEnemy enemy)
