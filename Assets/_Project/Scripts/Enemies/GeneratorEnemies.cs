@@ -20,7 +20,7 @@ namespace Scripts.Enemies
 
         private Coroutine _coroutine;
 
-        public void Initialize(ScoreData scoreData)
+        public void Initialize(ScoreData scoreDatar)
         {
             _scoreData = scoreData;
         }

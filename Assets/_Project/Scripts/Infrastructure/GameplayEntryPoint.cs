@@ -13,7 +13,7 @@ namespace Scripts.Infrastructure
         [SerializeField] private ObjectPool _objectPool;
         [SerializeField] private GeneratorEnemies _generatorEnemies;
 
-        [Header("Player & Combat")]
+        [Header("Prefabs")]
         [SerializeField] private Character _player;
         [SerializeField] private InputForShoot _shoot;
 
@@ -26,13 +26,15 @@ namespace Scripts.Infrastructure
 
         private void Awake()
         {
+            Character character = Instantiate(_player);
+
             _scoreData = new ScoreData();
 
             _viewScore.Create(_scoreData);
 
             _generatorEnemies.Initialize(_scoreData);
 
-            _game = new Game(_objectPool, _generatorEnemies, _player, _shoot, _windowEndGame, _scoreData);
+            _game = new Game(_objectPool, _generatorEnemies, character, _shoot, _windowEndGame, _scoreData);
         }
 
         private void Start()

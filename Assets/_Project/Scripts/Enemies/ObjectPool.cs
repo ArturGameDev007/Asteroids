@@ -33,12 +33,10 @@ namespace Scripts.Enemies
             if (_pool.Count == numberZero)
             {
                 int indexEnemy = Random.Range(minCountPool, _prefab.Count);
-                var createEnemy = Instantiate(_prefab[indexEnemy]);
+                var createEnemy = Instantiate(_prefab[indexEnemy], _container.transform);
 
                 if (createEnemy.TryGetComponent(out FlyingSaucerController enemy))
                     enemy.Construct(_player);
-
-                createEnemy.transform.parent = _container.transform;
 
                 createEnemy.Construct(_scoreData);
 
