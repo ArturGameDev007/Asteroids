@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Assets._Project.Scripts.Enemies;
+using UnityEngine;
 
-namespace Scripts.EnemySpace
+namespace Scripts.Enemies
 {
-    public class AsteroidController : TypesOfEnemies
+    public class AsteroidController : MonoBehaviour, IMovable
     {
         [SerializeField] private float _speed;
 
@@ -13,7 +14,7 @@ namespace Scripts.EnemySpace
             Move();
         }
 
-        protected override void Move()
+        public void Move()
         {
             _speedInput = _speed * Time.deltaTime;
             transform.Translate(Vector3.down * _speedInput);

@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Assets._Project.Scripts.Enemies;
+using UnityEngine;
 
-namespace Scripts.EnemySpace
+namespace Scripts.Enemies
 {
-    public class FlyingSaurcersController : TypesOfEnemies
+    public class FlyingSaucerController : MonoBehaviour, IMovable
     {
         [SerializeField] private Transform _player;
 
@@ -14,7 +15,7 @@ namespace Scripts.EnemySpace
         private Vector2 _directionMove;
 
         private float _distanceToPlayer;
-        private float _minDistanceForDetected = 10f;
+        private float _minDistanceForDetect = 10f;
 
         private void Start()
         {
@@ -26,17 +27,17 @@ namespace Scripts.EnemySpace
             Move();
         }
 
-        public void Construsct(Transform player)
+        public void Construct(Transform player)
         {
             _player = player;
         }
 
-        protected override void Move()
+        public void Move()
         {
             _directionToPlayer = _player.transform.position - _flyingPosition;
             _distanceToPlayer = _directionToPlayer.magnitude;
 
-            if (_distanceToPlayer < _minDistanceForDetected)
+            if (_distanceToPlayer < _minDistanceForDetect)
             {
                 RotateTowardPlayer();
 

@@ -1,4 +1,4 @@
-using Scripts.EnemySpace;
+using Scripts.Enemies;
 using System;
 using UnityEngine;
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scripts.EnemySpace
+namespace Scripts.Enemies
 {
     public class ObjectRemover : MonoBehaviour
     {

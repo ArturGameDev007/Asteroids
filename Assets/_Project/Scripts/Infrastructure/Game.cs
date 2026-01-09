@@ -1,11 +1,11 @@
-using Scripts.EnemySpace;
+using Scripts.Enemies;
 using Scripts.GameScreen;
 using Scripts.Player;
 using Scripts.Player.Weapons;
 using Scripts.UI.GameScreen;
 using UnityEngine.SceneManagement;
 
-namespace Scripts.EntryPointInGame
+namespace Scripts.Infrastructure
 {
     public class Game
     {

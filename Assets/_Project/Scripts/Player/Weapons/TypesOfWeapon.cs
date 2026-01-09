@@ -1,4 +1,4 @@
-﻿using Scripts.EnemySpace;
+﻿using Scripts.Enemies;
 using UnityEngine;
 
 namespace Scripts.Weapons

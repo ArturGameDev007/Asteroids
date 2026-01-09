@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Scripts.EnemySpace
+namespace Scripts.Enemies
 {
     public class GeneratorEnemies : MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using Scripts.UI.GameScreen;
 using UnityEngine;
 
-namespace Scripts.EnemySpace
+namespace Scripts.Enemies
 {
     public class Enemy : MonoBehaviour, IEnemy
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.EnemySpace
+namespace Scripts.Enemies
 {
     public class ObjectPool : MonoBehaviour
     {
@@ -17,8 +17,6 @@ namespace Scripts.EnemySpace
         private ScoreData _scoreData;
 
         private Queue<Enemy> _pool;
-
-        public IEnumerable<Enemy> PoolEnemy => _pool;
 
         public void Initialize()
         {
@@ -37,8 +35,8 @@ namespace Scripts.EnemySpace
                 int indexEnemy = Random.Range(minCountPool, _prefab.Count);
                 var createEnemy = Instantiate(_prefab[indexEnemy]);
 
-                if (createEnemy.TryGetComponent(out FlyingSaurcersController enemy))
-                    enemy.Construsct(_player);
+                if (createEnemy.TryGetComponent(out FlyingSaucerController enemy))
+                    enemy.Construct(_player);
 
                 createEnemy.transform.parent = _container.transform;
 
