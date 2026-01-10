@@ -8,8 +8,8 @@ namespace Scripts.Player
         private const float X_ANGLE = 0f;
         private const float Y_ANGLE = 0f;
 
-        [SerializeField] private float _rotationSpeed = 70f;
-        [SerializeField] private float _forceInput = 1.5f;
+        [SerializeField] private float _rotationSpeed = 100f;
+        [SerializeField] private float _forceInput = 2.0f;
 
         private Rigidbody2D _head2D;
         private InputController _controllerInput;

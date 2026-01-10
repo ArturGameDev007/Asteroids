@@ -20,7 +20,7 @@ namespace Scripts.Enemies
 
         private Coroutine _coroutine;
 
-        public void Initialize(ScoreData scoreDatar)
+        public void Initialize(ScoreData scoreData)
         {
             _scoreData = scoreData;
         }
@@ -59,7 +59,6 @@ namespace Scripts.Enemies
             }
 
             enemy.gameObject.SetActive(true);
-
             enemy.transform.position = positionSpawn;
         }
     }
