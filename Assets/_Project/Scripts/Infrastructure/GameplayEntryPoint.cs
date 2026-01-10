@@ -26,7 +26,7 @@ namespace Scripts.Infrastructure
 
         private void Awake()
         {
-            Character character = Instantiate(_player);
+            //Character character = Instantiate(_player);
 
             _scoreData = new ScoreData();
 
@@ -34,7 +34,7 @@ namespace Scripts.Infrastructure
 
             _generatorEnemies.Initialize(_scoreData);
 
-            _game = new Game(_objectPool, _generatorEnemies, character, _shoot, _windowEndGame, _scoreData);
+            _game = new Game(_objectPool, _generatorEnemies, _player, _shoot, _windowEndGame, _scoreData);
         }
 
         private void Start()
