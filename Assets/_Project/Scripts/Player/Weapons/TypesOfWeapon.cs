@@ -1,7 +1,7 @@
-﻿using Scripts.Enemies;
+﻿using _Project.Scripts.Enemies;
 using UnityEngine;
 
-namespace Scripts.Weapons
+namespace _Project.Scripts.Player.Weapons
 {
     public abstract class TypesOfWeapon : MonoBehaviour
     {

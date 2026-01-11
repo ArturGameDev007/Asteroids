@@ -1,8 +1,8 @@
-﻿using Scripts.UI.GameScreen;
-using System.Collections;
+﻿using System.Collections;
+using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
 
-namespace Scripts.Enemies
+namespace _Project.Scripts.Enemies
 {
     public class GeneratorEnemies : MonoBehaviour
     {

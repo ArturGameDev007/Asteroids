@@ -1,8 +1,8 @@
-using Scripts.Enemies;
 using System;
+using _Project.Scripts.Enemies;
 using UnityEngine;
 
-namespace Scripts.Player
+namespace _Project.Scripts.Player
 {
     public class HandlerCrashWithEnemy : MonoBehaviour
     {

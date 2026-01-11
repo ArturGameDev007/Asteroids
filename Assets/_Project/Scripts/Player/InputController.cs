@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.Player
+namespace _Project.Scripts.Player
 {
     public class InputController
     {

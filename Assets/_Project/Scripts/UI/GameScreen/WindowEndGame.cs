@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.GameScreen
+namespace _Project.Scripts.UI.GameScreen
 {
     [RequireComponent(typeof(Canvas))]
     public class WindowEndGame : MonoBehaviour

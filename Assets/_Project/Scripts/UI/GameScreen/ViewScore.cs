@@ -1,8 +1,7 @@
-﻿using Scripts.UI.GameScreen;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
-namespace Scripts.GameScreen
+namespace _Project.Scripts.UI.GameScreen
 {
     public class ViewScore : MonoBehaviour
     {

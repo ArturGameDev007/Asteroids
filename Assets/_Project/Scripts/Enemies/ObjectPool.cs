@@ -1,9 +1,9 @@
-﻿using Scripts.Player;
-using Scripts.UI.GameScreen;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using _Project.Scripts.Player;
+using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
 
-namespace Scripts.Enemies
+namespace _Project.Scripts.Enemies
 {
     public class ObjectPool : MonoBehaviour
     {

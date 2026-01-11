@@ -1,7 +1,6 @@
-﻿using Assets._Project.Scripts.Enemies;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Scripts.Enemies
+namespace _Project.Scripts.Enemies
 {
     public class FlyingSaucerController : MonoBehaviour, IMovable
     {

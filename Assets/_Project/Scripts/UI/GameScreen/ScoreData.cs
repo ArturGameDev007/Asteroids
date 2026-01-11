@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Scripts.UI.GameScreen
+namespace _Project.Scripts.UI.GameScreen
 {
     [Serializable]
     public class ScoreData

@@ -1,8 +1,8 @@
-﻿using Scripts.Player.Weapons;
-using Scripts.UI.GameScreen;
+﻿using _Project.Scripts.Player.Weapons;
+using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
 
-namespace Scripts.Enemies
+namespace _Project.Scripts.Enemies
 {
     public class Enemy : MonoBehaviour, IEnemy
     {

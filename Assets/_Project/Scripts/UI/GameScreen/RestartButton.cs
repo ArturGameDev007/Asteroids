@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets._Project.Scripts.UI.GameScreen
+namespace _Project.Scripts.UI.GameScreen
 {
     public class RestartButton : MonoBehaviour
     {

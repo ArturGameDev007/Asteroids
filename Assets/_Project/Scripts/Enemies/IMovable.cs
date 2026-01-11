@@ -1,4 +1,4 @@
-﻿namespace Assets._Project.Scripts.Enemies
+﻿namespace _Project.Scripts.Enemies
 {
     public interface IMovable
     {

@@ -1,4 +1,4 @@
-﻿namespace Scripts.Enemies
+﻿namespace _Project.Scripts.Enemies
 {
     public interface IEnemy
     {

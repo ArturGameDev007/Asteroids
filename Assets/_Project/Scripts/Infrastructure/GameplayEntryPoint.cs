@@ -1,12 +1,10 @@
-using Assets._Project.Scripts.UI.GameScreen;
-using Scripts.Enemies;
-using Scripts.GameScreen;
-using Scripts.Player;
-using Scripts.Player.Weapons;
-using Scripts.UI.GameScreen;
+using _Project.Scripts.Enemies;
+using _Project.Scripts.Player;
+using _Project.Scripts.Player.Weapons;
+using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
 
-namespace Scripts.Infrastructure
+namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
