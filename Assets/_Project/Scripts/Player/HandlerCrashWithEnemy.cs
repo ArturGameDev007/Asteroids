@@ -20,4 +20,3 @@ namespace _Project.Scripts.Player
         }
     }
 }
-
