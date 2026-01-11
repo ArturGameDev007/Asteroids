@@ -1,4 +1,5 @@
-﻿using Scripts.UI.GameScreen;
+﻿using Scripts.Player;
+using Scripts.UI.GameScreen;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Scripts.Enemies
     {
         [Header("Transform Objects")]
         [SerializeField] private GameObject _container;
-        [SerializeField] private Transform _player;
+        [SerializeField] private Character _player;
 
         [Space(10)]
         [Header("List Enemies")]
@@ -36,7 +37,7 @@ namespace Scripts.Enemies
                 var createEnemy = Instantiate(_prefab[indexEnemy], _container.transform);
 
                 if (createEnemy.TryGetComponent(out FlyingSaucerController enemy))
-                    enemy.Construct(_player);
+                    enemy.Construct(_player.transform);
 
                 createEnemy.Construct(_scoreData);
 

@@ -1,3 +1,4 @@
+using Assets._Project.Scripts.UI.GameScreen;
 using Scripts.Enemies;
 using Scripts.GameScreen;
 using Scripts.Player;
@@ -14,15 +15,17 @@ namespace Scripts.Infrastructure
         private readonly Character _player;
         private readonly InputForShoot _shoot;
         private readonly WindowEndGame _windowEndGame;
+        private readonly RestartButton _restartButton;
         private ScoreData _scoreData;
 
-        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, InputForShoot shoot, WindowEndGame windowEndGame, ScoreData scoreData)
+        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, InputForShoot shoot, WindowEndGame windowEndGame, RestartButton restartButton, ScoreData scoreData)
         {
             _objectPool = objectPool;
             _generatorEnemies = generatorEnemies;
             _player = player;
             _shoot = shoot;
             _windowEndGame = windowEndGame;
+            _restartButton = restartButton;
             _scoreData = scoreData;
         }
 
@@ -32,6 +35,7 @@ namespace Scripts.Infrastructure
             _player.ClearState();
             _objectPool.Initialize();
 
+            _windowEndGame.Construct(_restartButton.Button);
             Subscribe();
 
             _shoot.enabled = true;

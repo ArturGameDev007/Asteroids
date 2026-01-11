@@ -4,12 +4,13 @@ using UnityEngine.UI;
 
 namespace Scripts.GameScreen
 {
+    [RequireComponent(typeof(Canvas))]
     public class WindowEndGame : MonoBehaviour
     {
         public event Action OnRestartClick;
 
-        [SerializeField] private Canvas _panelCanvas;
-        [SerializeField] private Button _actionButton;
+        private Canvas _panelCanvas;
+        private Button _actionButton;
 
         private float _startTimeGame = 1f;
 
@@ -17,12 +18,18 @@ namespace Scripts.GameScreen
 
         private void Awake()
         {
+            _panelCanvas = GetComponent<Canvas>();
             _actionButton.onClick.AddListener(OnButtonClick);
         }
 
         private void OnDestroy()
         {
             _actionButton.onClick.RemoveListener(OnButtonClick);
+        }
+
+        public void Construct(Button button)
+        {
+            _actionButton = button;
         }
 
         public void OpenScreen()
