@@ -1,25 +1,30 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Project.Scripts.UI.GameScreen
 {
+    [RequireComponent(typeof(Canvas))]
     public class LoseView : MonoBehaviour
     {
-        [SerializeField] private Button _restartButton;
+        private Canvas _canvas;
+        [field: SerializeField] public Button RestartButton { get; set; }
 
-        private void Start()
+        private void Awake()
         {
-            Hide();
+            _canvas = GetComponent<Canvas>();
         }
 
-        public void Show()
+        public void ShowPanel()
         {
-            gameObject.SetActive(true);
+            _canvas.gameObject.SetActive(true);
+            RestartButton.interactable = true;
         }
 
-        private void Hide()
+        public void HidePanel()
         {
-            gameObject.SetActive(false);
+            _canvas.gameObject.SetActive(false);
+            RestartButton.interactable = true;
         }
     }
 }

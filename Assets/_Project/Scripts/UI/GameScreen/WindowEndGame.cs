@@ -15,12 +15,12 @@ namespace _Project.Scripts.UI.GameScreen
         private void Awake()
         {
             _panelCanvas = GetComponent<Canvas>();
+            _actionButton.onClick.AddListener(OnButtonClick);
         }
 
-        private void OnValidate()
+        private void Start()
         {
-            _actionButton = GetComponent<Button>();
-            _actionButton.onClick.AddListener(OnButtonClick);
+            CloseScreen();
         }
 
         private void OnDestroy()

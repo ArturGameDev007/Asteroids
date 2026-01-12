@@ -1,50 +1,42 @@
+using System;
 using UnityEngine;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    public class LoseViewModel
+    public class LoseViewModel : MonoBehaviour
     {
-        private readonly RestartGame _restartGame;
-        private readonly LoseView  _loseView;
-        private readonly GameTimeController _gameTimeController;
+        public event Action OnRestartClick;
+
+        [SerializeField] private LoseView _loseView;
+
+        private void Awake()
+        {
+            _loseView.RestartButton.onClick.AddListener(OnRestartClicked);
+        }
+
+        private void Start()
+        {
+            Close();
+        }
+
+        private void OnDestroy()
+        {
+            _loseView.RestartButton.onClick.RemoveListener(OnRestartClicked);
+        }
+
+        public void Open()
+        {
+            _loseView.ShowPanel();
+        } 
         
-        
-        public LoseViewModel(RestartGame restartGame, LoseView loseView, GameTimeController gameTimeController)
+        public void Close()
         {
-            _restartGame = restartGame;
-            _loseView = loseView;
-            _gameTimeController = gameTimeController;
-        }
-        
-        public void Initialize()
-        {
-            _player.OnDead += Show;
-            BindButtons();
+            _loseView.HidePanel();
         }
 
-        public void Dispose()
+        private void OnRestartClicked()
         {
-            _player.OnDead -= Show;
-            _loseCommand.Dispose();
-        }
-
-
-        private void BindButtons()
-        {
-            _loseCommand.Subscribe(_ => RestartGame());
-            _loseView.action.OnClickAsObservable()
-                .Subscribe(_loseCommand.Execute);
-        }
-
-        private void Show()
-        {
-            _loseView.Show();
-            _gameTimeController.LoseGame();
-        }
-
-        private void RestartGame()
-        {
-            _restartGame.RestartScene();
+            OnRestartClick?.Invoke();
         }
     }
 }

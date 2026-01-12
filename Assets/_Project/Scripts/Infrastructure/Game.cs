@@ -12,16 +12,17 @@ namespace _Project.Scripts.Infrastructure
         private readonly GeneratorEnemies _generatorEnemies;
         private readonly Character _player;
         private readonly InputForShoot _shoot;
-        private readonly WindowEndGame _windowEndGame;
+        // private readonly WindowEndGame _windowEndGame;
+        private readonly LoseViewModel _loseViewModel;
         private ScoreData _scoreData;
 
-        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, InputForShoot shoot, WindowEndGame windowEndGame, ScoreData scoreData)
+        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, InputForShoot shoot, LoseViewModel loseViewModel, ScoreData scoreData)
         {
             _objectPool = objectPool;
             _generatorEnemies = generatorEnemies;
             _player = player;
             _shoot = shoot;
-            _windowEndGame = windowEndGame;
+            _loseViewModel = loseViewModel;
             _scoreData = scoreData;
         }
 
@@ -44,20 +45,20 @@ namespace _Project.Scripts.Infrastructure
 
         private void Subscribe()
         {
-            _windowEndGame.OnRestartClick += OnRestartButtonClick;
+            _loseViewModel.OnRestartClick += OnRestartButtonClick;
             _player.OnGameOver += OnGameOver;
         }
 
         private void Unsubscribe()
         {
-            _windowEndGame.OnRestartClick -= OnRestartButtonClick;
+            _loseViewModel.OnRestartClick -= OnRestartButtonClick;
             _player.OnGameOver -= OnGameOver;
         }
 
         private void OnGameOver()
         {
             _generatorEnemies.StopSpawning();
-            _windowEndGame.OpenScreen();
+            _loseViewModel.Open();
 
             int finalScore = _scoreData.GetScore;
 
@@ -66,8 +67,7 @@ namespace _Project.Scripts.Infrastructure
 
         private void OnRestartButtonClick()
         {
-            _windowEndGame.CloseScreen();
-
+            _loseViewModel.Close();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

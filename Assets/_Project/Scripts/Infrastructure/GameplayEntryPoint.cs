@@ -3,6 +3,7 @@ using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Infrastructure
 {
@@ -16,8 +17,9 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private Character _player;
         [SerializeField] private InputForShoot _shoot;
 
+        [FormerlySerializedAs("_windowEndGame")]
         [Header("UI & Data")]
-        [SerializeField] private WindowEndGame _windowEndGame;
+        [SerializeField] private LoseViewModel _loseViewModel;
         [SerializeField] private ViewScore _viewScore;
 
         private Game _game;
@@ -32,7 +34,7 @@ namespace _Project.Scripts.Infrastructure
             _viewScore.Create(_scoreData);
             _generatorEnemies.Initialize(_scoreData);
 
-            _game = new Game(_objectPool, _generatorEnemies, _player, _shoot, _windowEndGame, _scoreData);
+            _game = new Game(_objectPool, _generatorEnemies, _player, _shoot, _loseViewModel, _scoreData);
         }
 
         private void Start()

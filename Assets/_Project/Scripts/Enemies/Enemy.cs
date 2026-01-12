@@ -7,10 +7,16 @@ namespace _Project.Scripts.Enemies
     public class Enemy : MonoBehaviour, IEnemy
     {
         private ScoreData _scoreData;
+        private Vector2 _direction;
 
         public void Construct(ScoreData scoreData)
         {
             _scoreData = scoreData;
+        }
+        
+        public void SetDirection(Vector2 direction)
+        {
+            _direction = direction;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
