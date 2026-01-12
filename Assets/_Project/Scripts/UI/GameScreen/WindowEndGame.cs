@@ -9,16 +9,17 @@ namespace _Project.Scripts.UI.GameScreen
     {
         public event Action OnRestartClick;
 
+        [SerializeField] private Button _actionButton;
         private Canvas _panelCanvas;
-        private Button _actionButton;
-
-        private float _startTimeGame = 1f;
-
-        public bool IsPaused { get; private set; }
 
         private void Awake()
         {
             _panelCanvas = GetComponent<Canvas>();
+        }
+
+        private void OnValidate()
+        {
+            _actionButton = GetComponent<Button>();
             _actionButton.onClick.AddListener(OnButtonClick);
         }
 
@@ -27,25 +28,14 @@ namespace _Project.Scripts.UI.GameScreen
             _actionButton.onClick.RemoveListener(OnButtonClick);
         }
 
-        public void Construct(Button button)
-        {
-            _actionButton = button;
-        }
-
         public void OpenScreen()
         {
-            IsPaused = true;
-
             _panelCanvas.gameObject.SetActive(true);
             _actionButton.interactable = true;
         }
 
         public void CloseScreen()
         {
-            IsPaused = false;
-
-            Time.timeScale = _startTimeGame;
-
             _panelCanvas.gameObject.SetActive(false);
             _actionButton.interactable = false;
         }

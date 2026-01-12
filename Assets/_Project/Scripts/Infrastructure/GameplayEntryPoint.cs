@@ -19,7 +19,6 @@ namespace _Project.Scripts.Infrastructure
         [Header("UI & Data")]
         [SerializeField] private WindowEndGame _windowEndGame;
         [SerializeField] private ViewScore _viewScore;
-        [SerializeField] private RestartButton _restartButton;
 
         private Game _game;
         private ScoreData _scoreData;
@@ -33,7 +32,7 @@ namespace _Project.Scripts.Infrastructure
             _viewScore.Create(_scoreData);
             _generatorEnemies.Initialize(_scoreData);
 
-            _game = new Game(_objectPool, _generatorEnemies, _player, _shoot, _windowEndGame, _restartButton, _scoreData);
+            _game = new Game(_objectPool, _generatorEnemies, _player, _shoot, _windowEndGame, _scoreData);
         }
 
         private void Start()
