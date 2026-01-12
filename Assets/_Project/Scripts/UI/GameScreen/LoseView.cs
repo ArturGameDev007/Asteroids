@@ -8,23 +8,36 @@ namespace _Project.Scripts.UI.GameScreen
     public class LoseView : MonoBehaviour
     {
         private Canvas _canvas;
-        [field: SerializeField] public Button RestartButton { get; set; }
+        public Button RestartButton { get; private set; }
 
         private void Awake()
         {
             _canvas = GetComponent<Canvas>();
         }
 
+        public void Construct(Button button)
+        {
+            RestartButton = button;
+        }
+
         public void ShowPanel()
         {
             _canvas.gameObject.SetActive(true);
-            RestartButton.interactable = true;
+
+            if (RestartButton != null)
+            {
+                RestartButton.interactable = true;
+            }
         }
 
         public void HidePanel()
         {
             _canvas.gameObject.SetActive(false);
-            RestartButton.interactable = true;
+
+            if (RestartButton != null)
+            {
+                RestartButton.interactable = false;
+            }
         }
     }
 }

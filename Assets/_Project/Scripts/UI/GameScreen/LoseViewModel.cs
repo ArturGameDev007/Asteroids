@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI.GameScreen
 {
@@ -9,9 +11,13 @@ namespace _Project.Scripts.UI.GameScreen
 
         [SerializeField] private LoseView _loseView;
 
-        private void Awake()
+        [Inject]
+        private void Construct()
         {
-            _loseView.RestartButton.onClick.AddListener(OnRestartClicked);
+            if (_loseView != null && _loseView.RestartButton != null)
+            {
+                _loseView.RestartButton.onClick.AddListener(OnRestartClicked);
+            }
         }
 
         private void Start()
@@ -21,7 +27,10 @@ namespace _Project.Scripts.UI.GameScreen
 
         private void OnDestroy()
         {
-            _loseView.RestartButton.onClick.RemoveListener(OnRestartClicked);
+            if (_loseView != null && _loseView.RestartButton != null)
+            {
+                _loseView.RestartButton.onClick.RemoveListener(OnRestartClicked);
+            }
         }
 
         public void Open()
