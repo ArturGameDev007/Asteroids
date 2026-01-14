@@ -11,16 +11,18 @@ namespace _Project.Scripts.Infrastructure
         private readonly ObjectPool _objectPool;
         private readonly GeneratorEnemies _generatorEnemies;
         private readonly Character _player;
+        private readonly PlayerController _controller;
         private readonly InputForShoot _shoot;
         // private readonly WindowEndGame _windowEndGame;
         private readonly LoseViewModel _loseViewModel;
         private ScoreData _scoreData;
 
-        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, InputForShoot shoot, LoseViewModel loseViewModel, ScoreData scoreData)
+        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, ScoreData scoreData)
         {
             _objectPool = objectPool;
             _generatorEnemies = generatorEnemies;
             _player = player;
+            _controller = controller;
             _shoot = shoot;
             _loseViewModel = loseViewModel;
             _scoreData = scoreData;
@@ -59,10 +61,13 @@ namespace _Project.Scripts.Infrastructure
         {
             _generatorEnemies.StopSpawning();
             _loseViewModel.Open();
-
-            int finalScore = _scoreData.GetScore;
-
+            
+            _controller.StopPhysics();
+            
+            _controller.enabled = false;
             _shoot.enabled = false;
+            
+            int finalScore = _scoreData.GetScore;
         }
 
         private void OnRestartButtonClick()

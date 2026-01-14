@@ -16,6 +16,7 @@ namespace _Project.Scripts.Infrastructure
         [Header("Prefabs")]
         [SerializeField] private Character _player;
         [SerializeField] private InputForShoot _shoot;
+        [SerializeField] private PlayerController _controller;
 
         [FormerlySerializedAs("_windowEndGame")]
         [Header("UI & Data")]
@@ -34,7 +35,7 @@ namespace _Project.Scripts.Infrastructure
             _viewScore.Create(_scoreData);
             _generatorEnemies.Initialize(_scoreData);
 
-            _game = new Game(_objectPool, _generatorEnemies, _player, _shoot, _loseViewModel, _scoreData);
+            _game = new Game(_objectPool, _generatorEnemies, _player, _controller, _shoot, _loseViewModel, _scoreData);
         }
 
         private void Start()

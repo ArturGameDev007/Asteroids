@@ -48,6 +48,13 @@ namespace _Project.Scripts.Player
             _head2D.velocity = Vector2.zero;
         }
 
+        public void StopPhysics()
+        {
+            _head2D.velocity = Vector2.zero;
+            _head2D.angularDrag = 0f;
+            _head2D.isKinematic = true;
+        }
+
         private void Move()
         {
             float moveVertical = _controllerInput.VerticalInput;
