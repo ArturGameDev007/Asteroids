@@ -13,11 +13,11 @@ namespace _Project.Scripts.Infrastructure
         private readonly Character _player;
         private readonly PlayerController _controller;
         private readonly InputForShoot _shoot;
-        // private readonly WindowEndGame _windowEndGame;
         private readonly LoseViewModel _loseViewModel;
+        private readonly RestartGame _restartGame;
         private ScoreData _scoreData;
 
-        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, ScoreData scoreData)
+        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData)
         {
             _objectPool = objectPool;
             _generatorEnemies = generatorEnemies;
@@ -25,6 +25,7 @@ namespace _Project.Scripts.Infrastructure
             _controller = controller;
             _shoot = shoot;
             _loseViewModel = loseViewModel;
+            _restartGame = restartGame;
             _scoreData = scoreData;
         }
 
@@ -62,18 +63,18 @@ namespace _Project.Scripts.Infrastructure
             _generatorEnemies.StopSpawning();
             _loseViewModel.Open();
             
-            _controller.StopPhysics();
-            
-            _controller.enabled = false;
-            _shoot.enabled = false;
-            
             int finalScore = _scoreData.GetScore;
+            
+            _controller.StopPhysics();
+            _controller.enabled = false;
+            
+            _shoot.enabled = false;
         }
 
         private void OnRestartButtonClick()
         {
             _loseViewModel.Close();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            _restartGame.RestartScene();
         }
     }
 }

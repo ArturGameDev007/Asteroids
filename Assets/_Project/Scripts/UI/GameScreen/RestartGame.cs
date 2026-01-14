@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    public class RestartGame : MonoBehaviour
+    public class RestartGame
     {
         public void RestartScene()
         {
