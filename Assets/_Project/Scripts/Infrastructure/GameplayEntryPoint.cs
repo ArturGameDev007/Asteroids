@@ -10,8 +10,6 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-        [Header("Prefabs")] 
-        
         [Header("Systems")] 
         [SerializeField] private ObjectPool _objectPool;
         [SerializeField] private GeneratorEnemies _generatorEnemies;

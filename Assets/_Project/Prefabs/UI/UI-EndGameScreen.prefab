@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7285421635860712061}
   - component: {fileID: 2275616237344249395}
   - component: {fileID: 9009136971575947304}
-  - component: {fileID: 9135402137906469222}
-  - component: {fileID: 2966772034981628623}
+  - component: {fileID: 6098494253116743469}
+  - component: {fileID: 8232298826363238915}
   m_Layer: 5
   m_Name: UI-EndGameScreen
   m_TagString: Untagged
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &9135402137906469222
+--- !u!114 &6098494253116743469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,8 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03cbeab69fc4126a09ff7df254a6065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loseView: {fileID: 2966772034981628623}
---- !u!114 &2966772034981628623
+  _loseView: {fileID: 8232298826363238915}
+--- !u!114 &8232298826363238915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
