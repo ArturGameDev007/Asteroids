@@ -179,34 +179,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77fd289117485cb4482536e1624733f6, type: 3}
---- !u!1 &517863681 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+--- !u!114 &517863687 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9135402137906469222, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
   m_PrefabInstance: {fileID: 3370116970750321382}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &517863687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 517863681}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c03cbeab69fc4126a09ff7df254a6065, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _loseView: {fileID: 517863688}
---- !u!114 &517863688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 517863681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6982f94804c143beba3207ac1ed5ceab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &519420028
@@ -733,8 +714,20 @@ MonoBehaviour:
   _generatorEnemies: {fileID: 746366996}
   _player: {fileID: 941055461}
   _shoot: {fileID: 941055458}
+  _controller: {fileID: 1990788574}
   _loseViewModel: {fileID: 517863687}
   _viewScore: {fileID: 1722916248}
+--- !u!114 &1990788574 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+  m_PrefabInstance: {fileID: 68688301}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 379e1362fd05851438811edabb1386f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3370116970750321382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -743,25 +736,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 701701839646206185, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: _panelCanvas
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 701701839646206185, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: _actionButton
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
       propertyPath: m_Name
       value: UI-EndGameScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3491601382450380812, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: _scoreData
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4128760670663854505, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
       propertyPath: m_Pivot.x
@@ -843,22 +820,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4245526581993141535, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1826247499050939764, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-    - {fileID: 701701839646206185, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 517863687}
-    - targetCorrespondingSourceObject: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 517863688}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
 --- !u!1001 &7531601158275955055
 PrefabInstance:
