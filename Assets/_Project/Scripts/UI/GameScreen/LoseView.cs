@@ -7,8 +7,8 @@ namespace _Project.Scripts.UI.GameScreen
     [RequireComponent(typeof(Canvas))]
     public class LoseView : MonoBehaviour
     {
+        [field: SerializeField] public Button RestartButton { get; set; }
         private Canvas _canvas;
-        public Button RestartButton { get; private set; }
 
         private void Awake()
         {
