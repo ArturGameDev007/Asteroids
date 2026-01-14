@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using _Project.Scripts.Player;
+using TMPro;
 using UnityEngine;
 
 namespace _Project.Scripts.UI.PerformanceShip

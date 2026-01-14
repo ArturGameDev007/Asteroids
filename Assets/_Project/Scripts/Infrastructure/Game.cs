@@ -2,6 +2,7 @@ using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.GameScreen;
+using _Project.Scripts.UI.PerformanceShip;
 using UnityEngine.SceneManagement;
 
 namespace _Project.Scripts.Infrastructure
