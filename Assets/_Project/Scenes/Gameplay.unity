@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pool: {fileID: 746366994}
+  _spawnOffset: 0.5
 --- !u!114 &941055458 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6076999410980347914, guid: 77fd289117485cb4482536e1624733f6, type: 3}
