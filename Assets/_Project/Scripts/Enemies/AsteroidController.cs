@@ -6,17 +6,22 @@ namespace _Project.Scripts.Enemies
     {
         [SerializeField] private float _speed;
 
-        private float _speedInput;
+        private Vector2 _direction;
 
         private void Update()
         {
             Move();
         }
 
+        public void SetDirection()
+        {
+            _direction = _direction.normalized;
+        }
+
         public void Move()
         {
-            _speedInput = _speed * Time.deltaTime;
-            transform.Translate(Vector3.down * _speedInput);
+            float speedMove = _speed * Time.deltaTime;
+            transform.Translate(_direction * speedMove);
         }
     }
 }

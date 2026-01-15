@@ -21,7 +21,7 @@ namespace _Project.Scripts.Player.Weapons
         private void Update()
         {
             InputBulletShoot();
-            InputlaserShoot();
+            InputLaserShoot();
         }
 
         private void InputBulletShoot()
@@ -30,7 +30,7 @@ namespace _Project.Scripts.Player.Weapons
                 _shooter.CreateShoot(_bulletPrefab, _pointShootForBullet);
         }
 
-        private void InputlaserShoot()
+        private void InputLaserShoot()
         {
             if (Input.GetMouseButtonDown(INPUT_MOUSE_RIGHT))
                 if (_laserAmmo.TrySpendAmmo())

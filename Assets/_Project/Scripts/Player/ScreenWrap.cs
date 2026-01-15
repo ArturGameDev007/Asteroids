@@ -29,6 +29,7 @@ namespace _Project.Scripts.Player
         private void BoundsScreen()
         {
             Vector3 screenBounds = _main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _position.z));
+            
             _screenWidth = screenBounds.x;
             _screenHeight = screenBounds.y;
         }

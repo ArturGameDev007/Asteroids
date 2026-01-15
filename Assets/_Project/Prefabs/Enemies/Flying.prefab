@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6872781815636317615}
   - component: {fileID: 181689331425005305}
   - component: {fileID: 2687539046242588937}
+  - component: {fileID: 9105957324695588644}
   m_Layer: 6
   m_Name: Flying
   m_TagString: Enemy
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 996319817450768352}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -187,3 +188,15 @@ MonoBehaviour:
   _player: {fileID: 0}
   _speed: 2
   _rotationSpeed: 30
+--- !u!114 &9105957324695588644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996319817450768352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf8978c140f7a6439bd39bb5fffab47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

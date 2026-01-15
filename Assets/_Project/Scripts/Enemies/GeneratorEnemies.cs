@@ -8,10 +8,10 @@ namespace _Project.Scripts.Enemies
     {
         [Header("ObjectPool Enemies")]
         [SerializeField] private ObjectPool _pool;
+        [SerializeField] private float _spawnOffset = 0.5f;
 
         private float _positionX;
         private float _positionY;
-        private float _spawnOffset;
 
         private float _delay = 3f;
 
@@ -63,31 +63,57 @@ namespace _Project.Scripts.Enemies
             // enemy.gameObject.SetActive(true);
             // enemy.transform.position = positionSpawn;
             
-            Vector2 spawnViewport = GetRandomOutsidePoint();
-            Vector3 spawnPos = _camera.ViewportToWorldPoint(new Vector3(spawnViewport.x, spawnViewport.y, _camera.nearClipPlane));
-            spawnPos.z = 0;
+            // float distanceToCamera = Mathf.Abs(_camera.transform.position.z);
+    
+            Vector3 spawnViewport = GetRandomPoint();
             
             var enemy = _pool.GetObject();
-            enemy.transform.position = spawnPos;
+            enemy.transform.position = spawnViewport;
             enemy.gameObject.SetActive(true);
+            
+            // Vector3 spawnPos = _camera.ViewportToWorldPoint(new Vector3(spawnViewport.x, spawnViewport.y, distanceToCamera));
+            // spawnPos.z = 0;
+            
 
             if (enemy.TryGetComponent(out Enemy enemyComponent))
             {
                 enemyComponent.Construct(_scoreData);
                 
-                // Vector3 targetPos = _camera.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f), 0));
-                // enemyComponent.SetDirection((targetPos - spawnPos).normalized);
+                Vector3 screenCenter = _camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, -_camera.transform.position.z));
+                screenCenter.z = 0;
+                
+                enemyComponent.SetDirection((screenCenter - spawnViewport).normalized);
             }
+
         }
-        
-        private Vector2 GetRandomOutsidePoint()
+
+        private Vector3 GetRandomPoint()
         {
-            bool isVertical = Random.value > 0.5f;
-            float edge = Random.value > 0.5f ? _spawnOffset : -(_spawnOffset - 1f); // Либо 1.1, либо -0.1
-    
-            return isVertical 
-                ? new Vector2(Random.value, edge)   // Верх/Низ
-                : new Vector2(edge, Random.value);  // Лево/Право
+            float camHalfHeight = _camera.orthographicSize;
+            float camHalfWidth = camHalfHeight * _camera.aspect;
+            Vector3 camPos = _camera.transform.position;
+
+            float left = camPos.x - camHalfWidth;
+            float right = camPos.x + camHalfWidth;
+            float bottom = camPos.y - camHalfHeight;
+            float top = camPos.y + camHalfHeight;
+
+            float offsetX = _spawnOffset;
+            float offsetY = _spawnOffset;
+
+            switch (Random.Range(0, 4))
+            {
+                case 0: // Слева
+                    return new Vector3(left - offsetX, Random.Range(bottom, top), 0);
+                case 1: // Справа
+                    return new Vector3(right + offsetX, Random.Range(bottom, top), 0);
+                case 2: // Снизу
+                    return new Vector3(Random.Range(left, right), bottom - offsetY, 0);
+                case 3: // Сверху
+                    return new Vector3(Random.Range(left, right), top + offsetY, 0);
+                default:
+                    return camPos + Vector3.up * (top + offsetY); // fallback
+            }
         }
     }
 }
