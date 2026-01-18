@@ -55,10 +55,6 @@ namespace _Project.Scripts.Enemies
             //
             // var enemy = _pool.GetObject();
             //
-            // if (enemy.TryGetComponent(out Enemy enemyComponent))
-            // {
-            //     enemyComponent.Construct(_scoreData);
-            // }
             //
             // enemy.gameObject.SetActive(true);
             // enemy.transform.position = positionSpawn;
@@ -71,32 +67,17 @@ namespace _Project.Scripts.Enemies
             
             enemy.transform.position = spawnViewport;
             enemy.gameObject.SetActive(true);
+            
+            
+            if (enemy.TryGetComponent(out Enemy enemyComponent))
+            {
+                enemyComponent.Construct(_scoreData);
+            }
 
             if (enemy.TryGetComponent(out AsteroidController asteroid))
             {
                 asteroid.SetDirection(spawnViewport);
             }
-            
-            
-            //
-            // var enemy = _pool.GetObject();
-            // enemy.transform.position = spawnViewport;
-            // enemy.gameObject.SetActive(true);
-            //
-            // if (enemy.TryGetComponent(out  AsteroidController asteroidController))
-            // {
-            //     asteroidController.SetDirection();
-            // }
-            //
-            // if (enemy.TryGetComponent(out Enemy enemyComponent))
-            // {
-            //     enemyComponent.Construct(_scoreData);
-            //     
-            //     Vector3 screenCenter = _camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, -_camera.transform.position.z));
-            //     screenCenter.z = 0;
-            //     
-            //     enemyComponent.SetDirection((screenCenter - spawnViewport).normalized);
-            // }
         }
 
         private Vector2 GetRandomPoint()
