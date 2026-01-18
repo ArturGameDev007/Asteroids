@@ -16,13 +16,11 @@ namespace _Project.Scripts.Enemies
         [SerializeField] private List<Enemy> _prefab;
 
         private ScoreData _scoreData;
-
         private Queue<Enemy> _pool;
 
         public void Initialize()
         {
             _pool = new Queue<Enemy>();
-
             _container = new GameObject("ContainerForEnemies");
         }
 
@@ -37,10 +35,10 @@ namespace _Project.Scripts.Enemies
                 var createEnemy = Instantiate(_prefab[indexEnemy], _container.transform);
 
                 if (createEnemy.TryGetComponent(out FlyingSaucerController enemy))
-                    enemy.Construct(_player.transform);
-
+                    enemy.Construct(_player.transform);                
+                
                 createEnemy.Construct(_scoreData);
-
+                
                 return createEnemy;
             }
 

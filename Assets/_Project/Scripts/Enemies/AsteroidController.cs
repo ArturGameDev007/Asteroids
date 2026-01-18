@@ -13,9 +13,9 @@ namespace _Project.Scripts.Enemies
             Move();
         }
 
-        public void SetDirection()
+        public void SetDirection(Vector2 direction)
         {
-            _direction = _direction.normalized;
+            _direction = direction.normalized;
         }
 
         public void Move()

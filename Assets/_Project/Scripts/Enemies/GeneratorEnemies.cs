@@ -65,29 +65,41 @@ namespace _Project.Scripts.Enemies
             
             // float distanceToCamera = Mathf.Abs(_camera.transform.position.z);
     
-            Vector3 spawnViewport = GetRandomPoint();
-            
+            Vector2 spawnViewport = GetRandomPoint();
+
             var enemy = _pool.GetObject();
+            
             enemy.transform.position = spawnViewport;
             enemy.gameObject.SetActive(true);
-            
-            // Vector3 spawnPos = _camera.ViewportToWorldPoint(new Vector3(spawnViewport.x, spawnViewport.y, distanceToCamera));
-            // spawnPos.z = 0;
-            
 
-            if (enemy.TryGetComponent(out Enemy enemyComponent))
+            if (enemy.TryGetComponent(out AsteroidController asteroid))
             {
-                enemyComponent.Construct(_scoreData);
-                
-                Vector3 screenCenter = _camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, -_camera.transform.position.z));
-                screenCenter.z = 0;
-                
-                enemyComponent.SetDirection((screenCenter - spawnViewport).normalized);
+                asteroid.SetDirection(spawnViewport);
             }
-
+            
+            
+            //
+            // var enemy = _pool.GetObject();
+            // enemy.transform.position = spawnViewport;
+            // enemy.gameObject.SetActive(true);
+            //
+            // if (enemy.TryGetComponent(out  AsteroidController asteroidController))
+            // {
+            //     asteroidController.SetDirection();
+            // }
+            //
+            // if (enemy.TryGetComponent(out Enemy enemyComponent))
+            // {
+            //     enemyComponent.Construct(_scoreData);
+            //     
+            //     Vector3 screenCenter = _camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, -_camera.transform.position.z));
+            //     screenCenter.z = 0;
+            //     
+            //     enemyComponent.SetDirection((screenCenter - spawnViewport).normalized);
+            // }
         }
 
-        private Vector3 GetRandomPoint()
+        private Vector2 GetRandomPoint()
         {
             float camHalfHeight = _camera.orthographicSize;
             float camHalfWidth = camHalfHeight * _camera.aspect;
@@ -112,7 +124,7 @@ namespace _Project.Scripts.Enemies
                 case 3: // Сверху
                     return new Vector3(Random.Range(left, right), top + offsetY, 0);
                 default:
-                    return camPos + Vector3.up * (top + offsetY); // fallback
+                    return camPos + Vector3.up * (top + offsetY);
             }
         }
     }
