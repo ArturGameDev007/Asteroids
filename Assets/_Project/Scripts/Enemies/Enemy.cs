@@ -7,13 +7,9 @@ namespace _Project.Scripts.Enemies
     public class Enemy : MonoBehaviour, IEnemy
     {
         private ObjectPool _pool;
-        private IEnemyDeathListener  _deathListener;
         
-        private Vector2 _direction;
-
-        public void Initialize(IEnemyDeathListener listener, ObjectPool pool)
+        public void Initialize(ObjectPool pool)
         {
-            _deathListener = listener;
             _pool = pool;
         }
 
@@ -21,14 +17,11 @@ namespace _Project.Scripts.Enemies
         {
             if (other.TryGetComponent(out Bullet bullet))
             {
-                _deathListener?.NotifyEnemyKilled();
                 _pool.PutObject(this);
-                
                 Destroy(bullet.gameObject);
             }
             else if (other.TryGetComponent(out Laser laser))
             {
-                _deathListener?.NotifyEnemyKilled();
                 _pool.PutObject(this);
             }
         }

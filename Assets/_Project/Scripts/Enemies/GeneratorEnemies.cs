@@ -9,7 +9,6 @@ namespace _Project.Scripts.Enemies
         [Header("ObjectPool Enemies")]
         [SerializeField] private ObjectPool _pool;
         [SerializeField] private float _spawnOffset = 2.5f;
-        [SerializeField] private ScoreController _scoreController;
 
         private float _positionX;
         private float _positionY;
@@ -20,17 +19,10 @@ namespace _Project.Scripts.Enemies
         private Camera _camera;
         private Coroutine _coroutine;
 
-        public void Initialize(ScoreData scoreData, ScoreController scoreController)
+        public void Initialize(ScoreData scoreData)
         {
             _scoreData = scoreData;
-            _scoreController = scoreController;
             _camera = Camera.main;
-            _scoreController?.Construct(_scoreData);
-        }
-
-        public void Construct(ScoreController scoreController)
-        {
-            _scoreController = scoreController;
         }
 
         public void StartSpawning()
@@ -62,11 +54,6 @@ namespace _Project.Scripts.Enemies
             
             enemy.transform.position = spawnViewport;
             enemy.gameObject.SetActive(true);
-            
-            if (enemy.TryGetComponent(out Enemy enemies))
-            {
-                enemies.Initialize(_scoreController, _pool);
-            }
             
             if (enemy.TryGetComponent(out AsteroidController asteroid))
             {
