@@ -417,6 +417,7 @@ MonoBehaviour:
   _prefab:
   - {fileID: 8789278343424712742, guid: 851e842e4e4f2c341abf89a4f0472a8d, type: 3}
   - {fileID: 181689331425005305, guid: 68a4a0e7d19928745b3e0dadee7bdb46, type: 3}
+  _scoreController: {fileID: 950231295}
 --- !u!4 &746366995
 Transform:
   m_ObjectHideFlags: 0
@@ -445,7 +446,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pool: {fileID: 746366994}
-  _spawnOffset: 0.5
+  _spawnOffset: 2.5
+  _scoreController: {fileID: 950231295}
 --- !u!114 &941055458 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6076999410980347914, guid: 77fd289117485cb4482536e1624733f6, type: 3}
@@ -468,6 +470,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9993bb60a649d5b48bed778c60f471a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &950231294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 950231296}
+  - component: {fileID: 950231295}
+  m_Layer: 0
+  m_Name: Score
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &950231295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950231294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df8e932f4b34c21acc6ee51d335720f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreData:
+    _currentScore: 0
+--- !u!4 &950231296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950231294}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1253985510
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,3 +989,4 @@ SceneRoots:
   - {fileID: 606854094}
   - {fileID: 1458068102}
   - {fileID: 1695440250}
+  - {fileID: 950231296}

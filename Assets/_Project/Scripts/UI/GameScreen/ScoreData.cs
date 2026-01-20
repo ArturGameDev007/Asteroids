@@ -13,7 +13,7 @@ namespace _Project.Scripts.UI.GameScreen
         private int _zeroCountScore = 0;
         private int _scoreForKill = 10;
 
-        public int GetScore { get; private set; }
+        public int GetScore { get; set; }
 
         public void Reset()
         {

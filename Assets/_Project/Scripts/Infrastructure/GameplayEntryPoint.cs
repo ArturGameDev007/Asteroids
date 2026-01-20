@@ -26,6 +26,7 @@ namespace _Project.Scripts.Infrastructure
         private Game _game;
         private RestartGame _restartGame;
         private ScoreData _scoreData;
+        private ScoreController  _scoreController;
         
         private void Awake()
         {
@@ -33,10 +34,10 @@ namespace _Project.Scripts.Infrastructure
             _scoreData = new ScoreData();
 
             _viewScore.Create(_scoreData);
-            _generatorEnemies.Initialize(_scoreData);
+            _generatorEnemies.Initialize(_scoreData, _scoreController);
 
             _game = new Game(_objectPool, _generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame,
-                _scoreData);
+                _scoreData, _scoreController);
         }
 
         private void Start()

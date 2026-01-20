@@ -15,7 +15,6 @@ namespace _Project.Scripts.Enemies
         [Header("List Enemies")]
         [SerializeField] private List<Enemy> _prefab;
 
-        private ScoreData _scoreData;
         private Queue<Enemy> _pool;
 
         public void Initialize()
@@ -36,8 +35,6 @@ namespace _Project.Scripts.Enemies
 
                 if (createEnemy.TryGetComponent(out FlyingSaucerController enemy))
                     enemy.Construct(_player.transform);                
-                
-                createEnemy.Construct(_scoreData);
                 
                 return createEnemy;
             }

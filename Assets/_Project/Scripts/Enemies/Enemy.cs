@@ -6,33 +6,30 @@ namespace _Project.Scripts.Enemies
 {
     public class Enemy : MonoBehaviour, IEnemy
     {
-        private ScoreData _scoreData;
+        private ObjectPool _pool;
+        private IEnemyDeathListener  _deathListener;
+        
         private Vector2 _direction;
 
-        public void Construct(ScoreData scoreData)
+        public void Initialize(IEnemyDeathListener listener, ObjectPool pool)
         {
-            _scoreData = scoreData;
-        }
-        
-        public void SetDirection(Vector2 direction)
-        {
-            _direction = direction;
+            _deathListener = listener;
+            _pool = pool;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Bullet bullet))
             {
-                _scoreData.AddScore();
-
-                Destroy(gameObject);
+                _deathListener?.NotifyEnemyKilled();
+                _pool.PutObject(this);
+                
                 Destroy(bullet.gameObject);
             }
             else if (other.TryGetComponent(out Laser laser))
             {
-                _scoreData.AddScore();
-
-                Destroy(gameObject);
+                _deathListener?.NotifyEnemyKilled();
+                _pool.PutObject(this);
             }
         }
     }

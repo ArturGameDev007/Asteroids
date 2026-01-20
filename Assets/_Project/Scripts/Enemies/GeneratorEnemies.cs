@@ -8,7 +8,8 @@ namespace _Project.Scripts.Enemies
     {
         [Header("ObjectPool Enemies")]
         [SerializeField] private ObjectPool _pool;
-        [SerializeField] private float _spawnOffset = 0.5f;
+        [SerializeField] private float _spawnOffset = 2.5f;
+        [SerializeField] private ScoreController _scoreController;
 
         private float _positionX;
         private float _positionY;
@@ -19,10 +20,17 @@ namespace _Project.Scripts.Enemies
         private Camera _camera;
         private Coroutine _coroutine;
 
-        public void Initialize(ScoreData scoreData)
+        public void Initialize(ScoreData scoreData, ScoreController scoreController)
         {
             _scoreData = scoreData;
+            _scoreController = scoreController;
             _camera = Camera.main;
+            _scoreController?.Construct(_scoreData);
+        }
+
+        public void Construct(ScoreController scoreController)
+        {
+            _scoreController = scoreController;
         }
 
         public void StartSpawning()
@@ -48,19 +56,6 @@ namespace _Project.Scripts.Enemies
 
         private void Spawn()
         {
-            // float positionX = Random.Range(-_positionX, _positionX);
-            // float positionY = Random.Range(-_positionY, _positionY);
-            // Vector2 positionSpawn = new Vector2(positionX, positionY);
-            
-            //
-            // var enemy = _pool.GetObject();
-            //
-            //
-            // enemy.gameObject.SetActive(true);
-            // enemy.transform.position = positionSpawn;
-            
-            // float distanceToCamera = Mathf.Abs(_camera.transform.position.z);
-    
             Vector2 spawnViewport = GetRandomPoint();
 
             var enemy = _pool.GetObject();
@@ -68,12 +63,11 @@ namespace _Project.Scripts.Enemies
             enemy.transform.position = spawnViewport;
             enemy.gameObject.SetActive(true);
             
-            
-            if (enemy.TryGetComponent(out Enemy enemyComponent))
+            if (enemy.TryGetComponent(out Enemy enemies))
             {
-                enemyComponent.Construct(_scoreData);
+                enemies.Initialize(_scoreController, _pool);
             }
-
+            
             if (enemy.TryGetComponent(out AsteroidController asteroid))
             {
                 asteroid.SetDirection(spawnViewport);

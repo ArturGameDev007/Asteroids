@@ -17,8 +17,9 @@ namespace _Project.Scripts.Infrastructure
         private readonly LoseViewModel _loseViewModel;
         private readonly RestartGame _restartGame;
         private ScoreData _scoreData;
+        private ScoreController _scoreController;
 
-        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData)
+        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData, ScoreController  scoreController)
         {
             _objectPool = objectPool;
             _generatorEnemies = generatorEnemies;
@@ -28,6 +29,7 @@ namespace _Project.Scripts.Infrastructure
             _loseViewModel = loseViewModel;
             _restartGame = restartGame;
             _scoreData = scoreData;
+            _scoreController = scoreController;
         }
 
         public void Initialize()
@@ -36,9 +38,12 @@ namespace _Project.Scripts.Infrastructure
             _player.ClearState();
             _objectPool.Initialize();
 
+                
+            
             Subscribe();
 
             _shoot.enabled = true;
+            _generatorEnemies.Construct(_scoreController);
             _generatorEnemies.StartSpawning();
         }
 
