@@ -130,6 +130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 978683251110895336, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+      propertyPath: m_LinearDrag
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1121580277768540567, guid: 77fd289117485cb4482536e1624733f6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -173,6 +177,14 @@ PrefabInstance:
     - target: {fileID: 2983046143582007568, guid: 77fd289117485cb4482536e1624733f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+      propertyPath: _forceInput
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+      propertyPath: _rotationSpeed
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

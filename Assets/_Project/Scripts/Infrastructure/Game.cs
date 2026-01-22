@@ -16,8 +16,8 @@ namespace _Project.Scripts.Infrastructure
         private readonly InputForShoot _shoot;
         private readonly LoseViewModel _loseViewModel;
         private readonly RestartGame _restartGame;
+        private readonly Enemy _enemy;
         private ScoreData _scoreData;
-        private Enemy _enemy;
 
         public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData, Enemy enemy)
         {
@@ -37,8 +37,6 @@ namespace _Project.Scripts.Infrastructure
             _scoreData?.Reset();
             _player.ClearState();
             _objectPool.Initialize();
-            _enemy.Initialize(_objectPool);
-            
             Subscribe();
 
             _shoot.enabled = true;

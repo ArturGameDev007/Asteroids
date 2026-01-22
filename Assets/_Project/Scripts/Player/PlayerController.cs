@@ -8,8 +8,8 @@ namespace _Project.Scripts.Player
         private const float X_ANGLE = 0f;
         private const float Y_ANGLE = 0f;
 
-        [SerializeField] private float _rotationSpeed = 80f;
-        [SerializeField] private float _forceInput = 1.7f;
+        [SerializeField] private float _rotationSpeed;
+        [SerializeField] private float _forceInput;
 
         private Rigidbody2D _head2D;
         private InputController _controllerInput;
@@ -31,13 +31,13 @@ namespace _Project.Scripts.Player
 
         private void Update()
         {
-            _controllerInput.UpdateVerticalInput();
+            _controllerInput.UpdateHorizontalInput();
             HandleRotation();
         }
 
         private void FixedUpdate()
         {
-            _controllerInput.UpdateHorizontalInput();
+            _controllerInput.UpdateVerticalInput();
             Move();
         }
 
@@ -58,12 +58,12 @@ namespace _Project.Scripts.Player
         private void Move()
         {
             float moveVertical = _controllerInput.VerticalInput;
-
+        
             if (moveVertical > 0)
             {
                 Vector2 direction = transform.up;
-
-                _head2D.AddForce(_forceInput * direction);
+        
+                _head2D.AddForce(direction * (_forceInput * Time.fixedDeltaTime));
             }
         }
 

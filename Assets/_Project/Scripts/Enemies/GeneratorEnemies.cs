@@ -63,18 +63,39 @@ namespace _Project.Scripts.Enemies
 
         private Vector2 GetRandomPoint()
         {
+            // float h = _camera.orthographicSize;
+            // float w = h * _camera.aspect;
+            //
+            // Vector3 camPos = _camera.transform.position;
+            //
+            // float x, y;
+            // int side = Random.Range(0, 4);
+            //
+            // if (side < 2) // Слева или Справа
+            // {
+            //     x = (side == 0) ? -w - _spawnOffset : w + _spawnOffset;
+            //     y = Random.Range(-h, h);
+            // }
+            // else // Снизу или Сверху
+            // {
+            //     x = Random.Range(-w, w);
+            //     y = (side == 2) ? -h - _spawnOffset : h + _spawnOffset;
+            // }
+            //
+            // return camPos + new Vector3(x, y, 0);
+            
             float camHalfHeight = _camera.orthographicSize;
             float camHalfWidth = camHalfHeight * _camera.aspect;
             Vector3 camPos = _camera.transform.position;
-
+            
             float left = camPos.x - camHalfWidth;
             float right = camPos.x + camHalfWidth;
             float bottom = camPos.y - camHalfHeight;
             float top = camPos.y + camHalfHeight;
-
+            
             float offsetX = _spawnOffset;
             float offsetY = _spawnOffset;
-
+            
             switch (Random.Range(0, 4))
             {
                 case 0: // Слева
