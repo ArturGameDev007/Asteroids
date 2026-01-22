@@ -34,7 +34,7 @@ namespace _Project.Scripts.Infrastructure
         public void Initialize()
         {
             _scoreData?.Reset();
-            _player.ClearState();
+            _player?.ClearState();
             _objectPool.Initialize();
             
             Subscribe();

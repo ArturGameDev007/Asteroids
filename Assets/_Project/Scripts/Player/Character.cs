@@ -31,7 +31,7 @@ namespace _Project.Scripts.Player
 
         public void ClearState()
         {
-            _player.Restart();
+            _player?.Restart();
         }
 
         private void ProcessCollision(IEnemy enemy)

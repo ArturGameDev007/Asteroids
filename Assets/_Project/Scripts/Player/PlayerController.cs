@@ -32,12 +32,13 @@ namespace _Project.Scripts.Player
         private void Update()
         {
             _controllerInput.UpdateHorizontalInput();
+            _controllerInput.UpdateVerticalInput();
+            
             HandleRotation();
         }
 
         private void FixedUpdate()
         {
-            _controllerInput.UpdateVerticalInput();
             Move();
         }
 
@@ -63,7 +64,7 @@ namespace _Project.Scripts.Player
             {
                 Vector2 direction = transform.up;
         
-                _head2D.AddForce(direction * (_forceInput * Time.fixedDeltaTime));
+                _head2D.AddForce(direction * _forceInput);
             }
         }
 
