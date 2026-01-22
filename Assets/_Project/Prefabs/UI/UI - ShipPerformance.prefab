@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coordinateText: {fileID: 4813132491366911421}
-  _targetValue: {fileID: 2983046143582007568, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-  _rigidbody2D: {fileID: 978683251110895336, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+  _targetValue: {fileID: 0}
+  _rigidbody2D: {fileID: 0}
 --- !u!1 &2230635320058244871
 GameObject:
   m_ObjectHideFlags: 0

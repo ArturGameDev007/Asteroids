@@ -34,7 +34,7 @@ namespace _Project.Scripts.Enemies
                 var createEnemy = Instantiate(_prefab[indexEnemy], _container.transform);
 
                 if (createEnemy.TryGetComponent(out FlyingSaucerController enemy))
-                    enemy.Construct(_player.transform);                
+                    enemy.Construct(_player.transform);      
                 
                 return createEnemy;
             }

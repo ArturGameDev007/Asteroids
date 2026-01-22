@@ -3,7 +3,6 @@ using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
-using UnityEngine.SceneManagement;
 
 namespace _Project.Scripts.Infrastructure
 {
@@ -37,6 +36,7 @@ namespace _Project.Scripts.Infrastructure
             _scoreData?.Reset();
             _player.ClearState();
             _objectPool.Initialize();
+            
             Subscribe();
 
             _shoot.enabled = true;

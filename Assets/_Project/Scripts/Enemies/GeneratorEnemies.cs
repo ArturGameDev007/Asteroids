@@ -15,11 +15,12 @@ namespace _Project.Scripts.Enemies
 
         private float _delay = 3f;
 
-        private ScoreData _scoreData;
         private Camera _camera;
         private Coroutine _coroutine;
+        
+        private ScoreData _scoreData;
 
-        public void Initialize(ScoreData scoreData)
+        public void Initialize(ScoreData  scoreData)
         {
             _scoreData = scoreData;
             _camera = Camera.main;
@@ -54,6 +55,8 @@ namespace _Project.Scripts.Enemies
             
             enemy.transform.position = spawnViewport;
             enemy.gameObject.SetActive(true);
+            
+            enemy.Initialize(_pool, _scoreData);
             
             if (enemy.TryGetComponent(out AsteroidController asteroid))
             {

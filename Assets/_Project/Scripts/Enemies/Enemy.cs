@@ -7,7 +7,6 @@ namespace _Project.Scripts.Enemies
     public class Enemy : MonoBehaviour, IEnemy
     {
         private ObjectPool _pool;
-
         private ScoreData _scoreData;
         
         public void Initialize(ObjectPool pool, ScoreData  scoreData)
