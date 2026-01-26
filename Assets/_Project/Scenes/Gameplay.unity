@@ -397,6 +397,7 @@ GameObject:
   - component: {fileID: 746366995}
   - component: {fileID: 746366994}
   - component: {fileID: 746366996}
+  - component: {fileID: 746366997}
   m_Layer: 0
   m_Name: EnemyPool
   m_TagString: Untagged
@@ -450,6 +451,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pool: {fileID: 746366994}
   _spawnOffset: 2.5
+--- !u!114 &746366997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746366993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3292e678baee400aae16ad8eca1c65d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreData:
+    _currentScore: 0
 --- !u!1 &1253985510
 GameObject:
   m_ObjectHideFlags: 0
