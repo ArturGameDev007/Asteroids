@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 181689331425005305}
   - component: {fileID: 2687539046242588937}
   - component: {fileID: 9105957324695588644}
-  - component: {fileID: -2504509163256650296}
   m_Layer: 6
   m_Name: Flying
   m_TagString: Enemy
@@ -119,7 +118,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -199,17 +198,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0bf8978c140f7a6439bd39bb5fffab47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-2504509163256650296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996319817450768352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c12ab359f0b44fbc8fee30cc11e3f823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -2,5 +2,6 @@
 {
     public interface IEnemy
     {
+        public void HandleEnemyKilled(Enemy enemy);
     }
 }

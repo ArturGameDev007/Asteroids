@@ -4,32 +4,21 @@ using UnityEngine;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    public class ScoreController : MonoBehaviour
+    public class ScoreController : MonoBehaviour, IEnemy
     {
         [SerializeField] private ScoreData _scoreData;
-        [SerializeField] private EnemyDiedHandler _enemyPool;
 
         private void Start()
         {
-            SubscribeToAllEnemies();
+            enemy.OnEnemyKilled += HandleEnemyKilled;
         }
 
         private void OnDestroy()
         {
-            UnsubscribeFromAllEnemies();
+            _enemy.OnEnemyKilled -= HandleEnemyKilled;
         }
 
-        private void SubscribeToAllEnemies()
-        {
-            _enemyPool.OnEnemyKilled += HandleEnemyKilled;
-        }
-
-        private void UnsubscribeFromAllEnemies()
-        {
-            _enemyPool.OnEnemyKilled -= HandleEnemyKilled;
-        }
-
-        private void HandleEnemyKilled(Enemy enemy)
+        public void HandleEnemyKilled(Enemy enemy)
         {
             _scoreData.AddScore();
         }
