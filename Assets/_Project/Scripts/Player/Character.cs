@@ -34,7 +34,7 @@ namespace _Project.Scripts.Player
             _player?.Restart();
         }
 
-        private void ProcessCollision(IEnemy enemy)
+        private void ProcessCollision(Enemy enemy)
         {
             OnGameOver?.Invoke();
         }

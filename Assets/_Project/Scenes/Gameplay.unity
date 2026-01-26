@@ -333,29 +333,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 268360021799195261, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 702101857338918056, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1121580277768540567, guid: 77fd289117485cb4482536e1624733f6, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1121580277768540567, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1121580277768540567, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 1953773673319353019, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_Layer
-      value: 0
+    - target: {fileID: 2480746135823739460, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2983046143582007568, guid: 77fd289117485cb4482536e1624733f6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -395,18 +379,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2983046143582007568, guid: 77fd289117485cb4482536e1624733f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: _forceInput
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7472494786819330340, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8215066183157923285, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

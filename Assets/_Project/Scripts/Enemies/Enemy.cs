@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
-    public class Enemy : MonoBehaviour, IEnemy
+    public class Enemy : MonoBehaviour
     {
-        private ObjectPool _pool;
-        // private ScoreData _scoreData;
-        
-        public void Initialize(ObjectPool pool)
-        {
-            _pool = pool;
-            // _scoreData = scoreData;
-        }
+        // private ObjectPool _pool;
+        // // private ScoreData _scoreData;
+        //
+        // public void Initialize(ObjectPool pool)
+        // {
+        //     _pool = pool;
+        //     // _scoreData = scoreData;
+        // }
 
         // private void OnTriggerEnter2D(Collider2D other)
         // {

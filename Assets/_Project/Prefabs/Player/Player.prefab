@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6365640685543690122}
   - component: {fileID: 1057101386596449737}
   - component: {fileID: 5675856999751815760}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,9 +77,9 @@ GameObject:
   - component: {fileID: 7483078181205018531}
   - component: {fileID: -894732123707215643}
   - component: {fileID: 6076999410980347914}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationSpeed: 90
-  _forceInput: 200
+  _forceInput: 7
 --- !u!114 &-2788843800920335249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2059019129757481366}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PointBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8547953513106730109}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PointLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5871882940623012560}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PointsWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
