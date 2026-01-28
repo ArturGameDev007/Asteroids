@@ -56,10 +56,10 @@ namespace _Project.Scripts.Enemies
             enemy.transform.position = spawnViewport;
             enemy.gameObject.SetActive(true);
             
-            // if (enemy.TryGetComponent(out Enemy enemyDiedHandler))
-            // {
-            //     enemyDiedHandler.Initialize(_pool);
-            // }
+            if (enemy.TryGetComponent(out Enemy enemyDiedHandler))
+            {
+                enemyDiedHandler.Initialize(_pool);
+            }
             
             if (enemy.TryGetComponent(out AsteroidController asteroid))
             {
