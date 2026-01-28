@@ -4,21 +4,22 @@ using UnityEngine;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    public class ScoreController : MonoBehaviour, IEnemy
+    public class EnemyDeathTracker : MonoBehaviour
     {
         [SerializeField] private ScoreData _scoreData;
+        [SerializeField] private EnemyManager _enemyManager;
 
         private void Start()
         {
-            enemy.OnEnemyKilled += HandleEnemyKilled;
+            _enemyManager.OnEnemyKilled += HandleEnemyKilled;
         }
 
         private void OnDestroy()
         {
-            _enemy.OnEnemyKilled -= HandleEnemyKilled;
+            _enemyManager.OnEnemyKilled -= HandleEnemyKilled;
         }
 
-        public void HandleEnemyKilled(Enemy enemy)
+        private void HandleEnemyKilled(Enemy enemy)
         {
             _scoreData.AddScore();
         }
