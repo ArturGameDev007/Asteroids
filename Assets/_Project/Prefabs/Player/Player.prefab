@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationSpeed: 90
-  _forceInput: 7
+  _forceInput: 6
 --- !u!114 &6076999410980347914
 MonoBehaviour:
   m_ObjectHideFlags: 0

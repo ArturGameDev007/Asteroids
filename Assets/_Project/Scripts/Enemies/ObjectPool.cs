@@ -11,8 +11,8 @@ namespace _Project.Scripts.Enemies
         [SerializeField] private GameObject _container;
         [SerializeField] private Character _player;
 
-        [Space(10)]
-        [Header("List Enemies")]
+        [Space(10)] 
+        [Header("List Enemies")] 
         [SerializeField] private List<Enemy> _prefab;
 
         private Queue<Enemy> _pool;
@@ -25,21 +25,25 @@ namespace _Project.Scripts.Enemies
 
         public Enemy GetObject()
         {
-            int numberZero = 0;
+            if (!_pool.TryDequeue(out Enemy enemy))
+                enemy = CreateEnemy();
+
+            enemy.gameObject.SetActive(true);
+            
+            return enemy;
+        }
+
+        private Enemy CreateEnemy()
+        {
             int minCountPool = 0;
+            
+            int indexEnemy = Random.Range(minCountPool, _prefab.Count);
+            var enemy = Instantiate(_prefab[indexEnemy], _container.transform);
 
-            if (_pool.Count == numberZero)
-            {
-                int indexEnemy = Random.Range(minCountPool, _prefab.Count);
-                var createEnemy = Instantiate(_prefab[indexEnemy], _container.transform);
+            if (enemy.TryGetComponent(out FlyingSaucerController saucer))
+                saucer.Construct(_player.transform);
 
-                if (createEnemy.TryGetComponent(out FlyingSaucerController enemy))
-                    enemy.Construct(_player.transform);      
-                
-                return createEnemy;
-            }
-
-            return _pool.Dequeue();
+            return enemy;
         }
 
         public void PutObject(Enemy enemy)

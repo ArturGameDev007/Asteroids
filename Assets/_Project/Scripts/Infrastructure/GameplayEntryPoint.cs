@@ -3,6 +3,7 @@ using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Project.Scripts.Infrastructure
 {
@@ -21,7 +22,10 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private LoseViewModel _loseViewModel;
         [SerializeField] private ViewScore _viewScore;
         [SerializeField] private EnemyDeathTracker _deathTracker;
-        
+
+        [Header("Prefabs UI")]
+        [SerializeField] private GameObject _background;
+
         private Game _game;
         private RestartGame _restartGame;
         private ScoreData _scoreData;
@@ -29,15 +33,17 @@ namespace _Project.Scripts.Infrastructure
 
         private void Awake()
         {
+            CreateBackground();
+            
             _restartGame = new RestartGame();
             _scoreData = new ScoreData();
-            
+
             _viewScore.Create(_scoreData);
             _generatorEnemies.Initialize(_scoreData);
-            
             _deathTracker.Initialize(_scoreData);
 
-            _game = new Game(_objectPool, _generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame,_enemy, _scoreData);
+            _game = new Game(_objectPool, _generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame,
+                _enemy, _scoreData);
         }
 
         private void Start()
@@ -49,6 +55,20 @@ namespace _Project.Scripts.Infrastructure
         {
             _game.Dispose();
             _objectPool.ClearPool();
+        }
+
+        private void CreateBackground()
+        {
+            int orderInLayer = -5;
+            
+            GameObject background = Instantiate(_background);
+            background.name = "UI - Background";
+
+            if (background.TryGetComponent(out Canvas canvas))
+            {
+                canvas.worldCamera = Camera.main;
+                canvas.sortingOrder = orderInLayer;
+            }
         }
     }
 }
