@@ -11,11 +11,6 @@ namespace _Project.Scripts.Enemies
         [SerializeField] private float _rotationSpeed = 30f;
 
         private Vector3 _flyingPosition;
-        private Vector2 _directionToPlayer;
-        private Vector2 _directionMove;
-
-        private float _distanceToPlayer;
-        private float _minDistanceForDetect = 10f;
 
         private void Start()
         {
@@ -34,25 +29,19 @@ namespace _Project.Scripts.Enemies
 
         public void Move()
         {
-            _directionToPlayer = _player.transform.position - _flyingPosition;
-            _distanceToPlayer = _directionToPlayer.magnitude;
+            Vector2 directionToPlayer = (_player.transform.position - _flyingPosition).normalized;
 
-            if (_distanceToPlayer < _minDistanceForDetect)
-            {
-                RotateTowardPlayer();
+            RotateTowardPlayer(directionToPlayer);
 
-                _directionMove = Vector2.MoveTowards(transform.position, _player.transform.position, _speed * Time.deltaTime);
-                transform.position = _directionMove;
-            }
+            Vector2 directionMove = Vector2.MoveTowards(transform.position, _player.transform.position, _speed * Time.deltaTime);
+            transform.position = directionMove;
         }
 
-        private void RotateTowardPlayer()
+        private void RotateTowardPlayer(Vector2 directionToPlayer)
         {
             float rotateX = 0;
             float rotateY = 0;
-
-            Vector3 directionToPlayer = _player.transform.position - _flyingPosition;
-
+            
             float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
             Quaternion targetRotation = Quaternion.Euler(new Vector3(rotateX, rotateY, angle));

@@ -10,6 +10,12 @@ namespace _Project.Scripts.UI.PerformanceShip
         [SerializeField] private PlayerController _targetValue;
 
         [SerializeField] private Rigidbody2D _rigidbody2D;
+        
+        public void Initialize(PlayerController shipController, Rigidbody2D head)
+        {
+            _targetValue = shipController;
+            _rigidbody2D = head;
+        }
 
         private void Update()
         {

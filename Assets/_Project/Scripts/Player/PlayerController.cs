@@ -29,8 +29,6 @@ namespace _Project.Scripts.Player
         private void Start()
         {
             _startPosition = transform.position;
-
-            // Restart();
         }
 
         private void Update()

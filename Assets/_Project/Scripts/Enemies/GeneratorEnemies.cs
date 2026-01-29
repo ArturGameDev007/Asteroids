@@ -8,7 +8,7 @@ namespace _Project.Scripts.Enemies
     {
         [Header("ObjectPool Enemies")]
         [SerializeField] private ObjectPool _pool;
-        [SerializeField] private float _spawnOffset = 2.5f;
+        [SerializeField] private float _spawnOffset = 4.5f;
 
         [SerializeField] private EnemyManager _enemyManager;
         
@@ -71,6 +71,22 @@ namespace _Project.Scripts.Enemies
 
         private Vector2 GetRandomPoint()
         {
+            float margin = _spawnOffset + 1.0f; 
+
+            int side = Random.Range(0, 4);
+            float t = Random.value;
+
+            Vector3 viewportPoint = side switch
+            {
+                0 => new Vector3(-margin, t, 10), // Слева
+                1 => new Vector3(1 + margin, t, 10), // Справа
+                2 => new Vector3(t, -margin, 10), // Снизу
+                _ => new Vector3(t, 1 + margin, 10)  // Сверху
+            };
+
+            return _camera.ViewportToWorldPoint(viewportPoint);
+            
+            
             // float h = _camera.orthographicSize;
             // float w = h * _camera.aspect;
             //
@@ -92,31 +108,31 @@ namespace _Project.Scripts.Enemies
             //
             // return camPos + new Vector3(x, y, 0);
             
-            float camHalfHeight = _camera.orthographicSize;
-            float camHalfWidth = camHalfHeight * _camera.aspect;
-            Vector3 camPos = _camera.transform.position;
-            
-            float left = camPos.x - camHalfWidth;
-            float right = camPos.x + camHalfWidth;
-            float bottom = camPos.y - camHalfHeight;
-            float top = camPos.y + camHalfHeight;
-            
-            float offsetX = _spawnOffset;
-            float offsetY = _spawnOffset;
-            
-            switch (Random.Range(0, 4))
-            {
-                case 0: // Слева
-                    return new Vector3(left - offsetX, Random.Range(bottom, top), 0);
-                case 1: // Справа
-                    return new Vector3(right + offsetX, Random.Range(bottom, top), 0);
-                case 2: // Снизу
-                    return new Vector3(Random.Range(left, right), bottom - offsetY, 0);
-                case 3: // Сверху
-                    return new Vector3(Random.Range(left, right), top + offsetY, 0);
-                default:
-                    return camPos + Vector3.up * (top + offsetY);
-            }
+            // float camHalfHeight = _camera.orthographicSize;
+            // float camHalfWidth = camHalfHeight * _camera.aspect;
+            // Vector3 camPos = _camera.transform.position;
+            //
+            // float left = camPos.x - camHalfWidth;
+            // float right = camPos.x + camHalfWidth;
+            // float bottom = camPos.y - camHalfHeight;
+            // float top = camPos.y + camHalfHeight;
+            //
+            // float offsetX = _spawnOffset;
+            // float offsetY = _spawnOffset;
+            //
+            // switch (Random.Range(0, 4))
+            // {
+            //     case 0: // Слева
+            //         return new Vector3(left - offsetX, Random.Range(bottom, top), 0);
+            //     case 1: // Справа
+            //         return new Vector3(right + offsetX, Random.Range(bottom, top), 0);
+            //     case 2: // Снизу
+            //         return new Vector3(Random.Range(left, right), bottom - offsetY, 0);
+            //     case 3: // Сверху
+            //         return new Vector3(Random.Range(left, right), top + offsetY, 0);
+            //     default:
+            //         return camPos + Vector3.up * (top + offsetY);
+            // }
         }
     }
 }

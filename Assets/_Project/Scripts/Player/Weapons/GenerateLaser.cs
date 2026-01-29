@@ -13,7 +13,7 @@ namespace _Project.Scripts.Player.Weapons
         [SerializeField] private float _reloadTime = 5f;
 
         public int CurrentAmmonLaser { get; private set; }
-        public bool IsRealoding { get; private set; }
+        public bool IsReloading { get; private set; }
 
         private Coroutine _coroutine;
 
@@ -31,7 +31,7 @@ namespace _Project.Scripts.Player.Weapons
         {
             int minCountLazer = 0;
 
-            if (IsRealoding || CurrentAmmonLaser <= 0)
+            if (IsReloading || CurrentAmmonLaser <= 0)
                 return false;
 
             if (CurrentAmmonLaser > minCountLazer)
@@ -49,7 +49,7 @@ namespace _Project.Scripts.Player.Weapons
 
         private IEnumerator ReloadLaser()
         {
-            IsRealoding = true;
+            IsReloading = true;
 
             float timer = 0f;
             float restoredTime = 5f;
@@ -62,7 +62,7 @@ namespace _Project.Scripts.Player.Weapons
 
             CurrentAmmonLaser = _maxAmountLaser;
             _reloadTime = restoredTime;
-            IsRealoding = false;
+            IsReloading = false;
         }
 
         public void ShoInfo()

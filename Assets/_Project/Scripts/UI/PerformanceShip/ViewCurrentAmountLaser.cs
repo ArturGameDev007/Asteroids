@@ -4,15 +4,17 @@ using UnityEngine;
 
 namespace _Project.Scripts.UI.PerformanceShip
 {
+    [RequireComponent((typeof(GenerateLaser)))]
     public class ViewCurrentAmountLaser : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textlaser;
         [SerializeField] private TextMeshProUGUI _rollbackLasera;
 
-        [SerializeField] private GenerateLaser _laser;
+        private GenerateLaser _laser;
 
-        private void Start()
+        public void Initialize()
         {
+            _laser = GetComponent<GenerateLaser>();
             Subscribe();
         }
 
