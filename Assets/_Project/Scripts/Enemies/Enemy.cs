@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
@@ -6,6 +7,8 @@ namespace _Project.Scripts.Enemies
     {
         private const string BULLET = "Bullet";
         private const string LASER = "Laser";
+
+        public event Action OnEnemyKilled; 
 
         private ObjectPool _pool;
 
@@ -24,6 +27,7 @@ namespace _Project.Scripts.Enemies
 
         private void Kill()
         {
+            OnEnemyKilled?.Invoke();
             _pool.PutObject(this);
         }
     }

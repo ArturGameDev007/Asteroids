@@ -30,7 +30,7 @@ namespace _Project.Scripts.Player
         {
             _startPosition = transform.position;
 
-            Restart();
+            // Restart();
         }
 
         private void Update()

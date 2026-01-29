@@ -7,19 +7,19 @@ namespace _Project.Scripts.UI.GameScreen
     public class EnemyDeathTracker : MonoBehaviour
     {
         [SerializeField] private ScoreData _scoreData;
-        [SerializeField] private EnemyManager _enemyManager;
+        [SerializeField] private Enemy _enemy;
 
         private void Start()
         {
-            _enemyManager.OnEnemyKilled += HandleEnemyKilled;
+            _enemy.OnEnemyKilled += OnEnemyDied;
         }
 
         private void OnDestroy()
         {
-            _enemyManager.OnEnemyKilled -= HandleEnemyKilled;
+            _enemy.OnEnemyKilled -= OnEnemyDied;
         }
 
-        private void HandleEnemyKilled(Enemy enemy)
+        private void OnEnemyDied()
         {
             _scoreData.AddScore();
         }

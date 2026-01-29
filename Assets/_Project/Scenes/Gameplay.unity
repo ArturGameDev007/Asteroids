@@ -334,18 +334,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 978683251110895336, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 978683251110895336, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 978683251110895336, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_SleepingMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1121580277768540567, guid: 77fd289117485cb4482536e1624733f6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -389,14 +377,6 @@ PrefabInstance:
     - target: {fileID: 2983046143582007568, guid: 77fd289117485cb4482536e1624733f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7030455677931118529, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -481,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreData:
-    _currentScore: 0
+    <GetScore>k__BackingField: 0
   _enemyManager: {fileID: 1688467850}
 --- !u!1 &1253985510
 GameObject:
@@ -1008,10 +988,21 @@ MonoBehaviour:
   _objectPool: {fileID: 746366994}
   _generatorEnemies: {fileID: 746366996}
   _player: {fileID: 1808894109}
-  _shoot: {fileID: 6076999410980347914, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-  _controller: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+  _shoot: {fileID: 2137728564}
+  _controller: {fileID: 1808894111}
   _loseViewModel: {fileID: 1602274629}
   _viewScore: {fileID: 481061828}
+--- !u!114 &2137728564 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6076999410980347914, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+  m_PrefabInstance: {fileID: 727883096}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5970e73f346d814428ac5fcf437ff3e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -8,22 +8,21 @@ namespace _Project.Scripts.UI.GameScreen
     {
         public event Action<int> OnScoreChanged;
 
-        [SerializeField] private int _currentScore;
+        [field: SerializeField] public int GetScore { get;  private set; }
 
         private int _zeroCountScore = 0;
         private int _scoreForKill = 10;
 
-        public int GetScore { get;  private set; }
-
         public void Reset()
         {
-            _currentScore = _zeroCountScore;
+            GetScore = _zeroCountScore;
+            OnScoreChanged?.Invoke(GetScore);
         }
 
         public void AddScore()
         {
-            _currentScore += _scoreForKill;
-            OnScoreChanged?.Invoke(_currentScore);
+            GetScore += _scoreForKill;
+            OnScoreChanged?.Invoke(GetScore);
         }
     }
 }
