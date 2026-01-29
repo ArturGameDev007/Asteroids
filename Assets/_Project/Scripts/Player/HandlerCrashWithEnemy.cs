@@ -18,7 +18,6 @@ namespace _Project.Scripts.Player
             if (other.TryGetComponent(out IEnemy enemy))
             {
                 OnCollisionHandler?.Invoke(enemy);
-                Debug.Log("handler");
             }
         }
     }

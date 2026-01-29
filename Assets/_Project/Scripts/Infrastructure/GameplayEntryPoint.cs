@@ -14,9 +14,8 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private ObjectPool _objectPool;
         [SerializeField] private GeneratorEnemies _generatorEnemies;
 
-        [FormerlySerializedAs("_player")]
         [Header("Prefabs")]
-        [SerializeField] private Character _playerPrefab;
+        [SerializeField] private Character _player;
         [SerializeField] private InputForShoot _shoot;
         [SerializeField] private PlayerController _controller;
 
@@ -24,10 +23,6 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private LoseViewModel _loseViewModel;
         [SerializeField] private ViewScore _viewScore;
         
-        
-        [Header("Spawn Settings")]
-        // [SerializeField] private Transform _playerSpawnPoint;
-
         private Game _game;
         private RestartGame _restartGame;
         private ScoreData _scoreData;
@@ -38,15 +33,10 @@ namespace _Project.Scripts.Infrastructure
             _restartGame = new RestartGame();
             _scoreData = new ScoreData();
             
-            // Character playerInstance = Instantiate(_playerPrefab, _playerSpawnPoint.position, Quaternion.identity);
-            //
-            // PlayerController controller = playerInstance.GetComponent<PlayerController>();
-            // InputForShoot shoot = playerInstance.GetComponent<InputForShoot>();
-
             _viewScore.Create(_scoreData);
             _generatorEnemies.Initialize(_scoreData);
 
-            _game = new Game(_objectPool, _generatorEnemies, _playerPrefab, _controller, _shoot, _loseViewModel, _restartGame, _scoreData, _enemy);
+            _game = new Game(_objectPool, _generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame, _scoreData, _enemy);
         }
 
         private void Start()

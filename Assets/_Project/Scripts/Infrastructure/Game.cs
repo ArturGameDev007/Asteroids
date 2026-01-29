@@ -34,11 +34,12 @@ namespace _Project.Scripts.Infrastructure
         public void Initialize()
         {
             _scoreData?.Reset();
-            _player?.ClearState();
             _objectPool.Initialize();
+            _player?.ClearState();
             
             Subscribe();
 
+            _controller.enabled = true;
             _shoot.enabled = true;
             _generatorEnemies.StartSpawning();
         }
@@ -62,15 +63,15 @@ namespace _Project.Scripts.Infrastructure
 
         private void OnGameOver()
         {
+            _controller.StopPhysics();
+            _controller.enabled = false;
+            _shoot.enabled = false;
+            
             _generatorEnemies.StopSpawning();
-            _loseViewModel.Open();
             
             int finalScore = _scoreData.GetScore;
             
-            _controller.StopPhysics();
-            _controller.enabled = false;
-            
-            _shoot.enabled = false;
+            _loseViewModel.Open();
         }
 
         private void OnRestartButtonClick()

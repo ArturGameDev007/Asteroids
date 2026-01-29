@@ -18,7 +18,11 @@ namespace _Project.Scripts.Player
 
         private void Awake()
         {
-            _head2D = GetComponent<Rigidbody2D>();
+            if (_head2D == null)
+            {
+                _head2D = GetComponent<Rigidbody2D>();
+            }
+
             _controllerInput = new InputController();
         }
 
@@ -33,7 +37,7 @@ namespace _Project.Scripts.Player
         {
             _controllerInput.UpdateHorizontalInput();
             _controllerInput.UpdateVerticalInput();
-            
+
             HandleRotation();
         }
 
@@ -44,6 +48,8 @@ namespace _Project.Scripts.Player
 
         public void Restart()
         {
+            _head2D.simulated = true;
+            
             transform.position = _startPosition;
             transform.rotation = Quaternion.identity;
             _head2D.velocity = Vector2.zero;
@@ -52,18 +58,18 @@ namespace _Project.Scripts.Player
         public void StopPhysics()
         {
             _head2D.velocity = Vector2.zero;
-            _head2D.angularDrag = 0f;
-            _head2D.isKinematic = true;
+            _head2D.angularVelocity = 0f;
+            _head2D.simulated = false;
         }
 
         private void Move()
         {
             float moveVertical = _controllerInput.VerticalInput;
-        
+
             if (moveVertical > 0)
             {
                 Vector2 direction = transform.up;
-        
+
                 _head2D.AddForce(direction * _forceInput);
             }
         }
@@ -77,4 +83,3 @@ namespace _Project.Scripts.Player
         }
     }
 }
-

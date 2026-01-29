@@ -334,6 +334,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 978683251110895336, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+      propertyPath: m_SleepingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1121580277768540567, guid: 77fd289117485cb4482536e1624733f6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -935,7 +939,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 727883096}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 379e1362fd05851438811edabb1386f3, type: 3}
   m_Name: 
@@ -991,7 +995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectPool: {fileID: 746366994}
   _generatorEnemies: {fileID: 746366996}
-  _playerPrefab: {fileID: -1081479925413627390, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+  _player: {fileID: 1808894109}
   _shoot: {fileID: 6076999410980347914, guid: 77fd289117485cb4482536e1624733f6, type: 3}
   _controller: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
   _loseViewModel: {fileID: 1602274629}
