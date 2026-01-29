@@ -6,8 +6,14 @@ namespace _Project.Scripts.UI.GameScreen
 {
     public class EnemyDeathTracker : MonoBehaviour
     {
-        [SerializeField] private ScoreData _scoreData;
-        [SerializeField] private Enemy _enemy;
+        [SerializeField] private EnemyManager _enemy;
+        
+        private ScoreData _scoreData;
+
+        public void Initialize(ScoreData scoreData)
+        {
+            _scoreData = scoreData;
+        }
 
         private void Start()
         {

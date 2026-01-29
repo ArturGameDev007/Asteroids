@@ -8,13 +8,13 @@ namespace _Project.Scripts.Enemies
         private const string BULLET = "Bullet";
         private const string LASER = "Laser";
 
-        public event Action OnEnemyKilled; 
-
         private ObjectPool _pool;
+        private IEnemyDeathListener  _deathListener;
 
-        public void Initialize(ObjectPool pool)
+        public void Initialize(ObjectPool pool, IEnemyDeathListener  deathListener)
         {
             _pool = pool;
+            _deathListener = deathListener;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -27,7 +27,7 @@ namespace _Project.Scripts.Enemies
 
         private void Kill()
         {
-            OnEnemyKilled?.Invoke();
+            _deathListener?.OnEnemyDeath();
             _pool.PutObject(this);
         }
     }

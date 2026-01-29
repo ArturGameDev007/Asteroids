@@ -2,9 +2,7 @@ using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.GameScreen;
-using _Project.Scripts.UI.PerformanceShip;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Infrastructure
 {
@@ -22,6 +20,7 @@ namespace _Project.Scripts.Infrastructure
         [Header("UI & Data")]
         [SerializeField] private LoseViewModel _loseViewModel;
         [SerializeField] private ViewScore _viewScore;
+        [SerializeField] private EnemyDeathTracker _deathTracker;
         
         private Game _game;
         private RestartGame _restartGame;
@@ -35,8 +34,10 @@ namespace _Project.Scripts.Infrastructure
             
             _viewScore.Create(_scoreData);
             _generatorEnemies.Initialize(_scoreData);
+            
+            _deathTracker.Initialize(_scoreData);
 
-            _game = new Game(_objectPool, _generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame, _scoreData, _enemy);
+            _game = new Game(_objectPool, _generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame,_enemy, _scoreData);
         }
 
         private void Start()

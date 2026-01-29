@@ -448,6 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pool: {fileID: 746366994}
   _spawnOffset: 2.5
+  _enemyManager: {fileID: 1688467850}
 --- !u!114 &746366997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,9 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3292e678baee400aae16ad8eca1c65d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreData:
-    <GetScore>k__BackingField: 0
-  _enemyManager: {fileID: 1688467850}
+  _enemy: {fileID: 1688467850}
 --- !u!1 &1253985510
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,7 +679,7 @@ GameObject:
   - component: {fileID: 1688467849}
   - component: {fileID: 1688467850}
   m_Layer: 0
-  m_Name: EnemtManager
+  m_Name: EnemyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -992,6 +991,7 @@ MonoBehaviour:
   _controller: {fileID: 1808894111}
   _loseViewModel: {fileID: 1602274629}
   _viewScore: {fileID: 481061828}
+  _deathTracker: {fileID: 746366997}
 --- !u!114 &2137728564 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6076999410980347914, guid: 77fd289117485cb4482536e1624733f6, type: 3}

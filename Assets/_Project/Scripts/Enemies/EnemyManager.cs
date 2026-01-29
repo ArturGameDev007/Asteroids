@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
-    public class EnemyManager : MonoBehaviour
+    public class EnemyManager : MonoBehaviour, IEnemyDeathListener
     {
-        public event Action<Enemy> OnEnemyKilled;
+        public event Action OnEnemyKilled;
 
-        private void OnEnemyDeath(Enemy enemy)
+        public void OnEnemyDeath()
         {
-            OnEnemyKilled?.Invoke(enemy);
+            OnEnemyKilled?.Invoke();
         }
     }
 }

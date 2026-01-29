@@ -18,7 +18,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly Enemy _enemy;
         private ScoreData _scoreData;
 
-        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData, Enemy enemy)
+        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, Enemy enemy, ScoreData scoreData)
         {
             _objectPool = objectPool;
             _generatorEnemies = generatorEnemies;
@@ -27,8 +27,8 @@ namespace _Project.Scripts.Infrastructure
             _shoot = shoot;
             _loseViewModel = loseViewModel;
             _restartGame = restartGame;
-            _scoreData = scoreData;
             _enemy = enemy;
+            _scoreData = scoreData;
         }
 
         public void Initialize()

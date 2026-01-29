@@ -10,6 +10,8 @@ namespace _Project.Scripts.Enemies
         [SerializeField] private ObjectPool _pool;
         [SerializeField] private float _spawnOffset = 2.5f;
 
+        [SerializeField] private EnemyManager _enemyManager;
+        
         private float _positionX;
         private float _positionY;
 
@@ -58,7 +60,7 @@ namespace _Project.Scripts.Enemies
             
             if (enemy.TryGetComponent(out Enemy enemyDiedHandler))
             {
-                enemyDiedHandler.Initialize(_pool);
+                enemyDiedHandler.Initialize(_pool, _enemyManager);
             }
             
             if (enemy.TryGetComponent(out AsteroidController asteroid))

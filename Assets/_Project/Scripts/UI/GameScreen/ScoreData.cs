@@ -22,6 +22,7 @@ namespace _Project.Scripts.UI.GameScreen
         public void AddScore()
         {
             GetScore += _scoreForKill;
+            Debug.Log($"Score: {GetScore}");
             OnScoreChanged?.Invoke(GetScore);
         }
     }
