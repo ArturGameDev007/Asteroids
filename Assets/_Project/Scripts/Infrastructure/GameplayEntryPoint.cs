@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
@@ -6,7 +5,6 @@ using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using _Project.Scripts.Utils;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Project.Scripts.Infrastructure
 {
@@ -16,21 +14,23 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private GameObject _background;
         [SerializeField] private GameObject _performanceShip;
         [SerializeField] private GameObject _endGameScreen;
+        [SerializeField] private GameObject _ship;
 
         [Header("Systems")]
         [SerializeField] private ObjectPool _objectPool;
         [SerializeField] private GeneratorEnemies _generatorEnemies;
 
-        [Header("Prefabs")]
-        [SerializeField] private Character _player;
-        [SerializeField] private InputForShoot _shoot;
-        [SerializeField] private PlayerController _controller;
+        [Header("Ship")]
 
         [Header("UI & Data")]
         [SerializeField] private LoseViewModel _loseViewModel;
         [SerializeField] private ViewScore _viewScore;
         [SerializeField] private EnemyDeathTracker _deathTracker;
 
+        private Character _player;
+        private InputForShoot _shoot;
+        private PlayerController _controller;
+        
         private CoordinateDisplay _coordinateDisplay;
         private ViewCurrentAmountLaser _viewCurrentAmountLaser;
         private Game _game;
@@ -38,7 +38,6 @@ namespace _Project.Scripts.Infrastructure
         private HierarchyScanner _hierarchyScanner;
         private RestartGame _restartGame;
         private ScoreData _scoreData;
-        private Enemy _enemy;
 
         private void Awake()
         {
@@ -46,6 +45,7 @@ namespace _Project.Scripts.Infrastructure
             _mainCamera = Camera.main;
             
             CreateBackground(_mainCamera);
+            _player = CreatePlayer();
             CreatePerformanceShip();
             CreateEndGameScreen();
 
@@ -53,11 +53,10 @@ namespace _Project.Scripts.Infrastructure
             _scoreData = new ScoreData();
 
             _viewScore.Create(_scoreData);
-            _generatorEnemies.Initialize(_scoreData);
+            _generatorEnemies.Initialize();
             _deathTracker.Initialize(_scoreData);
 
-            _game = new Game(_objectPool, _generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame,
-                _enemy, _scoreData);
+            _game = new Game(_objectPool, _generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame, _scoreData);
         }
 
         private void Start()
@@ -89,6 +88,30 @@ namespace _Project.Scripts.Infrastructure
             }
         }
 
+        private Character CreatePlayer()
+        {
+            GameObject playerObject = Instantiate(_ship, Vector2.zero, Quaternion.identity);
+            playerObject.name = "Ship_Player";
+
+            if (!playerObject.TryGetComponent(out Character characterComponent))
+            {
+                Debug.LogError("Компонент Character не найден на префабе _shipPrefab!");
+                return null;
+            }
+            
+            if (!playerObject.TryGetComponent(out _controller))
+            {
+                Debug.LogError("Компонент PlayerController не найден на префабе _shipPrefab!");
+            }
+            
+            if (!playerObject.TryGetComponent(out _shoot))
+            {
+                Debug.LogError("Компонент InputForShoot не найден на префабе _ship!");
+            }
+
+            return characterComponent;
+        }
+
         private void CreatePerformanceShip()
         {
             GameObject performanceShip = Instantiate(_performanceShip);
@@ -100,7 +123,7 @@ namespace _Project.Scripts.Infrastructure
             
             if (performanceShip.TryGetComponent(out CoordinateDisplay coordinateDisplay))
             {
-                Rigidbody2D player = _player.GetComponent<Rigidbody2D>();
+                Rigidbody2D player = _player?.GetComponent<Rigidbody2D>();
 
                 coordinateDisplay?.Initialize(_controller, player);
             }

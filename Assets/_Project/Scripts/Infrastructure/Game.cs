@@ -15,10 +15,9 @@ namespace _Project.Scripts.Infrastructure
         private readonly InputForShoot _shoot;
         private readonly LoseViewModel _loseViewModel;
         private readonly RestartGame _restartGame;
-        private readonly Enemy _enemy;
         private ScoreData _scoreData;
 
-        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, Enemy enemy, ScoreData scoreData)
+        public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData)
         {
             _objectPool = objectPool;
             _generatorEnemies = generatorEnemies;
@@ -27,7 +26,6 @@ namespace _Project.Scripts.Infrastructure
             _shoot = shoot;
             _loseViewModel = loseViewModel;
             _restartGame = restartGame;
-            _enemy = enemy;
             _scoreData = scoreData;
         }
 

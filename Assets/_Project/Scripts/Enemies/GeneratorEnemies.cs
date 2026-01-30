@@ -14,17 +14,13 @@ namespace _Project.Scripts.Enemies
         
         private float _positionX;
         private float _positionY;
-
         private float _delay = 3f;
 
         private Camera _camera;
         private Coroutine _coroutine;
         
-        private ScoreData _scoreData;
-
-        public void Initialize(ScoreData  scoreData)
+        public void Initialize()
         {
-            _scoreData = scoreData;
             _camera = Camera.main;
         }
 
@@ -78,61 +74,13 @@ namespace _Project.Scripts.Enemies
 
             Vector3 viewportPoint = side switch
             {
-                0 => new Vector3(-margin, t, 10), // Слева
-                1 => new Vector3(1 + margin, t, 10), // Справа
-                2 => new Vector3(t, -margin, 10), // Снизу
-                _ => new Vector3(t, 1 + margin, 10)  // Сверху
+                0 => new Vector3(-margin, t, 10),
+                1 => new Vector3(1 + margin, t, 10),
+                2 => new Vector3(t, -margin, 10),
+                _ => new Vector3(t, 1 + margin, 10)
             };
 
             return _camera.ViewportToWorldPoint(viewportPoint);
-            
-            
-            // float h = _camera.orthographicSize;
-            // float w = h * _camera.aspect;
-            //
-            // Vector3 camPos = _camera.transform.position;
-            //
-            // float x, y;
-            // int side = Random.Range(0, 4);
-            //
-            // if (side < 2) // Слева или Справа
-            // {
-            //     x = (side == 0) ? -w - _spawnOffset : w + _spawnOffset;
-            //     y = Random.Range(-h, h);
-            // }
-            // else // Снизу или Сверху
-            // {
-            //     x = Random.Range(-w, w);
-            //     y = (side == 2) ? -h - _spawnOffset : h + _spawnOffset;
-            // }
-            //
-            // return camPos + new Vector3(x, y, 0);
-            
-            // float camHalfHeight = _camera.orthographicSize;
-            // float camHalfWidth = camHalfHeight * _camera.aspect;
-            // Vector3 camPos = _camera.transform.position;
-            //
-            // float left = camPos.x - camHalfWidth;
-            // float right = camPos.x + camHalfWidth;
-            // float bottom = camPos.y - camHalfHeight;
-            // float top = camPos.y + camHalfHeight;
-            //
-            // float offsetX = _spawnOffset;
-            // float offsetY = _spawnOffset;
-            //
-            // switch (Random.Range(0, 4))
-            // {
-            //     case 0: // Слева
-            //         return new Vector3(left - offsetX, Random.Range(bottom, top), 0);
-            //     case 1: // Справа
-            //         return new Vector3(right + offsetX, Random.Range(bottom, top), 0);
-            //     case 2: // Снизу
-            //         return new Vector3(Random.Range(left, right), bottom - offsetY, 0);
-            //     case 3: // Сверху
-            //         return new Vector3(Random.Range(left, right), top + offsetY, 0);
-            //     default:
-            //         return camPos + Vector3.up * (top + offsetY);
-            // }
         }
     }
 }

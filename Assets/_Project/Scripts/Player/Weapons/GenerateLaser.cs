@@ -15,8 +15,6 @@ namespace _Project.Scripts.Player.Weapons
         public int CurrentAmmonLaser { get; private set; }
         public bool IsReloading { get; private set; }
 
-        private Coroutine _coroutine;
-
         private void Start()
         {
             CurrentAmmonLaser = _maxAmountLaser;
@@ -40,7 +38,7 @@ namespace _Project.Scripts.Player.Weapons
 
                 if (CurrentAmmonLaser == minCountLazer)
                 {
-                    _coroutine = StartCoroutine(ReloadLaser());
+                    StartCoroutine(ReloadLaser());
                 }
             }
 
