@@ -23,6 +23,11 @@ namespace _Project.Scripts.Player.Weapons
             _laserAmmo = laser;
         }
         
+        public void Construct(GenerateLaser laser)
+        {
+            _laserAmmo = laser;
+        }
+        
         private void Update()
         {
             InputBulletShoot();

@@ -24,7 +24,7 @@ namespace _Project.Scripts.Player.Weapons
 
         private void Update()
         {
-            ShoInfo();
+            ShowInfo();
         }
 
         public bool TrySpendAmmo()
@@ -65,7 +65,7 @@ namespace _Project.Scripts.Player.Weapons
             IsReloading = false;
         }
 
-        public void ShoInfo()
+        public void ShowInfo()
         {
             OnLaserChanged?.Invoke(CurrentAmmonLaser);
             OnReloadProgress?.Invoke(_reloadTime);

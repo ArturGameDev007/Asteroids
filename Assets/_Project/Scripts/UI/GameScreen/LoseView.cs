@@ -16,31 +16,21 @@ namespace _Project.Scripts.UI.GameScreen
             _canvas = GetComponent<Canvas>();
         }
 
-        public void Construct(Button button)
-        {
-            RestartButton = button;
-        }
+        // public void Construct(Button button)
+        // {
+        //     RestartButton = button;
+        // }
 
         public void ShowPanel()
         {
             _canvas.gameObject.SetActive(true);
             RestartButton.interactable = true;
-
-            // if (RestartButton != null)
-            // {
-            //     RestartButton.interactable = true;
-            // }
         }
 
         public void HidePanel()
         {
             _canvas.gameObject.SetActive(false);
             RestartButton.interactable = false;
-
-            // if (RestartButton != null)
-            // {
-            //     RestartButton.interactable = false;
-            // }
         }
     }
 }

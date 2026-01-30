@@ -12,11 +12,6 @@ namespace _Project.Scripts.UI.GameScreen
 
         private void Awake()
         {
-            // if (_loseView != null && _loseView.RestartButton != null)
-            // {
-            //     _loseView.RestartButton.onClick.AddListener(OnRestartClicked);
-            // }            
-
             _loseView.RestartButton.onClick.AddListener(OnRestartClicked);
         }
 
@@ -27,11 +22,6 @@ namespace _Project.Scripts.UI.GameScreen
 
         private void OnDestroy()
         {
-            // if (_loseView != null && _loseView.RestartButton != null)
-            // {
-            //     _loseView.RestartButton.onClick.RemoveListener(OnRestartClicked);
-            // }            
-
             _loseView.RestartButton.onClick.RemoveListener(OnRestartClicked);
         }
 
