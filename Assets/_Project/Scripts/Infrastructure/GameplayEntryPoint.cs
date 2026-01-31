@@ -30,7 +30,7 @@ namespace _Project.Scripts.Infrastructure
         private PlayerController _controller;
         
         private CoordinateDisplay _coordinateDisplay;
-        private LoseView  _loseView;
+        // private LoseView  _loseView;
         private ViewCurrentAmountLaser _viewCurrentAmountLaser;
         private Game _game;
         private Camera _mainCamera;
@@ -146,10 +146,10 @@ namespace _Project.Scripts.Infrastructure
             if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out LoseViewModel loseViewModel))
             {
                 _loseViewModel = loseViewModel;
-                if (gameScreen.TryGetComponent(out LoseViewModel  viewModel))
-                {
-                    viewModel.Construct(_loseView);
-                }
+                // if (gameScreen.TryGetComponent(out LoseViewModel  viewModel))
+                // {
+                //     viewModel.Construct(_loseView);
+                // }
             }
 
             if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out ViewScore viewScore))
