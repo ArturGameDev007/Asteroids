@@ -2,6 +2,7 @@ using System;
 using _Project.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace _Project.Scripts.UI.GameScreen
 {
@@ -18,15 +19,15 @@ namespace _Project.Scripts.UI.GameScreen
             
             if (RestartButton == null)
             {
-                var scanner = new HierarchyScanner();
-            
-                if (scanner.TryGetInStack(this.transform, out Button foundButton))
+                if (new ButtonScanner().TryGetInStack(transform, out Button found))
                 {
-                    RestartButton = foundButton;
+                    RestartButton = found;
+                    Debug.Log("Кнопка найдена!");
                 }
                 else
                 {
-                    Debug.LogError("Сканер прошел сквозь Backfon, но кнопку не увидел!");
+                    Debug.Log("Кнопка не найдена!");
+                    
                 }
             }
         }
