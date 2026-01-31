@@ -11,30 +11,27 @@ namespace _Project.Scripts.UI.GameScreen
         [field: SerializeField] public Button RestartButton { get; private set; }
 
         private Canvas _canvas;
-        private HierarchyScanner _hierarchyScanner =  new HierarchyScanner();
 
         private void Awake()
         {
             _canvas = GetComponent<Canvas>();
-            
+
+
             if (RestartButton == null)
             {
-                if (_hierarchyScanner.TryGetInStack(this.transform, out Button buttonComponent))
+                ButtonScanner scanner = new ButtonScanner();
+
+                if (scanner.TryGetInStack(this.transform, out Button foundButton))
                 {
-                    RestartButton = buttonComponent;
-                    Debug.LogWarning("Кнопка найдена через сканер, но лучше назначить ее в инспекторе!");
+                    RestartButton = foundButton;
+                    Debug.Log($"[LoseView] Кнопка найдена: {foundButton.name}");
                 }
                 else
                 {
-                    Debug.LogError("Кнопка перезапуска не найдена ни в инспекторе, ни через сканер!");
+                    Debug.LogError("[LoseView] Кнопка не найдена в иерархии!");
                 }
             }
         }
-
-        // public void Construct(Button button)
-        // {
-        //     RestartButton = button;
-        // }
 
         public void ShowPanel()
         {

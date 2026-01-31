@@ -11,9 +11,13 @@ namespace _Project.Scripts.UI.GameScreen
 
         [SerializeField] private LoseView _loseView;
 
+        public void Construct(LoseView loseView)
+        {
+            _loseView = loseView;
+        }
+
         private void Awake()
         {
-            // _loseView = GetComponent<LoseView>();
             _loseView.RestartButton.onClick.AddListener(OnRestartClicked);
         }
 
@@ -29,7 +33,7 @@ namespace _Project.Scripts.UI.GameScreen
 
         public void Open()
         {
-            _loseView.ShowPanel();
+            _loseView?.ShowPanel();
         }
 
         public void Close()
