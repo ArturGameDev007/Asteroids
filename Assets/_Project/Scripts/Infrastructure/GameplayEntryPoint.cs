@@ -75,11 +75,11 @@ namespace _Project.Scripts.Infrastructure
             int orderInLayer = -5;
 
             GameObject separator = new GameObject($"{new string('-', 10)} UI {new string('-', 10)}");
-            separator.transform.SetSiblingIndex(2);
+            separator.transform.SetSiblingIndex(3);
 
             GameObject background = Instantiate(_background);
             background.name = "UI - Background";
-            background.transform.SetSiblingIndex(3);
+            background.transform.SetSiblingIndex(4);
 
             if (background.TryGetComponent(out Canvas canvas))
             {
@@ -92,6 +92,7 @@ namespace _Project.Scripts.Infrastructure
         {
             GameObject playerObject = Instantiate(_ship, Vector2.zero, Quaternion.identity);
             playerObject.name = "Ship_Player";
+            playerObject.transform.SetSiblingIndex(2);
 
             if (!playerObject.TryGetComponent(out Character characterComponent))
             {
@@ -116,10 +117,7 @@ namespace _Project.Scripts.Infrastructure
         {
             GameObject performanceShip = Instantiate(_performanceShip);
             performanceShip.name = "UI - Performance Ship";
-            performanceShip.transform.SetSiblingIndex(4);
-            
-            GameObject separator = new GameObject(new string('-', 20));
-            separator.transform.SetSiblingIndex(6);
+            performanceShip.transform.SetSiblingIndex(5);
             
             if (performanceShip.TryGetComponent(out CoordinateDisplay coordinateDisplay))
             {
@@ -139,7 +137,10 @@ namespace _Project.Scripts.Infrastructure
         {
             GameObject gameScreen = Instantiate(_endGameScreen);
             gameScreen.name = "UI - EndGameScreen";
-            gameScreen.transform.SetSiblingIndex(5);
+            gameScreen.transform.SetSiblingIndex(6);
+            
+            GameObject separator = new GameObject(new string('-', 20));
+            separator.transform.SetSiblingIndex(8);
             
             if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out LoseViewModel loseViewModel))
                 _loseViewModel = loseViewModel;

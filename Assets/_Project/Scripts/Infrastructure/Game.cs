@@ -32,7 +32,7 @@ namespace _Project.Scripts.Infrastructure
         public void Initialize()
         {
             _scoreData?.Reset();
-            _objectPool.Initialize();
+            _objectPool.Initialize(_player);
             _player?.ClearState();
             
             Subscribe();

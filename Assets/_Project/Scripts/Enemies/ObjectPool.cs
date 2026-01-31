@@ -9,16 +9,17 @@ namespace _Project.Scripts.Enemies
     {
         [Header("Transform Objects")]
         [SerializeField] private GameObject _container;
-        [SerializeField] private Character _player;
 
         [Space(10)] 
         [Header("List Enemies")] 
         [SerializeField] private List<Enemy> _prefab;
 
+        private Character _player;
         private Queue<Enemy> _pool;
 
-        public void Initialize()
+        public void Initialize(Character player)
         {
+            _player = player;
             _pool = new Queue<Enemy>();
             _container = new GameObject("ContainerForEnemies");
         }
