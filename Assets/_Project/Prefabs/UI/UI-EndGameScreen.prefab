@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2275616237344249395}
   - component: {fileID: 9009136971575947304}
   - component: {fileID: 6098494253116743469}
-  - component: {fileID: 8232298826363238915}
   m_Layer: 5
   m_Name: UI-EndGameScreen
   m_TagString: Untagged
@@ -117,19 +116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loseView: {fileID: 0}
---- !u!114 &8232298826363238915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027745613698290874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6982f94804c143beba3207ac1ed5ceab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <RestartButton>k__BackingField: {fileID: 0}
 --- !u!1 &1932604559545053720
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,6 +664,8 @@ GameObject:
   - component: {fileID: 734534577339328941}
   - component: {fileID: 3645948649259030731}
   - component: {fileID: 4245526581993141535}
+  - component: {fileID: 258512139858845677}
+  - component: {fileID: 2062243403808534030}
   m_Layer: 5
   m_Name: BackFon
   m_TagString: Untagged
@@ -745,3 +733,39 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!223 &258512139858845677
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8423268194228852047}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &2062243403808534030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8423268194228852047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6982f94804c143beba3207ac1ed5ceab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <RestartButton>k__BackingField: {fileID: 0}

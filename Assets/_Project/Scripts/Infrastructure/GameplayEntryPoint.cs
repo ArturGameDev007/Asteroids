@@ -5,6 +5,7 @@ using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using _Project.Scripts.Utils;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Project.Scripts.Infrastructure
 {
@@ -30,8 +31,8 @@ namespace _Project.Scripts.Infrastructure
         private PlayerController _controller;
         
         private CoordinateDisplay _coordinateDisplay;
-        // private LoseView  _loseView;
         private ViewCurrentAmountLaser _viewCurrentAmountLaser;
+        // private LoseView _loseView;
         private Game _game;
         private Camera _mainCamera;
         private HierarchyScanner _hierarchyScanner;
@@ -146,9 +147,16 @@ namespace _Project.Scripts.Infrastructure
             if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out LoseViewModel loseViewModel))
             {
                 _loseViewModel = loseViewModel;
-                
-                if (gameScreen.TryGetComponent(out LoseView  loseView))
+
+                if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out LoseView loseView))
+                {
+                    if (_hierarchyScanner.TryGetInStack(loseView.transform, out Button button))
+                    {
+                        loseView.Construct(button);
+                    }
                     _loseViewModel.Construct(loseView);
+                    
+                }
             }
 
             if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out ViewScore viewScore))
