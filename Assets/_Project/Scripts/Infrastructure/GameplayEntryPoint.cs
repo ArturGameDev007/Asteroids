@@ -16,11 +16,9 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private GameObject _endGameScreen;
         [SerializeField] private GameObject _ship;
 
-        [Header("Systems")]
+        [Header("Systems Pool")]
         [SerializeField] private ObjectPool _objectPool;
         [SerializeField] private GeneratorEnemies _generatorEnemies;
-
-        [Header("Ship")]
 
         [Header("UI & Data")]
         [SerializeField] private LoseViewModel _loseViewModel;
@@ -52,7 +50,7 @@ namespace _Project.Scripts.Infrastructure
             _restartGame = new RestartGame();
             _scoreData = new ScoreData();
 
-            _viewScore.Create(_scoreData);
+            _viewScore.Construct(_scoreData);
             _generatorEnemies.Initialize();
             _deathTracker.Initialize(_scoreData);
 
@@ -128,9 +126,11 @@ namespace _Project.Scripts.Infrastructure
 
             if (_hierarchyScanner.TryGetInStack(performanceShip.transform, out ViewCurrentAmountLaser viewLaser))
                 viewLaser?.Initialize();
+            
+            WeaponShooter shooter = new WeaponShooter();
 
             if (_hierarchyScanner.TryGetInStack(performanceShip.transform, out GenerateLaser laserLogic))
-                _shoot?.Initialize(laserLogic);
+                _shoot?.Initialize(laserLogic, shooter);
         }
 
         private void CreateEndGameScreen()

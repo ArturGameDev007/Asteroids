@@ -9,14 +9,13 @@ namespace _Project.Scripts.UI.GameScreen
 
         private ScoreData _scoreData;
 
-        public void Create(ScoreData scoreData)
+        public void Construct(ScoreData scoreData)
         {
             _scoreData = scoreData;
             _scoreData.OnScoreChanged += OnShowInfoFinalScore;
 
             OnShowInfoFinalScore(_scoreData.GetScore);
         }
-
 
         private void OnDestroy()
         {

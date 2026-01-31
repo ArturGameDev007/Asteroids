@@ -2,11 +2,11 @@
 
 namespace _Project.Scripts.Player.Weapons
 {
-    public class WeaponShooter : MonoBehaviour
+    public class WeaponShooter
     {
         public void CreateShoot(GameObject weapon, Transform spawnPoint)
         {
-            Instantiate(weapon, spawnPoint.position, spawnPoint.rotation);
+            Object.Instantiate(weapon, spawnPoint.position, spawnPoint.rotation);
         }
     }
 }

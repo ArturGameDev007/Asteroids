@@ -47,10 +47,10 @@ namespace _Project.Scripts.Player
         public void Restart()
         {
             _head2D.simulated = true;
+            _head2D.velocity = Vector2.zero;
             
             transform.position = _startPosition;
             transform.rotation = Quaternion.identity;
-            _head2D.velocity = Vector2.zero;
         }
 
         public void StopPhysics()

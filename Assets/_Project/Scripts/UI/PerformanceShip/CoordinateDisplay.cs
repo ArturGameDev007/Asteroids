@@ -7,8 +7,10 @@ namespace _Project.Scripts.UI.PerformanceShip
     public class CoordinateDisplay : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _coordinateText;
+        
+        [Space(10)]
+        
         [SerializeField] private PlayerController _targetValue;
-
         [SerializeField] private Rigidbody2D _rigidbody2D;
         
         public void Initialize(PlayerController shipController, Rigidbody2D head)

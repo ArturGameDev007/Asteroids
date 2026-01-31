@@ -12,6 +12,11 @@ namespace _Project.Scripts.Enemies
 
         private Vector3 _flyingPosition;
 
+        public void Construct(Transform player)
+        {
+            _player = player;
+        }
+        
         private void Start()
         {
             _flyingPosition = transform.position;
@@ -20,11 +25,6 @@ namespace _Project.Scripts.Enemies
         private void Update()
         {
             Move();
-        }
-
-        public void Construct(Transform player)
-        {
-            _player = player;
         }
 
         public void Move()

@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4128760670663854505
 RectTransform:
   m_ObjectHideFlags: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6982f94804c143beba3207ac1ed5ceab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <RestartButton>k__BackingField: {fileID: 4899644403387639473}
+  <RestartButton>k__BackingField: {fileID: 0}
 --- !u!1 &1932604559545053720
 GameObject:
   m_ObjectHideFlags: 0

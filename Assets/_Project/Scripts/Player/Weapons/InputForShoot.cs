@@ -15,17 +15,13 @@ namespace _Project.Scripts.Player.Weapons
         [SerializeField] private Transform _pointShootForBullet;
 
         [Space(10)]
-        [SerializeField] private GenerateLaser _laserAmmo;
-        [SerializeField] private WeaponShooter _shooter;
-
-        public void Initialize(GenerateLaser laser)
-        {
-            _laserAmmo = laser;
-        }
+        private GenerateLaser _laserAmmo;
+        private WeaponShooter _shooter;
         
-        public void Construct(GenerateLaser laser)
+        public void Initialize(GenerateLaser laser, WeaponShooter  shooter)
         {
             _laserAmmo = laser;
+            _shooter = shooter;
         }
         
         private void Update()

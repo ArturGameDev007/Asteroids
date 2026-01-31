@@ -2,7 +2,6 @@ using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.GameScreen;
-using _Project.Scripts.UI.PerformanceShip;
 
 namespace _Project.Scripts.Infrastructure
 {
@@ -15,7 +14,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly InputForShoot _shoot;
         private readonly LoseViewModel _loseViewModel;
         private readonly RestartGame _restartGame;
-        private ScoreData _scoreData;
+        private readonly ScoreData _scoreData;
 
         public Game(ObjectPool objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData)
         {
