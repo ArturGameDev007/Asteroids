@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    // [RequireComponent(typeof(LoseView))]
     public class LoseViewModel : MonoBehaviour
     {
         public event Action OnRestartClick;

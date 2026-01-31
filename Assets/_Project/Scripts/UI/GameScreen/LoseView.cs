@@ -15,20 +15,18 @@ namespace _Project.Scripts.UI.GameScreen
         private void Awake()
         {
             _canvas = GetComponent<Canvas>();
-
-
+            
             if (RestartButton == null)
             {
-                ButtonScanner scanner = new ButtonScanner();
-
+                var scanner = new HierarchyScanner();
+            
                 if (scanner.TryGetInStack(this.transform, out Button foundButton))
                 {
                     RestartButton = foundButton;
-                    Debug.Log($"[LoseView] Кнопка найдена: {foundButton.name}");
                 }
                 else
                 {
-                    Debug.LogError("[LoseView] Кнопка не найдена в иерархии!");
+                    Debug.LogError("Сканер прошел сквозь Backfon, но кнопку не увидел!");
                 }
             }
         }

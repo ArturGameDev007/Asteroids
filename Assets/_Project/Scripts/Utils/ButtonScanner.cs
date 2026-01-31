@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Project.Scripts.Utils
 {
@@ -18,7 +19,9 @@ namespace _Project.Scripts.Utils
                     return true;
 
                 for (int i = 0; i < current.childCount; i++)
+                {
                     stack.Push(current.GetChild(i));
+                }
             }
 
             component = null;

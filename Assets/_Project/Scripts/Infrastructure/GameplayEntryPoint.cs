@@ -146,10 +146,9 @@ namespace _Project.Scripts.Infrastructure
             if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out LoseViewModel loseViewModel))
             {
                 _loseViewModel = loseViewModel;
-                // if (gameScreen.TryGetComponent(out LoseViewModel  viewModel))
-                // {
-                //     viewModel.Construct(_loseView);
-                // }
+                
+                if (gameScreen.TryGetComponent(out LoseView  loseView))
+                    _loseViewModel.Construct(loseView);
             }
 
             if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out ViewScore viewScore))
