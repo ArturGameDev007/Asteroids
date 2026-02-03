@@ -15,6 +15,8 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private GameObject _background;
         [SerializeField] private GameObject _performanceShip;
         [SerializeField] private GameObject _endGameScreen;
+        
+        [Header("Prefab Player")]
         [SerializeField] private GameObject _ship;
 
         [Header("Systems Pool")]
@@ -32,7 +34,6 @@ namespace _Project.Scripts.Infrastructure
         
         private CoordinateDisplay _coordinateDisplay;
         private ViewCurrentAmountLaser _viewCurrentAmountLaser;
-        // private LoseView _loseView;
         private Game _game;
         private Camera _mainCamera;
         private HierarchyScanner _hierarchyScanner;
@@ -96,7 +97,6 @@ namespace _Project.Scripts.Infrastructure
 
             if (!playerObject.TryGetComponent(out Character characterComponent))
             {
-                Debug.LogError("Компонент Character не найден на префабе _shipPrefab!");
                 return null;
             }
             
@@ -154,15 +154,13 @@ namespace _Project.Scripts.Infrastructure
                     {
                         loseView.Construct(button);
                     }
-                    _loseViewModel.Construct(loseView);
                     
+                    _loseViewModel.Construct(loseView);
                 }
             }
 
             if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out ViewScore viewScore))
-            {
                 _viewScore = viewScore;
-            }
         }
     }
 }
