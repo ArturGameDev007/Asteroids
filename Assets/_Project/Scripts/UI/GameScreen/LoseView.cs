@@ -20,18 +20,10 @@ namespace _Project.Scripts.UI.GameScreen
             RestartButton = restartButton;
         }
 
-        // private void Awake()
-        // {
-        //     if (_canvas == null)
-        //     {
-        //         _canvas = GetComponent<Canvas>();
-        //     }
-        // }
-
         public void ShowPanel()
         {
             Canvas?.gameObject.SetActive(true);
-            
+
             if (RestartButton != null)
                 RestartButton.interactable = true;
         }
@@ -39,7 +31,7 @@ namespace _Project.Scripts.UI.GameScreen
         public void HidePanel()
         {
             Canvas?.gameObject.SetActive(false);
-            
+ 
             if (RestartButton != null)
                 RestartButton.interactable = false;
         }

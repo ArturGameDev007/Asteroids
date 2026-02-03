@@ -20,9 +20,7 @@ namespace _Project.Scripts.Enemies
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag(BULLET) || other.CompareTag(LASER))
-            {
                 Kill();
-            }
         }
 
         private void Kill()

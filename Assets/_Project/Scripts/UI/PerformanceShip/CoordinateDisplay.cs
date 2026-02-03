@@ -8,8 +8,7 @@ namespace _Project.Scripts.UI.PerformanceShip
     {
         [SerializeField] private TextMeshProUGUI _coordinateText;
         
-        [Space(10)]
-        
+        [Header("Character")]
         [SerializeField] private PlayerController _targetValue;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         

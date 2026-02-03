@@ -22,7 +22,7 @@ namespace _Project.Scripts.UI.GameScreen
             _scoreData.OnScoreChanged -= OnShowInfoFinalScore;
         }
 
-        public void OnShowInfoFinalScore(int value)
+        private void OnShowInfoFinalScore(int value)
         {
             _textScore.text = $"Score: {value.ToString()}";
         }
