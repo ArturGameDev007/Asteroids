@@ -65,6 +65,7 @@ namespace _Project.Scripts.Infrastructure
             _shoot.enabled = false;
             
             _generatorEnemies.StopSpawning();
+            _generatorEnemies.StopAllAnemies();
             
             int finalScore = _scoreData.GetScore;
             
