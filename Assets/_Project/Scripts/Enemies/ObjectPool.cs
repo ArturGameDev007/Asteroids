@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Player;
-using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies

@@ -5,7 +5,6 @@ using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using _Project.Scripts.Utils;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Project.Scripts.Infrastructure
 {

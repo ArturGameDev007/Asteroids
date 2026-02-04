@@ -1,5 +1,4 @@
-﻿using System;
-using _Project.Scripts.Player.Weapons;
+﻿using _Project.Scripts.Player.Weapons;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies

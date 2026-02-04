@@ -1,8 +1,5 @@
-using System;
-using _Project.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 namespace _Project.Scripts.UI.GameScreen
 {
