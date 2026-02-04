@@ -10,6 +10,7 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
+        [Header("Create Entities")]
         [SerializeField] private GameFactory _gameFactory;
         
         [Header("Prefabs UI")]
