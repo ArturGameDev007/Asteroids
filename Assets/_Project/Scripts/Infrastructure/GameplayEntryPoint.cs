@@ -47,18 +47,9 @@ namespace _Project.Scripts.Infrastructure
 
             _hierarchyScanner = new HierarchyScanner();
             _mainCamera = Camera.main;
-
-            _gameFactory.CreateBackground(_background, _mainCamera);
-            _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot);
-            _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _coordinateDisplay, _viewCurrentAmountLaser, _hierarchyScanner);
-            _gameFactory.CreateEndGameScreen(_endGameScreen, _hierarchyScanner, out _loseViewModel, out _viewScore);
-
-            _restartGame = new RestartGame();
-            _scoreData = new ScoreData();
-
-            _viewScore.Construct(_scoreData);
-            _generatorEnemies.Initialize();
-            _deathTracker.Initialize(_scoreData);
+            
+            CreateGameEntities();
+            SetupDataAndUI();
 
             _game = new Game(_objectPool, _generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame,
                 _scoreData);
@@ -73,6 +64,24 @@ namespace _Project.Scripts.Infrastructure
         {
             _game.Dispose();
             _objectPool.ClearPool();
+        }
+
+        private void CreateGameEntities()
+        {
+            _gameFactory.CreateBackground(_background, _mainCamera);
+            _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot);
+            _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _coordinateDisplay, _viewCurrentAmountLaser, _hierarchyScanner);
+            _gameFactory.CreateEndGameScreen(_endGameScreen, _hierarchyScanner, out _loseViewModel, out _viewScore);
+        }
+
+        private void SetupDataAndUI()
+        {
+            _restartGame = new RestartGame();
+            _scoreData = new ScoreData();
+
+            _viewScore.Construct(_scoreData);
+            _generatorEnemies.Initialize();
+            _deathTracker.Initialize(_scoreData);
         }
     }
 }

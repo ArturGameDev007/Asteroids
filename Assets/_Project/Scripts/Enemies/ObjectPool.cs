@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Enemies
 {
@@ -9,9 +10,8 @@ namespace _Project.Scripts.Enemies
         [Header("Transform Objects")]
         [SerializeField] private GameObject _container;
 
-        [Space(10)] 
         [Header("List Enemies")] 
-        [SerializeField] private List<Enemy> _prefab;
+        [SerializeField] private List<Enemy> _prefabEnemy;
 
         private Character _player;
         private Queue<Enemy> _pool;
@@ -37,8 +37,8 @@ namespace _Project.Scripts.Enemies
         {
             int minCountPool = 0;
             
-            int indexEnemy = Random.Range(minCountPool, _prefab.Count);
-            var enemy = Instantiate(_prefab[indexEnemy], _container.transform);
+            int indexEnemy = Random.Range(minCountPool, _prefabEnemy.Count);
+            var enemy = Instantiate(_prefabEnemy[indexEnemy], _container.transform);
 
             if (enemy.TryGetComponent(out FlyingSaucerController saucer))
                 saucer.Construct(_player.transform);

@@ -6,8 +6,8 @@ namespace _Project.Scripts.Enemies
 {
     public class GeneratorEnemies : MonoBehaviour
     {
-        [Header("ObjectPool Enemies")] [SerializeField]
-        private ObjectPool _pool;
+        [Header("ObjectPool Enemies")]
+        [SerializeField] private ObjectPool _pool;
 
         [SerializeField] private EnemyManager _enemyManager;
         [SerializeField] private float _spawnOffset = 2.0f;
