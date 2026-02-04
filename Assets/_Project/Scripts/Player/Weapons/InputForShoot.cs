@@ -7,23 +7,29 @@ namespace _Project.Scripts.Player.Weapons
         private const int INPUT_MOUSE_LEFT = 0;
         private const int INPUT_MOUSE_RIGHT = 1;
 
-        [Header("Prefabs Weapons")]
-        [SerializeField] private GameObject _prefabLaser;
+        [Header("Prefabs Weapons")] [SerializeField]
+        private GameObject _prefabLaser;
+
         [SerializeField] private GameObject _bulletPrefab;
 
-        [Header("Points Weapons")]
-        [SerializeField] private Transform _pointShootForlaser;
+        [Header("Points Weapons")] [SerializeField]
+        private Transform _pointShootForlaser;
+
         [SerializeField] private Transform _pointShootForBullet;
 
         private GenerateLaser _laserAmmo;
         private WeaponShooter _shooter;
-        
-        public void Initialize(GenerateLaser laser, WeaponShooter  shooter)
+
+        private GameObject _containerForShoots;
+
+        public void Initialize(GenerateLaser laser, WeaponShooter shooter)
         {
             _laserAmmo = laser;
             _shooter = shooter;
+
+            _containerForShoots = new GameObject("Container_For_Shoots");
         }
-        
+
         private void Update()
         {
             InputBulletShoot();
@@ -33,14 +39,14 @@ namespace _Project.Scripts.Player.Weapons
         private void InputBulletShoot()
         {
             if (Input.GetMouseButtonDown(INPUT_MOUSE_LEFT))
-                _shooter.CreateShoot(_bulletPrefab, _pointShootForBullet);
+                _shooter.CreateShoot(_bulletPrefab, _pointShootForBullet, _containerForShoots);
         }
 
         private void InputLaserShoot()
         {
             if (Input.GetMouseButtonDown(INPUT_MOUSE_RIGHT))
                 if (_laserAmmo.TrySpendAmmo())
-                    _shooter.CreateShoot(_prefabLaser, _pointShootForlaser);
+                    _shooter.CreateShoot(_prefabLaser, _pointShootForlaser, _containerForShoots);
         }
     }
 }

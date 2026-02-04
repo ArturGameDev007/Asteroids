@@ -20,7 +20,7 @@ namespace _Project.Scripts.Enemies
         {
             _player = player;
             _pool = new Queue<Enemy>();
-            _container = new GameObject("ContainerForEnemies");
+            _container = new GameObject("Container_For_Enemies");
         }
 
         public Enemy GetObject()
