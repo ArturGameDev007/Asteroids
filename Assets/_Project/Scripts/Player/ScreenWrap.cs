@@ -23,6 +23,7 @@ namespace _Project.Scripts.Player
         private void Update()
         {
             CheckForScreenWrap();
+            
             _position = _main.transform.position;
         }
 

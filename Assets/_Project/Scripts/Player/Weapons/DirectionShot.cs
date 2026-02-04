@@ -13,7 +13,7 @@ namespace _Project.Scripts.Player.Weapons
 
         private void DirectionMove()
         {
-            transform.Translate(transform.up * _speed * Time.deltaTime, Space.World);
+            transform.Translate(transform.up * (_speed * Time.deltaTime), Space.World);
         }
     }
 }

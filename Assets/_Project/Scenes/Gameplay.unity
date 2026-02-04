@@ -378,8 +378,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pool: {fileID: 746366994}
-  _spawnOffset: 4.5
   _enemyManager: {fileID: 1688467850}
+  _spawnOffset: 2
 --- !u!114 &746366997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,6 +393,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 1688467850}
+  _scoreData:
+    <GetScore>k__BackingField: 0
 --- !u!1 &1688467848
 GameObject:
   m_ObjectHideFlags: 0

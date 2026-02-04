@@ -1,13 +1,11 @@
 ﻿using System;
+using _Project.Scripts.Player.Weapons;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
     public class Enemy : MonoBehaviour, IEnemy
     {
-        private const string BULLET = "Bullet";
-        private const string LASER = "Laser";
-
         private ObjectPool _pool;
         private IEnemyDeathListener  _deathListener;
 
@@ -19,8 +17,10 @@ namespace _Project.Scripts.Enemies
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag(BULLET) || other.CompareTag(LASER))
+            if (other.TryGetComponent(out Bullet _) || other.TryGetComponent(out Laser _))
+            {
                 Kill();
+            }
         }
 
         private void Kill()

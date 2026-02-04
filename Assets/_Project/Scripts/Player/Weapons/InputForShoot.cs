@@ -7,14 +7,14 @@ namespace _Project.Scripts.Player.Weapons
         private const int INPUT_MOUSE_LEFT = 0;
         private const int INPUT_MOUSE_RIGHT = 1;
 
+        [Header("Prefabs Weapons")]
         [SerializeField] private GameObject _prefabLaser;
         [SerializeField] private GameObject _bulletPrefab;
 
-        [Space(10)]
+        [Header("Points Weapons")]
         [SerializeField] private Transform _pointShootForlaser;
         [SerializeField] private Transform _pointShootForBullet;
 
-        [Space(10)]
         private GenerateLaser _laserAmmo;
         private WeaponShooter _shooter;
         

@@ -54,11 +54,6 @@ namespace _Project.Scripts.Infrastructure
             _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _coordinateDisplay, _viewCurrentAmountLaser, _hierarchyScanner);
             _gameFactory.CreateEndGameScreen(_endGameScreen, _hierarchyScanner, out _loseViewModel, out _viewScore);
 
-            // CreateBackground(_mainCamera);
-            // _player = CreatePlayer();
-            // CreatePerformanceShip();
-            // CreateEndGameScreen();
-
             _restartGame = new RestartGame();
             _scoreData = new ScoreData();
 
@@ -80,111 +75,5 @@ namespace _Project.Scripts.Infrastructure
             _game.Dispose();
             _objectPool.ClearPool();
         }
-
-        // private void CreateBackground(Camera main)
-        // {
-        //     int orderInLayer = -5;
-        //
-        //     int indexSeparator = 3;
-        //     int count = 10;
-        //
-        //     char dash = '-';
-        //
-        //     CreateSeparator(new string(dash, count), indexSeparator);
-        //
-        //     GameObject background = Instantiate(_background);
-        //     background.name = "UI - Background";
-        //     background.transform.SetSiblingIndex(4);
-        //
-        //     if (background.TryGetComponent(out Canvas canvas))
-        //     {
-        //         canvas.worldCamera = main;
-        //         canvas.sortingOrder = orderInLayer;
-        //     }
-        // }
-        //
-        // private Character CreatePlayer()
-        // {
-        //     GameObject playerObject = Instantiate(_ship, Vector2.zero, Quaternion.identity);
-        //     playerObject.name = "Ship_Player";
-        //     playerObject.transform.SetSiblingIndex(2);
-        //
-        //     if (!playerObject.TryGetComponent(out Character characterComponent))
-        //     {
-        //         return null;
-        //     }
-        //
-        //     if (!playerObject.TryGetComponent(out _controller))
-        //     {
-        //         Debug.LogError("Компонент PlayerController не найден на префабе _shipPrefab!");
-        //     }
-        //
-        //     if (!playerObject.TryGetComponent(out _shoot))
-        //     {
-        //         Debug.LogError("Компонент InputForShoot не найден на префабе _ship!");
-        //     }
-        //
-        //     return characterComponent;
-        // }
-        //
-        // private void CreatePerformanceShip()
-        // {
-        //     GameObject performanceShip = Instantiate(_performanceShip);
-        //     performanceShip.name = "UI - Performance Ship";
-        //     performanceShip.transform.SetSiblingIndex(5);
-        //
-        //     if (performanceShip.TryGetComponent(out CoordinateDisplay coordinateDisplay))
-        //     {
-        //         Rigidbody2D player = _player?.GetComponent<Rigidbody2D>();
-        //
-        //         coordinateDisplay?.Initialize(_controller, player);
-        //     }
-        //
-        //     if (_hierarchyScanner.TryGetInStack(performanceShip.transform, out ViewCurrentAmountLaser viewLaser))
-        //         viewLaser?.Initialize();
-        //
-        //     WeaponShooter shooter = new WeaponShooter();
-        //
-        //     if (_hierarchyScanner.TryGetInStack(performanceShip.transform, out GenerateLaser laserLogic))
-        //         _shoot?.Initialize(laserLogic, shooter);
-        // }
-        //
-        // private void CreateEndGameScreen()
-        // {
-        //     GameObject gameScreen = Instantiate(_endGameScreen);
-        //     gameScreen.name = "UI - EndGameScreen";
-        //     gameScreen.transform.SetSiblingIndex(6);
-        //
-        //     int indexSeparator = 3;
-        //     int count = 10;
-        //
-        //     char dash = '-';
-        //
-        //     CreateSeparator(new string(dash, count), indexSeparator);
-        //
-        //     if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out LoseViewModel loseViewModel))
-        //     {
-        //         _loseViewModel = loseViewModel;
-        //
-        //         if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out LoseView loseView))
-        //         {
-        //             if (_hierarchyScanner.TryGetInStack(loseView.transform, out Button button))
-        //             {
-        //                 loseView.Construct(button);
-        //             }
-        //
-        //             _loseViewModel.Construct(loseView);
-        //         }
-        //     }
-        //
-        //     if (_hierarchyScanner.TryGetInStack(gameScreen.transform, out ViewScore viewScore))
-        //         _viewScore = viewScore;
-        // }
-        //
-        // private void CreateSeparator(string label, int index)
-        // {
-        //     var separator = new GameObject($"{label}");
-        //     separator.transform.SetSiblingIndex(index);
-        // }
     }
 }

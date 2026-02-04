@@ -19,9 +19,7 @@ namespace _Project.Scripts.Player
         private void Awake()
         {
             if (_head2D == null)
-            {
                 _head2D = GetComponent<Rigidbody2D>();
-            }
 
             _controllerInput = new InputController();
         }
