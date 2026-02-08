@@ -187,7 +187,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textlaser: {fileID: 3323797721636029055}
   _rollbackLasera: {fileID: 2068647093855257191}
-  _laser: {fileID: 0}
 --- !u!114 &6610810285733574452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,6 +481,7 @@ GameObject:
   - component: {fileID: 2496822317866041278}
   - component: {fileID: 4556974815178221717}
   - component: {fileID: 4925556711503200577}
+  - component: {fileID: 3727960807859460676}
   - component: {fileID: 5519756204450628070}
   m_Layer: 5
   m_Name: UI - ShipPerformance
@@ -576,6 +576,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3727960807859460676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3764183192274243191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0085f8f79476430d8b0bd6197007241a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CoordinateDisplay>k__BackingField: {fileID: 0}
+  <ViewCurrentAmountLaser>k__BackingField: {fileID: 0}
 --- !u!114 &5519756204450628070
 MonoBehaviour:
   m_ObjectHideFlags: 0

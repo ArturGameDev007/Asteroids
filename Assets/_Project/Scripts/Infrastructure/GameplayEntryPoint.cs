@@ -11,34 +11,36 @@ namespace _Project.Scripts.Infrastructure
     public class GameplayEntryPoint : MonoBehaviour
     {
         [Header("Prefabs UI")]
-        [SerializeField] private GameObject _background;
-        [SerializeField] private GameObject _performanceShip;
-        [SerializeField] private GameObject _endGameScreen;
+        [SerializeField] private SpriteRenderer _background;
+        [SerializeField] private PerformanceShipView _performanceShip;
+        [SerializeField] private EndGameView _endGameScreen;
 
         [Header("Prefab Player")]
-        [SerializeField] private GameObject _ship;
+        [SerializeField] private Character _ship;
 
         [Header("Systems Pool")]
         [SerializeField] private ObjectPool _objectPool;
         [SerializeField] private GeneratorEnemies _generatorEnemies;
 
         [Header("UI & Data")]
-        [SerializeField] private LoseViewModel _loseViewModel;
-        [SerializeField] private ViewScore _viewScore;
         [SerializeField] private EnemyDeathTracker _deathTracker;
         
         private IGameFactory _gameFactory;
         private IInstantiator _instantiator;
+        
+        private LoseViewModel _loseViewModel;
+        private ViewScore _viewScore;
 
         private Character _player;
         private InputForShoot _shoot;
         private PlayerController _controller;
 
-        private CoordinateDisplay _coordinateDisplay;
-        private ViewCurrentAmountLaser _viewCurrentAmountLaser;
+        // private CoordinateDisplay _coordinateDisplay;
+        // private ViewCurrentAmountLaser _viewCurrentAmountLaser;
+        private HierarchyScanner _hierarchyScanner;
+        
         private Game _game;
         private Camera _mainCamera;
-        private HierarchyScanner _hierarchyScanner;
         private RestartGame _restartGame;
         private ScoreData _scoreData;
 
@@ -73,7 +75,7 @@ namespace _Project.Scripts.Infrastructure
         {
             _gameFactory.CreateBackground(_background, _mainCamera);
             _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot);
-            _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _coordinateDisplay, _viewCurrentAmountLaser, _hierarchyScanner);
+            _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _hierarchyScanner);
             _gameFactory.CreateEndGameScreen(_endGameScreen, _hierarchyScanner, out _loseViewModel, out _viewScore);
         }
 
