@@ -17,20 +17,27 @@ namespace _Project.Scripts.Infrastructure
             _instantiator = instantiator;
         }
         
-        public void CreateBackground(SpriteRenderer prefab, Camera mainCamera)
+        public void CreateBackground(Canvas prefab, Camera mainCamera)
         {
+            
+            if (prefab == null) { Debug.LogError("Префаб фона не назначен!"); return; }
+            if (mainCamera == null) { Debug.LogError("Камера не передана в Factory!"); return; }
             int orderInLayer = -5;
 
-            SpriteRenderer background = _instantiator.CreatePrefab(prefab);
+            Canvas background = _instantiator.CreatePrefab(prefab);
             background.name = "UI - Background";
             
             SetHierarchy(background.transform, 3);
+            
+            background.renderMode = RenderMode.ScreenSpaceCamera;
+            background.worldCamera = mainCamera;
+            background.sortingOrder = orderInLayer;
 
-            if (background.TryGetComponent(out Canvas canvas))
-            {
-                canvas.worldCamera = mainCamera;
-                canvas.sortingOrder = orderInLayer;
-            }
+            // if (background.TryGetComponent(out Canvas canvas))
+            // {
+            //     canvas.worldCamera = mainCamera;
+            //     canvas.sortingOrder = orderInLayer;
+            // }
         }
 
         public void CreatePlayer(Character prefab, out Character character, out PlayerController controller, out InputForShoot shoot)

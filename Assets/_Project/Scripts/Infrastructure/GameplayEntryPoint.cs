@@ -10,8 +10,11 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
+
+        [SerializeField] private Camera _mainCamera;
+        
         [Header("Prefabs UI")]
-        [SerializeField] private SpriteRenderer _background;
+        [SerializeField] private Canvas _background;
         [SerializeField] private PerformanceShipView _performanceShip;
         [SerializeField] private EndGameView _endGameScreen;
 
@@ -40,7 +43,7 @@ namespace _Project.Scripts.Infrastructure
         private HierarchyScanner _hierarchyScanner;
         
         private Game _game;
-        private Camera _mainCamera;
+        // private Camera _mainCamera;
         private RestartGame _restartGame;
         private ScoreData _scoreData;
 
@@ -51,7 +54,7 @@ namespace _Project.Scripts.Infrastructure
             _gameFactory = new GameFactory(_instantiator);
             
             _hierarchyScanner = new HierarchyScanner();
-            _mainCamera = Camera.main;
+            // _mainCamera = Camera.main;
             
             CreateGameEntities();
             SetupDataAndUI();

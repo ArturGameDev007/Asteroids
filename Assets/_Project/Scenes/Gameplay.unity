@@ -483,14 +483,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c292813b9dab54da9e7432cb89007a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _background: {fileID: 1919717069324130509, guid: 706471e4a7448cf4c83df1b0cad6e350, type: 3}
-  _performanceShip: {fileID: 3764183192274243191, guid: a752461b71d007d41a3f9643f9183b0f, type: 3}
-  _endGameScreen: {fileID: 1027745613698290874, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-  _ship: {fileID: 1121580277768540567, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+  _mainCamera: {fileID: 519420031}
+  _background: {fileID: 1257377806477324128, guid: 706471e4a7448cf4c83df1b0cad6e350, type: 3}
+  _performanceShip: {fileID: 3727960807859460676, guid: a752461b71d007d41a3f9643f9183b0f, type: 3}
+  _endGameScreen: {fileID: 653617797202727563, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+  _ship: {fileID: -1081479925413627390, guid: 77fd289117485cb4482536e1624733f6, type: 3}
   _objectPool: {fileID: 746366994}
   _generatorEnemies: {fileID: 746366996}
-  _loseViewModel: {fileID: 0}
-  _viewScore: {fileID: 0}
   _deathTracker: {fileID: 746366997}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
