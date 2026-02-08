@@ -21,11 +21,6 @@ namespace _Project.Scripts.Enemies
             _flyingPosition = transform.position;
         }
 
-        private void Update()
-        {
-            Move();
-        }
-
         public void Move()
         {
             Vector2 directionToPlayer = (_player.transform.position - _flyingPosition).normalized;

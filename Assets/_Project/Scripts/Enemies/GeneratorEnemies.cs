@@ -40,11 +40,8 @@ namespace _Project.Scripts.Enemies
         {
             foreach (var enemy in _activeEnemies)
             {
-                if (enemy.TryGetComponent(out AsteroidController asteroid))
-                    asteroid.enabled = false;
-
-                if (enemy.TryGetComponent(out FlyingSaucerController saucer))
-                    saucer.enabled = false;
+                if (enemy.TryGetComponent(out Enemy enemies))
+                    enemies.enabled = false;
             }
 
             _activeEnemies.Clear();

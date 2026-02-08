@@ -1,12 +1,25 @@
-﻿using _Project.Scripts.Player.Weapons;
+﻿using System;
+using _Project.Scripts.Player.Weapons;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
     public class Enemy : MonoBehaviour, IEnemy
     {
+        private IMovable _movable;
+        
         private ObjectPool _pool;
         private IEnemyDeathListener  _deathListener;
+
+        private void Awake()
+        {
+            _movable = GetComponent<IMovable>();
+        }
+
+        private void Update()
+        {
+            _movable?.Move();
+        }
 
         public void Initialize(ObjectPool pool, IEnemyDeathListener  deathListener)
         {

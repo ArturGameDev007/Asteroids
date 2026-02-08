@@ -8,11 +8,6 @@ namespace _Project.Scripts.Enemies
 
         private Vector2 _direction;
 
-        private void Update()
-        {
-            Move();
-        }
-
         public void SetDirection(Vector2 direction)
         {
             _direction = direction.normalized;
