@@ -10,9 +10,6 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-        [Header("Create Entities")]
-        [SerializeField] private GameFactory _gameFactory;
-        
         [Header("Prefabs UI")]
         [SerializeField] private GameObject _background;
         [SerializeField] private GameObject _performanceShip;
@@ -29,6 +26,9 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private LoseViewModel _loseViewModel;
         [SerializeField] private ViewScore _viewScore;
         [SerializeField] private EnemyDeathTracker _deathTracker;
+        
+        private IGameFactory _gameFactory;
+        private IInstantiator _instantiator;
 
         private Character _player;
         private InputForShoot _shoot;
@@ -44,8 +44,10 @@ namespace _Project.Scripts.Infrastructure
 
         private void Awake()
         {
-            _gameFactory = GetComponent<GameFactory>();
+            _instantiator = GetComponent<IInstantiator>();
 
+            _gameFactory = new GameFactory(_instantiator);
+            
             _hierarchyScanner = new HierarchyScanner();
             _mainCamera = Camera.main;
             

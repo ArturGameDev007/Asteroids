@@ -8,13 +8,20 @@ using UnityEngine.UI;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class GameFactory : MonoBehaviour, IGameFactory
+    public class GameFactory : IGameFactory
     {
+        private readonly IInstantiator _instantiator;
+
+        public GameFactory(IInstantiator instantiator)
+        {
+            _instantiator = instantiator;
+        }
+        
         public void CreateBackground(GameObject prefab, Camera mainCamera)
         {
             int orderInLayer = -5;
 
-            GameObject background = Instantiate(prefab);
+            GameObject background = _instantiator.CreatePrefab(prefab);
             background.name = "UI - Background";
             
             SetHierarchy(background.transform, 3);
@@ -28,7 +35,8 @@ namespace _Project.Scripts.Infrastructure
 
         public void CreatePlayer(GameObject prefab, out Character character, out PlayerController controller, out InputForShoot shoot)
         {
-            GameObject playerObject = Instantiate(prefab, Vector2.zero, Quaternion.identity);
+            // GameObject playerObject = Instantiate(prefab, Vector2.zero, Quaternion.identity);
+            GameObject playerObject = _instantiator.CreatePrefab(prefab);
             playerObject.name = "Ship_Player";
             
             SetHierarchy(playerObject.transform, 2);
@@ -44,7 +52,8 @@ namespace _Project.Scripts.Infrastructure
         public void CreatePerformanceShip(GameObject prefab, Character player, PlayerController controller, InputForShoot shoot, CoordinateDisplay coordinateDisplay, ViewCurrentAmountLaser  amountLaser,
             HierarchyScanner scanner)
         {
-            GameObject performanceShip = Instantiate(prefab);
+            // GameObject performanceShip = Instantiate(prefab);
+            GameObject performanceShip = _instantiator.CreatePrefab(prefab);
             performanceShip.name = "UI - Performance Ship";
             
             SetHierarchy(performanceShip.transform, 4);
@@ -71,7 +80,8 @@ namespace _Project.Scripts.Infrastructure
             viewModel = null;
             score = null;
             
-            GameObject gameScreen = Instantiate(prefab);
+            // GameObject gameScreen = Instantiate(prefab);
+            GameObject gameScreen =_instantiator.CreatePrefab(prefab);
             gameScreen.name = "UI - EndGameScreen";
             
             SetHierarchy(gameScreen.transform, 5);
