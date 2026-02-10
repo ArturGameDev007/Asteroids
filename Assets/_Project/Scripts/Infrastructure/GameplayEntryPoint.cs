@@ -1,6 +1,7 @@
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
+using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using _Project.Scripts.Utils;
@@ -10,11 +11,8 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-
-        [SerializeField] private Camera _mainCamera;
-        
         [Header("Prefabs UI")]
-        [SerializeField] private Canvas _background;
+        [SerializeField] private ViewBackground _background;
         [SerializeField] private PerformanceShipView _performanceShip;
         [SerializeField] private EndGameView _endGameScreen;
 
@@ -76,7 +74,7 @@ namespace _Project.Scripts.Infrastructure
 
         private void CreateGameEntities()
         {
-            _gameFactory.CreateBackground(_background, _mainCamera);
+            _gameFactory.CreateBackground(_background);
             _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot);
             _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _hierarchyScanner);
             _gameFactory.CreateEndGameScreen(_endGameScreen, _hierarchyScanner, out _loseViewModel, out _viewScore);
