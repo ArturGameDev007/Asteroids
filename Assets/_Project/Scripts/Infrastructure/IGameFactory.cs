@@ -10,9 +10,9 @@ namespace _Project.Scripts.Infrastructure
 {
     public interface IGameFactory
     {
-        public void CreateBackground(ViewBackground prefab);
-        public void CreatePlayer(Character prefab, out Character character, out PlayerController controller, out InputForShoot shoot);
-        public void CreatePerformanceShip(PerformanceShipView prefab, Character player, PlayerController controller, InputForShoot shoot, HierarchyScanner scanner);
-        public void CreateEndGameScreen(EndGameView prefab, HierarchyScanner scanner, out LoseViewModel viewModel, out ViewScore viewScore);
+        public void CreateBackground(GameObject prefab, Camera mainCamera);
+        public void CreatePlayer(GameObject prefab, out Character character, out PlayerController controller, out InputForShoot shoot);
+        public void CreatePerformanceShip(GameObject prefab, Character player, PlayerController controller, InputForShoot shoot, HierarchyScanner scanner);
+        public void CreateEndGameScreen(GameObject prefab, HierarchyScanner scanner, out LoseViewModel viewModel, out ViewScore viewScore);
     }
 }

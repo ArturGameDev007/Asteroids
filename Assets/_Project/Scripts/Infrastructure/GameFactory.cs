@@ -9,34 +9,36 @@ using UnityEngine.UI;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class GameFactory : IGameFactory
+    public class GameFactory : MonoBehaviour, IGameFactory
     {
-        private readonly IInstantiator _instantiator;
+        // private readonly IInstantiator _instantiator;
+        //
+        // public GameFactory(IInstantiator instantiator)
+        // {
+        //     _instantiator = instantiator;
+        // }
 
-        public GameFactory(IInstantiator instantiator)
-        {
-            _instantiator = instantiator;
-        }
-
-        public void CreateBackground(ViewBackground prefab)
+        public void CreateBackground(GameObject prefab, Camera  mainCamera)
         {
             int orderInLayer = -5;
 
-            ViewBackground background = _instantiator.CreatePrefab(prefab);
+            GameObject background = Instantiate(prefab);
             background.name = "UI - Background";
-
-            if (background.TryGetComponent(out ViewBackground viewBackground))
-            {
-                background.GetComponent<ViewBackground>();
-            }
             
+
+            if (background.TryGetComponent(out Canvas canvas))
+            {
+                // canvas.renderMode = RenderMode.ScreenSpaceCamera;
+                canvas.worldCamera = mainCamera; 
+                canvas.sortingOrder = orderInLayer;
+            }
             SetHierarchy(background.transform, 3);
         }
 
-        public void CreatePlayer(Character prefab, out Character character, out PlayerController controller,
+        public void CreatePlayer(GameObject prefab, out Character character, out PlayerController controller,
             out InputForShoot shoot)
         {
-            Character playerObject = _instantiator.CreatePrefab(prefab);
+            GameObject playerObject = Instantiate(prefab, Vector2.zero, Quaternion.identity);
             playerObject.name = "Ship_Player";
 
             SetHierarchy(playerObject.transform, 2);
@@ -49,10 +51,11 @@ namespace _Project.Scripts.Infrastructure
                 Debug.LogError("На префабе игрока не хватает компонентов!");
         }
 
-        public void CreatePerformanceShip(PerformanceShipView prefab, Character player, PlayerController controller,
+        public void CreatePerformanceShip(GameObject prefab, Character player, PlayerController controller,
             InputForShoot shoot, HierarchyScanner scanner)
         {
-            PerformanceShipView performanceShip = _instantiator.CreatePrefab(prefab);
+            // PerformanceShipView performanceShip = _instantiator.CreatePrefab(prefab);
+            GameObject performanceShip = Instantiate(prefab);
             performanceShip.name = "UI - Performance Ship";
 
             SetHierarchy(performanceShip.transform, 4);
@@ -73,13 +76,14 @@ namespace _Project.Scripts.Infrastructure
                 shoot?.Initialize(laserLogic, shooter);
         }
 
-        public void CreateEndGameScreen(EndGameView prefab, HierarchyScanner scanner, out LoseViewModel viewModel,
+        public void CreateEndGameScreen(GameObject prefab, HierarchyScanner scanner, out LoseViewModel viewModel,
             out ViewScore score)
         {
             viewModel = null;
             score = null;
 
-            EndGameView gameScreen = _instantiator.CreatePrefab(prefab);
+            // EndGameView gameScreen = _instantiator.CreatePrefab(prefab);
+            GameObject gameScreen = Instantiate(prefab);
             gameScreen.name = "UI - EndGameScreen";
 
             SetHierarchy(gameScreen.transform, 5);
