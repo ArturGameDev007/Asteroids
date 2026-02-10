@@ -7,9 +7,10 @@ namespace _Project.Scripts.Infrastructure
     {
         public T CreatePrefab<T>(T prefab) where T : Component
         {
-            Instantiate(prefab, prefab.transform.position, prefab.transform.rotation);
+            if (prefab == null) return null;
+            T instance = Instantiate(prefab, prefab.transform.position, prefab.transform.rotation);
             
-            return prefab;
+            return instance;
         }
     }
 }

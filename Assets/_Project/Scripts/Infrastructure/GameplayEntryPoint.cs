@@ -10,6 +10,9 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
+
+        [SerializeField] private CreateObjectsScene _createObjectsScene;
+        
         [Header("Prefabs UI")]
         [SerializeField] private GameObject _background;
         [SerializeField] private PerformanceShipView _performanceShip;
@@ -46,8 +49,10 @@ namespace _Project.Scripts.Infrastructure
 
         private void Awake()
         {
+            
+            _instantiator = _createObjectsScene; 
+            
             _instantiator = GetComponent<IInstantiator>();
-
             _gameFactory = new GameFactory(_instantiator);
             
             _hierarchyScanner = new HierarchyScanner();

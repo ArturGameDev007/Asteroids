@@ -36,6 +36,12 @@ namespace _Project.Scripts.Infrastructure
         public void CreatePlayer(Character prefab, out Character character, out PlayerController controller,
             out InputForShoot shoot)
         {
+            if (prefab == null) {
+                Debug.LogError("Префаб игрока не передан в фабрику!");
+                character = null; controller = null; shoot = null;
+                return;
+            }
+            
             Character playerObject = _instantiator.CreatePrefab(prefab);
             playerObject.name = "Ship_Player";
 
