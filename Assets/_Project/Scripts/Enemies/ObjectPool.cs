@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Player;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Enemies
 {

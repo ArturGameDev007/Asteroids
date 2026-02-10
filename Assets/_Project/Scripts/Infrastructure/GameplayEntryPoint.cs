@@ -1,7 +1,6 @@
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
-using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using _Project.Scripts.Utils;
@@ -11,28 +10,26 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-        [SerializeField] private GameFactory _gameFactory;
-        
         [Header("Prefabs UI")]
         [SerializeField] private GameObject _background;
-        [SerializeField] private GameObject _performanceShip;
-        [SerializeField] private GameObject _endGameScreen;
+        [SerializeField] private PerformanceShipView _performanceShip;
+        [SerializeField] private EndGameView _endGameScreen;
 
         [Header("Prefab Player")]
-        [SerializeField] private GameObject _ship;
+        [SerializeField] private Character _ship;
 
         [Header("Systems Pool")]
         [SerializeField] private ObjectPool _objectPool;
         [SerializeField] private GeneratorEnemies _generatorEnemies;
 
         [Header("UI & Data")]
-        [SerializeField] private LoseViewModel _loseViewModel;
-        [SerializeField] private ViewScore _viewScore;
         [SerializeField] private EnemyDeathTracker _deathTracker;
         
-        // private IGameFactory _gameFactory;
-        // private IInstantiator _instantiator;
+        private IGameFactory _gameFactory;
+        private IInstantiator _instantiator;
         
+        private LoseViewModel _loseViewModel;
+        private ViewScore _viewScore;
 
         private Character _player;
         private InputForShoot _shoot;
@@ -49,9 +46,9 @@ namespace _Project.Scripts.Infrastructure
 
         private void Awake()
         {
-            // _instantiator = GetComponent<IInstantiator>();
+            _instantiator = GetComponent<IInstantiator>();
 
-            // _gameFactory = new GameFactory();
+            _gameFactory = new GameFactory(_instantiator);
             
             _hierarchyScanner = new HierarchyScanner();
             _mainCamera = Camera.main;
