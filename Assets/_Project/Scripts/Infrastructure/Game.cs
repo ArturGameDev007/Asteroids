@@ -36,8 +36,8 @@ namespace _Project.Scripts.Infrastructure
             
             Subscribe();
 
-            _controller.enabled = true;
-            _shoot.enabled = true;
+            _controller.EnableControl();
+            _shoot.EnableControl();
             _generatorEnemies.StartSpawning();
         }
 
@@ -61,8 +61,8 @@ namespace _Project.Scripts.Infrastructure
         private void OnGameOver()
         {
             _controller.StopPhysics();
-            _controller.enabled = false;
-            _shoot.enabled = false;
+            _controller.DisableControl();
+            _shoot.DisableControl();
             
             _generatorEnemies.StopSpawning();
             _generatorEnemies.StopAllEnemies();

@@ -42,6 +42,16 @@ namespace _Project.Scripts.Player
             Move();
         }
 
+        public void EnableControl()
+        {
+            enabled = true;
+        }
+
+        public void DisableControl()
+        {
+            enabled = false;
+        }
+
         public void Restart()
         {
             _head2D.simulated = true;

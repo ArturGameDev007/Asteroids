@@ -13,7 +13,6 @@ namespace _Project.Scripts.Infrastructure
     public class GameplayEntryPoint : MonoBehaviour
     {
         // [SerializeField] private CreateObjectsScene _createObjectsScene;
-        
         [Header("Prefabs UI")]
         [SerializeField] private BackgroundView _background;
         [SerializeField] private PerformanceShipView _performanceShip;
@@ -23,7 +22,6 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private Character _ship;
 
         [Header("Systems Pool")]
-        // [SerializeField] private ObjectPool _objectPool;
         [SerializeField] private List<Enemy> _enemyPrefabs;
         [SerializeField] private GeneratorEnemies _generatorEnemies;
 
@@ -54,13 +52,12 @@ namespace _Project.Scripts.Infrastructure
         private void Awake()
         {
             // _instantiator = _createObjectsScene; 
+            _mainCamera = Camera.main;
             
             _instantiator = GetComponent<IInstantiator>();
-            _gameFactory = new GameFactory(_instantiator);
             
+            _gameFactory = new GameFactory(_instantiator);
             _hierarchyScanner = new HierarchyScanner();
-            _mainCamera = Camera.main;
-
             _objectPool = new ObjectPool(_enemyPrefabs);
             
             CreateGameEntities();
