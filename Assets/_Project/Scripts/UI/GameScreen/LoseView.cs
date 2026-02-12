@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,27 +11,22 @@ namespace _Project.Scripts.UI.GameScreen
 
         private Canvas _canvas;
 
-        private Canvas Canvas => _canvas ??= GetComponent<Canvas>();
-
         public void Construct(Button restartButton)
         {
+            _canvas = GetComponent<Canvas>();
             RestartButton = restartButton;
         }
 
         public void ShowPanel()
         {
-            Canvas?.gameObject.SetActive(true);
-
-            if (RestartButton != null)
-                RestartButton.interactable = true;
+            _canvas.gameObject.SetActive(true);
+            RestartButton.interactable = true;
         }
 
         public void HidePanel()
         {
-            Canvas?.gameObject.SetActive(false);
- 
-            if (RestartButton != null)
-                RestartButton.interactable = false;
+            _canvas.gameObject.SetActive(false);
+            RestartButton.interactable = false;
         }
     }
 }
