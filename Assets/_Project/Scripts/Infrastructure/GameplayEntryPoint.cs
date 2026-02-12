@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
+using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using _Project.Scripts.Utils;
@@ -13,7 +15,7 @@ namespace _Project.Scripts.Infrastructure
         // [SerializeField] private CreateObjectsScene _createObjectsScene;
         
         [Header("Prefabs UI")]
-        [SerializeField] private GameObject _background;
+        [SerializeField] private BackgroundView _background;
         [SerializeField] private PerformanceShipView _performanceShip;
         [SerializeField] private EndGameView _endGameScreen;
 
@@ -21,7 +23,8 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private Character _ship;
 
         [Header("Systems Pool")]
-        [SerializeField] private ObjectPool _objectPool;
+        // [SerializeField] private ObjectPool _objectPool;
+        [SerializeField] private List<Enemy> _enemyPrefabs;
         [SerializeField] private GeneratorEnemies _generatorEnemies;
 
         [Header("UI & Data")]
@@ -36,6 +39,8 @@ namespace _Project.Scripts.Infrastructure
         private Character _player;
         private InputForShoot _shoot;
         private PlayerController _controller;
+        
+        private ObjectPool _objectPool;
 
         private CoordinateDisplay _coordinateDisplay;
         private ViewCurrentAmountLaser _viewCurrentAmountLaser;
@@ -55,6 +60,8 @@ namespace _Project.Scripts.Infrastructure
             
             _hierarchyScanner = new HierarchyScanner();
             _mainCamera = Camera.main;
+
+            _objectPool = new ObjectPool(_enemyPrefabs);
             
             CreateGameEntities();
             SetupDataAndUI();
@@ -88,7 +95,7 @@ namespace _Project.Scripts.Infrastructure
             _scoreData = new ScoreData();
 
             _viewScore.Construct(_scoreData);
-            _generatorEnemies.Initialize();
+            _generatorEnemies.Initialize(_objectPool);
             _deathTracker.Initialize(_scoreData);
         }
     }

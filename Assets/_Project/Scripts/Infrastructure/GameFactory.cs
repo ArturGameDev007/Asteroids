@@ -1,5 +1,6 @@
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
+using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using _Project.Scripts.Utils;
@@ -17,20 +18,30 @@ namespace _Project.Scripts.Infrastructure
             _instantiator = instantiator;
         }
 
-        public void CreateBackground(GameObject prefab, Camera  mainCamera)
+        public void CreateBackground(BackgroundView prefab, Camera  mainCamera)
         {
             int orderInLayer = -5;
 
-            GameObject background = Object.Instantiate(prefab);
+            BackgroundView background = _instantiator.CreatePrefab(prefab);
             background.name = "UI - Background";
-            
+    
             SetHierarchy(background.transform, 3);
 
-            if (background.TryGetComponent(out Canvas canvas))
-            {
-                canvas.worldCamera = mainCamera; 
-                canvas.sortingOrder = orderInLayer;
-            }
+            background.Construct(mainCamera, orderInLayer);
+            
+            
+            // int orderInLayer = -5;
+            //
+            // BackgroundView background = _instantiator.CreatePrefab(prefab);
+            // background.name = "UI - Background";
+            //
+            // SetHierarchy(background.transform, 3);
+            //
+            // if (background.TryGetComponent(out Canvas canvas))
+            // {
+            //     canvas.worldCamera = mainCamera; 
+            //     canvas.sortingOrder = orderInLayer;
+            // }
         }
 
         public void CreatePlayer(Character prefab, out Character character, out PlayerController controller,

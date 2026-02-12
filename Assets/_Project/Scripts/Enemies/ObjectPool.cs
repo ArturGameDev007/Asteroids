@@ -1,24 +1,33 @@
 ﻿using System.Collections.Generic;
+using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Player;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
-    public class ObjectPool : MonoBehaviour
+    public class ObjectPool
     {
-        [Header("Transform Objects")]
-        [SerializeField] private GameObject _container;
-
-        [Header("List Enemies")] 
-        [SerializeField] private List<Enemy> _prefabEnemy;
+        // [Header("Transform Objects")]
+        // [SerializeField] private GameObject _container;
+        //
+        // [Header("List Enemies")] 
+        // [SerializeField] private List<Enemy> _prefabEnemy;        
+        
+        private GameObject _container;
+        private List<Enemy> _prefabEnemy;
 
         private Character _player;
         private Queue<Enemy> _pool;
 
+        public ObjectPool(List<Enemy> prefabEnemy)
+        {
+            _prefabEnemy = prefabEnemy;
+            _pool = new Queue<Enemy>();
+        }
+
         public void Initialize(Character player)
         {
             _player = player;
-            _pool = new Queue<Enemy>();
             _container = new GameObject("Container_For_Enemies");
         }
 
@@ -37,7 +46,7 @@ namespace _Project.Scripts.Enemies
             int minCountPool = 0;
             
             int indexEnemy = Random.Range(minCountPool, _prefabEnemy.Count);
-            var enemy = Instantiate(_prefabEnemy[indexEnemy], _container.transform);
+            var enemy = Object.Instantiate(_prefabEnemy[indexEnemy], _container.transform);
 
             if (enemy.TryGetComponent(out FlyingSaucerController saucer))
                 saucer.Construct(_player.transform);

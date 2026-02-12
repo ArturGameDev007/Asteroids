@@ -6,12 +6,12 @@ namespace _Project.Scripts.Enemies
 {
     public class GeneratorEnemies : MonoBehaviour
     {
-        [Header("ObjectPool Enemies")]
-        [SerializeField] private ObjectPool _pool;
+        // [SerializeField] private ObjectPool _pool;
 
         [SerializeField] private EnemyManager _enemyManager;
         [SerializeField] private float _spawnOffset = 2.0f;
 
+        private ObjectPool _pool;
         private List<Enemy> _activeEnemies = new();
 
         private float _positionX;
@@ -21,8 +21,9 @@ namespace _Project.Scripts.Enemies
         private Camera _camera;
         private Coroutine _coroutine;
 
-        public void Initialize()
+        public void Initialize(ObjectPool pool)
         {
+            _pool = pool;
             _camera = Camera.main;
         }
 
