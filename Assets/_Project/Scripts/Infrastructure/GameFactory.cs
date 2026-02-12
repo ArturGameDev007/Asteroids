@@ -23,25 +23,10 @@ namespace _Project.Scripts.Infrastructure
             int orderInLayer = -5;
 
             BackgroundView background = _instantiator.CreatePrefab(prefab);
-            background.name = "UI - Background";
     
             SetHierarchy(background.transform, 3);
 
             background.Construct(mainCamera, orderInLayer);
-            
-            
-            // int orderInLayer = -5;
-            //
-            // BackgroundView background = _instantiator.CreatePrefab(prefab);
-            // background.name = "UI - Background";
-            //
-            // SetHierarchy(background.transform, 3);
-            //
-            // if (background.TryGetComponent(out Canvas canvas))
-            // {
-            //     canvas.worldCamera = mainCamera; 
-            //     canvas.sortingOrder = orderInLayer;
-            // }
         }
 
         public void CreatePlayer(Character prefab, out Character character, out PlayerController controller,
@@ -70,7 +55,6 @@ namespace _Project.Scripts.Infrastructure
             InputForShoot shoot, HierarchyScanner scanner)
         {
             PerformanceShipView performanceShip = _instantiator.CreatePrefab(prefab);
-            performanceShip.name = "UI - Performance Ship";
 
             SetHierarchy(performanceShip.transform, 4);
 
@@ -97,7 +81,6 @@ namespace _Project.Scripts.Infrastructure
             score = null;
 
             EndGameView gameScreen = _instantiator.CreatePrefab(prefab);
-            gameScreen.name = "UI - EndGameScreen";
 
             SetHierarchy(gameScreen.transform, 5);
 
