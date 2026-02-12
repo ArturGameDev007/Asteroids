@@ -10,8 +10,7 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-
-        [SerializeField] private CreateObjectsScene _createObjectsScene;
+        // [SerializeField] private CreateObjectsScene _createObjectsScene;
         
         [Header("Prefabs UI")]
         [SerializeField] private GameObject _background;
@@ -49,8 +48,7 @@ namespace _Project.Scripts.Infrastructure
 
         private void Awake()
         {
-            
-            _instantiator = _createObjectsScene; 
+            // _instantiator = _createObjectsScene; 
             
             _instantiator = GetComponent<IInstantiator>();
             _gameFactory = new GameFactory(_instantiator);
