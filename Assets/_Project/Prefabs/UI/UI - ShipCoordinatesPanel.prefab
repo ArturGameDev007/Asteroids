@@ -484,7 +484,7 @@ GameObject:
   - component: {fileID: 5519756204450628070}
   - component: {fileID: 2094023753586929040}
   m_Layer: 5
-  m_Name: UI - ShipPerformance
+  m_Name: UI - ShipCoordinatesPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
