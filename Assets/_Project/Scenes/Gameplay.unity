@@ -324,7 +324,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746366995}
-  - component: {fileID: 746366994}
   - component: {fileID: 746366996}
   - component: {fileID: 746366997}
   m_Layer: 0
@@ -334,22 +333,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &746366994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746366993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f126ac4c23efffb418186d062303aa19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _container: {fileID: 0}
-  _prefabEnemy:
-  - {fileID: 8789278343424712742, guid: 851e842e4e4f2c341abf89a4f0472a8d, type: 3}
-  - {fileID: 181689331425005305, guid: 68a4a0e7d19928745b3e0dadee7bdb46, type: 3}
 --- !u!4 &746366995
 Transform:
   m_ObjectHideFlags: 0
@@ -377,7 +360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ac4fe6626b51744a67762d21d08901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pool: {fileID: 746366994}
   _enemyManager: {fileID: 1688467850}
   _spawnOffset: 2
 --- !u!114 &746366997
@@ -484,11 +466,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c292813b9dab54da9e7432cb89007a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _background: {fileID: 1919717069324130509, guid: 706471e4a7448cf4c83df1b0cad6e350, type: 3}
+  _background: {fileID: 2215494606810428197, guid: 706471e4a7448cf4c83df1b0cad6e350, type: 3}
   _performanceShip: {fileID: 2094023753586929040, guid: a752461b71d007d41a3f9643f9183b0f, type: 3}
   _endGameScreen: {fileID: 5460865261052969232, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
   _ship: {fileID: -1081479925413627390, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-  _objectPool: {fileID: 746366994}
+  _enemyPrefabs:
+  - {fileID: 8789278343424712742, guid: 851e842e4e4f2c341abf89a4f0472a8d, type: 3}
+  - {fileID: 181689331425005305, guid: 68a4a0e7d19928745b3e0dadee7bdb46, type: 3}
   _generatorEnemies: {fileID: 746366996}
   _deathTracker: {fileID: 746366997}
 --- !u!114 &1985787635
