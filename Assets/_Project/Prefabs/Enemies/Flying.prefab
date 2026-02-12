@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _speed: 2
+  _speed: 7
   _rotationSpeed: 30
 --- !u!114 &9105957324695588644
 MonoBehaviour:

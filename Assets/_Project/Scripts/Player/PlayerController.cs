@@ -20,7 +20,7 @@ namespace _Project.Scripts.Player
         {
             if (_head2D == null)
                 _head2D = GetComponent<Rigidbody2D>();
-
+            
             _controllerInput = new InputController();
         }
 
