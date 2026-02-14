@@ -9,24 +9,16 @@ namespace _Project.Scripts.Player.Weapons
         [SerializeField] private float _lifeTime = 0.5f;
 
         private ObjectPool<Laser> _pool;
-        private Coroutine _returnCoroutine;
+        private Coroutine _coroutine;
         
         public void Initialize(ObjectPool<Laser> pool)
         {
             _pool = pool;
 
-            if (_returnCoroutine != null)
-                StopCoroutine(_returnCoroutine);
+            if (_coroutine != null)
+                StopCoroutine(_coroutine);
 
-            _returnCoroutine = StartCoroutine(ReturnAfterTime(_lifeTime));
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.TryGetComponent(out Enemy _))
-            {
-                ReturnToPool();
-            }
+            _coroutine = StartCoroutine(ReturnAfterTime(_lifeTime));
         }
 
         private IEnumerator ReturnAfterTime(float delay)
@@ -39,10 +31,10 @@ namespace _Project.Scripts.Player.Weapons
 
         private void ReturnToPool()
         {
-            if (_returnCoroutine != null)
+            if (_coroutine != null)
             {
-                StopCoroutine(_returnCoroutine);
-                _returnCoroutine = null;
+                StopCoroutine(_coroutine);
+                _coroutine = null;
             }
 
             _pool?.PutObject(this);
@@ -50,8 +42,8 @@ namespace _Project.Scripts.Player.Weapons
 
         private void OnDisable()
         {
-            if (_returnCoroutine != null)
-                StopCoroutine(_returnCoroutine);
+            if (_coroutine != null)
+                StopCoroutine(_coroutine);
         }
     }
 }

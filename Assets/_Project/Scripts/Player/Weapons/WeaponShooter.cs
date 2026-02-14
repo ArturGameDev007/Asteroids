@@ -24,7 +24,6 @@ namespace _Project.Scripts.Player.Weapons
             Bullet bullet = _bulletPool.GetObject();
             
             bullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
-            
             bullet.Initialize(_bulletPool);
         }
 
@@ -36,6 +35,7 @@ namespace _Project.Scripts.Player.Weapons
             _nextLaserShootTime = Time.time + _laserCooldown;
 
             Laser laser = _laserPool.GetObject();
+            
             laser.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             laser.Initialize(_laserPool);
         }

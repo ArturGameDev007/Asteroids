@@ -14,7 +14,8 @@ namespace _Project.Scripts.Player.Weapons
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            ReturnToPool();
+            if (collision.gameObject.TryGetComponent(out Enemy _))
+                ReturnToPool();
         }
 
         private void ReturnToPool()

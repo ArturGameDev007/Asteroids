@@ -11,8 +11,7 @@ namespace _Project.Scripts.Enemies
         [SerializeField] private float _rotationSpeed = 30f;
 
         private Rigidbody2D _head2D;
-        private Vector3 _flyingPosition;
-
+        
         private void Awake()
         {
             _head2D = GetComponent<Rigidbody2D>();
@@ -25,22 +24,17 @@ namespace _Project.Scripts.Enemies
             _player = player;
         }
 
-        private void Start()
-        {
-            _flyingPosition = transform.position;
-        }
-
         public void Move()
         {
             Vector2 currentPosition = _head2D.position;
-            Vector2 targetPosition = _player.transform.position;
+            Vector2 targetPosition = _player.position;
             
-            Vector2 directionToPlayer = (_player.transform.position - _flyingPosition).normalized;
+            Vector2 directionToPlayer = (targetPosition - currentPosition).normalized;
+            RotateTowardPlayer(directionToPlayer);
 
             Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, _speed * Time.deltaTime);
             _head2D.MovePosition(directionMove);
 
-            RotateTowardPlayer(directionToPlayer);
         }
 
         private void RotateTowardPlayer(Vector2 directionToPlayer)

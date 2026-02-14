@@ -18,14 +18,10 @@ namespace _Project.Scripts.Player.Weapons
         private GenerateLaser _laserAmmo;
         private WeaponShooter _shooter;
 
-        // private GameObject _containerForShoots;
-
         public void Initialize(GenerateLaser laser, WeaponShooter shooter)
         {
             _laserAmmo = laser;
             _shooter = shooter;
-
-            // _containerForShoots = new GameObject("Container_For_Shoots");
         }
 
         private void Update()

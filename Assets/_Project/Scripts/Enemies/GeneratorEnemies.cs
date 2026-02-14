@@ -73,9 +73,6 @@ namespace _Project.Scripts.Enemies
             enemy.transform.position = spawnViewport;
             enemy.gameObject.SetActive(true);
             
-            if (enemy.TryGetComponent(out FlyingSaucerController saucer))
-                saucer.Construct(_player.transform);
-
             if (enemy.TryGetComponent(out Enemy enemyDiedHandler))
             {
                 enemyDiedHandler.Initialize(_pool, _enemyManager);
@@ -90,6 +87,7 @@ namespace _Project.Scripts.Enemies
             if (enemy.TryGetComponent(out FlyingSaucerController flyingSaucerController))
             {
                 flyingSaucerController.enabled = true;
+                flyingSaucerController.Construct(_player.transform);
             }
         }
 
