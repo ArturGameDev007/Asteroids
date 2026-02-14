@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using _Project.Scripts.Player;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
     public class GeneratorEnemies : MonoBehaviour
     {
-        // [SerializeField] private ObjectPool _pool;
-
         [SerializeField] private EnemyManager _enemyManager;
         [SerializeField] private float _spawnOffset = 2.0f;
 
-        private ObjectPool _pool;
+        private ObjectPool<Enemy> _pool;
+        // private ObjectPool _pool;
         private List<Enemy> _activeEnemies = new();
 
         private float _positionX;
@@ -20,11 +20,14 @@ namespace _Project.Scripts.Enemies
 
         private Camera _camera;
         private Coroutine _coroutine;
+        
+        private Character _player;
 
-        public void Initialize(ObjectPool pool)
+        public void Initialize(ObjectPool<Enemy> pool , Character player)
         {
             _pool = pool;
             _camera = Camera.main;
+            _player = player;
         }
 
         public void StartSpawning()
@@ -69,6 +72,9 @@ namespace _Project.Scripts.Enemies
             Vector2 spawnViewport = GetRandomPoint();
             enemy.transform.position = spawnViewport;
             enemy.gameObject.SetActive(true);
+            
+            if (enemy.TryGetComponent(out FlyingSaucerController saucer))
+                saucer.Construct(_player.transform);
 
             if (enemy.TryGetComponent(out Enemy enemyDiedHandler))
             {

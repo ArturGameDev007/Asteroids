@@ -18,14 +18,14 @@ namespace _Project.Scripts.Player.Weapons
         private GenerateLaser _laserAmmo;
         private WeaponShooter _shooter;
 
-        private GameObject _containerForShoots;
+        // private GameObject _containerForShoots;
 
         public void Initialize(GenerateLaser laser, WeaponShooter shooter)
         {
             _laserAmmo = laser;
             _shooter = shooter;
 
-            _containerForShoots = new GameObject("Container_For_Shoots");
+            // _containerForShoots = new GameObject("Container_For_Shoots");
         }
 
         private void Update()
@@ -47,14 +47,14 @@ namespace _Project.Scripts.Player.Weapons
         private void InputBulletShoot()
         {
             if (Input.GetMouseButtonDown(INPUT_MOUSE_LEFT))
-                _shooter.CreateShoot(_bulletPrefab, _pointShootForBullet, _containerForShoots);
+                _shooter.ShootBullet(_pointShootForBullet);
         }
 
         private void InputLaserShoot()
         {
             if (Input.GetMouseButtonDown(INPUT_MOUSE_RIGHT))
                 if (_laserAmmo.TrySpendAmmo())
-                    _shooter.CreateShoot(_prefabLaser, _pointShootForlaser, _containerForShoots);
+                    _shooter.ShootLaser(_pointShootForlaser);
         }
     }
 }

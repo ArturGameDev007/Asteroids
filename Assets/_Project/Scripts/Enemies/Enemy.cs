@@ -1,5 +1,4 @@
-﻿using System;
-using _Project.Scripts.Player.Weapons;
+﻿using _Project.Scripts.Player.Weapons;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
@@ -8,7 +7,7 @@ namespace _Project.Scripts.Enemies
     {
         private IMovable _movable;
         
-        private ObjectPool _pool;
+        private ObjectPool<Enemy> _pool;
         private IEnemyDeathListener  _deathListener;
 
         private void Awake()
@@ -21,7 +20,7 @@ namespace _Project.Scripts.Enemies
             _movable?.Move();
         }
 
-        public void Initialize(ObjectPool pool, IEnemyDeathListener  deathListener)
+        public void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener  deathListener)
         {
             _pool = pool;
             _deathListener = deathListener;
