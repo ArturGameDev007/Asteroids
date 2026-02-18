@@ -2,7 +2,7 @@
 
 namespace _Project.Scripts.Player.Weapons
 {
-    public class InputForShoot : MonoBehaviour
+    public class InputForShoot : MonoBehaviour, IShootable
     {
         private const int INPUT_MOUSE_LEFT = 0;
         private const int INPUT_MOUSE_RIGHT = 1;

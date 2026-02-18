@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Player
 {
-    public class RigidbodyMover: IMovable
+    public class RigidbodyMover
     {
         private readonly Rigidbody2D _head2D;
         private readonly Transform _transform;
@@ -20,19 +20,5 @@ namespace _Project.Scripts.Player
         }
         
         
-        public void Move(float verticalInput)
-        {
-
-        }
-
-        public void Rotate(float horizontalInput)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Cancel()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

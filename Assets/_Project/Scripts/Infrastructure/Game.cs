@@ -9,13 +9,13 @@ namespace _Project.Scripts.Infrastructure
     {
         private readonly GeneratorEnemies _generatorEnemies;
         private readonly Character _player;
-        private readonly PlayerController _controller;
-        private readonly InputForShoot _shoot;
+        private readonly IControllable _controller;
+        private readonly IShootable _shoot;
         private readonly LoseViewModel _loseViewModel;
         private readonly RestartGame _restartGame;
         private readonly ScoreData _scoreData;
 
-        public Game(GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData)
+        public Game(GeneratorEnemies generatorEnemies, Character player, IControllable controller, IShootable shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData)
         {
             _generatorEnemies = generatorEnemies;
             _player = player;
@@ -33,7 +33,7 @@ namespace _Project.Scripts.Infrastructure
             
             Subscribe();
 
-            _controller.EnableControl();
+            _controller?.EnableControl();
             _shoot.EnableControl();
             _generatorEnemies.StartSpawning();
         }
@@ -57,8 +57,8 @@ namespace _Project.Scripts.Infrastructure
 
         private void OnGameOver()
         {
-            _controller.StopPhysics();
-            _controller.DisableControl();
+            _controller?.StopPhysics();
+            _controller?.DisableControl();
             _shoot.DisableControl();
             
             _generatorEnemies.StopSpawning();

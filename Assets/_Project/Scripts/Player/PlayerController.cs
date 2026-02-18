@@ -3,7 +3,7 @@ using UnityEngine;
 namespace _Project.Scripts.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerController: MonoBehaviour
+    public class PlayerController: MonoBehaviour, IControllable
     {
         private const float X_ANGLE = 0f;
         private const float Y_ANGLE = 0f;
@@ -42,6 +42,15 @@ namespace _Project.Scripts.Player
             Move();
         }
 
+        public void ResetState()
+        {
+            _head2D.simulated = true;
+            _head2D.velocity = Vector2.zero;
+            
+            transform.position = _startPosition;
+            transform.rotation = Quaternion.identity;
+        }
+
         public void EnableControl()
         {
             enabled = true;
@@ -52,22 +61,13 @@ namespace _Project.Scripts.Player
             enabled = false;
         }
 
-        public void Restart()
-        {
-            _head2D.simulated = true;
-            _head2D.velocity = Vector2.zero;
-            
-            transform.position = _startPosition;
-            transform.rotation = Quaternion.identity;
-        }
-
         public void StopPhysics()
         {
             _head2D.velocity = Vector2.zero;
             _head2D.angularVelocity = 0f;
             _head2D.simulated = false;
         }
-
+        
         private void Move()
         {
             float moveVertical = _controllerInput.VerticalInput;

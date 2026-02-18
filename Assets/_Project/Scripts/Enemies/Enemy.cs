@@ -6,8 +6,9 @@ namespace _Project.Scripts.Enemies
     public class Enemy : MonoBehaviour, IEnemy
     {
         private IMovable _movable;
+        
         private IObjectReturner<Enemy> _returner;
-        private IEnemyDeathListener  _deathListener;
+        private IEnemyDeathListener _deathListener;
 
         private void Awake()
         {
@@ -19,7 +20,7 @@ namespace _Project.Scripts.Enemies
             _movable?.Move();
         }
 
-        public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener  deathListener)
+        public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener)
         {
             _returner = returner;
             _deathListener = deathListener;
@@ -36,7 +37,7 @@ namespace _Project.Scripts.Enemies
         private void Kill()
         {
             _deathListener?.OnEnemyDeath();
-            _returner.ReturnPool(this);
+            _returner?.ReturnPool(this);
         }
     }
 }

@@ -8,10 +8,10 @@ namespace _Project.Scripts.Enemies
     public class GeneratorEnemies : MonoBehaviour
     {
         [SerializeField] private EnemyManager _enemyManager;
+
         [SerializeField] private float _spawnOffset = 2.0f;
 
         private ObjectPool<Enemy> _pool;
-        // private ObjectPool _pool;
         private List<Enemy> _activeEnemies = new();
 
         private float _positionX;
@@ -20,14 +20,15 @@ namespace _Project.Scripts.Enemies
 
         private Camera _camera;
         private Coroutine _coroutine;
-        
+
         private Character _player;
 
-        public void Initialize(ObjectPool<Enemy> pool , Character player)
+        public void Initialize(ObjectPool<Enemy> pool, Character player)
         {
             _pool = pool;
-            _camera = Camera.main;
             _player = player;
+            
+            _camera = Camera.main;
         }
 
         public void StartSpawning()
@@ -44,8 +45,8 @@ namespace _Project.Scripts.Enemies
         {
             foreach (var enemy in _activeEnemies)
             {
-                if (enemy.TryGetComponent(out Enemy enemies))
-                    enemies.enabled = false;
+                enemy.enabled = false;
+                _pool.ReturnPool(enemy);
             }
 
             _activeEnemies.Clear();
@@ -72,7 +73,7 @@ namespace _Project.Scripts.Enemies
             Vector2 spawnViewport = GetRandomPoint();
             enemy.transform.position = spawnViewport;
             enemy.gameObject.SetActive(true);
-            
+
             if (enemy.TryGetComponent(out Enemy enemyDiedHandler))
             {
                 enemyDiedHandler.Initialize(_pool, _enemyManager);
@@ -114,15 +115,15 @@ namespace _Project.Scripts.Enemies
                 case LeftSide:
                     viewportPoint = new Vector3(ViewportMin - margin, randomPositionAlongSide, CameraDistanceZ);
                     break;
-            
+
                 case RightSide:
                     viewportPoint = new Vector3(ViewportMax + margin, randomPositionAlongSide, CameraDistanceZ);
                     break;
-            
+
                 case BottomSide:
                     viewportPoint = new Vector3(randomPositionAlongSide, ViewportMin - margin, CameraDistanceZ);
                     break;
-            
+
                 case TopSide:
                     viewportPoint = new Vector3(randomPositionAlongSide, ViewportMax + margin, CameraDistanceZ);
                     break;

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace _Project.Scripts.Player
 {
-    public class HandlerCrashWithEnemy : MonoBehaviour
+    public class HandlerCrashWithEnemy : MonoBehaviour, ICollisionHandler
     {
-        public event Action<IEnemy> OnCollisionHandler;
+        public event Action<IEnemy> OnCollisionDetected;
 
         private void OnValidate()
         {
@@ -16,7 +16,7 @@ namespace _Project.Scripts.Player
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out IEnemy enemy))
-                OnCollisionHandler?.Invoke(enemy);
+                OnCollisionDetected?.Invoke(enemy);
         }
     }
 }
