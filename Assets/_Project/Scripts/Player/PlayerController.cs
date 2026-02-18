@@ -3,7 +3,7 @@ using UnityEngine;
 namespace _Project.Scripts.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController: MonoBehaviour
     {
         private const float X_ANGLE = 0f;
         private const float Y_ANGLE = 0f;
@@ -79,7 +79,7 @@ namespace _Project.Scripts.Player
                 _head2D.AddForce(direction * _forceInput);
             }
         }
-
+        
         private void HandleRotation()
         {
             float rotationHorizontal = _controllerInput.HorizontalInput;

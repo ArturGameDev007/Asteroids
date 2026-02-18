@@ -21,7 +21,7 @@ namespace _Project.Scripts.Player.Weapons
         private void ReturnToPool()
         {
             if (_pool != null)
-                _pool.PutObject(this);
+                _pool.ReturnPool(this);
         }
     }
 }

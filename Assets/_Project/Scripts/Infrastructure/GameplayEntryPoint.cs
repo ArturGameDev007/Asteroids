@@ -80,7 +80,7 @@ namespace _Project.Scripts.Infrastructure
             CreateGameEntities();
             SetupDataAndUI();
 
-            _game = new Game(_enemyPool, _generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame,
+            _game = new Game(_generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame,
                 _scoreData);
         }
 
@@ -92,7 +92,7 @@ namespace _Project.Scripts.Infrastructure
         private void OnDestroy()
         {
             _game.Dispose();
-            // _enemyPool.ClearPool();
+            _enemyPool.ClearPool();
         }
 
         private void CreateGameEntities()

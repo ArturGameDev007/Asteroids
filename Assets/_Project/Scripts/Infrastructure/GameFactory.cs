@@ -39,7 +39,6 @@ namespace _Project.Scripts.Infrastructure
             }
             
             Character playerObject = _instantiator.CreatePrefab(prefab);
-            // playerObject.name = "Ship_Player";
 
             SetHierarchy(playerObject.transform, 2);
 
@@ -67,8 +66,6 @@ namespace _Project.Scripts.Infrastructure
 
             if (scanner.TryGetInStack(performanceShip.transform, out ViewCurrentAmountLaser viewLaser))
                 viewLaser?.Initialize();
-
-            // WeaponShooter shooter = new WeaponShooter();
 
             if (scanner.TryGetInStack(performanceShip.transform, out GenerateLaser laserLogic))
                 shoot?.Initialize(laserLogic, shooter);

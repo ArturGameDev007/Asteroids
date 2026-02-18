@@ -8,12 +8,12 @@ namespace _Project.Scripts.Player.Weapons
     {
         [SerializeField] private float _lifeTime = 0.5f;
 
-        private ObjectPool<Laser> _pool;
+        private IObjectReturner<Laser> _returner;
         private Coroutine _coroutine;
         
-        public void Initialize(ObjectPool<Laser> pool)
+        public void Initialize(IObjectReturner<Laser> returner)
         {
-            _pool = pool;
+            _returner = returner;
 
             if (_coroutine != null)
                 StopCoroutine(_coroutine);
@@ -37,7 +37,7 @@ namespace _Project.Scripts.Player.Weapons
                 _coroutine = null;
             }
 
-            _pool?.PutObject(this);
+            _returner?.ReturnPool(this);
         }
 
         private void OnDisable()

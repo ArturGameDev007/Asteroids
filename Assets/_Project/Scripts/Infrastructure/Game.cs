@@ -7,7 +7,6 @@ namespace _Project.Scripts.Infrastructure
 {
     public class Game
     {
-        private readonly ObjectPool<Enemy> _objectPool;
         private readonly GeneratorEnemies _generatorEnemies;
         private readonly Character _player;
         private readonly PlayerController _controller;
@@ -16,9 +15,8 @@ namespace _Project.Scripts.Infrastructure
         private readonly RestartGame _restartGame;
         private readonly ScoreData _scoreData;
 
-        public Game(ObjectPool<Enemy> objectPool, GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData)
+        public Game(GeneratorEnemies generatorEnemies, Character player, PlayerController controller, InputForShoot shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData)
         {
-            _objectPool = objectPool;
             _generatorEnemies = generatorEnemies;
             _player = player;
             _controller = controller;
@@ -31,7 +29,6 @@ namespace _Project.Scripts.Infrastructure
         public void Initialize()
         {
             _scoreData?.Reset();
-            // _objectPool.Initialize(_player);
             _player?.ClearState();
             
             Subscribe();
