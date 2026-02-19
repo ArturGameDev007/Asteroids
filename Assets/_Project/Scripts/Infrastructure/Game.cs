@@ -11,17 +11,18 @@ namespace _Project.Scripts.Infrastructure
         private readonly Character _player;
         private readonly IControllable _controller;
         private readonly IShootable _shoot;
-        private readonly LoseViewModel _loseViewModel;
+        private readonly LosePresenter _losePresenter;
         private readonly RestartGame _restartGame;
         private readonly ScoreData _scoreData;
 
-        public Game(GeneratorEnemies generatorEnemies, Character player, IControllable controller, IShootable shoot, LoseViewModel loseViewModel, RestartGame restartGame, ScoreData scoreData)
+        public Game(GeneratorEnemies generatorEnemies, Character player, IControllable controller, IShootable shoot,
+            LosePresenter losePresenter, RestartGame restartGame, ScoreData scoreData)
         {
             _generatorEnemies = generatorEnemies;
             _player = player;
             _controller = controller;
             _shoot = shoot;
-            _loseViewModel = loseViewModel;
+            _losePresenter = losePresenter;
             _restartGame = restartGame;
             _scoreData = scoreData;
         }
@@ -30,7 +31,7 @@ namespace _Project.Scripts.Infrastructure
         {
             _scoreData?.Reset();
             _player?.ClearState();
-            
+
             Subscribe();
 
             _controller?.EnableControl();
@@ -41,17 +42,18 @@ namespace _Project.Scripts.Infrastructure
         public void Dispose()
         {
             Unsubscribe();
+            _losePresenter.Dispose();
         }
 
         private void Subscribe()
         {
-            _loseViewModel.OnRestartClick += OnRestartButtonClick;
+            _losePresenter.OnRestartClick += OnRestartButtonClick;
             _player.OnGameOver += OnGameOver;
         }
 
         private void Unsubscribe()
         {
-            _loseViewModel.OnRestartClick -= OnRestartButtonClick;
+            _losePresenter.OnRestartClick -= OnRestartButtonClick;
             _player.OnGameOver -= OnGameOver;
         }
 
@@ -60,18 +62,16 @@ namespace _Project.Scripts.Infrastructure
             _controller?.StopPhysics();
             _controller?.DisableControl();
             _shoot.DisableControl();
-            
+
             _generatorEnemies.StopSpawning();
             _generatorEnemies.StopAllEnemies();
             
-            int finalScore = _scoreData.GetScore;
-            
-            _loseViewModel.Open();
+            _losePresenter.Open(_scoreData.GetScore);
         }
 
         private void OnRestartButtonClick()
         {
-            _loseViewModel.Close();
+            _losePresenter.Close();
             _restartGame.RestartScene();
         }
     }

@@ -34,8 +34,7 @@ namespace _Project.Scripts.Infrastructure
         private IGameFactory _gameFactory;
         private IInstantiator _instantiator;
 
-        private LoseViewModel _loseViewModel;
-        private ViewScore _viewScore;
+        private LosePresenter _losePresenter;
 
         private Character _player;
         private PlayerController _controller;
@@ -62,25 +61,20 @@ namespace _Project.Scripts.Infrastructure
             _gameFactory = new GameFactory(_instantiator);
             _hierarchyScanner = new HierarchyScanner();
             _weapons = new WeaponShooter();
-
-            Transform rootPool = new GameObject("All_Objects_Pools").transform;
             
-            Transform enemiesContainer = new GameObject("Enemies_Category").transform;
-            enemiesContainer.parent = rootPool;
+            _restartGame = new RestartGame();
+            _scoreData = new ScoreData();
             
-            Transform projectilesContainer = new GameObject("Weapon_Category").transform;
-            projectilesContainer.parent = rootPool;
-
-            _enemyPool = new ObjectPool<Enemy>(_enemyPrefabs, 5, "Enemies", enemiesContainer);
-            _bulletPool = new ObjectPool<Bullet>(_bulletPrefabs, 5, "Shoot", projectilesContainer);
-            _laserPool = new ObjectPool<Laser>(_laserPrefabs, 5, "Shoot", projectilesContainer);
+            SetupPools();
 
             _weapons.Initialize(_bulletPool, _laserPool); 
             
             CreateGameEntities();
             SetupDataAndUI();
 
-            _game = new Game(_generatorEnemies, _player, _controller, _shoot, _loseViewModel, _restartGame,
+            SetupSystems();
+
+            _game = new Game(_generatorEnemies, _player, _controller, _shoot, _losePresenter, _restartGame,
                 _scoreData);
         }
 
@@ -100,15 +94,33 @@ namespace _Project.Scripts.Infrastructure
             _gameFactory.CreateBackground(_background, _mainCamera);
             _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot);
             _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _weapons, _hierarchyScanner);
-            _gameFactory.CreateEndGameScreen(_endGameScreen, _hierarchyScanner, out _loseViewModel, out _viewScore);
+            _gameFactory.CreateEndGameScreen(_endGameScreen, _hierarchyScanner, _scoreData, out _losePresenter);
+        }
+
+        private void SetupPools()
+        {
+            Transform rootPool = new GameObject("All_Objects_Pools").transform;
+            
+            Transform enemiesContainer = new GameObject("Enemies_Category").transform;
+            enemiesContainer.parent = rootPool;
+            
+            Transform projectilesContainer = new GameObject("Weapon_Category").transform;
+            projectilesContainer.parent = rootPool;
+
+            _enemyPool = new ObjectPool<Enemy>(_enemyPrefabs, 5, "Enemies", enemiesContainer);
+            _bulletPool = new ObjectPool<Bullet>(_bulletPrefabs, 5, "Shoot", projectilesContainer);
+            _laserPool = new ObjectPool<Laser>(_laserPrefabs, 5, "Shoot", projectilesContainer);
+        }
+        
+        
+        private void SetupSystems()
+        {
+            _generatorEnemies.Initialize(_enemyPool, _player);
+            _deathTracker.Initialize(_scoreData);
         }
 
         private void SetupDataAndUI()
         {
-            _restartGame = new RestartGame();
-            _scoreData = new ScoreData();
-
-            _viewScore.Construct(_scoreData);
             _generatorEnemies.Initialize(_enemyPool, _player);
             _deathTracker.Initialize(_scoreData);
         }

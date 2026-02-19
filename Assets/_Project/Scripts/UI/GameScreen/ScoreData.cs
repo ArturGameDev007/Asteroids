@@ -4,11 +4,13 @@ using UnityEngine;
 namespace _Project.Scripts.UI.GameScreen
 {
     [Serializable]
-    public class ScoreData
+    public class ScoreData: ILoseModel
     {
         public event Action<int> OnScoreChanged;
 
-        [field: SerializeField] public int GetScore { get;  private set; }
+        [field: SerializeField] public int GetScore { get; private set; }
+        
+        public int FinalScore => GetScore;
 
         private int _zeroCountScore = 0;
         private int _scoreForKill = 10;
@@ -22,6 +24,11 @@ namespace _Project.Scripts.UI.GameScreen
         public void AddScore()
         {
             GetScore += _scoreForKill;
+            OnScoreChanged?.Invoke(GetScore);
+        }
+
+        public void SaveResult(int score)
+        {
             OnScoreChanged?.Invoke(GetScore);
         }
     }

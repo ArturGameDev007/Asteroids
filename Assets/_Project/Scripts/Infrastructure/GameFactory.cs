@@ -4,6 +4,7 @@ using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using _Project.Scripts.Utils;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,18 +13,18 @@ namespace _Project.Scripts.Infrastructure
     public class GameFactory : IGameFactory
     {
         private readonly IInstantiator _instantiator;
-        
+
         public GameFactory(IInstantiator instantiator)
         {
             _instantiator = instantiator;
         }
 
-        public void CreateBackground(BackgroundView prefab, Camera  mainCamera)
+        public void CreateBackground(BackgroundView prefab, Camera mainCamera)
         {
             int orderInLayer = -5;
 
             BackgroundView background = _instantiator.CreatePrefab(prefab);
-    
+
             SetHierarchy(background.transform, 3);
 
             background.Construct(mainCamera, orderInLayer);
@@ -32,12 +33,15 @@ namespace _Project.Scripts.Infrastructure
         public void CreatePlayer(Character prefab, out Character character, out PlayerController controller,
             out InputForShoot shoot)
         {
-            if (prefab == null) {
+            if (prefab == null)
+            {
                 Debug.LogError("Префаб игрока не передан в фабрику!");
-                character = null; controller = null; shoot = null;
+                character = null;
+                controller = null;
+                shoot = null;
                 return;
             }
-            
+
             Character playerObject = _instantiator.CreatePrefab(prefab);
 
             SetHierarchy(playerObject.transform, 2);
@@ -71,33 +75,28 @@ namespace _Project.Scripts.Infrastructure
                 shoot?.Initialize(laserLogic, shooter);
         }
 
-        public void CreateEndGameScreen(EndGameView prefab, HierarchyScanner scanner, out LoseViewModel viewModel,
-            out ViewScore score)
+        public void CreateEndGameScreen(EndGameView prefab, HierarchyScanner scanner, ScoreData scoreData,
+            out LosePresenter presenter)
         {
-            viewModel = null;
-            score = null;
+            EndGameView endGameContainer = _instantiator.CreatePrefab(prefab);
 
-            EndGameView gameScreen = _instantiator.CreatePrefab(prefab);
+            SetHierarchy(endGameContainer.transform, 5);
 
-            SetHierarchy(gameScreen.transform, 5);
-
-            if (scanner.TryGetInStack(gameScreen.transform, out LoseViewModel loseViewModel))
+            if (scanner.TryGetInStack(endGameContainer.transform, out LoseView loseView))
             {
-                viewModel = loseViewModel;
+                if (scanner.TryGetInStack(loseView.transform, out Button button))
+                    loseView.Construct(button);
 
-                if (scanner.TryGetInStack(gameScreen.transform, out LoseView loseView))
-                {
-                    if (scanner.TryGetInStack(loseView.transform, out Button button))
-                    {
-                        loseView.Construct(button);
-                    }
+                presenter = new LosePresenter();
+                presenter.Construct(scoreData, loseView);
+                presenter.Enable();
 
-                    viewModel.Construct(loseView);
-                }
+                endGameContainer.Construct(loseView);
             }
-
-            if (scanner.TryGetInStack(gameScreen.transform, out ViewScore viewScore))
-                score = viewScore;
+            else
+            {
+                presenter = null;
+            }
         }
 
         private void SetHierarchy(Transform target, int index)

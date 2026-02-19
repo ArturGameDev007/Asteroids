@@ -1,20 +1,32 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Project.Scripts.UI.GameScreen
 {
     [RequireComponent(typeof(Canvas))]
-    public class LoseView : MonoBehaviour
+    public class LoseView : MonoBehaviour, ILoseView
     {
-        [field: SerializeField] public Button RestartButton { get; private set; }
+        public event Action OnRestartRequested;
+
+        [SerializeField] private TextMeshProUGUI _textScore;
+        
+        [field: SerializeField] public Button  RestartButton {get; private set;}
 
         private Canvas _canvas;
 
-        public void Construct(Button restartButton)
+        public void Construct(Button button)
         {
             _canvas = GetComponent<Canvas>();
-            RestartButton = restartButton;
+            RestartButton = button;
+            
+            RestartButton?.onClick.AddListener(OnRestart);
+        }
+
+        public void SetScore(int score)
+        {
+            _textScore.text = $"Score: {score.ToString()}";
         }
 
         public void ShowPanel()
@@ -25,8 +37,18 @@ namespace _Project.Scripts.UI.GameScreen
 
         public void HidePanel()
         {
-            _canvas.gameObject.SetActive(false);
+            _canvas.gameObject.SetActive(true);
             RestartButton.interactable = false;
+        }
+
+        private void OnDestroy()
+        {
+            RestartButton.onClick.RemoveListener(OnRestart);
+        }
+
+        private void OnRestart()
+        {
+            OnRestartRequested?.Invoke();
         }
     }
 }
