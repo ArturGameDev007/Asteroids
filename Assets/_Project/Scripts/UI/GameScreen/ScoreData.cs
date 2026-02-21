@@ -6,28 +6,29 @@ namespace _Project.Scripts.UI.GameScreen
     [Serializable]
     public class ScoreData: ILoseModel
     {
-        public event Action<int> OnScoreChanged;
+        public event Action OnScoreChanged;
 
-        [field: SerializeField] public int GetScore { get; private set; }
+        [field: SerializeField] public int Score { get; private set; }
         
         private int _zeroCountScore = 0;
         private int _scoreForKill = 10;
 
         public void Reset()
         {
-            GetScore = _zeroCountScore;
-            OnScoreChanged?.Invoke(GetScore);
+            Score = _zeroCountScore;
+            OnScoreChanged?.Invoke();
         }
 
         public void AddScore()
         {
-            GetScore += _scoreForKill;
-            OnScoreChanged?.Invoke(GetScore);
+            Score += _scoreForKill;
+            OnScoreChanged?.Invoke();
         }
 
         public void SaveResult(int score)
         {
-            OnScoreChanged?.Invoke(GetScore);
+            Score = score;
+            OnScoreChanged?.Invoke();
         }
     }
 }

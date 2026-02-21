@@ -67,7 +67,7 @@ namespace _Project.Scripts.Infrastructure
             _generatorEnemies.StopSpawning();
             _generatorEnemies.StopAllEnemies();
             
-            _losePresenter.Open(_scoreData.GetScore);
+            _losePresenter.Open(_scoreData.Score);
         }
 
         private void OnRestartButtonClick()

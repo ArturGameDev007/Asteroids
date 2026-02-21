@@ -29,7 +29,7 @@ namespace _Project.Scripts.UI.GameScreen
         public void Enable()
         {
             Subscribe();
-            OnScoreChanged(_loseModel.GetScore);
+            UpdateScoreView();
         }
 
         public void Dispose()
@@ -39,19 +39,19 @@ namespace _Project.Scripts.UI.GameScreen
         
         private void Subscribe()
         {
-            _loseModel.OnScoreChanged += OnScoreChanged;
+            _loseModel.OnScoreChanged += UpdateScoreView;
             _loseView.OnRestartRequested += OnRestartRequested;
         }
 
         private void Unsubscribe()
         {
-            _loseModel.OnScoreChanged -= OnScoreChanged;
+            _loseModel.OnScoreChanged -= UpdateScoreView;
             _loseView.OnRestartRequested -= OnRestartRequested;
         }
 
-        private void OnScoreChanged(int score)
+        private void UpdateScoreView()
         {
-            _loseView.SetScore(score);
+            _loseView.SetScore(_loseModel.Score);
         }
 
         private void OnRestartRequested()
