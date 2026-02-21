@@ -3,25 +3,26 @@ using UnityEngine;
 
 namespace _Project.Scripts.Player.Weapons
 {
-    public class Bullet : MonoBehaviour
+    public class Bullet : TimedPoolObject
     {
-        private ObjectPool<Bullet> _pool;
+        private IObjectReturner<Bullet> _returner;
 
-        public void Initialize(ObjectPool<Bullet> pool)
+        public void Initialize(IObjectReturner<Bullet> returner)
         {
-            _pool = pool;
+            StartLifeTimer();
+            _returner = returner;
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        protected override void ReturnToPool()
         {
-            if (collision.gameObject.TryGetComponent(out Enemy _))
+            StopLifeTimer();
+            _returner?.ReturnPool(this);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.TryGetComponent(out Enemy _))
                 ReturnToPool();
-        }
-
-        private void ReturnToPool()
-        {
-            if (_pool != null)
-                _pool.ReturnPool(this);
         }
     }
 }

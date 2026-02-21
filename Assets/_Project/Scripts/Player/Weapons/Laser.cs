@@ -1,49 +1,21 @@
-﻿using System.Collections;
-using _Project.Scripts.Enemies;
-using UnityEngine;
+﻿using _Project.Scripts.Enemies;
 
 namespace _Project.Scripts.Player.Weapons
 {
-    public class Laser : MonoBehaviour
+    public class Laser : TimedPoolObject
     {
-        [SerializeField] private float _lifeTime = 0.5f;
-
         private IObjectReturner<Laser> _returner;
-        private Coroutine _coroutine;
         
         public void Initialize(IObjectReturner<Laser> returner)
         {
+            StartLifeTimer();
             _returner = returner;
-
-            if (_coroutine != null)
-                StopCoroutine(_coroutine);
-
-            _coroutine = StartCoroutine(ReturnAfterTime(_lifeTime));
         }
-
-        private IEnumerator ReturnAfterTime(float delay)
+        
+        protected override void ReturnToPool()
         {
-            var wait = new WaitForSeconds(delay);
-            yield return  wait;
-            
-            ReturnToPool();
-        }
-
-        private void ReturnToPool()
-        {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-                _coroutine = null;
-            }
-
+            StopLifeTimer();
             _returner?.ReturnPool(this);
-        }
-
-        private void OnDisable()
-        {
-            if (_coroutine != null)
-                StopCoroutine(_coroutine);
         }
     }
 }
