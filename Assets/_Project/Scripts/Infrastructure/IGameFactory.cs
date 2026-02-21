@@ -3,7 +3,6 @@ using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
-using _Project.Scripts.Utils;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure
