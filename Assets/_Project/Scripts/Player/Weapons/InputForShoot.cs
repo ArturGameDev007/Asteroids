@@ -15,6 +15,8 @@ namespace _Project.Scripts.Player.Weapons
         [SerializeField] private Transform _pointShootForlaser;
         [SerializeField] private Transform _pointShootForBullet;
 
+        public bool IsPaused { get; set; } = false;
+
         private GenerateLaser _laserAmmo;
         private WeaponShooter _shooter;
 
@@ -26,18 +28,22 @@ namespace _Project.Scripts.Player.Weapons
 
         private void Update()
         {
+            if (IsPaused)
+                return;
+            
             InputBulletShoot();
             InputLaserShoot();
         }
 
+
         public void EnableControl()
         {
-            enabled = true;
+            IsPaused = false;
         }
 
         public void DisableControl()
         {
-            enabled = false;
+            IsPaused = true;
         }
 
         private void InputBulletShoot()

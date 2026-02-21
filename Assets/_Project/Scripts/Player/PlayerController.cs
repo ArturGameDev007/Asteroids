@@ -13,6 +13,8 @@ namespace _Project.Scripts.Player
 
         private Rigidbody2D _head2D;
         private InputController _controllerInput;
+        
+        public bool IsPaused { get; set; } =  false;
 
         private Vector3 _startPosition;
 
@@ -31,6 +33,9 @@ namespace _Project.Scripts.Player
 
         private void Update()
         {
+            if (IsPaused)
+                return;
+            
             _controllerInput.UpdateHorizontalInput();
             _controllerInput.UpdateVerticalInput();
 
@@ -39,11 +44,17 @@ namespace _Project.Scripts.Player
 
         private void FixedUpdate()
         {
+            if (IsPaused)
+                return;
+            
             Move();
         }
 
+
         public void ResetState()
         {
+            IsPaused = false;
+            
             _head2D.simulated = true;
             _head2D.velocity = Vector2.zero;
             
@@ -53,16 +64,20 @@ namespace _Project.Scripts.Player
 
         public void EnableControl()
         {
-            enabled = true;
+            // enabled = true;
+            IsPaused = false;
         }
 
         public void DisableControl()
         {
-            enabled = false;
+            // enabled = false;
+            IsPaused = true;
         }
 
         public void StopPhysics()
         {
+            IsPaused = true;
+            
             _head2D.velocity = Vector2.zero;
             _head2D.angularVelocity = 0f;
             _head2D.simulated = false;
