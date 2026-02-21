@@ -18,11 +18,9 @@ namespace _Project.Scripts.Player.Weapons
         private void Start()
         {
             CurrentAmmonLaser = _maxAmountLaser;
-        }
-
-        private void Update()
-        {
             ShowInfo();
+
+            OnReloadProgress?.Invoke(_reloadTime);
         }
 
         public bool TrySpendAmmo()
@@ -32,15 +30,12 @@ namespace _Project.Scripts.Player.Weapons
             if (IsReloading || CurrentAmmonLaser <= 0)
                 return false;
 
-            if (CurrentAmmonLaser > minCountLazer)
-            {
-                CurrentAmmonLaser--;
+            CurrentAmmonLaser--;
 
-                if (CurrentAmmonLaser == minCountLazer)
-                {
-                    StartCoroutine(ReloadLaser());
-                }
-            }
+            ShowInfo();
+
+            if (CurrentAmmonLaser <= minCountLazer)
+                StartCoroutine(ReloadLaser());
 
             return true;
         }
@@ -49,24 +44,27 @@ namespace _Project.Scripts.Player.Weapons
         {
             IsReloading = true;
 
-            float timer = 0f;
-            float restoredTime = 5f;
+            float timer = _reloadTime;
+            float targetTime = 0f;
 
-            while (_reloadTime > timer)
+            while (timer > targetTime)
             {
-                _reloadTime -= Time.deltaTime;
+                timer -= Time.deltaTime;
+                OnReloadProgress?.Invoke(timer);
+                
                 yield return null;
             }
 
             CurrentAmmonLaser = _maxAmountLaser;
-            _reloadTime = restoredTime;
+            ShowInfo();
+
+            OnReloadProgress?.Invoke(_reloadTime);
             IsReloading = false;
         }
 
-        public void ShowInfo()
+        private void ShowInfo()
         {
             OnLaserChanged?.Invoke(CurrentAmmonLaser);
-            OnReloadProgress?.Invoke(_reloadTime);
         }
     }
 }

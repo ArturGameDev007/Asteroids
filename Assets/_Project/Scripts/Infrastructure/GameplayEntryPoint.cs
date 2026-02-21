@@ -57,11 +57,12 @@ namespace _Project.Scripts.Infrastructure
         private void Awake()
         {
             _mainCamera = Camera.main;
+            
             _instantiator = GetComponent<IInstantiator>();
+            
             _gameFactory = new GameFactory(_instantiator);
             _hierarchyScanner = new HierarchyScanner();
             _weapons = new WeaponShooter();
-            
             _restartGame = new RestartGame();
             _scoreData = new ScoreData();
             
@@ -71,7 +72,6 @@ namespace _Project.Scripts.Infrastructure
             
             CreateGameEntities();
             SetupDataAndUI();
-
             SetupSystems();
 
             _game = new Game(_generatorEnemies, _player, _controller, _shoot, _losePresenter, _restartGame,

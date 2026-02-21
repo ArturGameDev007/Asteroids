@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using _Project.Scripts.Player;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -22,9 +21,6 @@ namespace _Project.Scripts.Enemies
             _container = new GameObject($"[Pool_{containerName}]").transform;
             _container.SetParent(parent);
 
-            // for (int i = 0; i < initialCount; i++)
-            //     CreateNewObject(false);
-
             AddObjects(initialCount);
         }
 
@@ -37,7 +33,7 @@ namespace _Project.Scripts.Enemies
 
             return objectType;
         }
-        
+
         public void ReturnPool(T objectType)
         {
             _pool.Enqueue(objectType);
@@ -48,7 +44,7 @@ namespace _Project.Scripts.Enemies
         {
             _pool.Clear();
         }
-        
+
         private void AddObjects(int count)
         {
             for (int i = 0; i < count; i++)
@@ -56,20 +52,20 @@ namespace _Project.Scripts.Enemies
                 CreateNewObject(false);
             }
         }
-        
+
         private T CreateNewObject(bool isActive)
         {
             int minCountPool = 0;
 
             var prefab = _prefabs[Random.Range(minCountPool, _prefabs.Count)];
-            var obj = Object.Instantiate(prefab, _container);
+            var newObject = Object.Instantiate(prefab, _container);
 
-            obj.gameObject.SetActive(isActive);
+            newObject.gameObject.SetActive(isActive);
 
             if (!isActive)
-                _pool.Enqueue(obj);
-            
-            return obj;
+                _pool.Enqueue(newObject);
+
+            return newObject;
         }
     }
 }

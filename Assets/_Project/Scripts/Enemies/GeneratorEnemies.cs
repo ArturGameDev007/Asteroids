@@ -22,6 +22,8 @@ namespace _Project.Scripts.Enemies
         private Coroutine _coroutine;
 
         private Character _player;
+        
+        private bool _isGameActive;
 
         public void Initialize(ObjectPool<Enemy> pool, Character player)
         {
@@ -43,20 +45,29 @@ namespace _Project.Scripts.Enemies
 
         public void StopAllEnemies()
         {
-            foreach (var enemy in _activeEnemies)
+            _isGameActive = false;
+            
+            for (int i = _activeEnemies.Count - 1; i >= 0; i--)
             {
-                enemy.enabled = false;
-                _pool.ReturnPool(enemy);
+                var enemy = _activeEnemies[i];
+            
+                if (enemy != null)
+                {
+                    enemy.enabled = false;
+                    _pool.ReturnPool(enemy);
+                }
+            
+                _activeEnemies.RemoveAt(i); 
             }
-
-            _activeEnemies.Clear();
         }
 
         private IEnumerator GeneratorEnemy(float delay)
         {
+            _isGameActive = true;
+            
             var wait = new WaitForSeconds(delay);
 
-            while (true)
+            while (_isGameActive)
             {
                 Spawn();
                 yield return wait;

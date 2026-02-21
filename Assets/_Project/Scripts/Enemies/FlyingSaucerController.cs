@@ -34,7 +34,6 @@ namespace _Project.Scripts.Enemies
 
             Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, _speed * Time.deltaTime);
             _head2D.MovePosition(directionMove);
-
         }
 
         private void RotateTowardPlayer(Vector2 directionToPlayer)

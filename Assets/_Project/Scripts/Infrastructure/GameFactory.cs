@@ -4,7 +4,6 @@ using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using _Project.Scripts.Utils;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,13 +33,7 @@ namespace _Project.Scripts.Infrastructure
             out InputForShoot shoot)
         {
             if (prefab == null)
-            {
-                Debug.LogError("Префаб игрока не передан в фабрику!");
-                character = null;
-                controller = null;
-                shoot = null;
-                return;
-            }
+                throw new MissingReferenceException("Префаб игрока не передан!");
 
             Character playerObject = _instantiator.CreatePrefab(prefab);
 
