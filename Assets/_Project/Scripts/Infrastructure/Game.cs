@@ -61,6 +61,7 @@ namespace _Project.Scripts.Infrastructure
         {
             _controller?.StopPhysics();
             _controller?.DisableControl();
+            
             _shoot.DisableControl();
 
             _generatorEnemies.StopSpawning();

@@ -5,7 +5,6 @@ using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
-using _Project.Scripts.Utils;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure
@@ -47,7 +46,6 @@ namespace _Project.Scripts.Infrastructure
 
         private CoordinateDisplay _coordinateDisplay;
         private ViewCurrentAmountLaser _viewCurrentAmountLaser;
-        private HierarchyScanner _hierarchyScanner;
 
         private Game _game;
         private Camera _mainCamera;
@@ -61,7 +59,6 @@ namespace _Project.Scripts.Infrastructure
             _instantiator = GetComponent<IInstantiator>();
             
             _gameFactory = new GameFactory(_instantiator);
-            _hierarchyScanner = new HierarchyScanner();
             _weapons = new WeaponShooter();
             _restartGame = new RestartGame();
             _scoreData = new ScoreData();
@@ -93,8 +90,8 @@ namespace _Project.Scripts.Infrastructure
         {
             _gameFactory.CreateBackground(_background, _mainCamera);
             _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot);
-            _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _weapons, _hierarchyScanner);
-            _gameFactory.CreateEndGameScreen(_endGameScreen, _hierarchyScanner, _scoreData, out _losePresenter);
+            _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _weapons);
+            _gameFactory.CreateEndGameScreen(_endGameScreen, _scoreData, out _losePresenter);
         }
 
         private void SetupPools()
@@ -111,7 +108,6 @@ namespace _Project.Scripts.Infrastructure
             _bulletPool = new ObjectPool<Bullet>(_bulletPrefabs, 5, "Shoot", projectilesContainer);
             _laserPool = new ObjectPool<Laser>(_laserPrefabs, 5, "Shoot", projectilesContainer);
         }
-        
         
         private void SetupSystems()
         {

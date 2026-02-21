@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textScore: {fileID: 6288423951504225029}
-  _restartButton: {fileID: 4572342822539608865}
+  <RestartButton>k__BackingField: {fileID: 4572342822539608865}
 --- !u!1 &2044428503877197268
 GameObject:
   m_ObjectHideFlags: 0

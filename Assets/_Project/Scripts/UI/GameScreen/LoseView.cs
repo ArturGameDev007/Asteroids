@@ -19,8 +19,8 @@ namespace _Project.Scripts.UI.GameScreen
         public void Construct(Button button)
         {
             _canvas = GetComponent<Canvas>();
-            RestartButton = button;
             
+            RestartButton = button;
             RestartButton?.onClick.AddListener(OnRestart);
         }
 

@@ -605,6 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CoordinateDisplay>k__BackingField: {fileID: 5519756204450628070}
   <ViewCurrentAmountLaser>k__BackingField: {fileID: 4959263912404664997}
+  <GenerateLaser>k__BackingField: {fileID: 6610810285733574452}
 --- !u!1 &3984131522187436711
 GameObject:
   m_ObjectHideFlags: 0

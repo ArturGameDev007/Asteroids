@@ -3,9 +3,7 @@ using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
-using _Project.Scripts.Utils;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Project.Scripts.Infrastructure
 {
@@ -23,7 +21,6 @@ namespace _Project.Scripts.Infrastructure
             int orderInLayer = -5;
 
             BackgroundView background = _instantiator.CreatePrefab(prefab);
-
             SetHierarchy(background.transform, 3);
 
             background.Construct(mainCamera, orderInLayer);
@@ -36,7 +33,6 @@ namespace _Project.Scripts.Infrastructure
                 throw new MissingReferenceException("Префаб игрока не передан!");
 
             Character playerObject = _instantiator.CreatePrefab(prefab);
-
             SetHierarchy(playerObject.transform, 2);
 
             playerObject.TryGetComponent(out character);
@@ -48,37 +44,36 @@ namespace _Project.Scripts.Infrastructure
         }
 
         public void CreatePerformanceShip(PerformanceShipView prefab, Character player, PlayerController controller,
-            InputForShoot shoot, WeaponShooter shooter, HierarchyScanner scanner)
+            InputForShoot shoot, WeaponShooter shooter)
         {
             PerformanceShipView performanceShip = _instantiator.CreatePrefab(prefab);
-
             SetHierarchy(performanceShip.transform, 4);
 
             if (performanceShip.TryGetComponent(out CoordinateDisplay display))
             {
                 Rigidbody2D head = player?.GetComponent<Rigidbody2D>();
-
                 display?.Initialize(controller, head);
             }
-
-            if (scanner.TryGetInStack(performanceShip.transform, out ViewCurrentAmountLaser viewLaser))
-                viewLaser?.Initialize();
-
-            if (scanner.TryGetInStack(performanceShip.transform, out GenerateLaser laserLogic))
-                shoot?.Initialize(laserLogic, shooter);
+            
+            if (performanceShip.GenerateLaser != null && performanceShip.ViewCurrentAmountLaser != null)
+            {
+                shoot?.Initialize(performanceShip.GenerateLaser, shooter);
+                
+                performanceShip.ViewCurrentAmountLaser.Initialize();
+        
+                performanceShip.Construct(performanceShip.CoordinateDisplay, performanceShip.ViewCurrentAmountLaser, performanceShip.GenerateLaser);
+            }
         }
 
-        public void CreateEndGameScreen(EndGameView prefab, HierarchyScanner scanner, ScoreData scoreData,
+        public void CreateEndGameScreen(EndGameView prefab, ScoreData scoreData,
             out LosePresenter presenter)
         {
             EndGameView endGameContainer = _instantiator.CreatePrefab(prefab);
-
             SetHierarchy(endGameContainer.transform, 5);
-
-            if (scanner.TryGetInStack(endGameContainer.transform, out LoseView loseView))
+            
+            if (endGameContainer.TryGetComponent(out LoseView loseView))
             {
-                if (scanner.TryGetInStack(loseView.transform, out Button button))
-                    loseView.Construct(button);
+                loseView.Construct(loseView.RestartButton);
 
                 presenter = new LosePresenter();
                 presenter.Construct(scoreData, loseView);

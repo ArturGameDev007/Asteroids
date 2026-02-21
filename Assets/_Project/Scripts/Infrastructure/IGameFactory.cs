@@ -12,7 +12,7 @@ namespace _Project.Scripts.Infrastructure
     {
         public void CreateBackground(BackgroundView prefab, Camera mainCamera);
         public void CreatePlayer(Character prefab, out Character character, out PlayerController controller, out InputForShoot shoot);
-        public void CreatePerformanceShip(PerformanceShipView prefab, Character player, PlayerController controller, InputForShoot shoot, WeaponShooter shooter, HierarchyScanner scanner);
-        public void CreateEndGameScreen(EndGameView prefab, HierarchyScanner scanner, ScoreData scoreData, out LosePresenter losePresenter);
+        public void CreatePerformanceShip(PerformanceShipView prefab, Character player, PlayerController controller, InputForShoot shoot, WeaponShooter shooter);
+        public void CreateEndGameScreen(EndGameView prefab, ScoreData scoreData, out LosePresenter losePresenter);
     }
 }
