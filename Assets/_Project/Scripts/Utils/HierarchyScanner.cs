@@ -7,13 +7,12 @@ namespace _Project.Scripts.Utils
     {
         public bool TryGetInStack<T>(Transform root, out T component) where T : Component
         {
+            component = null;
+            
             if (root == null)
-            {
-                component = null;
                 return false;
-            }
 
-            Stack<Transform> stack =  new Stack<Transform>();
+            Stack<Transform> stack = new Stack<Transform>();
             stack.Push(root);
 
             while (stack.TryPop(out Transform current))
@@ -25,7 +24,6 @@ namespace _Project.Scripts.Utils
                     stack.Push(current.GetChild(i));
             }
 
-            component = null;
             return false;
         }
     }

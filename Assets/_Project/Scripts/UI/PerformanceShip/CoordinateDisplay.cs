@@ -6,6 +6,7 @@ namespace _Project.Scripts.UI.PerformanceShip
 {
     public class CoordinateDisplay : MonoBehaviour
     {
+        [Header("Text")]
         [SerializeField] private TextMeshProUGUI _coordinateText;
         
         [Header("Character")]

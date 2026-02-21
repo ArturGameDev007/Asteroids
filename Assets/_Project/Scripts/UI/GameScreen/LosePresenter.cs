@@ -29,7 +29,7 @@ namespace _Project.Scripts.UI.GameScreen
         public void Enable()
         {
             Subscribe();
-            OnScoreChanged(_loseModel.FinalScore);
+            OnScoreChanged(_loseModel.GetScore);
         }
 
         public void Dispose()

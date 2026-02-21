@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerController: MonoBehaviour, IControllable
+    public class PlayerController : MonoBehaviour, IControllable
     {
         private const float X_ANGLE = 0f;
         private const float Y_ANGLE = 0f;
@@ -13,8 +14,8 @@ namespace _Project.Scripts.Player
 
         private Rigidbody2D _head2D;
         private InputController _controllerInput;
-        
-        public bool IsPaused { get; set; } =  false;
+
+        public bool IsPaused { get; set; }
 
         private Vector3 _startPosition;
 
@@ -22,7 +23,7 @@ namespace _Project.Scripts.Player
         {
             if (_head2D == null)
                 _head2D = GetComponent<Rigidbody2D>();
-            
+
             _controllerInput = new InputController();
         }
 
@@ -35,7 +36,7 @@ namespace _Project.Scripts.Player
         {
             if (IsPaused)
                 return;
-            
+
             _controllerInput.UpdateHorizontalInput();
             _controllerInput.UpdateVerticalInput();
 
@@ -46,7 +47,7 @@ namespace _Project.Scripts.Player
         {
             if (IsPaused)
                 return;
-            
+
             Move();
         }
 
@@ -54,10 +55,10 @@ namespace _Project.Scripts.Player
         public void ResetState()
         {
             IsPaused = false;
-            
+
             _head2D.simulated = true;
             _head2D.velocity = Vector2.zero;
-            
+
             transform.position = _startPosition;
             transform.rotation = Quaternion.identity;
         }
@@ -77,12 +78,12 @@ namespace _Project.Scripts.Player
         public void StopPhysics()
         {
             IsPaused = true;
-            
+
             _head2D.velocity = Vector2.zero;
             _head2D.angularVelocity = 0f;
             _head2D.simulated = false;
         }
-        
+
         private void Move()
         {
             float moveVertical = _controllerInput.VerticalInput;
@@ -94,7 +95,7 @@ namespace _Project.Scripts.Player
                 _head2D.AddForce(direction * _forceInput);
             }
         }
-        
+
         private void HandleRotation()
         {
             float rotationHorizontal = _controllerInput.HorizontalInput;

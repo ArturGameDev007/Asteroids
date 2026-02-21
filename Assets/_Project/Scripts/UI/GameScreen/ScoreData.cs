@@ -10,8 +10,6 @@ namespace _Project.Scripts.UI.GameScreen
 
         [field: SerializeField] public int GetScore { get; private set; }
         
-        public int FinalScore => GetScore;
-
         private int _zeroCountScore = 0;
         private int _scoreForKill = 10;
 
