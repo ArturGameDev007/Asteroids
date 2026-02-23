@@ -11,7 +11,7 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-        [Header("Prefabs UI")]
+        [Header("Prefabs UI")] 
         [SerializeField] private BackgroundView _background;
         [SerializeField] private PerformanceShipView _performanceShip;
         [SerializeField] private EndGameView _endGameScreen;
@@ -55,23 +55,23 @@ namespace _Project.Scripts.Infrastructure
         private void Awake()
         {
             _mainCamera = Camera.main;
-            
+
             _instantiator = GetComponent<IInstantiator>();
-            
+
             _gameFactory = new GameFactory(_instantiator);
             _weapons = new WeaponShooter();
             _restartGame = new RestartGame();
             _scoreData = new ScoreData();
-            
+
             SetupPools();
 
-            _weapons.Initialize(_bulletPool, _laserPool); 
-            
+            _weapons.Initialize(_bulletPool, _laserPool);
+
             CreateGameEntities();
             SetupDataAndUI();
             SetupSystems();
 
-            _game = new Game(_generatorEnemies, _player, _controller, _shoot, _losePresenter, _restartGame,
+            _game = new Game(_gameFactory, _endGameScreen, _generatorEnemies, _player, _controller, _shoot, _restartGame,
                 _scoreData);
         }
 
@@ -91,16 +91,15 @@ namespace _Project.Scripts.Infrastructure
             _gameFactory.CreateBackground(_background, _mainCamera);
             _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot);
             _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _weapons);
-            _gameFactory.CreateEndGameScreen(_endGameScreen, _scoreData, out _losePresenter);
         }
 
         private void SetupPools()
         {
             Transform rootPool = new GameObject("All_Objects_Pools").transform;
-            
+
             Transform enemiesContainer = new GameObject("Enemies_Category").transform;
             enemiesContainer.parent = rootPool;
-            
+
             Transform projectilesContainer = new GameObject("Weapon_Category").transform;
             projectilesContainer.parent = rootPool;
 
@@ -108,7 +107,7 @@ namespace _Project.Scripts.Infrastructure
             _bulletPool = new ObjectPool<Bullet>(_bulletPrefabs, 5, "Shoot", projectilesContainer);
             _laserPool = new ObjectPool<Laser>(_laserPrefabs, 5, "Shoot", projectilesContainer);
         }
-        
+
         private void SetupSystems()
         {
             _generatorEnemies.Initialize(_enemyPool, _player);
