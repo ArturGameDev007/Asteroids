@@ -15,7 +15,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly IShootable _shoot;
         private readonly RestartGame _restartGame;
         private readonly ScoreData _scoreData;
-
+        
         private LosePresenter _losePresenter;
 
         public Game(IGameFactory gameFactory, EndGameView endGameScreen, GeneratorEnemies generatorEnemies,
