@@ -376,7 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemy: {fileID: 1688467850}
   _scoreData:
-    <GetScore>k__BackingField: 0
+    <Score>k__BackingField: 0
 --- !u!1 &1688467848
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,8 +430,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1985787633}
-  - component: {fileID: 1985787634}
   - component: {fileID: 1985787635}
+  - component: {fileID: 1985787634}
   m_Layer: 0
   m_Name: Gameplay
   m_TagString: Untagged
@@ -463,22 +463,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1985787631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85c292813b9dab54da9e7432cb89007a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b1eea9062c349adb3b00010c5e6df1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _background: {fileID: 2215494606810428197, guid: 706471e4a7448cf4c83df1b0cad6e350, type: 3}
-  _performanceShip: {fileID: 2094023753586929040, guid: a752461b71d007d41a3f9643f9183b0f, type: 3}
-  _endGameScreen: {fileID: 5460865261052969232, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-  _ship: {fileID: -1081479925413627390, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-  _bulletPrefabs:
-  - {fileID: 3242289843733358288, guid: 12deaaaf3585eb74d92fb178f7fc9366, type: 3}
-  _laserPrefabs:
-  - {fileID: 6051079152520341968, guid: 84b5391dff2e8fd41bfb6478ea67a667, type: 3}
-  _enemyPrefabs:
-  - {fileID: 8789278343424712742, guid: 851e842e4e4f2c341abf89a4f0472a8d, type: 3}
-  - {fileID: 181689331425005305, guid: 68a4a0e7d19928745b3e0dadee7bdb46, type: 3}
-  _generatorEnemies: {fileID: 746366996}
-  _deathTracker: {fileID: 746366997}
 --- !u!114 &1985787635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,9 +475,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1985787631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b1eea9062c349adb3b00010c5e6df1c, type: 3}
+  m_Script: {fileID: 11500000, guid: 85c292813b9dab54da9e7432cb89007a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _background: {fileID: 2215494606810428197, guid: 706471e4a7448cf4c83df1b0cad6e350, type: 3}
+  _performanceShip: {fileID: 2094023753586929040, guid: a752461b71d007d41a3f9643f9183b0f, type: 3}
+  _endGameScreen: {fileID: 5460865261052969232, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+  _ship: {fileID: -1081479925413627390, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+  _bulletPrefabs: {fileID: 3242289843733358288, guid: 12deaaaf3585eb74d92fb178f7fc9366, type: 3}
+  _laserPrefabs: {fileID: 7444338288434493993, guid: 84b5391dff2e8fd41bfb6478ea67a667, type: 3}
+  _asteroidPrefabs: {fileID: 8789278343424712742, guid: 851e842e4e4f2c341abf89a4f0472a8d, type: 3}
+  _ufoPrefabs: {fileID: 181689331425005305, guid: 68a4a0e7d19928745b3e0dadee7bdb46, type: 3}
+  _generatorEnemies: {fileID: 746366996}
+  _deathTracker: {fileID: 746366997}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

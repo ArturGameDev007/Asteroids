@@ -2,19 +2,18 @@
 using _Project.Scripts.Player;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Enemies
 {
     public class ObjectPool<T> : IObjectReturner<T> where T : Component
     {
-        private List<T> _prefabs;
+        private T _prefabs;
         private Queue<T> _pool;
         private Transform _container;
 
         private Character _player;
 
-        public ObjectPool(List<T> prefabs, int initialCount, string containerName, Transform parent)
+        public ObjectPool(T prefabs, int initialCount, string containerName, Transform parent)
         {
             _prefabs = prefabs;
             _pool = new Queue<T>(initialCount);
@@ -55,10 +54,10 @@ namespace _Project.Scripts.Enemies
 
         private T CreateNewObject(bool isActive)
         {
-            int minCountPool = 0;
+            // int minCountPool = 0;
 
-            var prefab = _prefabs[Random.Range(minCountPool, _prefabs.Count)];
-            var newObject = Object.Instantiate(prefab, _container);
+            // var prefab = _prefabs[Random.Range(minCountPool, _prefabs.Count)];
+            var newObject = Object.Instantiate(_prefabs, _container);
 
             newObject.gameObject.SetActive(isActive);
 

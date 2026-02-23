@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Enemies;
+﻿using System;
+using _Project.Scripts.Enemies;
 using UnityEngine;
 
 namespace _Project.Scripts.Player.Weapons
@@ -39,10 +40,5 @@ namespace _Project.Scripts.Player.Weapons
             laser.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             laser.Initialize(_laserPool);
         }
-
-        // public void CreateShoot(GameObject weapon, Transform spawnPoint, GameObject parent)
-        // {
-        //     Object.Instantiate(weapon, spawnPoint.position, spawnPoint.rotation, parent.transform);
-        // }
     }
 }

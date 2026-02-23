@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
@@ -20,11 +19,13 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private Character _ship;
 
         [Header("Prefabs Projectiles")]
-        [SerializeField] private List<Bullet> _bulletPrefabs;
-        [SerializeField] private List<Laser> _laserPrefabs;
+        [SerializeField] private Bullet _bulletPrefabs;
+        [SerializeField] private Laser _laserPrefabs;
 
-        [Header("Systems Pool")]
-        [SerializeField] private List<Enemy> _enemyPrefabs;
+        [Header("Enemies Settings")]
+        [SerializeField] private Enemy _asteroidPrefabs;
+        [SerializeField] private Enemy _ufoPrefabs;
+        
         [SerializeField] private GeneratorEnemies _generatorEnemies;
 
         [Header("UI & Data")]
@@ -40,7 +41,8 @@ namespace _Project.Scripts.Infrastructure
         private InputForShoot _shoot;
         private WeaponShooter _weapons;
 
-        private ObjectPool<Enemy> _enemyPool;
+        private ObjectPool<Enemy> _asteroidPool;
+        private ObjectPool<Enemy> _ufoPool;
         private ObjectPool<Bullet> _bulletPool;
         private ObjectPool<Laser> _laserPool;
 
@@ -63,12 +65,11 @@ namespace _Project.Scripts.Infrastructure
             _restartGame = new RestartGame();
             _scoreData = new ScoreData();
 
-            SetupPools();
-
-            _weapons.Initialize(_bulletPool, _laserPool);
-
             CreateGameEntities();
-            SetupDataAndUI();
+            SetupPools();
+            
+            _weapons.Initialize(_bulletPool, _laserPool);
+            
             SetupSystems();
 
             _game = new Game(_gameFactory, _endGameScreen, _generatorEnemies, _player, _controller, _shoot, _restartGame,
@@ -83,7 +84,7 @@ namespace _Project.Scripts.Infrastructure
         private void OnDestroy()
         {
             _game.Dispose();
-            _enemyPool.ClearPool();
+            _asteroidPool.ClearPool();
         }
 
         private void CreateGameEntities()
@@ -103,20 +104,15 @@ namespace _Project.Scripts.Infrastructure
             Transform projectilesContainer = new GameObject("Weapon_Category").transform;
             projectilesContainer.parent = rootPool;
 
-            _enemyPool = new ObjectPool<Enemy>(_enemyPrefabs, 5, "Enemies", enemiesContainer);
+            _asteroidPool = new ObjectPool<Enemy>(_asteroidPrefabs, 5, "Asteroid", enemiesContainer);
+            _ufoPool = new ObjectPool<Enemy>(_ufoPrefabs, 5, "UFO", enemiesContainer);
             _bulletPool = new ObjectPool<Bullet>(_bulletPrefabs, 5, "Shoot", projectilesContainer);
             _laserPool = new ObjectPool<Laser>(_laserPrefabs, 5, "Shoot", projectilesContainer);
         }
 
         private void SetupSystems()
         {
-            _generatorEnemies.Initialize(_enemyPool, _player);
-            _deathTracker.Initialize(_scoreData);
-        }
-
-        private void SetupDataAndUI()
-        {
-            _generatorEnemies.Initialize(_enemyPool, _player);
+            _generatorEnemies.Initialize(_asteroidPool, _ufoPool, _player);
             _deathTracker.Initialize(_scoreData);
         }
     }

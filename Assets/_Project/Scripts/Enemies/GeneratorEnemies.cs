@@ -11,7 +11,8 @@ namespace _Project.Scripts.Enemies
 
         [SerializeField] private float _spawnOffset = 2.0f;
 
-        private ObjectPool<Enemy> _pool;
+        private ObjectPool<Enemy> _asteroid;
+        private ObjectPool<Enemy> _ufo;
         private List<Enemy> _activeEnemies = new();
 
         private float _positionX;
@@ -25,9 +26,10 @@ namespace _Project.Scripts.Enemies
         
         private bool _isGameActive;
 
-        public void Initialize(ObjectPool<Enemy> pool, Character player)
+        public void Initialize(ObjectPool<Enemy> asteroid,  ObjectPool<Enemy> ufo, Character player)
         {
-            _pool = pool;
+            _asteroid = asteroid;
+            _ufo = ufo;
             _player = player;
             
             _camera = Camera.main;
@@ -46,19 +48,26 @@ namespace _Project.Scripts.Enemies
         public void StopAllEnemies()
         {
             _isGameActive = false;
-            
-            for (int i = _activeEnemies.Count - 1; i >= 0; i--)
-            {
-                var enemy = _activeEnemies[i];
-            
-                if (enemy != null)
-                {
-                    enemy.enabled = false;
-                    _pool.ReturnPool(enemy);
-                }
-            
-                _activeEnemies.RemoveAt(i); 
-            }
+            //
+            // foreach (var enemy in _activeEnemies)
+            // {
+            //     if (enemy.TryGetComponent(out IMovable movable))
+            //     {
+            //     }
+            // }
+            //
+            // for (int i = _activeEnemies.Count - 1; i >= 0; i--)
+            // {
+            //     var enemy = _activeEnemies[i];
+            //
+            //     if (enemy != null)
+            //     {
+            //         enemy.enabled = false;
+            //         _pool.ReturnPool(enemy);
+            //     }
+            //
+            //     _activeEnemies.RemoveAt(i); 
+            // }
         }
 
         private IEnumerator GeneratorEnemy(float delay)
@@ -69,37 +78,69 @@ namespace _Project.Scripts.Enemies
 
             while (_isGameActive)
             {
-                Spawn();
+                SpawnEntity(_asteroid);
+                SpawnEntity(_ufo);
+                
                 yield return wait;
             }
         }
 
-        private void Spawn()
+        // private void Spawn()
+        // {
+        //     var enemy = _pool.GetObject();
+        //
+        //     if (!_activeEnemies.Contains(enemy))
+        //         _activeEnemies.Add(enemy);
+        //
+        //     Vector2 spawnViewport = GetRandomPoint();
+        //     enemy.transform.position = spawnViewport;
+        //     enemy.gameObject.SetActive(true);
+        //
+        //     if (enemy.TryGetComponent(out Enemy enemyDiedHandler))
+        //     {
+        //         enemyDiedHandler.Initialize(_pool, _enemyManager);
+        //     }
+        //
+        //     if (enemy.TryGetComponent(out AsteroidController asteroid))
+        //     {
+        //         asteroid.enabled = true;
+        //         asteroid.SetDirection(spawnViewport);
+        //     }
+        //
+        //     if (enemy.TryGetComponent(out FlyingSaucerController flyingSaucerController))
+        //     {
+        //         flyingSaucerController.enabled = true;
+        //         flyingSaucerController.Construct(_player.transform);
+        //     }
+        // }
+        
+        private void SpawnEntity(ObjectPool<Enemy> pool)
         {
-            var enemy = _pool.GetObject();
+            if (pool == null) return;
+
+            var enemy = pool.GetObject();
 
             if (!_activeEnemies.Contains(enemy))
                 _activeEnemies.Add(enemy);
 
-            Vector2 spawnViewport = GetRandomPoint();
-            enemy.transform.position = spawnViewport;
+            Vector2 spawnPosition = GetRandomPoint();
+            enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
 
-            if (enemy.TryGetComponent(out Enemy enemyDiedHandler))
+            if (enemy.TryGetComponent(out Enemy enemyComponent))
             {
-                enemyDiedHandler.Initialize(_pool, _enemyManager);
+                enemyComponent.Initialize(pool, _enemyManager);
             }
 
             if (enemy.TryGetComponent(out AsteroidController asteroid))
             {
                 asteroid.enabled = true;
-                asteroid.SetDirection(spawnViewport);
+                asteroid.SetDirection(spawnPosition);
             }
-
-            if (enemy.TryGetComponent(out FlyingSaucerController flyingSaucerController))
+            else if (enemy.TryGetComponent(out FlyingSaucerController ufo))
             {
-                flyingSaucerController.enabled = true;
-                flyingSaucerController.Construct(_player.transform);
+                ufo.enabled = true;
+                ufo.Construct(_player.transform);
             }
         }
 
