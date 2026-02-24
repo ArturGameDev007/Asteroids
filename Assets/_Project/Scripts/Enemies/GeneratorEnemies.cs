@@ -48,26 +48,7 @@ namespace _Project.Scripts.Enemies
         public void StopAllEnemies()
         {
             _isGameActive = false;
-            //
-            // foreach (var enemy in _activeEnemies)
-            // {
-            //     if (enemy.TryGetComponent(out IMovable movable))
-            //     {
-            //     }
-            // }
-            //
-            // for (int i = _activeEnemies.Count - 1; i >= 0; i--)
-            // {
-            //     var enemy = _activeEnemies[i];
-            //
-            //     if (enemy != null)
-            //     {
-            //         enemy.enabled = false;
-            //         _pool.ReturnPool(enemy);
-            //     }
-            //
-            //     _activeEnemies.RemoveAt(i); 
-            // }
+
         }
 
         private IEnumerator GeneratorEnemy(float delay)
@@ -85,35 +66,6 @@ namespace _Project.Scripts.Enemies
             }
         }
 
-        // private void Spawn()
-        // {
-        //     var enemy = _pool.GetObject();
-        //
-        //     if (!_activeEnemies.Contains(enemy))
-        //         _activeEnemies.Add(enemy);
-        //
-        //     Vector2 spawnViewport = GetRandomPoint();
-        //     enemy.transform.position = spawnViewport;
-        //     enemy.gameObject.SetActive(true);
-        //
-        //     if (enemy.TryGetComponent(out Enemy enemyDiedHandler))
-        //     {
-        //         enemyDiedHandler.Initialize(_pool, _enemyManager);
-        //     }
-        //
-        //     if (enemy.TryGetComponent(out AsteroidController asteroid))
-        //     {
-        //         asteroid.enabled = true;
-        //         asteroid.SetDirection(spawnViewport);
-        //     }
-        //
-        //     if (enemy.TryGetComponent(out FlyingSaucerController flyingSaucerController))
-        //     {
-        //         flyingSaucerController.enabled = true;
-        //         flyingSaucerController.Construct(_player.transform);
-        //     }
-        // }
-        
         private void SpawnEntity(ObjectPool<Enemy> pool)
         {
             if (pool == null) return;

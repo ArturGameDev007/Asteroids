@@ -3,21 +3,24 @@ using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
-    public class Enemy : MonoBehaviour, IEnemy
+    [RequireComponent(typeof(Rigidbody2D))]
+    public abstract class Enemy : MonoBehaviour, IEnemy
     {
-        private IMovable _movable;
+        [field: SerializeField] protected float Speed { get; private set; } = 1.5f;
+        [field: SerializeField] protected Rigidbody2D Head2D { get; private set; }
         
         private IObjectReturner<Enemy> _returner;
         private IEnemyDeathListener _deathListener;
 
         private void Awake()
         {
-            _movable = GetComponent<IMovable>();
+            Head2D = GetComponent<Rigidbody2D>();
+            Head2D.gravityScale = 0f;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            _movable?.Move();
+            Move();
         }
 
         public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener)
@@ -26,12 +29,12 @@ namespace _Project.Scripts.Enemies
             _deathListener = deathListener;
         }
 
+        protected abstract void Move();
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Bullet _) || other.TryGetComponent(out Laser _))
-            {
                 Kill();
-            }
         }
 
         private void Kill()

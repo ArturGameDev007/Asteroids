@@ -2,49 +2,37 @@
 
 namespace _Project.Scripts.Enemies
 {
-    [RequireComponent(typeof(Rigidbody2D))]
-    public class FlyingSaucerController : MonoBehaviour, IMovable
+    public class FlyingSaucerController : Enemy
     {
-        [SerializeField] private Transform _player;
-
-        [SerializeField] private float _speed = 7f;
+        [SerializeField] private Transform _target;
         [SerializeField] private float _rotationSpeed = 30f;
-
-        private Rigidbody2D _head2D;
         
-        private void Awake()
+        public void Construct(Transform target)
         {
-            _head2D = GetComponent<Rigidbody2D>();
-
-            _head2D.gravityScale = 0f;
+            _target = target;
         }
-
-        public void Construct(Transform player)
+        
+        protected override void Move()
         {
-            _player = player;
-        }
-
-        public void Move()
-        {
-            Vector2 currentPosition = _head2D.position;
-            Vector2 targetPosition = _player.position;
+            Vector2 currentPosition = Head2D.position;
+            Vector2 targetPosition = _target.position;
             
             Vector2 directionToPlayer = (targetPosition - currentPosition).normalized;
             RotateTowardPlayer(directionToPlayer);
-
-            Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, _speed * Time.deltaTime);
-            _head2D.MovePosition(directionMove);
+            
+            Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, Speed * Time.deltaTime);
+            Head2D.MovePosition(directionMove);
         }
-
+        
         private void RotateTowardPlayer(Vector2 directionToPlayer)
         {
             float rotateX = 0;
             float rotateY = 0;
-
+        
             float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
-
+        
             Quaternion targetRotation = Quaternion.Euler(new Vector3(rotateX, rotateY, angle));
-
+        
             transform.rotation =
                 Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }

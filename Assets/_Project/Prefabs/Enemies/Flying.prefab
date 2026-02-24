@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7872548440656693655}
   - component: {fileID: 3623481144781250868}
   - component: {fileID: 6872781815636317615}
-  - component: {fileID: 181689331425005305}
   - component: {fileID: 2687539046242588937}
   - component: {fileID: 9105957324695588644}
   m_Layer: 6
@@ -161,18 +160,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &181689331425005305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996319817450768352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e8947ffaa147b44ab6d34945562b5b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2687539046242588937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,8 +172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32700fd763936344f864888182b0abad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _speed: 7
+  <Speed>k__BackingField: 1.5
+  <Head2D>k__BackingField: {fileID: 0}
+  _target: {fileID: 0}
   _rotationSpeed: 30
 --- !u!114 &9105957324695588644
 MonoBehaviour:

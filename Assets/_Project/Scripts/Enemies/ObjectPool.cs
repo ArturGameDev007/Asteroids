@@ -55,8 +55,8 @@ namespace _Project.Scripts.Enemies
         private T CreateNewObject(bool isActive)
         {
             // int minCountPool = 0;
-
             // var prefab = _prefabs[Random.Range(minCountPool, _prefabs.Count)];
+            
             var newObject = Object.Instantiate(_prefabs, _container);
 
             newObject.gameObject.SetActive(isActive);
