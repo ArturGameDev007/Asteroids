@@ -12,14 +12,14 @@ namespace _Project.Scripts.Infrastructure
         private readonly GeneratorEnemies _generatorEnemies;
         private readonly Character _player;
         private readonly IControllable _controller;
-        private readonly IShootable _shoot;
+        private readonly InputForShoot _shoot;
         private readonly RestartGame _restartGame;
         private readonly ScoreData _scoreData;
         
         private LosePresenter _losePresenter;
 
         public Game(IGameFactory gameFactory, EndGameView endGameScreen, GeneratorEnemies generatorEnemies,
-            Character player, IControllable controller, IShootable shoot,
+            Character player, IControllable controller, InputForShoot shoot,
             RestartGame restartGame, ScoreData scoreData)
         {
             _gameFactory = gameFactory;

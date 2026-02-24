@@ -49,6 +49,10 @@ namespace _Project.Scripts.Enemies
         {
             _isGameActive = false;
 
+            foreach (var enemy in _activeEnemies)
+                enemy.StopPhysics(true);
+            
+            _activeEnemies.Clear();
         }
 
         private IEnumerator GeneratorEnemy(float delay)
@@ -79,10 +83,8 @@ namespace _Project.Scripts.Enemies
             enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
 
-            if (enemy.TryGetComponent(out Enemy enemyComponent))
-            {
-                enemyComponent.Initialize(pool, _enemyManager);
-            }
+            enemy.Initialize(pool, _enemyManager);
+            enemy.StopPhysics(false);
 
             if (enemy.TryGetComponent(out AsteroidController asteroid))
             {

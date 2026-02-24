@@ -12,6 +12,8 @@ namespace _Project.Scripts.Enemies
         private IObjectReturner<Enemy> _returner;
         private IEnemyDeathListener _deathListener;
 
+        private bool _canMove;
+
         private void Awake()
         {
             Head2D = GetComponent<Rigidbody2D>();
@@ -20,6 +22,9 @@ namespace _Project.Scripts.Enemies
 
         private void FixedUpdate()
         {
+            if (!_canMove)
+                return;
+            
             Move();
         }
 
@@ -35,6 +40,14 @@ namespace _Project.Scripts.Enemies
         {
             if (other.TryGetComponent(out Bullet _) || other.TryGetComponent(out Laser _))
                 Kill();
+        }
+
+        public void StopPhysics(bool isStop)
+        {
+            _canMove = !isStop;
+            Head2D.simulated = !isStop;
+            Head2D.velocity = Vector2.zero;
+            Head2D.angularVelocity = 0f;
         }
 
         private void Kill()
