@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using _Project.Scripts.Player;
+using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
@@ -19,7 +20,7 @@ namespace _Project.Scripts.Enemies
         private ObjectPool<Enemy> _ufo;
 
         private List<Enemy> _activeEnemies = new();
-
+        
         private Camera _camera;
         
         private Coroutine _asteroidCoroutine;

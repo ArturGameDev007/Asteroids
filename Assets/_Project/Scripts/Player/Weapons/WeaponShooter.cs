@@ -19,7 +19,10 @@ namespace _Project.Scripts.Player.Weapons
         
         public void ShootBullet(Transform spawnPoint)
         {
-            if (_bulletPool == null) return;
+            if (_bulletPool == null || Time.time < _nextLaserShootTime) 
+                return;
+            
+            _nextLaserShootTime = Time.time + _laserCooldown;
 
             Bullet bullet = _bulletPool.GetObject();
             
@@ -29,11 +32,9 @@ namespace _Project.Scripts.Player.Weapons
 
         public void ShootLaser(Transform spawnPoint)
         {
-            if (_laserPool == null || Time.time < _nextLaserShootTime) 
+            if (_laserPool == null)
                 return;
-
-            _nextLaserShootTime = Time.time + _laserCooldown;
-
+            
             Laser laser = _laserPool.GetObject();
             
             laser.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);

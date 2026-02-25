@@ -35,6 +35,7 @@ namespace _Project.Scripts.Infrastructure
         private IInstantiator _instantiator;
 
         private LosePresenter _losePresenter;
+        private TimePauseController _timePauseController;
 
         private Character _player;
         private PlayerController _controller;
@@ -64,6 +65,7 @@ namespace _Project.Scripts.Infrastructure
             _weapons = new WeaponShooter();
             _restartGame = new RestartGame();
             _scoreData = new ScoreData();
+            _timePauseController = new TimePauseController();
 
             CreateGameEntities();
             SetupPools();
@@ -73,7 +75,7 @@ namespace _Project.Scripts.Infrastructure
             SetupSystems();
 
             _game = new Game(_gameFactory, _endGameScreen, _generatorEnemies, _player, _controller, _shoot, _restartGame,
-                _scoreData);
+                _scoreData, _timePauseController);
         }
 
         private void Start()
