@@ -7,29 +7,30 @@ namespace _Project.Scripts.Enemies
 {
     public class GeneratorEnemies : MonoBehaviour
     {
+        [Header("Manager")]
         [SerializeField] private EnemyManager _enemyManager;
-
-        [SerializeField] private float _spawnOffset = 2.0f;
 
         [Header("Settings Delays Enemies")]
         [SerializeField] private float _asteroidDelay = 2f;
         [SerializeField] private float _ufoDelay = 4f;
+        [SerializeField] private float _spawnOffset = 2.0f;
 
         private ObjectPool<Enemy> _asteroid;
         private ObjectPool<Enemy> _ufo;
 
         private List<Enemy> _activeEnemies = new();
 
+        private Camera _camera;
+        
+        private Coroutine _asteroidCoroutine;
+        private Coroutine _ufoCoroutine;
+        
         private float _positionX;
         private float _positionY;
-        // private float _delay = 3f;
-
-        private Camera _camera;
-        private Coroutine _coroutine;
-
-        private Character _player;
 
         private bool _isGameActive;
+        
+        private Character _player;
 
         public void Initialize(ObjectPool<Enemy> asteroid, ObjectPool<Enemy> ufo, Character player)
         {
@@ -42,22 +43,25 @@ namespace _Project.Scripts.Enemies
 
         public void StartSpawning()
         {
-            // _coroutine = StartCoroutine(GeneratorEnemy(_delay));
+            _isGameActive = true;
             
-            StartCoroutine(GeneratorEnemy(_asteroid, _asteroidDelay));
-            StartCoroutine(GeneratorEnemy(_ufo, _ufoDelay));
+            _asteroidCoroutine = StartCoroutine(GeneratorEnemy(_asteroid, _asteroidDelay));
+            _ufoCoroutine = StartCoroutine(GeneratorEnemy(_ufo, _ufoDelay));
         }
 
         public void StopSpawning()
         {
-            // StopCoroutine(_coroutine);
-            StopAllCoroutines();
+            _isGameActive = false;
+            
+            if (_asteroidCoroutine != null)
+                StopCoroutine(_asteroidCoroutine);
+            
+            if (_asteroidCoroutine != null)
+                StopCoroutine(_ufoCoroutine);
         }
 
         public void StopAllEnemies()
         {
-            _isGameActive = false;
-
             foreach (var enemy in _activeEnemies)
                 enemy.StopPhysics(true);
 
@@ -92,7 +96,7 @@ namespace _Project.Scripts.Enemies
 
             enemy.Initialize(pool, _enemyManager);
             enemy.StopPhysics(false);
-            
+
             if (enemy is AsteroidController asteroid)
             {
                 asteroid.enabled = true;
@@ -103,17 +107,6 @@ namespace _Project.Scripts.Enemies
                 ufo.enabled = true;
                 ufo.Construct(_player.transform);
             }
-
-            // if (enemy.TryGetComponent(out AsteroidController asteroid))
-            // {
-            //     asteroid.enabled = true;
-            //     asteroid.SetDirection(spawnPosition);
-            // }
-            // else if (enemy.TryGetComponent(out FlyingSaucerController ufo))
-            // {
-            //     ufo.enabled = true;
-            //     ufo.Construct(_player.transform);
-            // }
         }
 
         private Vector2 GetRandomPoint()
