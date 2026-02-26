@@ -48,7 +48,6 @@ namespace _Project.Scripts.Player.Weapons
             laser.Initialize(_laserPool);
         }
 
-
         public void StopAllShoots()
         {
             foreach (var projectile in _activeProjectiles)

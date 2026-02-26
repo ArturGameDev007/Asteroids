@@ -3,7 +3,7 @@ using UnityEngine;
 namespace _Project.Scripts.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerController : MonoBehaviour, IControllable
+    public class PlayerController : MonoBehaviour
     {
         private const float X_ANGLE = 0f;
         private const float Y_ANGLE = 0f;
@@ -14,7 +14,7 @@ namespace _Project.Scripts.Player
         private Rigidbody2D _head2D;
         private InputController _controllerInput;
 
-        public bool IsPaused { get; set; }
+        private bool _isPaused;
 
         private Vector3 _startPosition;
 
@@ -33,7 +33,7 @@ namespace _Project.Scripts.Player
 
         private void Update()
         {
-            if (IsPaused)
+            if (_isPaused)
                 return;
 
             _controllerInput.UpdateHorizontalInput();
@@ -44,16 +44,20 @@ namespace _Project.Scripts.Player
 
         private void FixedUpdate()
         {
-            if (IsPaused)
+            if (_isPaused)
                 return;
 
             Move();
         }
-
+        
+        public void SetPaused(bool paused)
+        {
+            _isPaused = paused;
+        }
 
         public void ResetState()
         {
-            IsPaused = false;
+            _isPaused = false;
 
             _head2D.simulated = true;
             _head2D.velocity = Vector2.zero;
@@ -61,22 +65,10 @@ namespace _Project.Scripts.Player
             transform.position = _startPosition;
             transform.rotation = Quaternion.identity;
         }
-
-        public void EnableControl()
-        {
-            // enabled = true;
-            IsPaused = false;
-        }
-
-        public void DisableControl()
-        {
-            // enabled = false;
-            IsPaused = true;
-        }
-
+        
         public void StopPhysics()
         {
-            IsPaused = true;
+            _isPaused = true;
 
             _head2D.velocity = Vector2.zero;
             _head2D.angularVelocity = 0f;

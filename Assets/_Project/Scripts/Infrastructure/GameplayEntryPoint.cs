@@ -36,6 +36,7 @@ namespace _Project.Scripts.Infrastructure
 
         private LosePresenter _losePresenter;
 
+        private IControllable _controllable;
         private IShootable _shootable;
         
         private Character _player;
@@ -73,8 +74,10 @@ namespace _Project.Scripts.Infrastructure
             _weapons.Initialize(_bulletPool, _laserPool);
             
             SetupSystems();
+            
+            _controllable = new PlayerControllerAdapter(_controller);
 
-            _game = new Game(_gameFactory, _endGameScreen, _generatorEnemies, _player, _controller, _shootable, _restartGame,
+            _game = new Game(_gameFactory, _endGameScreen, _generatorEnemies, _player, _controllable, _shootable, _restartGame,
                 _scoreData);
         }
 

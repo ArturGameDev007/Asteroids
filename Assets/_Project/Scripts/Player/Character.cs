@@ -10,12 +10,15 @@ namespace _Project.Scripts.Player
     {
         public event Action OnGameOver;
         
-        private IControllable _player;
+        private IControllable _controllable;
         private ICollisionHandler _collisionHandler;
 
         private void Awake()
         {
-            _player = GetComponent<IControllable>();
+            var player = GetComponent<PlayerController>();
+            
+            _controllable = new PlayerControllerAdapter(player);
+            
             _collisionHandler = GetComponent<ICollisionHandler>();
         }
 
@@ -31,13 +34,12 @@ namespace _Project.Scripts.Player
 
         public void ClearState()
         {
-            _player.IsPaused = false;
-            _player?.ResetState();
+            _controllable?.ResetState();
         }
 
         private void ProcessCollision(IEnemy enemy)
         {
-            _player.IsPaused = true;
+            // _controllable.SetPaused(true);
             OnGameOver?.Invoke();
         }
     }
