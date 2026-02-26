@@ -14,7 +14,6 @@ namespace _Project.Scripts.Player
 
         private void Start()
         {
-            _main = GetComponent<Camera>();
             _main = Camera.main;
 
             BoundsScreen();

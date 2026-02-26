@@ -361,6 +361,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyManager: {fileID: 1688467850}
+  _asteroidDelay: 2
+  _ufoDelay: 4
   _spawnOffset: 2
 --- !u!114 &746366997
 MonoBehaviour:
@@ -431,7 +433,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1985787633}
   - component: {fileID: 1985787635}
-  - component: {fileID: 1985787634}
   m_Layer: 0
   m_Name: Gameplay
   m_TagString: Untagged
@@ -454,18 +455,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1985787634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985787631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b1eea9062c349adb3b00010c5e6df1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1985787635
 MonoBehaviour:
   m_ObjectHideFlags: 0
