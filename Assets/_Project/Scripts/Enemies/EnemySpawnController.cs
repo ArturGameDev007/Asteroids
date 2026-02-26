@@ -11,16 +11,16 @@ namespace _Project.Scripts.Enemies
 
         public void StartAll()
         {
-            foreach (var gen in _generators) 
-                gen.StartSpawning();
+            foreach (var generator in _generators) 
+                generator.StartSpawning();
         }
 
         public void StopAndClearAll()
         {
-            foreach (var gen in _generators)
+            foreach (var generator in _generators)
             {
-                gen.StopSpawning();
-                gen.StopAllEnemies();
+                generator.StopSpawning();
+                generator.StopAllEnemies();
             }
         }
     }
