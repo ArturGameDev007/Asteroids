@@ -2,11 +2,11 @@ using _Project.Scripts.Player.Weapons;
 
 namespace _Project.Scripts.Player
 {
-    public class PlayerShootProvider: IShootable
+    public class PlayerShootProvider : IShootable
     {
-        private InputForShoot  _input;
+        private InputForShoot _input;
 
-        public PlayerShootProvider(InputForShoot  input)
+        public PlayerShootProvider(InputForShoot input)
         {
             _input = input;
         }

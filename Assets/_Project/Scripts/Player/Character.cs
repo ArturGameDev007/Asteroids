@@ -39,7 +39,6 @@ namespace _Project.Scripts.Player
 
         private void ProcessCollision(IEnemy enemy)
         {
-            // _controllable.SetPaused(true);
             OnGameOver?.Invoke();
         }
     }
