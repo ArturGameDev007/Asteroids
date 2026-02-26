@@ -8,7 +8,7 @@ namespace _Project.Scripts.Enemies
     {
         [field: SerializeField] protected float Speed { get; private set; } = 1.5f;
         [field: SerializeField] protected Rigidbody2D Head2D { get; private set; }
-        
+
         private IObjectReturner<Enemy> _returner;
         private IEnemyDeathListener _deathListener;
 
@@ -20,18 +20,18 @@ namespace _Project.Scripts.Enemies
             Head2D.gravityScale = 0f;
         }
 
-        private void FixedUpdate()
-        {
-            if (!_canMove)
-                return;
-            
-            Move();
-        }
-
         public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener)
         {
             _returner = returner;
             _deathListener = deathListener;
+        }
+
+        private void FixedUpdate()
+        {
+            if (!_canMove)
+                return;
+
+            Move();
         }
 
         protected abstract void Move();

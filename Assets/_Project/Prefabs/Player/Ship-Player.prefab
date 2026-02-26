@@ -242,8 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5970e73f346d814428ac5fcf437ff3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabLaser: {fileID: 4891558229020209014, guid: 84b5391dff2e8fd41bfb6478ea67a667, type: 3}
-  _bulletPrefab: {fileID: 2852611276195661994, guid: 12deaaaf3585eb74d92fb178f7fc9366, type: 3}
+  _prefabLaser: {fileID: 7444338288434493993, guid: 84b5391dff2e8fd41bfb6478ea67a667, type: 3}
+  _bulletPrefab: {fileID: 3242289843733358288, guid: 12deaaaf3585eb74d92fb178f7fc9366, type: 3}
   _pointShootForlaser: {fileID: 8547953513106730109}
   _pointShootForBullet: {fileID: 2059019129757481366}
 --- !u!114 &-1081479925413627390

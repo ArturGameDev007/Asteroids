@@ -8,13 +8,7 @@ namespace _Project.Scripts.Player.Weapons
         [SerializeField] private float _lifeTime = 0.5f;
 
         private Coroutine _coroutine;
-        private WaitForSeconds _wait;
-
-        private void Awake()
-        {
-            _wait = new WaitForSeconds(_lifeTime);
-        }
-
+        
         private void OnDestroy()
         {
             StopLifeTimer();
@@ -25,7 +19,7 @@ namespace _Project.Scripts.Player.Weapons
             _coroutine = StartCoroutine(ReturnRoutine());   
         }
 
-        protected void StopLifeTimer()
+        public void StopLifeTimer()
         {
             if (_coroutine != null)
                 StopCoroutine(_coroutine);
@@ -33,8 +27,9 @@ namespace _Project.Scripts.Player.Weapons
 
         private IEnumerator ReturnRoutine()
         {
-            yield return _wait;
-
+            var wait = new WaitForSeconds(_lifeTime);
+            yield return wait;
+            
             ReturnToPool();
         }
 

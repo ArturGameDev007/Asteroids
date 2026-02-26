@@ -8,17 +8,17 @@ namespace _Project.Scripts.Player.Weapons
         private const int INPUT_MOUSE_RIGHT = 1;
 
         [Header("Prefabs Weapons")]
-        [SerializeField] private GameObject _prefabLaser;
-        [SerializeField] private GameObject _bulletPrefab;
+        [SerializeField] private Laser _prefabLaser;
+        [SerializeField] private Bullet _bulletPrefab;
 
         [Header("Points Weapons")]
         [SerializeField] private Transform _pointShootForlaser;
         [SerializeField] private Transform _pointShootForBullet;
 
-        private bool _isPaused;
-
         private GenerateLaser _laserAmmo;
         private WeaponShooter _shooter;
+        
+        private bool _isPaused;
 
         public void Initialize(GenerateLaser laser, WeaponShooter shooter)
         {

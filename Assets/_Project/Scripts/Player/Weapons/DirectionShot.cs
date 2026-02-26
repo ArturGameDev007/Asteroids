@@ -15,5 +15,10 @@ namespace _Project.Scripts.Player.Weapons
         {
             transform.Translate(transform.up * (_speed * Time.deltaTime), Space.World);
         }
+        
+        public void StopMovement()
+        {
+            enabled = false; 
+        }
     }
 }

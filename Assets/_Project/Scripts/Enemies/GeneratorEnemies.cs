@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using _Project.Scripts.Player;
-using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
@@ -18,7 +17,7 @@ namespace _Project.Scripts.Enemies
 
         private ObjectPool<Enemy> _asteroid;
         private ObjectPool<Enemy> _ufo;
-
+        
         private List<Enemy> _activeEnemies = new();
         
         private Camera _camera;
@@ -65,7 +64,7 @@ namespace _Project.Scripts.Enemies
         {
             foreach (var enemy in _activeEnemies)
                 enemy.StopPhysics(true);
-
+        
             _activeEnemies.Clear();
         }
 
@@ -87,14 +86,15 @@ namespace _Project.Scripts.Enemies
             if (pool == null) return;
 
             var enemy = pool.GetObject();
-
+            
             if (!_activeEnemies.Contains(enemy))
                 _activeEnemies.Add(enemy);
+            
 
             Vector2 spawnPosition = GetRandomPoint();
             enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
-
+            
             enemy.Initialize(pool, _enemyManager);
             enemy.StopPhysics(false);
 

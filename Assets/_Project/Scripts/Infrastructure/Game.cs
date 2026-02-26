@@ -17,11 +17,11 @@ namespace _Project.Scripts.Infrastructure
         private readonly ScoreData _scoreData;
 
         private LosePresenter _losePresenter;
-        private TimePauseController _pauseController;
+        private WeaponShooter _weaponShooter;
 
         public Game(IGameFactory gameFactory, EndGameView endGameScreen, GeneratorEnemies generatorEnemies,
             Character player, IControllable controller, InputForShoot shoot,
-            RestartGame restartGame, ScoreData scoreData, TimePauseController pauseController)
+            RestartGame restartGame, ScoreData scoreData, WeaponShooter weaponShooter)
         {
             _gameFactory = gameFactory;
             _endGameScreen = endGameScreen;
@@ -31,7 +31,7 @@ namespace _Project.Scripts.Infrastructure
             _shoot = shoot;
             _restartGame = restartGame;
             _scoreData = scoreData;
-            _pauseController = pauseController;
+            _weaponShooter = weaponShooter;
         }
 
         public void Initialize()
@@ -59,12 +59,11 @@ namespace _Project.Scripts.Infrastructure
 
         private void OnGameOver()
         {
-            _pauseController.SetPause(true);
-            
             _controller?.StopPhysics();
             _controller?.DisableControl();
 
             _shoot.DisableControl();
+            _weaponShooter.StopAllShoots(); 
 
             _generatorEnemies.StopSpawning();
             _generatorEnemies.StopAllEnemies();
@@ -82,7 +81,6 @@ namespace _Project.Scripts.Infrastructure
 
         private void OnRestartButtonClick()
         {
-            _pauseController.SetPause(false);
             _losePresenter.Close();
             _restartGame.RestartScene();
         }
