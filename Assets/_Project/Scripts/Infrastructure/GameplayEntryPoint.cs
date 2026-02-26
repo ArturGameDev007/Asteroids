@@ -36,6 +36,8 @@ namespace _Project.Scripts.Infrastructure
 
         private LosePresenter _losePresenter;
 
+        private IShootable _shootable;
+        
         private Character _player;
         private PlayerController _controller;
         private InputForShoot _shoot;
@@ -72,8 +74,8 @@ namespace _Project.Scripts.Infrastructure
             
             SetupSystems();
 
-            _game = new Game(_gameFactory, _endGameScreen, _generatorEnemies, _player, _controller, _shoot, _restartGame,
-                _scoreData, _weapons);
+            _game = new Game(_gameFactory, _endGameScreen, _generatorEnemies, _player, _controller, _shootable, _restartGame,
+                _scoreData);
         }
 
         private void Start()
@@ -91,6 +93,8 @@ namespace _Project.Scripts.Infrastructure
         {
             _gameFactory.CreateBackground(_background, _mainCamera);
             _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot);
+            _shootable = new PlayerShootProvider(_shoot);
+            
             _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _weapons);
         }
 

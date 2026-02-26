@@ -2,7 +2,7 @@
 
 namespace _Project.Scripts.Player.Weapons
 {
-    public class InputForShoot : MonoBehaviour, IShootable
+    public class InputForShoot : MonoBehaviour
     {
         private const int INPUT_MOUSE_LEFT = 0;
         private const int INPUT_MOUSE_RIGHT = 1;
@@ -35,15 +35,14 @@ namespace _Project.Scripts.Player.Weapons
             InputLaserShoot();
         }
 
-
-        public void EnableControl()
+        public void SetPause(bool isPaused)
         {
-            _isPaused = false;
+            _isPaused = isPaused;
         }
 
-        public void DisableControl()
+        public void StopShoots()
         {
-            _isPaused = true;
+            _shooter?.StopAllShoots();
         }
 
         private void InputBulletShoot()

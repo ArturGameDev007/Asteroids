@@ -12,16 +12,15 @@ namespace _Project.Scripts.Infrastructure
         private readonly GeneratorEnemies _generatorEnemies;
         private readonly Character _player;
         private readonly IControllable _controller;
-        private readonly InputForShoot _shoot;
+        private readonly IShootable _shoot;
         private readonly RestartGame _restartGame;
         private readonly ScoreData _scoreData;
 
         private LosePresenter _losePresenter;
-        private WeaponShooter _weaponShooter;
 
         public Game(IGameFactory gameFactory, EndGameView endGameScreen, GeneratorEnemies generatorEnemies,
-            Character player, IControllable controller, InputForShoot shoot,
-            RestartGame restartGame, ScoreData scoreData, WeaponShooter weaponShooter)
+            Character player, IControllable controller, IShootable shoot,
+            RestartGame restartGame, ScoreData scoreData)
         {
             _gameFactory = gameFactory;
             _endGameScreen = endGameScreen;
@@ -31,7 +30,6 @@ namespace _Project.Scripts.Infrastructure
             _shoot = shoot;
             _restartGame = restartGame;
             _scoreData = scoreData;
-            _weaponShooter = weaponShooter;
         }
 
         public void Initialize()
@@ -63,7 +61,7 @@ namespace _Project.Scripts.Infrastructure
             _controller?.DisableControl();
 
             _shoot.DisableControl();
-            _weaponShooter.StopAllShoots(); 
+            _shoot.StopAllShoots(); 
 
             _generatorEnemies.StopSpawning();
             _generatorEnemies.StopAllEnemies();
