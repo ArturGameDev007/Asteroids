@@ -32,7 +32,6 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private EnemyDeathTracker _deathTracker;
 
         private IGameFactory _gameFactory;
-        private IInstantiator _instantiator;
 
         private LosePresenter _losePresenter;
 
@@ -61,9 +60,7 @@ namespace _Project.Scripts.Infrastructure
         {
             _mainCamera = Camera.main;
 
-            _instantiator = GetComponent<IInstantiator>();
-
-            _gameFactory = new GameFactory(_instantiator);
+            _gameFactory = new GameFactory();
             _weapons = new WeaponShooter();
             _restartGame = new RestartGame();
             _scoreData = new ScoreData();

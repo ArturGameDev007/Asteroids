@@ -9,18 +9,11 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameFactory : IGameFactory
     {
-        private readonly IInstantiator _instantiator;
-
-        public GameFactory(IInstantiator instantiator)
-        {
-            _instantiator = instantiator;
-        }
-
         public void CreateBackground(BackgroundView prefab, Camera mainCamera)
         {
             int orderInLayer = -5;
 
-            BackgroundView background = _instantiator.CreatePrefab(prefab);
+            BackgroundView background = Object.Instantiate(prefab);
             SetHierarchy(background.transform, 3);
 
             background.Construct(mainCamera, orderInLayer);
@@ -32,7 +25,7 @@ namespace _Project.Scripts.Infrastructure
             if (prefab == null)
                 throw new MissingReferenceException("Префаб игрока не передан!");
 
-            Character playerObject = _instantiator.CreatePrefab(prefab);
+            Character playerObject = Object.Instantiate(prefab);
             SetHierarchy(playerObject.transform, 2);
 
             playerObject.TryGetComponent(out character);
@@ -46,7 +39,7 @@ namespace _Project.Scripts.Infrastructure
         public void CreatePerformanceShip(PerformanceShipView prefab, Character player, PlayerController controller,
             InputForShoot shoot, WeaponShooter shooter)
         {
-            PerformanceShipView performanceShip = _instantiator.CreatePrefab(prefab);
+            PerformanceShipView performanceShip = Object.Instantiate(prefab);
             SetHierarchy(performanceShip.transform, 4);
 
             if (performanceShip.TryGetComponent(out CoordinateDisplay display))
@@ -68,7 +61,7 @@ namespace _Project.Scripts.Infrastructure
         public void CreateEndGameScreen(EndGameView prefab, ScoreData scoreData,
             out LosePresenter presenter)
         {
-            EndGameView endGameContainer = _instantiator.CreatePrefab(prefab);
+            EndGameView endGameContainer = Object.Instantiate(prefab);
             SetHierarchy(endGameContainer.transform, 5);
             
             if (endGameContainer.TryGetComponent(out LoseView loseView))
