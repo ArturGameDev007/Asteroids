@@ -8,6 +8,8 @@ namespace _Project.Scripts.UI.GameScreen
         [SerializeField] private EnemyManager _enemy;
         [SerializeField] private ScoreData _scoreData;
 
+        private EnemyDeathNotifier _listener;
+
         public void Initialize(ScoreData scoreData)
         {
             _scoreData = scoreData;

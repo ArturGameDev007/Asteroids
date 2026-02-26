@@ -9,7 +9,7 @@ namespace _Project.Scripts.Infrastructure
     {
         private readonly IGameFactory _gameFactory;
         private readonly EndGameView _endGameScreen;
-        private readonly GeneratorEnemies _generatorEnemies;
+        private readonly EnemySpawnController _enemySpawnController;
         private readonly Character _player;
         private readonly IControllable _controller;
         private readonly IShootable _shoot;
@@ -18,13 +18,13 @@ namespace _Project.Scripts.Infrastructure
 
         private LosePresenter _losePresenter;
 
-        public Game(IGameFactory gameFactory, EndGameView endGameScreen, GeneratorEnemies generatorEnemies,
+        public Game(IGameFactory gameFactory, EndGameView endGameScreen, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot,
             RestartGame restartGame, ScoreData scoreData)
         {
             _gameFactory = gameFactory;
             _endGameScreen = endGameScreen;
-            _generatorEnemies = generatorEnemies;
+            _enemySpawnController = enemySpawnController;
             _player = player;
             _controller = controller;
             _shoot = shoot;
@@ -41,7 +41,8 @@ namespace _Project.Scripts.Infrastructure
 
             _controller?.EnableControl();
             _shoot.EnableControl();
-            _generatorEnemies.StartSpawning();
+
+            _enemySpawnController.StartAll();
         }
 
         public void Dispose()
@@ -61,10 +62,9 @@ namespace _Project.Scripts.Infrastructure
             _controller?.DisableControl();
 
             _shoot.DisableControl();
-            _shoot.StopAllShoots(); 
-
-            _generatorEnemies.StopSpawning();
-            _generatorEnemies.StopAllEnemies();
+            _shoot.StopAllShoots();
+            
+            _enemySpawnController.StopAndClearAll();
 
             ShowLoseScreen();
 

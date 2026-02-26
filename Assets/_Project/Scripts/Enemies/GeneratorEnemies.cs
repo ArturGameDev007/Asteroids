@@ -1,63 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using _Project.Scripts.Player;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
-    public class GeneratorEnemies : MonoBehaviour
+    public abstract class GeneratorEnemies : MonoBehaviour
     {
         [Header("Manager")]
         [SerializeField] private EnemyManager _enemyManager;
 
         [Header("Settings Delays Enemies")]
-        [SerializeField] private float _asteroidDelay = 2f;
-        [SerializeField] private float _ufoDelay = 4f;
         [SerializeField] private float _spawnOffset = 2.0f;
+        [SerializeField] private float _delay = 3f;
 
-        private ObjectPool<Enemy> _asteroid;
-        private ObjectPool<Enemy> _ufo;
+        private ObjectPool<Enemy> _pool;
         
         private List<Enemy> _activeEnemies = new();
         
         private Camera _camera;
         
-        private Coroutine _asteroidCoroutine;
-        private Coroutine _ufoCoroutine;
+        private Coroutine _spawnCoroutine;
         
         private float _positionX;
         private float _positionY;
 
         private bool _isGameActive;
         
-        private Character _player;
-
-        public void Initialize(ObjectPool<Enemy> asteroid, ObjectPool<Enemy> ufo, Character player)
+        public void Initialize(ObjectPool<Enemy> pool)
         {
-            _asteroid = asteroid;
-            _ufo = ufo;
-            _player = player;
-
+            _pool = pool;
             _camera = Camera.main;
         }
 
         public void StartSpawning()
         {
             _isGameActive = true;
-            
-            _asteroidCoroutine = StartCoroutine(GeneratorEnemy(_asteroid, _asteroidDelay));
-            _ufoCoroutine = StartCoroutine(GeneratorEnemy(_ufo, _ufoDelay));
+
+            _spawnCoroutine = StartCoroutine(GeneratorEnemy(_pool,  _delay));
         }
 
         public void StopSpawning()
         {
             _isGameActive = false;
             
-            if (_asteroidCoroutine != null)
-                StopCoroutine(_asteroidCoroutine);
-            
-            if (_asteroidCoroutine != null)
-                StopCoroutine(_ufoCoroutine);
+            if (_spawnCoroutine != null)
+                StopCoroutine(_spawnCoroutine);
         }
 
         public void StopAllEnemies()
@@ -67,7 +54,7 @@ namespace _Project.Scripts.Enemies
         
             _activeEnemies.Clear();
         }
-
+        
         private IEnumerator GeneratorEnemy(ObjectPool<Enemy> pool, float delay)
         {
             _isGameActive = true;
@@ -77,38 +64,30 @@ namespace _Project.Scripts.Enemies
             while (_isGameActive)
             {
                 yield return wait;
+                
                 SpawnEntity(pool);
             }
         }
 
-        private void SpawnEntity(ObjectPool<Enemy> pool)
+        private void SpawnEntity(ObjectPool<Enemy>  pool)
         {
-            if (pool == null) return;
-
             var enemy = pool.GetObject();
             
             if (!_activeEnemies.Contains(enemy))
                 _activeEnemies.Add(enemy);
-            
 
             Vector2 spawnPosition = GetRandomPoint();
             enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
             
             enemy.Initialize(pool, _enemyManager);
+            
+            ConfigureSpawn(enemy, spawnPosition);
+            
             enemy.StopPhysics(false);
-
-            if (enemy is AsteroidController asteroid)
-            {
-                asteroid.enabled = true;
-                asteroid.SetDirection(spawnPosition);
-            }
-            else if (enemy is FlyingSaucerController ufo)
-            {
-                ufo.enabled = true;
-                ufo.Construct(_player.transform);
-            }
         }
+        
+        protected abstract void ConfigureSpawn(Enemy enemy, Vector2 spawnPosition);
 
         private Vector2 GetRandomPoint()
         {

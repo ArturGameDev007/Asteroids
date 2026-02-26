@@ -10,26 +10,28 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-        [Header("Prefabs UI")] 
-        [SerializeField] private BackgroundView _background;
+        [Header("Prefabs UI")] [SerializeField]
+        private BackgroundView _background;
+
         [SerializeField] private PerformanceShipView _performanceShip;
         [SerializeField] private EndGameView _endGameScreen;
 
-        [Header("Prefab Player")]
-        [SerializeField] private Character _ship;
+        [Header("Prefab Player")] [SerializeField]
+        private Character _ship;
 
-        [Header("Prefabs Projectiles")]
-        [SerializeField] private Bullet _bulletPrefabs;
+        [Header("Prefabs Projectiles")] [SerializeField]
+        private Bullet _bulletPrefabs;
+
         [SerializeField] private Laser _laserPrefabs;
 
-        [Header("Enemies Settings")]
-        [SerializeField] private Enemy _asteroidPrefabs;
-        [SerializeField] private Enemy _ufoPrefabs;
-        
-        [SerializeField] private GeneratorEnemies _generatorEnemies;
+        [Header("Enemies Settings")] [SerializeField]
+        private Enemy _asteroidPrefabs;
 
-        [Header("UI & Data")]
-        [SerializeField] private EnemyDeathTracker _deathTracker;
+        [SerializeField] private Enemy _ufoPrefabs;
+
+        [SerializeField] private GeneratorEnemies[] _generatorEnemies;
+
+        [Header("UI & Data")] [SerializeField] private EnemyDeathTracker _deathTracker;
 
         private IGameFactory _gameFactory;
 
@@ -37,7 +39,7 @@ namespace _Project.Scripts.Infrastructure
 
         private IControllable _controllable;
         private IShootable _shootable;
-        
+
         private Character _player;
         private PlayerController _controller;
         private InputForShoot _shoot;
@@ -56,6 +58,8 @@ namespace _Project.Scripts.Infrastructure
         private RestartGame _restartGame;
         private ScoreData _scoreData;
 
+        private EnemySpawnController _spawnController;
+
         private void Awake()
         {
             _mainCamera = Camera.main;
@@ -63,19 +67,20 @@ namespace _Project.Scripts.Infrastructure
             _gameFactory = new GameFactory();
             _weapons = new WeaponShooter();
             _restartGame = new RestartGame();
+            _spawnController = new EnemySpawnController(_generatorEnemies);
             _scoreData = new ScoreData();
 
             CreateGameEntities();
             SetupPools();
-            
+
             _weapons.Initialize(_bulletPool, _laserPool);
-            
+
             SetupSystems();
-            
+
             _controllable = new PlayerControllerAdapter(_controller);
 
-            _game = new Game(_gameFactory, _endGameScreen, _generatorEnemies, _player, _controllable, _shootable, _restartGame,
-                _scoreData);
+            _game = new Game(_gameFactory, _endGameScreen, _spawnController, _player, _controllable, _shootable,
+                _restartGame, _scoreData);
         }
 
         private void Start()
@@ -86,7 +91,10 @@ namespace _Project.Scripts.Infrastructure
         private void OnDestroy()
         {
             _game.Dispose();
-            _asteroidPool.ClearPool();
+            _asteroidPool?.ClearPool();
+            _ufoPool?.ClearPool();
+            _bulletPool?.ClearPool();
+            _laserPool?.ClearPool();
         }
 
         private void CreateGameEntities()
@@ -94,7 +102,7 @@ namespace _Project.Scripts.Infrastructure
             _gameFactory.CreateBackground(_background, _mainCamera);
             _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot);
             _shootable = new PlayerShootProvider(_shoot);
-            
+
             _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _weapons);
         }
 
@@ -116,7 +124,20 @@ namespace _Project.Scripts.Infrastructure
 
         private void SetupSystems()
         {
-            _generatorEnemies.Initialize(_asteroidPool, _ufoPool, _player);
+            foreach (var generator in _generatorEnemies)
+            {
+                if (generator is AsteroidSpawner asteroidGen)
+                {
+                    asteroidGen.Initialize(_asteroidPool);
+                }
+
+                if (generator is UfoSpawner ufoGen)
+                {
+                    ufoGen.Initialize(_ufoPool);
+                    ufoGen.Construct(_player.transform);
+                }
+            }
+
             _deathTracker.Initialize(_scoreData);
         }
     }
