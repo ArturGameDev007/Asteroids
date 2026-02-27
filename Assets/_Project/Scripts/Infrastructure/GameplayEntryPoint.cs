@@ -86,10 +86,6 @@ namespace _Project.Scripts.Infrastructure
         private void OnDestroy()
         {
             _game.Dispose();
-            _asteroidPool?.ClearPool();
-            _ufoPool?.ClearPool();
-            _bulletPool?.ClearPool();
-            _laserPool?.ClearPool();
         }
 
         private void CreateGameEntities()
@@ -130,20 +126,11 @@ namespace _Project.Scripts.Infrastructure
 
         private void SetupSystems()
         {
-            foreach (var generator in _generatorEnemies)
-            {
-                if (generator is AsteroidSpawner asteroidSpawner)
-                {
-                    asteroidSpawner.Initialize(_asteroidPool, _enemyManager);
-                }
-
-                if (generator is UfoSpawner ufoSpawner)
-                {
-                    ufoSpawner.Initialize(_ufoPool, _enemyManager);
-                    ufoSpawner.Construct(_player.transform);
-                }
-            }
-
+            IEnemyInitialize initializer = new EnemyInitializer(_generatorEnemies);
+            
+            initializer.SetupAsteroids(_asteroidPool, _enemyManager);
+            initializer.SetupUfos(_ufoPool, _enemyManager, _player.transform);
+            
             _deathTracker.Initialize(_scoreData, _enemyManager);
         }
     }
