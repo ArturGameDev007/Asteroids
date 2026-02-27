@@ -125,7 +125,7 @@ namespace _Project.Scripts.Infrastructure
             _asteroidPool = new ObjectPool<Enemy>(_asteroidPrefabs, 5, "Asteroid", enemiesContainer);
             _ufoPool = new ObjectPool<Enemy>(_ufoPrefabs, 5, "UFO", enemiesContainer);
             _bulletPool = new ObjectPool<Bullet>(_bulletPrefabs, 5, "Shoot", projectilesContainer);
-            _laserPool = new ObjectPool<Laser>(_laserPrefabs, 5, "Shoot", projectilesContainer);
+            _laserPool = new ObjectPool<Laser>(_laserPrefabs, 10, "Shoot", projectilesContainer);
         }
 
         private void SetupSystems()

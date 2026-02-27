@@ -12,7 +12,7 @@ namespace _Project.Scripts.Player.Weapons
         private ObjectPool<Laser> _laserPool;
 
         private float _laserCooldown = 0.5f;
-        private float _nextLaserShootTime;
+        private float _nextBulletShootTime;
 
         public void Initialize(ObjectPool<Bullet> bulletPool, ObjectPool<Laser> laserPool)
         {
@@ -22,10 +22,10 @@ namespace _Project.Scripts.Player.Weapons
 
         public void ShootBullet(Transform spawnPoint)
         {
-            if (_bulletPool == null || Time.time < _nextLaserShootTime)
+            if (_bulletPool == null || Time.time < _nextBulletShootTime)
                 return;
 
-            _nextLaserShootTime = Time.time + _laserCooldown;
+            _nextBulletShootTime = Time.time + _laserCooldown;
 
             Bullet bullet = _bulletPool.GetObject();
             
@@ -54,7 +54,7 @@ namespace _Project.Scripts.Player.Weapons
             {
                 projectile.StopLifeTimer();
 
-                if (projectile.TryGetComponent(out DirectionShot  directionShot))
+                if (projectile.TryGetComponent(out DirectionShot directionShot))
                     directionShot.StopMovement();
             }
 

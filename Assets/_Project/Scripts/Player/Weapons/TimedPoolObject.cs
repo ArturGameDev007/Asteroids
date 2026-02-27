@@ -5,7 +5,7 @@ namespace _Project.Scripts.Player.Weapons
 {
     public abstract class TimedPoolObject : MonoBehaviour
     {
-        [SerializeField] private float _lifeTime = 3.0f;
+        [SerializeField] private float _lifeTime = 2.0f;
 
         private Coroutine _coroutine;
 
