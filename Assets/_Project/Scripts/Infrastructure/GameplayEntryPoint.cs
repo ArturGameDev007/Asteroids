@@ -34,6 +34,7 @@ namespace _Project.Scripts.Infrastructure
 
         private IControllable _controllable;
         private IShootable _shootable;
+        private IEnemyDeathListener _enemyManager;
         
         private LosePresenter _losePresenter;
 
@@ -63,6 +64,7 @@ namespace _Project.Scripts.Infrastructure
             _gameFactory = new GameFactory();
             _weapons = new WeaponShooter();
             _restartGame = new RestartGame();
+            _enemyManager = new EnemyManager(); 
             _spawnController = new EnemySpawnController(_generatorEnemies);
             _scoreData = new ScoreData();
 
@@ -122,19 +124,19 @@ namespace _Project.Scripts.Infrastructure
         {
             foreach (var generator in _generatorEnemies)
             {
-                if (generator is AsteroidSpawner asteroidGen)
+                if (generator is AsteroidSpawner asteroidSpawner)
                 {
-                    asteroidGen.Initialize(_asteroidPool);
+                    asteroidSpawner.Initialize(_asteroidPool, _enemyManager);
                 }
 
-                if (generator is UfoSpawner ufoGen)
+                if (generator is UfoSpawner ufoSpawner)
                 {
-                    ufoGen.Initialize(_ufoPool);
-                    ufoGen.Construct(_player.transform);
+                    ufoSpawner.Initialize(_ufoPool, _enemyManager);
+                    ufoSpawner.Construct(_player.transform);
                 }
             }
 
-            _deathTracker.Initialize(_scoreData);
+            _deathTracker.Initialize(_scoreData, _enemyManager);
         }
     }
 }

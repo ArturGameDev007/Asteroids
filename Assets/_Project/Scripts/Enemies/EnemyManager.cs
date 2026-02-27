@@ -1,9 +1,8 @@
 using System;
-using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
-    public class EnemyManager : MonoBehaviour, IEnemyDeathListener
+    public class EnemyManager : IEnemyDeathListener
     {
         public event Action OnEnemyKilled;
 

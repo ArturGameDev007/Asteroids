@@ -6,13 +6,13 @@ namespace _Project.Scripts.Enemies
 {
     public abstract class GeneratorEnemies : MonoBehaviour
     {
-        [Header("Manager")]
-        [SerializeField] private EnemyManager _enemyManager;
+        // [Header("Manager")]
 
         [Header("Settings Delays Enemies")]
         [SerializeField] private float _spawnOffset = 2.0f;
         [SerializeField] private float _delay = 3f;
 
+        private IEnemyDeathListener _enemyManager;
         private ObjectPool<Enemy> _pool;
         
         private List<Enemy> _activeEnemies = new();
@@ -26,10 +26,11 @@ namespace _Project.Scripts.Enemies
 
         private bool _isGameActive;
         
-        public void Initialize(ObjectPool<Enemy> pool)
+        public void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager)
         {
-            _pool = pool;
             _camera = Camera.main;
+            _pool = pool;
+            _enemyManager = enemyManager;
         }
 
         public void StartSpawning()
