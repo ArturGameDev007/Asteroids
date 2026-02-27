@@ -5,24 +5,32 @@ namespace _Project.Scripts.Enemies
 {
     public class EnemyInitializer : IEnemyInitialize
     {
-        private AsteroidSpawner _asteroidSpawners;
-        private UfoSpawner _ufoSpawner;
+        private GeneratorEnemies[] _generatorEnemies;
 
         public EnemyInitializer(GeneratorEnemies[] generatorEnemies)
         {
-            _asteroidSpawners = generatorEnemies.OfType<AsteroidSpawner>().FirstOrDefault();
-            _ufoSpawner = generatorEnemies.OfType<UfoSpawner>().FirstOrDefault();
+            _generatorEnemies = generatorEnemies;
         }
 
         public void SetupAsteroid(ObjectPool<Enemy> pool, IEnemyDeathListener manager)
         {
-            _asteroidSpawners?.Initialize(pool, manager);
+            foreach (var enemy in _generatorEnemies)
+            {
+                if (enemy is AsteroidSpawner asteroid)
+                    asteroid.Initialize(pool, manager);
+            }
         }
 
         public void SetupUfo(ObjectPool<Enemy> pool, IEnemyDeathListener manager, Transform player)
         {
-            _ufoSpawner?.Initialize(pool, manager);
-            _ufoSpawner?.Construct(player);
+            foreach (var enemy in _generatorEnemies)
+            {
+                if (enemy is UfoSpawner ufoSpawner)
+                {
+                    ufoSpawner.Initialize(pool, manager);
+                    ufoSpawner.Construct(player);
+                }
+            }
         }
     }
 }
