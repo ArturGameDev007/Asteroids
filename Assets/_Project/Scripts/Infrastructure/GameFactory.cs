@@ -21,7 +21,7 @@ namespace _Project.Scripts.Infrastructure
         }
 
         public void CreatePlayer(Character prefab, out Character character, out PlayerController controller,
-            out InputForShoot shoot)
+            out InputForShoot shoot, out ICollisionHandler collisionHandler)
         {
             if (prefab == null)
                 throw new MissingReferenceException("Префаб игрока не передан!");
@@ -32,8 +32,9 @@ namespace _Project.Scripts.Infrastructure
             playerObject.TryGetComponent(out character);
             playerObject.TryGetComponent(out controller);
             playerObject.TryGetComponent(out shoot);
+            playerObject.TryGetComponent(out collisionHandler);
 
-            if (character == null || controller == null || shoot == null)
+            if (character == null || controller == null || shoot == null || collisionHandler == null)
                 Debug.LogError("На префабе игрока не хватает компонентов!");
         }
 

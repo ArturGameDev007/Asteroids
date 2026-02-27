@@ -11,7 +11,6 @@ namespace _Project.Scripts.Infrastructure
     {
         [Header("Prefabs UI-Background")]
         [SerializeField] private Canvas _backgroundCanvas;
-
         [SerializeField] private PerformanceShipView _performanceShip;
         [SerializeField] private EndGameView _endGameScreen;
 
@@ -31,10 +30,10 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private EnemyDeathTracker _deathTracker;
         
         private IGameFactory _gameFactory;
-
         private IControllable _controllable;
         private IShootable _shootable;
         private IEnemyDeathListener _enemyManager;
+        private ICollisionHandler _collisionHandler;
         
         private LosePresenter _losePresenter;
 
@@ -70,12 +69,10 @@ namespace _Project.Scripts.Infrastructure
 
             CreateGameEntities();
             SetupPools();
-
+            
             _weapons.Initialize(_bulletPool, _laserPool);
-
+            
             SetupSystems();
-
-            _controllable = new PlayerControllerAdapter(_controller);
 
             _game = new Game(_gameFactory, _endGameScreen, _spawnController, _player, _controllable, _shootable,
                 _restartGame, _scoreData);
@@ -98,10 +95,21 @@ namespace _Project.Scripts.Infrastructure
         private void CreateGameEntities()
         {
             _gameFactory.CreateBackground(_backgroundCanvas, _mainCamera);
-            _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot);
-            _shootable = new PlayerShootProvider(_shoot);
-
+            _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot, out _collisionHandler);
+            InitializePlayer(_collisionHandler);
+            
             _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _weapons);
+        }
+
+        private void InitializePlayer(ICollisionHandler  collisionHandler)
+        {
+            IInputService inputService = new InputController();
+            _controller.Construct(inputService);
+            
+            _controllable = new PlayerControllerAdapter(_controller);
+            _player.Construct(_controllable, collisionHandler);
+            
+            _shootable = new PlayerShootProvider(_shoot);
         }
 
         private void SetupPools()

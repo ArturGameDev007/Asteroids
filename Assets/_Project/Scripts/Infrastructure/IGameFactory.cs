@@ -9,7 +9,7 @@ namespace _Project.Scripts.Infrastructure
     public interface IGameFactory
     {
         public void CreateBackground(Canvas prefab, Camera mainCamera);
-        public void CreatePlayer(Character prefab, out Character character, out PlayerController controller, out InputForShoot shoot);
+        public void CreatePlayer(Character prefab, out Character character, out PlayerController controller, out InputForShoot shoot, out ICollisionHandler collisionHandler);
         public void CreatePerformanceShip(PerformanceShipView prefab, Character player, PlayerController controller, InputForShoot shoot, WeaponShooter shooter);
         public void CreateEndGameScreen(EndGameView prefab, ScoreData scoreData, out LosePresenter losePresenter);
     }

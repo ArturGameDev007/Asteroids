@@ -11,19 +11,22 @@ namespace _Project.Scripts.Player
         [SerializeField] private float _rotationSpeed;
         [SerializeField] private float _forceInput;
 
+        private IInputService _controllerInput;
         private Rigidbody2D _head2D;
-        private InputProvider _providerInput;
 
         private bool _isPaused;
 
         private Vector3 _startPosition;
 
+        public void Construct(IInputService controllerInput)
+        {
+            _controllerInput = controllerInput;
+        }
+
         private void Awake()
         {
             if (_head2D == null)
                 _head2D = GetComponent<Rigidbody2D>();
-
-            _providerInput = new InputProvider();
         }
 
         private void Start()
@@ -36,8 +39,8 @@ namespace _Project.Scripts.Player
             if (_isPaused)
                 return;
 
-            _providerInput.UpdateHorizontalInput();
-            _providerInput.UpdateVerticalInput();
+            _controllerInput.UpdateHorizontalInput();
+            _controllerInput.UpdateVerticalInput();
 
             HandleRotation();
         }
@@ -49,7 +52,7 @@ namespace _Project.Scripts.Player
 
             Move();
         }
-        
+
         public void SetPaused(bool paused)
         {
             _isPaused = paused;
@@ -65,7 +68,7 @@ namespace _Project.Scripts.Player
             transform.position = _startPosition;
             transform.rotation = Quaternion.identity;
         }
-        
+
         public void StopPhysics()
         {
             _isPaused = true;
@@ -77,7 +80,7 @@ namespace _Project.Scripts.Player
 
         private void Move()
         {
-            float moveVertical = _providerInput.VerticalInput;
+            float moveVertical = _controllerInput.VerticalInput;
 
             if (moveVertical > 0)
             {
@@ -89,7 +92,7 @@ namespace _Project.Scripts.Player
 
         private void HandleRotation()
         {
-            float rotationHorizontal = _providerInput.HorizontalInput;
+            float rotationHorizontal = _controllerInput.HorizontalInput;
             float rotationAmount = -rotationHorizontal * _rotationSpeed * Time.deltaTime;
 
             transform.Rotate(X_ANGLE, Y_ANGLE, rotationAmount);

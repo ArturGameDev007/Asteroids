@@ -12,20 +12,24 @@ namespace _Project.Scripts.Player
         
         private IControllable _controllable;
         private ICollisionHandler _collisionHandler;
-
-        private void Awake()
+        
+        public void Construct(IControllable controllable, ICollisionHandler collisionHandler)
         {
-            var player = GetComponent<PlayerController>();
+            _controllable = controllable;
+            _collisionHandler = collisionHandler;
             
-            _controllable = new PlayerControllerAdapter(player);
-            
-            _collisionHandler = GetComponent<ICollisionHandler>();
-        }
-
-        private void Start()
-        {
             _collisionHandler.OnCollisionDetected += ProcessCollision;
         }
+
+        // private void Awake()
+        // {
+        //     var player = GetComponent<PlayerController>();
+        //     
+        //     _controllable = new PlayerControllerAdapter(player);
+        //     
+        //     _collisionHandler = GetComponent<ICollisionHandler>();
+        // }
+
 
         private void OnDestroy()
         {
