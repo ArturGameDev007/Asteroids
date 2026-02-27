@@ -8,15 +8,16 @@ namespace _Project.Scripts.Player.Weapons
         [SerializeField] private float _lifeTime = 3.0f;
 
         private Coroutine _coroutine;
-        
-        private void OnDestroy()
+
+        private void OnEnable()
         {
             StopLifeTimer();
+            _coroutine = StartCoroutine(ReturnRoutine());
         }
-        
-        protected void StartLifeTimer()
+
+        private void OnDisable()
         {
-            _coroutine = StartCoroutine(ReturnRoutine());   
+            StopLifeTimer();
         }
 
         public void StopLifeTimer()

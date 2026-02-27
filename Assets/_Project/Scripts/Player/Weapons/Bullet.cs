@@ -9,13 +9,11 @@ namespace _Project.Scripts.Player.Weapons
 
         public void Initialize(IObjectReturner<Bullet> returner)
         {
-            StartLifeTimer();
             _returner = returner;
         }
 
         protected override void ReturnToPool()
         {
-            StopLifeTimer();
             _returner?.ReturnPool(this);
         }
 

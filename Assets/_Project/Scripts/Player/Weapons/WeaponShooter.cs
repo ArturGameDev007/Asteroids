@@ -29,10 +29,10 @@ namespace _Project.Scripts.Player.Weapons
 
             Bullet bullet = _bulletPool.GetObject();
             
-            _activeProjectiles.Add(bullet);
-            
             bullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             bullet.Initialize(_bulletPool);
+            
+            _activeProjectiles.Add(bullet);
         }
 
         public void ShootLaser(Transform spawnPoint)
@@ -41,11 +41,11 @@ namespace _Project.Scripts.Player.Weapons
                 return;
 
             Laser laser = _laserPool.GetObject();
-            
-            _activeProjectiles.Add(laser);
 
             laser.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             laser.Initialize(_laserPool);
+            
+            _activeProjectiles.Add(laser);
         }
 
         public void StopAllShoots()
