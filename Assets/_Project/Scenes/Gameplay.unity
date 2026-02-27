@@ -578,7 +578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c292813b9dab54da9e7432cb89007a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _background: {fileID: 2215494606810428197, guid: 706471e4a7448cf4c83df1b0cad6e350, type: 3}
+  _backgroundCanvas: {fileID: 1257377806477324128, guid: 706471e4a7448cf4c83df1b0cad6e350, type: 3}
   _performanceShip: {fileID: 2094023753586929040, guid: a752461b71d007d41a3f9643f9183b0f, type: 3}
   _endGameScreen: {fileID: 5460865261052969232, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
   _ship: {fileID: -1081479925413627390, guid: 77fd289117485cb4482536e1624733f6, type: 3}
