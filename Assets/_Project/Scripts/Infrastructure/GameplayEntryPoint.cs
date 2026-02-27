@@ -128,8 +128,8 @@ namespace _Project.Scripts.Infrastructure
         {
             IEnemyInitialize initializer = new EnemyInitializer(_generatorEnemies);
             
-            initializer.SetupAsteroids(_asteroidPool, _enemyManager);
-            initializer.SetupUfos(_ufoPool, _enemyManager, _player.transform);
+            initializer.SetupAsteroid(_asteroidPool, _enemyManager);
+            initializer.SetupUfo(_ufoPool, _enemyManager, _player.transform);
             
             _deathTracker.Initialize(_scoreData, _enemyManager);
         }

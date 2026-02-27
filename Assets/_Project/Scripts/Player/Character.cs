@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace _Project.Scripts.Player
 {
-    [RequireComponent(typeof(PlayerController))]
-    [RequireComponent(typeof(HandlerCrashWithEnemy))]
     public class Character : MonoBehaviour
     {
         public event Action OnGameOver;
