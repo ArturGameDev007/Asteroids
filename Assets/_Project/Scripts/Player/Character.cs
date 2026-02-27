@@ -21,16 +21,6 @@ namespace _Project.Scripts.Player
             _collisionHandler.OnCollisionDetected += ProcessCollision;
         }
 
-        // private void Awake()
-        // {
-        //     var player = GetComponent<PlayerController>();
-        //     
-        //     _controllable = new PlayerControllerAdapter(player);
-        //     
-        //     _collisionHandler = GetComponent<ICollisionHandler>();
-        // }
-
-
         private void OnDestroy()
         {
             _collisionHandler.OnCollisionDetected -= ProcessCollision;
