@@ -2,16 +2,17 @@ using UnityEngine;
 
 namespace _Project.Scripts.UI.Background
 {
-    [RequireComponent((typeof(Canvas)))]
-    public class BackgroundView : MonoBehaviour
+    public class BackgroundView
     {
         private Canvas _canvas;
 
+        public BackgroundView(Canvas canvas)
+        {
+            _canvas = canvas;
+        }
+
         public void Construct(Camera mainCamera, int orderInLayer)
         {
-            if (_canvas == null) 
-                _canvas = GetComponent<Canvas>();
-
             _canvas.renderMode = RenderMode.ScreenSpaceCamera;
             _canvas.worldCamera = mainCamera;
             _canvas.sortingOrder = orderInLayer;

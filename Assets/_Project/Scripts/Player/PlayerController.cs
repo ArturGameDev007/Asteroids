@@ -12,7 +12,7 @@ namespace _Project.Scripts.Player
         [SerializeField] private float _forceInput;
 
         private Rigidbody2D _head2D;
-        private InputController _controllerInput;
+        private InputProvider _providerInput;
 
         private bool _isPaused;
 
@@ -23,7 +23,7 @@ namespace _Project.Scripts.Player
             if (_head2D == null)
                 _head2D = GetComponent<Rigidbody2D>();
 
-            _controllerInput = new InputController();
+            _providerInput = new InputProvider();
         }
 
         private void Start()
@@ -36,8 +36,8 @@ namespace _Project.Scripts.Player
             if (_isPaused)
                 return;
 
-            _controllerInput.UpdateHorizontalInput();
-            _controllerInput.UpdateVerticalInput();
+            _providerInput.UpdateHorizontalInput();
+            _providerInput.UpdateVerticalInput();
 
             HandleRotation();
         }
@@ -77,7 +77,7 @@ namespace _Project.Scripts.Player
 
         private void Move()
         {
-            float moveVertical = _controllerInput.VerticalInput;
+            float moveVertical = _providerInput.VerticalInput;
 
             if (moveVertical > 0)
             {
@@ -89,7 +89,7 @@ namespace _Project.Scripts.Player
 
         private void HandleRotation()
         {
-            float rotationHorizontal = _controllerInput.HorizontalInput;
+            float rotationHorizontal = _providerInput.HorizontalInput;
             float rotationAmount = -rotationHorizontal * _rotationSpeed * Time.deltaTime;
 
             transform.Rotate(X_ANGLE, Y_ANGLE, rotationAmount);

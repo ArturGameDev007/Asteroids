@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Player
 {
-    public class InputController
+    public class InputProvider
     {
         private const string HORIZONTAL = "Horizontal";
         private const string VERTICAL = "Vertical";
@@ -21,5 +21,3 @@ namespace _Project.Scripts.Player
         }
     }
 }
-
-

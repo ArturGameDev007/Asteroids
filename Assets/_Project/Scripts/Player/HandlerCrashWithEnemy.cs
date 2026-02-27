@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Player
 {
+    [RequireComponent(typeof(PolygonCollider2D))]
     public class HandlerCrashWithEnemy : MonoBehaviour, ICollisionHandler
     {
         public event Action<IEnemy> OnCollisionDetected;

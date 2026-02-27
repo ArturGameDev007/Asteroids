@@ -9,14 +9,15 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameFactory : IGameFactory
     {
-        public void CreateBackground(BackgroundView prefab, Camera mainCamera)
+        public void CreateBackground(Canvas prefab, Camera mainCamera)
         {
             int orderInLayer = -5;
 
-            BackgroundView background = Object.Instantiate(prefab);
+            Canvas background = Object.Instantiate(prefab);
             SetHierarchy(background.transform, 3);
 
-            background.Construct(mainCamera, orderInLayer);
+            BackgroundView backgroundView = new BackgroundView(background);
+            backgroundView.Construct(mainCamera, orderInLayer);
         }
 
         public void CreatePlayer(Character prefab, out Character character, out PlayerController controller,

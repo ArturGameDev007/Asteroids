@@ -1,7 +1,6 @@
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
-using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using UnityEngine;
@@ -10,35 +9,33 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-        [Header("Prefabs UI")] [SerializeField]
-        private BackgroundView _background;
+        [Header("Prefabs UI-Background")]
+        [SerializeField] private Canvas _backgroundCanvas;
 
         [SerializeField] private PerformanceShipView _performanceShip;
         [SerializeField] private EndGameView _endGameScreen;
 
-        [Header("Prefab Player")] [SerializeField]
-        private Character _ship;
+        [Header("Prefab Player")]
+        [SerializeField] private Character _ship;
 
-        [Header("Prefabs Projectiles")] [SerializeField]
-        private Bullet _bulletPrefabs;
-
+        [Header("Prefabs Projectiles")]
+        [SerializeField] private Bullet _bulletPrefabs;
         [SerializeField] private Laser _laserPrefabs;
 
-        [Header("Enemies Settings")] [SerializeField]
-        private Enemy _asteroidPrefabs;
-
+        [Header("Enemies Settings")] 
+        [SerializeField] private Enemy _asteroidPrefabs;
         [SerializeField] private Enemy _ufoPrefabs;
-
         [SerializeField] private GeneratorEnemies[] _generatorEnemies;
 
-        [Header("UI & Data")] [SerializeField] private EnemyDeathTracker _deathTracker;
-
+        [Header("UI & Data")]
+        [SerializeField] private EnemyDeathTracker _deathTracker;
+        
         private IGameFactory _gameFactory;
-
-        private LosePresenter _losePresenter;
 
         private IControllable _controllable;
         private IShootable _shootable;
+        
+        private LosePresenter _losePresenter;
 
         private Character _player;
         private PlayerController _controller;
@@ -63,7 +60,6 @@ namespace _Project.Scripts.Infrastructure
         private void Awake()
         {
             _mainCamera = Camera.main;
-
             _gameFactory = new GameFactory();
             _weapons = new WeaponShooter();
             _restartGame = new RestartGame();
@@ -99,7 +95,7 @@ namespace _Project.Scripts.Infrastructure
 
         private void CreateGameEntities()
         {
-            _gameFactory.CreateBackground(_background, _mainCamera);
+            _gameFactory.CreateBackground(_backgroundCanvas, _mainCamera);
             _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot);
             _shootable = new PlayerShootProvider(_shoot);
 
