@@ -6,19 +6,16 @@ namespace _Project.Scripts.Enemies
 {
     public abstract class GeneratorEnemies : MonoBehaviour
     {
-        // [Header("Manager")]
-
         [Header("Settings Delays Enemies")]
         [SerializeField] private float _spawnOffset = 2.0f;
         [SerializeField] private float _delay = 3f;
 
+        private List<Enemy> _activeEnemies = new();
+        
         private IEnemyDeathListener _enemyManager;
         private ObjectPool<Enemy> _pool;
         
-        private List<Enemy> _activeEnemies = new();
-        
         private Camera _camera;
-        
         private Coroutine _spawnCoroutine;
         
         private float _positionX;
