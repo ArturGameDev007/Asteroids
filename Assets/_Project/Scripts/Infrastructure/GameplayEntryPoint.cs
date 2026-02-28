@@ -14,10 +14,10 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private PerformanceShipView _performanceShip;
         [SerializeField] private EndGameView _endGameScreen;
 
-        [Header("Prefab Player")]
+        [Header("Prefab Player")] 
         [SerializeField] private Character _ship;
 
-        [Header("Prefabs Projectiles")]
+        [Header("Prefabs Projectiles")] 
         [SerializeField] private Bullet _bulletPrefabs;
         [SerializeField] private Laser _laserPrefabs;
 
@@ -28,13 +28,13 @@ namespace _Project.Scripts.Infrastructure
 
         [Header("UI & Data")]
         [SerializeField] private EnemyDeathTracker _deathTracker;
-        
+
         private IGameFactory _gameFactory;
         private IControllable _controllable;
         private IShootable _shootable;
         private IEnemyDeathListener _enemyManager;
         private ICollisionHandler _collisionHandler;
-        
+
         private LosePresenter _losePresenter;
 
         private Character _player;
@@ -63,15 +63,15 @@ namespace _Project.Scripts.Infrastructure
             _gameFactory = new GameFactory();
             _weapons = new WeaponShooter();
             _restartGame = new RestartGame();
-            _enemyManager = new EnemyManager(); 
+            _enemyManager = new EnemyManager();
             _spawnController = new EnemySpawnController(_generatorEnemies);
             _scoreData = new ScoreData();
 
             CreateGameEntities();
             SetupPools();
-            
+
             _weapons.Initialize(_bulletPool, _laserPool);
-            
+
             SetupSystems();
 
             _game = new Game(_gameFactory, _endGameScreen, _spawnController, _player, _controllable, _shootable,
@@ -93,18 +93,18 @@ namespace _Project.Scripts.Infrastructure
             _gameFactory.CreateBackground(_backgroundCanvas, _mainCamera);
             _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot, out _collisionHandler);
             InitializePlayer(_collisionHandler);
-            
+
             _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _weapons);
         }
 
-        private void InitializePlayer(ICollisionHandler  collisionHandler)
+        private void InitializePlayer(ICollisionHandler collisionHandler)
         {
             IInputService inputService = new InputController();
             _controller.Construct(inputService);
-            
+
             _controllable = new PlayerControllerAdapter(_controller);
             _player.Construct(_controllable, collisionHandler);
-            
+
             _shootable = new PlayerShootProvider(_shoot);
         }
 
@@ -127,10 +127,10 @@ namespace _Project.Scripts.Infrastructure
         private void SetupSystems()
         {
             IEnemyInitialize initializer = new EnemyInitializer(_generatorEnemies);
-            
+
             initializer.SetupAsteroid(_asteroidPool, _enemyManager);
             initializer.SetupUfo(_ufoPool, _enemyManager, _player.transform);
-            
+
             _deathTracker.Initialize(_scoreData, _enemyManager);
         }
     }
