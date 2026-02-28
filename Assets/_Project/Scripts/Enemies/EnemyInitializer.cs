@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
@@ -16,8 +15,8 @@ namespace _Project.Scripts.Enemies
         {
             foreach (var enemy in _generatorEnemies)
             {
-                if (enemy is AsteroidSpawner asteroid)
-                    asteroid.Initialize(pool, manager);
+                if (enemy.TryGetComponent(out AsteroidSpawner asteroidSpawner))
+                    asteroidSpawner.Initialize(pool, manager);
             }
         }
 
@@ -25,7 +24,7 @@ namespace _Project.Scripts.Enemies
         {
             foreach (var enemy in _generatorEnemies)
             {
-                if (enemy is UfoSpawner ufoSpawner)
+                if (enemy.TryGetComponent(out UfoSpawner ufoSpawner))
                 {
                     ufoSpawner.Initialize(pool, manager);
                     ufoSpawner.Construct(player);
