@@ -20,25 +20,23 @@ namespace _Project.Scripts.Infrastructure
             backgroundView.Construct(mainCamera, orderInLayer);
         }
 
-        public void CreatePlayer(Character prefab, out Character character, out PlayerController controller,
-            out InputForShoot shoot, out ICollisionHandler collisionHandler)
+        public void CreatePlayer(PlayerController prefab, out PlayerController controller, out InputForShoot shoot, out ICollisionHandler collisionHandler)
         {
             if (prefab == null)
                 throw new MissingReferenceException("Префаб игрока не передан!");
 
-            Character playerObject = Object.Instantiate(prefab);
+            PlayerController playerObject = Object.Instantiate(prefab);
             SetHierarchy(playerObject.transform, 2);
 
-            playerObject.TryGetComponent(out character);
             playerObject.TryGetComponent(out controller);
             playerObject.TryGetComponent(out shoot);
             playerObject.TryGetComponent(out collisionHandler);
 
-            if (character == null || controller == null || shoot == null || collisionHandler == null)
+            if (controller == null || shoot == null || collisionHandler == null)
                 Debug.LogError("На префабе игрока не хватает компонентов!");
         }
 
-        public void CreatePerformanceShip(PerformanceShipView prefab, Character player, PlayerController controller,
+        public void CreatePerformanceShip(PerformanceShipView prefab, PlayerController player,
             InputForShoot shoot, WeaponShooter shooter)
         {
             PerformanceShipView performanceShip = Object.Instantiate(prefab);
@@ -47,7 +45,7 @@ namespace _Project.Scripts.Infrastructure
             if (performanceShip.TryGetComponent(out CoordinateDisplay display))
             {
                 Rigidbody2D head = player?.GetComponent<Rigidbody2D>();
-                display?.Initialize(controller, head);
+                display?.Initialize(player, head);
             }
             
             if (performanceShip.GenerateLaser != null && performanceShip.ViewCurrentAmountLaser != null)

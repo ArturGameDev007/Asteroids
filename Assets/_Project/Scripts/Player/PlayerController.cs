@@ -21,12 +21,11 @@ namespace _Project.Scripts.Player
         public void Construct(IInputService controllerInput)
         {
             _controllerInput = controllerInput;
-        }
 
-        private void Awake()
-        {
             if (_head2D == null)
                 _head2D = GetComponent<Rigidbody2D>();
+
+            _isPaused = false;
         }
 
         private void Start()
@@ -36,7 +35,7 @@ namespace _Project.Scripts.Player
 
         private void Update()
         {
-            if (_isPaused)
+            if (_isPaused || _controllerInput == null)
                 return;
 
             _controllerInput.UpdateHorizontalInput();
@@ -47,7 +46,7 @@ namespace _Project.Scripts.Player
 
         private void FixedUpdate()
         {
-            if (_isPaused)
+            if (_isPaused || _controllerInput == null)
                 return;
 
             Move();
@@ -64,6 +63,7 @@ namespace _Project.Scripts.Player
 
             _head2D.simulated = true;
             _head2D.velocity = Vector2.zero;
+            _head2D.angularVelocity = 0f;
 
             transform.position = _startPosition;
             transform.rotation = Quaternion.identity;

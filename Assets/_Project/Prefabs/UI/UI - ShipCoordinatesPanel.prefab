@@ -588,8 +588,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coordinateText: {fileID: 4813132491366911421}
-  _targetValue: {fileID: 0}
-  _rigidbody2D: {fileID: 0}
+  _targetValue: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+  _rigidbody2D: {fileID: 978683251110895336, guid: 77fd289117485cb4482536e1624733f6, type: 3}
 --- !u!114 &2094023753586929040
 MonoBehaviour:
   m_ObjectHideFlags: 0

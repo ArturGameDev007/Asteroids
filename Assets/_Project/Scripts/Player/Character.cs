@@ -1,17 +1,16 @@
 using System;
 using _Project.Scripts.Enemies;
-using UnityEngine;
 
 namespace _Project.Scripts.Player
 {
-    public class Character : MonoBehaviour
+    public class Character
     {
         public event Action OnGameOver;
         
         private IControllable _controllable;
         private ICollisionHandler _collisionHandler;
-        
-        public void Construct(IControllable controllable, ICollisionHandler collisionHandler)
+
+        public Character(IControllable controllable, ICollisionHandler collisionHandler)
         {
             _controllable = controllable;
             _collisionHandler = collisionHandler;
@@ -19,7 +18,7 @@ namespace _Project.Scripts.Player
             _collisionHandler.OnCollisionDetected += ProcessCollision;
         }
 
-        private void OnDestroy()
+        public void Destruct()
         {
             _collisionHandler.OnCollisionDetected -= ProcessCollision;
         }

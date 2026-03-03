@@ -21,7 +21,7 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private PoolConfig _poolConfig;
 
         [Header("Prefabs")]
-        [SerializeField] private Character _ship;
+        [SerializeField] private PlayerController _shipPrefab;
         [SerializeField] private Bullet _bulletPrefabs;
         [SerializeField] private Laser _laserPrefabs;
         [SerializeField] private Enemy _asteroidPrefabs;
@@ -34,8 +34,8 @@ namespace _Project.Scripts.Infrastructure
         private IEnemyDeathListener _enemyManager;
         private ICollisionHandler _collisionHandler;
 
+        private PlayerController _controller; 
         private Character _player;
-        private PlayerController _controller;
         private InputForShoot _shoot;
         private WeaponShooter _weaponShooter;
 
@@ -82,10 +82,10 @@ namespace _Project.Scripts.Infrastructure
         private void CreateGameEntities()
         {
             _gameFactory.CreateBackground(_backgroundCanvas, _mainCamera);
-            _gameFactory.CreatePlayer(_ship, out _player, out _controller, out _shoot, out _collisionHandler);
+            _gameFactory.CreatePlayer(_shipPrefab, out  _controller,  out _shoot, out _collisionHandler);
             InitializePlayer(_collisionHandler);
-
-            _gameFactory.CreatePerformanceShip(_performanceShip, _player, _controller, _shoot, _weaponShooter);
+            
+            _gameFactory.CreatePerformanceShip(_performanceShip, _controller, _shoot, _weaponShooter);
         }
 
         private void InitializePlayer(ICollisionHandler collisionHandler)
@@ -94,8 +94,8 @@ namespace _Project.Scripts.Infrastructure
             _controller.Construct(inputService);
 
             _controllable = new PlayerControllerAdapter(_controller);
-            _player.Construct(_controllable, collisionHandler);
-
+            _player = new Character(_controllable, collisionHandler);
+ 
             _shootable = new PlayerShootProvider(_shoot);
         }
 
@@ -109,11 +109,9 @@ namespace _Project.Scripts.Infrastructure
             Transform projectilesContainer = new GameObject("Weapon_Category").transform;
             projectilesContainer.parent = rootPool;
 
-            _asteroidPool = new ObjectPool<Enemy>(_asteroidPrefabs, _poolConfig.AsteroidPoolSize, "Asteroid",
-                enemiesContainer);
+            _asteroidPool = new ObjectPool<Enemy>(_asteroidPrefabs, _poolConfig.AsteroidPoolSize, "Asteroid", enemiesContainer);
             _ufoPool = new ObjectPool<Enemy>(_ufoPrefabs, _poolConfig.UfoPoolSize, "UFO", enemiesContainer);
-            _bulletPool =
-                new ObjectPool<Bullet>(_bulletPrefabs, _poolConfig.BulletPoolSize, "Shoot", projectilesContainer);
+            _bulletPool = new ObjectPool<Bullet>(_bulletPrefabs, _poolConfig.BulletPoolSize, "Shoot", projectilesContainer);
             _laserPool = new ObjectPool<Laser>(_laserPrefabs, _poolConfig.LaserPoolSize, "Shoot", projectilesContainer);
         }
 
@@ -122,7 +120,7 @@ namespace _Project.Scripts.Infrastructure
             IEnemyInitialize initializer = new EnemyInitializer(_generatorEnemies);
 
             initializer.SetupAsteroid(_asteroidPool, _enemyManager);
-            initializer.SetupUfo(_ufoPool, _enemyManager, _player.transform);
+            initializer.SetupUfo(_ufoPool, _enemyManager, _controller.transform);
 
             _deathTracker.Initialize(_scoreData, _enemyManager);
         }
