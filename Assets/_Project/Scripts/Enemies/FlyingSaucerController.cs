@@ -6,8 +6,6 @@ namespace _Project.Scripts.Enemies
     public class FlyingSaucerController : Enemy
     {
         [SerializeField] private Transform _target;
-        // [SerializeField] private float _rotationSpeed = 30f;
-        
         [SerializeField] private UfoConfig _ufoConfig;
         
         public void Construct(Transform target)
@@ -23,7 +21,7 @@ namespace _Project.Scripts.Enemies
             Vector2 directionToPlayer = (targetPosition - currentPosition).normalized;
             RotateTowardPlayer(directionToPlayer);
             
-            Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, EnemyConfig.Speed * Time.deltaTime);
+            Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, _ufoConfig.Speed * Time.deltaTime);
             Head2D.MovePosition(directionMove);
         }
         

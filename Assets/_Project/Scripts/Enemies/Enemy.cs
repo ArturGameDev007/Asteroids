@@ -7,9 +7,9 @@ namespace _Project.Scripts.Enemies
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Enemy : MonoBehaviour, IEnemy
     {
+        protected EnemyConfig EnemyConfig;
         protected Rigidbody2D Head2D { get; private set; }
-        protected EnemyConfig EnemyConfig { get; private set; }
-        
+
         private IObjectReturner<Enemy> _returner;
         private IEnemyDeathListener _deathListener;
 
@@ -18,17 +18,14 @@ namespace _Project.Scripts.Enemies
         private void Awake()
         {
             Head2D = GetComponent<Rigidbody2D>();
-            if (Head2D != null) 
-            {
-                Head2D.gravityScale = 0f;
-            }
         }
 
-        public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, EnemyConfig  config)
+        public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener,
+            EnemyConfig enemyConfig)
         {
             _returner = returner;
             _deathListener = deathListener;
-            EnemyConfig = config;
+            EnemyConfig = enemyConfig;
         }
 
         private void FixedUpdate()
