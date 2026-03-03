@@ -1,11 +1,15 @@
 using System.Collections;
+using _Project.Scripts.Configs;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Player.Weapons
 {
     public abstract class TimedPoolObject : MonoBehaviour
     {
-        [SerializeField] private float _lifeTime = 2.5f;
+        // [SerializeField] private float _lifeTime = 2.5f;
+        
+        [FormerlySerializedAs("_shootsConfig")] [SerializeField] private ShootingConfig  shootingConfig;
 
         private Coroutine _coroutine;
 
@@ -28,7 +32,7 @@ namespace _Project.Scripts.Player.Weapons
 
         private IEnumerator ReturnRoutine()
         {
-            var wait = new WaitForSeconds(_lifeTime);
+            var wait = new WaitForSeconds(shootingConfig.LifeTime);
             yield return wait;
             
             ReturnToPool();

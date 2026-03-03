@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using _Project.Scripts.Configs;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Player.Weapons
 {
     public class DirectionShot : MonoBehaviour
     {
-        [SerializeField] private float _speed = 5f;
+        // [SerializeField] private float _speed = 5f;
+        
+        [FormerlySerializedAs("_shootsConfig")] [SerializeField] private ShootingConfig shootingConfig;
 
         private void Update()
         {
@@ -13,7 +17,7 @@ namespace _Project.Scripts.Player.Weapons
 
         private void DirectionMove()
         {
-            transform.Translate(transform.up * (_speed * Time.deltaTime), Space.World);
+            transform.Translate(transform.up * (shootingConfig.Speed * Time.deltaTime), Space.World);
         }
         
         public void StopMovement()
