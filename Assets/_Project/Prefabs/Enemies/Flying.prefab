@@ -172,10 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32700fd763936344f864888182b0abad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 1.5
-  <Head2D>k__BackingField: {fileID: 0}
   _target: {fileID: 0}
-  _rotationSpeed: 30
+  _ufoConfig: {fileID: 11400000, guid: 611a46d51a4cfab4098c550d82d1002b, type: 2}
 --- !u!114 &9105957324695588644
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using _Project.Scripts.Configs;
+using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
     public class FlyingSaucerController : Enemy
     {
         [SerializeField] private Transform _target;
-        [SerializeField] private float _rotationSpeed = 30f;
+        // [SerializeField] private float _rotationSpeed = 30f;
+        
+        [SerializeField] private UfoConfig _ufoConfig;
         
         public void Construct(Transform target)
         {
@@ -20,7 +23,7 @@ namespace _Project.Scripts.Enemies
             Vector2 directionToPlayer = (targetPosition - currentPosition).normalized;
             RotateTowardPlayer(directionToPlayer);
             
-            Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, Speed * Time.deltaTime);
+            Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, EnemyConfig.Speed * Time.deltaTime);
             Head2D.MovePosition(directionMove);
         }
         
@@ -34,7 +37,7 @@ namespace _Project.Scripts.Enemies
             Quaternion targetRotation = Quaternion.Euler(new Vector3(rotateX, rotateY, angle));
         
             transform.rotation =
-                Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+                Quaternion.RotateTowards(transform.rotation, targetRotation, _ufoConfig.RotationSpeed * Time.deltaTime);
         }
     }
 }

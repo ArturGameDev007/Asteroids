@@ -13,7 +13,7 @@ namespace _Project.Scripts.Enemies
 
         protected override void Move()
         {
-            Head2D.velocity = _direction * Speed;
+            Head2D.velocity = _direction * EnemyConfig.Speed;
         }
     }
 }

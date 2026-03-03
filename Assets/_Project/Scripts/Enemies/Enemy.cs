@@ -7,10 +7,9 @@ namespace _Project.Scripts.Enemies
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Enemy : MonoBehaviour, IEnemy
     {
-        [field: SerializeField] protected float Speed { get; private set; } = 1.5f;
-        [field: SerializeField] protected Rigidbody2D Head2D { get; private set; }
-
-        private EnemyConfig  _config;
+        protected Rigidbody2D Head2D { get; private set; }
+        protected EnemyConfig EnemyConfig { get; private set; }
+        
         private IObjectReturner<Enemy> _returner;
         private IEnemyDeathListener _deathListener;
 
@@ -19,14 +18,17 @@ namespace _Project.Scripts.Enemies
         private void Awake()
         {
             Head2D = GetComponent<Rigidbody2D>();
-            Head2D.gravityScale = 0f;
+            if (Head2D != null) 
+            {
+                Head2D.gravityScale = 0f;
+            }
         }
 
         public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, EnemyConfig  config)
         {
             _returner = returner;
             _deathListener = deathListener;
-            _config = config;
+            EnemyConfig = config;
         }
 
         private void FixedUpdate()
@@ -55,7 +57,7 @@ namespace _Project.Scripts.Enemies
 
         private void Kill()
         {
-            _deathListener?.OnEnemyDeath(_config);
+            _deathListener?.OnEnemyDeath(EnemyConfig);
             _returner?.ReturnPool(this);
         }
     }
