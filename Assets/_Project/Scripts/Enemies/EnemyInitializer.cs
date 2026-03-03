@@ -26,8 +26,8 @@ namespace _Project.Scripts.Enemies
             {
                 if (enemy.TryGetComponent(out UfoSpawner ufoSpawner))
                 {
-                    ufoSpawner.Initialize(pool, manager);
                     ufoSpawner.Construct(player);
+                    ufoSpawner.Initialize(pool, manager);
                 }
             }
         }

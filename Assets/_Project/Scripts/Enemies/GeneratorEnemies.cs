@@ -23,7 +23,7 @@ namespace _Project.Scripts.Enemies
 
         private bool _isGameActive;
         
-        public void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager)
+        public virtual void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager)
         {
             _camera = Camera.main;
             _pool = pool;
