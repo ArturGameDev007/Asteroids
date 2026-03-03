@@ -39,11 +39,6 @@ namespace _Project.Scripts.Enemies
             objectType.gameObject.SetActive(false);
         }
 
-        public void ClearPool()
-        {
-            _pool.Clear();
-        }
-
         private void AddObjects(int count)
         {
             for (int i = 0; i < count; i++)
