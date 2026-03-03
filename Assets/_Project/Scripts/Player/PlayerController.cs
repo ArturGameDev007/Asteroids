@@ -1,3 +1,4 @@
+using _Project.Scripts.Configs;
 using UnityEngine;
 
 namespace _Project.Scripts.Player
@@ -8,8 +9,7 @@ namespace _Project.Scripts.Player
         private const float X_ANGLE = 0f;
         private const float Y_ANGLE = 0f;
 
-        [SerializeField] private float _rotationSpeed;
-        [SerializeField] private float _forceInput;
+        [SerializeField] private PlayerControllerConfig _playerControllerConfig;
 
         private IInputService _controllerInput;
         private Rigidbody2D _head2D;
@@ -86,14 +86,14 @@ namespace _Project.Scripts.Player
             {
                 Vector2 direction = transform.up;
 
-                _head2D.AddForce(direction * _forceInput);
+                _head2D.AddForce(direction * _playerControllerConfig.ForceInput);
             }
         }
 
         private void HandleRotation()
         {
             float rotationHorizontal = _controllerInput.HorizontalInput;
-            float rotationAmount = -rotationHorizontal * _rotationSpeed * Time.deltaTime;
+            float rotationAmount = -rotationHorizontal * _playerControllerConfig.RotationSpeed * Time.deltaTime;
 
             transform.Rotate(X_ANGLE, Y_ANGLE, rotationAmount);
         }

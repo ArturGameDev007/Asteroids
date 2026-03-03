@@ -10,9 +10,6 @@ namespace _Project.Scripts.Player.Weapons
         public event Action<int> OnLaserChanged;
         public event Action<float> OnReloadProgress;
 
-        // [SerializeField] private int _maxAmountLaser = 20;
-        // [SerializeField] private float _reloadTime = 5f;
-        
         [SerializeField] private LaserConfig _laserConfig;
 
         public int CurrentAmmonLaser { get; private set; }

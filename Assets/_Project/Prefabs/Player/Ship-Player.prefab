@@ -228,8 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379e1362fd05851438811edabb1386f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 90
-  _forceInput: 6
+  _playerControllerConfig: {fileID: 11400000, guid: 45543a7f4c7d25d46a997801c3ea1470, type: 2}
 --- !u!114 &6076999410980347914
 MonoBehaviour:
   m_ObjectHideFlags: 0
