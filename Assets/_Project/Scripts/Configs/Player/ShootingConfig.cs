@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.Configs
+namespace _Project.Scripts.Configs.Player
 {
     [CreateAssetMenu(fileName = "", menuName = "Configs/PlayerController/Weapon/Shooting", order = 51)]
     public class ShootingConfig : ScriptableObject

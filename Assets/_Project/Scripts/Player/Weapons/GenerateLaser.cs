@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using _Project.Scripts.Configs;
+using _Project.Scripts.Configs.Player;
 using UnityEngine;
 
 namespace _Project.Scripts.Player.Weapons

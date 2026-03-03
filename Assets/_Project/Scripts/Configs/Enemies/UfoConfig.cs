@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.Configs
+namespace _Project.Scripts.Configs.Enemies
 {
     [CreateAssetMenu(fileName = "UfoConfig", menuName = "Configs/Enemies/Ufo", order = 51)]
     public class UfoConfig : EnemyConfig

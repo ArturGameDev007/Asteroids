@@ -1,5 +1,5 @@
 ﻿using System;
-using _Project.Scripts.Configs;
+using _Project.Scripts.Configs.Enemies;
 using UnityEngine;
 
 namespace _Project.Scripts.UI.GameScreen
@@ -12,7 +12,6 @@ namespace _Project.Scripts.UI.GameScreen
         [field: SerializeField] public int Score { get; private set; }
         
         private int _zeroCountScore = 0;
-        // private int _scoreForKill = 10;
 
         public void Reset()
         {

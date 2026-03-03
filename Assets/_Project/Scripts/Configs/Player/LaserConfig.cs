@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.Configs
+namespace _Project.Scripts.Configs.Player
 {
     [CreateAssetMenu(fileName = "LaserConfig", menuName = "Configs/PlayerController/Weapon/LaserConfig", order = 51)]
     public class LaserConfig : ScriptableObject

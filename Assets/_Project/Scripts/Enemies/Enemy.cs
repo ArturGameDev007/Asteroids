@@ -1,4 +1,4 @@
-﻿using _Project.Scripts.Configs;
+﻿using _Project.Scripts.Configs.Enemies;
 using _Project.Scripts.Player.Weapons;
 using UnityEngine;
 

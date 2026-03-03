@@ -1,5 +1,5 @@
 using System;
-using _Project.Scripts.Configs;
+using _Project.Scripts.Configs.Enemies;
 
 namespace _Project.Scripts.Enemies
 {

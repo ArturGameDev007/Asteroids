@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using _Project.Scripts.Configs;
+using _Project.Scripts.Configs.Enemies;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies

@@ -1,5 +1,5 @@
 using System;
-using _Project.Scripts.Configs;
+using _Project.Scripts.Configs.PoolObjects;
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;

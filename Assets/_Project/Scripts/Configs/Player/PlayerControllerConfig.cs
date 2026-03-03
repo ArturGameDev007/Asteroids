@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.Configs
+namespace _Project.Scripts.Configs.Player
 {
     [CreateAssetMenu(fileName = "NewPlayerController", menuName = "Configs/PlayerController/StaticData", order = 51)]
     public class PlayerControllerConfig : ScriptableObject
