@@ -1,12 +1,11 @@
 using _Project.Scripts.Configs;
 using _Project.Scripts.Enemies;
-using UnityEngine;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    public class EnemyDeathTracker : MonoBehaviour
+    public class EnemyDeathTracker
     {
-        [SerializeField] private ScoreData _scoreData;
+        private ScoreData _scoreData;
 
         private IEnemyDeathListener _enemy;
 
@@ -14,14 +13,11 @@ namespace _Project.Scripts.UI.GameScreen
         {
             _scoreData = scoreData;
             _enemy = enemyManager;
-        }
-
-        private void Start()
-        {
+            
             _enemy.OnEnemyKilled += OnEnemyDied;
         }
 
-        private void OnDestroy()
+        public void Dispose()
         {
             _enemy.OnEnemyKilled -= OnEnemyDied;
         }

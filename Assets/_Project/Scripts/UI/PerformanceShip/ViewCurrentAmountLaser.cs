@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.UI.PerformanceShip
 {
-    [RequireComponent((typeof(GenerateLaser)))]
+    [RequireComponent(typeof(GenerateLaser))]
     public class ViewCurrentAmountLaser : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textlaser;

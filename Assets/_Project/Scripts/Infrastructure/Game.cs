@@ -15,12 +15,13 @@ namespace _Project.Scripts.Infrastructure
         private readonly IShootable _shoot;
         private readonly RestartGame _restartGame;
         private readonly ScoreData _scoreData;
+        private readonly EnemyDeathTracker _deathTracker;
 
         private LosePresenter _losePresenter;
 
         public Game(IGameFactory gameFactory, EndGameView endGameScreen, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot,
-            RestartGame restartGame, ScoreData scoreData)
+            RestartGame restartGame, ScoreData scoreData, EnemyDeathTracker  deathTracker)
         {
             _gameFactory = gameFactory;
             _endGameScreen = endGameScreen;
@@ -30,6 +31,7 @@ namespace _Project.Scripts.Infrastructure
             _shoot = shoot;
             _restartGame = restartGame;
             _scoreData = scoreData;
+            _deathTracker = deathTracker;
         }
 
         public void Initialize()
@@ -54,6 +56,8 @@ namespace _Project.Scripts.Infrastructure
                 _losePresenter.OnRestartClick -= OnRestartButtonClick;
                 _losePresenter?.Dispose();
             }
+            
+            _deathTracker?.Dispose();
         }
 
         private void OnGameOver()
