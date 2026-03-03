@@ -1,3 +1,4 @@
+using _Project.Scripts.Configs;
 using _Project.Scripts.Enemies;
 using UnityEngine;
 
@@ -25,9 +26,9 @@ namespace _Project.Scripts.UI.GameScreen
             _enemy.OnEnemyKilled -= OnEnemyDied;
         }
 
-        private void OnEnemyDied()
+        private void OnEnemyDied(EnemyConfig config)
         {
-            _scoreData.AddScore();
+            _scoreData.AddScore(config);
         }
     }
 }

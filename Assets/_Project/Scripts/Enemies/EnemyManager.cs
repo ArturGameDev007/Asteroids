@@ -1,14 +1,15 @@
 using System;
+using _Project.Scripts.Configs;
 
 namespace _Project.Scripts.Enemies
 {
     public class EnemyManager : IEnemyDeathListener
     {
-        public event Action OnEnemyKilled;
+        public event Action<EnemyConfig> OnEnemyKilled;
 
-        public void OnEnemyDeath()
+        public void OnEnemyDeath(EnemyConfig config)
         {
-            OnEnemyKilled?.Invoke();
+            OnEnemyKilled?.Invoke(config);
         }
     }
 }

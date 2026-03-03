@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Player.Weapons;
+﻿using _Project.Scripts.Configs;
+using _Project.Scripts.Player.Weapons;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
@@ -9,6 +10,7 @@ namespace _Project.Scripts.Enemies
         [field: SerializeField] protected float Speed { get; private set; } = 1.5f;
         [field: SerializeField] protected Rigidbody2D Head2D { get; private set; }
 
+        private EnemyConfig  _config;
         private IObjectReturner<Enemy> _returner;
         private IEnemyDeathListener _deathListener;
 
@@ -20,10 +22,11 @@ namespace _Project.Scripts.Enemies
             Head2D.gravityScale = 0f;
         }
 
-        public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener)
+        public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, EnemyConfig  config)
         {
             _returner = returner;
             _deathListener = deathListener;
+            _config = config;
         }
 
         private void FixedUpdate()
@@ -52,7 +55,7 @@ namespace _Project.Scripts.Enemies
 
         private void Kill()
         {
-            _deathListener?.OnEnemyDeath();
+            _deathListener?.OnEnemyDeath(_config);
             _returner?.ReturnPool(this);
         }
     }

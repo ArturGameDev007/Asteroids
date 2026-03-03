@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using _Project.Scripts.Configs;
 using UnityEngine;
 
 namespace _Project.Scripts.Player.Weapons
@@ -9,18 +10,20 @@ namespace _Project.Scripts.Player.Weapons
         public event Action<int> OnLaserChanged;
         public event Action<float> OnReloadProgress;
 
-        [SerializeField] private int _maxAmountLaser = 20;
-        [SerializeField] private float _reloadTime = 5f;
+        // [SerializeField] private int _maxAmountLaser = 20;
+        // [SerializeField] private float _reloadTime = 5f;
+        
+        [SerializeField] private LaserConfig _laserConfig;
 
         public int CurrentAmmonLaser { get; private set; }
         public bool IsReloading { get; private set; }
 
         private void Start()
         {
-            CurrentAmmonLaser = _maxAmountLaser;
+            CurrentAmmonLaser = _laserConfig.MaxAmountLaser;
             ShowInfo();
 
-            OnReloadProgress?.Invoke(_reloadTime);
+            OnReloadProgress?.Invoke(_laserConfig.ReloadTime);
         }
 
         public bool TrySpendAmmo()
@@ -44,7 +47,7 @@ namespace _Project.Scripts.Player.Weapons
         {
             IsReloading = true;
 
-            float timer = _reloadTime;
+            float timer = _laserConfig.ReloadTime;
             float targetTime = 0f;
 
             while (timer > targetTime)
@@ -55,10 +58,10 @@ namespace _Project.Scripts.Player.Weapons
                 yield return null;
             }
 
-            CurrentAmmonLaser = _maxAmountLaser;
+            CurrentAmmonLaser = _laserConfig.MaxAmountLaser;
             ShowInfo();
 
-            OnReloadProgress?.Invoke(_reloadTime);
+            OnReloadProgress?.Invoke(_laserConfig.ReloadTime);
             IsReloading = false;
         }
 

@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using _Project.Scripts.Configs;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
     public abstract class GeneratorEnemies : MonoBehaviour
     {
-        [Header("Settings Delays Enemies")]
-        [SerializeField] private float _spawnOffset = 2.0f;
-        [SerializeField] private float _delay = 3f;
+        [Header("Settings EnemyConfig")]
+        [SerializeField] protected EnemyConfig _config;
 
         private List<Enemy> _activeEnemies = new();
         
@@ -34,7 +34,7 @@ namespace _Project.Scripts.Enemies
         {
             _isGameActive = true;
 
-            _spawnCoroutine = StartCoroutine(GeneratorEnemy(_pool,  _delay));
+            _spawnCoroutine = StartCoroutine(GeneratorEnemy(_pool,  _config.Delay));
         }
 
         public void StopSpawning()
@@ -78,7 +78,7 @@ namespace _Project.Scripts.Enemies
             enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
             
-            enemy.Initialize(pool, _enemyManager);
+            enemy.Initialize(pool, _enemyManager, _config);
             
             ConfigureSpawn(enemy, spawnPosition);
             
@@ -98,7 +98,7 @@ namespace _Project.Scripts.Enemies
             float ViewportMax = 1f;
             float CameraDistanceZ = 10f;
 
-            float margin = _spawnOffset;
+            float margin = _config.SpawnOffset;
             float randomPositionAlongSide = Random.value;
 
             Vector3 viewportPoint;

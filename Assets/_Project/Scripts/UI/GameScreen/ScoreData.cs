@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.Configs;
 using UnityEngine;
 
 namespace _Project.Scripts.UI.GameScreen
@@ -11,7 +12,7 @@ namespace _Project.Scripts.UI.GameScreen
         [field: SerializeField] public int Score { get; private set; }
         
         private int _zeroCountScore = 0;
-        private int _scoreForKill = 10;
+        // private int _scoreForKill = 10;
 
         public void Reset()
         {
@@ -19,9 +20,9 @@ namespace _Project.Scripts.UI.GameScreen
             OnScoreChanged?.Invoke();
         }
 
-        public void AddScore()
+        public void AddScore(EnemyConfig  config)
         {
-            Score += _scoreForKill;
+            Score += config.ScoreForKill;
             OnScoreChanged?.Invoke();
         }
 

@@ -1,3 +1,4 @@
+using _Project.Scripts.Configs;
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
@@ -13,6 +14,9 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private Canvas _backgroundCanvas;
         [SerializeField] private PerformanceShipView _performanceShip;
         [SerializeField] private EndGameView _endGameScreen;
+        
+        [Header("Pool Config")]
+        [SerializeField] private PoolConfig  _poolConfig;
 
         [Header("Prefab Player")] 
         [SerializeField] private Character _ship;
@@ -118,10 +122,10 @@ namespace _Project.Scripts.Infrastructure
             Transform projectilesContainer = new GameObject("Weapon_Category").transform;
             projectilesContainer.parent = rootPool;
 
-            _asteroidPool = new ObjectPool<Enemy>(_asteroidPrefabs, 5, "Asteroid", enemiesContainer);
-            _ufoPool = new ObjectPool<Enemy>(_ufoPrefabs, 5, "UFO", enemiesContainer);
-            _bulletPool = new ObjectPool<Bullet>(_bulletPrefabs, 5, "Shoot", projectilesContainer);
-            _laserPool = new ObjectPool<Laser>(_laserPrefabs, 10, "Shoot", projectilesContainer);
+            _asteroidPool = new ObjectPool<Enemy>(_asteroidPrefabs, _poolConfig.AsteroidPoolSize, "Asteroid", enemiesContainer);
+            _ufoPool = new ObjectPool<Enemy>(_ufoPrefabs, _poolConfig.UfoPoolSize, "UFO", enemiesContainer);
+            _bulletPool = new ObjectPool<Bullet>(_bulletPrefabs, _poolConfig.BulletPoolSize, "Shoot", projectilesContainer);
+            _laserPool = new ObjectPool<Laser>(_laserPrefabs, _poolConfig.LaserPoolSize, "Shoot", projectilesContainer);
         }
 
         private void SetupSystems()
