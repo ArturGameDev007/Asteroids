@@ -15,12 +15,6 @@ namespace _Project.Scripts.UI.GameScreen
             _loseView = loseView;
         }
 
-        // public void Construct(ILoseModel model, ILoseView view)
-        // {
-        //     _loseModel = model;
-        //     _loseView = view;
-        // }
-
         public void Open(int finalScore)
         {
             _loseModel.SaveResult(finalScore);

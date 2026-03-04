@@ -1,38 +1,48 @@
 using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    public class LoseView : ILoseView, IDisposable
+    [RequireComponent(typeof(Canvas))]
+    public class LoseView : MonoBehaviour, ILoseView, IDisposable
     {
         public event Action OnRestartRequested;
-        private readonly LoseUIComponents _loseUIComponents;
+        
+        [SerializeField] private TextMeshProUGUI _textScore;
+        [field: SerializeField] public Button RestartButton { get; private set; }
+        
+        private Canvas _canvas;
 
-        public LoseView(LoseUIComponents loseUIComponents)
+        public void Construct(Button restartButton)
         {
-            _loseUIComponents = loseUIComponents;
-            _loseUIComponents.RestartButton?.onClick.AddListener(OnRestart);
+            _canvas = GetComponent<Canvas>();
+            
+            RestartButton = restartButton;
+            RestartButton?.onClick.AddListener(OnRestart);
         }
-
+        
         public void SetScore(int score)
         {
-            _loseUIComponents.TextScore.text = $"Score: {score.ToString()}";
+            _textScore.text = $"Score: {score.ToString()}";
         }
 
         public void ShowPanel()
         {
-            _loseUIComponents.Canvas.gameObject.SetActive(true);
-            _loseUIComponents.RestartButton.interactable = true;
+            _canvas.gameObject.SetActive(true);
+            RestartButton.interactable = true;
         }
 
         public void HidePanel()
         {
-            _loseUIComponents.Canvas.gameObject.SetActive(false);
-            _loseUIComponents.RestartButton.interactable = false;
+            _canvas.gameObject.SetActive(false);
+            RestartButton.interactable = false;
         }
 
         public void Dispose()
         {
-            _loseUIComponents.RestartButton.onClick.RemoveListener(OnRestart);
+            RestartButton.onClick.RemoveListener(OnRestart);
         }
 
         private void OnRestart()

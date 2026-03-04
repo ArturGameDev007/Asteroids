@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2275616237344249395}
   - component: {fileID: 9009136971575947304}
   - component: {fileID: 5460865261052969232}
-  - component: {fileID: 3976030599937661784}
+  - component: {fileID: 1796660822261427583}
   m_Layer: 5
   m_Name: UI-EndGameScreen
   m_TagString: Untagged
@@ -116,8 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b471673f0682427f94f2beee320ae6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <LoseViewUIComponents>k__BackingField: {fileID: 3976030599937661784}
---- !u!114 &3976030599937661784
+  <LoseView>k__BackingField: {fileID: 1796660822261427583}
+--- !u!114 &1796660822261427583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,11 +126,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1027745613698290874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad1532c034b44ad9867ff670f4721af7, type: 3}
+  m_Script: {fileID: 11500000, guid: 6982f94804c143beba3207ac1ed5ceab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Canvas>k__BackingField: {fileID: 7285421635860712061}
-  <TextScore>k__BackingField: {fileID: 6288423951504225029}
+  _textScore: {fileID: 6288423951504225029}
   <RestartButton>k__BackingField: {fileID: 4572342822539608865}
 --- !u!1 &2044428503877197268
 GameObject:
