@@ -4,7 +4,7 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-        [SerializeField] private GameplayCompositionRoot  _gameplayCompositionRoot;
+        [SerializeField] private GameplayCompositionRoot _gameplayCompositionRoot;
 
         private void Awake()
         {

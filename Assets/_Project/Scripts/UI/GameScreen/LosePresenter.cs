@@ -35,6 +35,9 @@ namespace _Project.Scripts.UI.GameScreen
         public void Dispose()
         {
             Unsubscribe();
+            
+            if (_loseView is IDisposable disposableView) 
+                disposableView.Dispose();
         }
         
         private void Subscribe()

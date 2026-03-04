@@ -64,15 +64,13 @@ namespace _Project.Scripts.Infrastructure
             EndGameView endGameContainer = Object.Instantiate(prefab);
             SetHierarchy(endGameContainer.transform, 5);
             
-            if (endGameContainer.TryGetComponent(out LoseView loseView))
+            if (endGameContainer.LoseViewUIComponents != null)
             {
-                loseView.Construct(loseView.RestartButton);
+                LoseView loseView = new LoseView(endGameContainer.LoseViewUIComponents);
 
                 presenter = new LosePresenter();
                 presenter.Construct(scoreData, loseView);
                 presenter.Enable();
-
-                endGameContainer.Construct(loseView);
             }
             else
             {

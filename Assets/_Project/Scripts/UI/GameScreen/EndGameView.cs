@@ -4,11 +4,6 @@ namespace _Project.Scripts.UI.GameScreen
 {
     public class EndGameView : MonoBehaviour
     {
-        [field: SerializeField] public LoseView LoseView { get; private set; }
-
-        public void Construct(LoseView loseView)
-        {
-            LoseView = loseView;
-        }
+        [field: SerializeField] public LoseUIComponents LoseViewUIComponents { get; private set; }
     }
 }

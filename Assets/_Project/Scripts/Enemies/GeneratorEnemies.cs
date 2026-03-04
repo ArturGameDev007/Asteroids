@@ -62,7 +62,6 @@ namespace _Project.Scripts.Enemies
             while (_isGameActive)
             {
                 yield return wait;
-                
                 SpawnEntity(pool);
             }
         }
@@ -75,9 +74,9 @@ namespace _Project.Scripts.Enemies
                 _activeEnemies.Add(enemy);
 
             Vector2 spawnPosition = GetRandomPoint();
+            
             enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
-            
             enemy.Initialize(pool, _enemyManager, _config);
             
             ConfigureSpawn(enemy, spawnPosition);
