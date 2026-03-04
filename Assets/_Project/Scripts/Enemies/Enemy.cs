@@ -7,11 +7,12 @@ namespace _Project.Scripts.Enemies
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Enemy : MonoBehaviour, IEnemy
     {
-        protected EnemyConfig EnemyConfig;
-        protected Rigidbody2D Head2D { get; private set; }
-
+        private EnemyConfig _enemyConfig;
+        
         private IObjectReturner<Enemy> _returner;
         private IEnemyDeathListener _deathListener;
+        
+        protected Rigidbody2D Head2D { get; private set; }
 
         private bool _canMove;
 
@@ -20,12 +21,11 @@ namespace _Project.Scripts.Enemies
             Head2D = GetComponent<Rigidbody2D>();
         }
 
-        public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener,
-            EnemyConfig enemyConfig)
+        public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, EnemyConfig enemyConfig)
         {
             _returner = returner;
             _deathListener = deathListener;
-            EnemyConfig = enemyConfig;
+            _enemyConfig = enemyConfig;
         }
 
         private void FixedUpdate()
@@ -54,7 +54,7 @@ namespace _Project.Scripts.Enemies
 
         private void Kill()
         {
-            _deathListener?.OnEnemyDeath(EnemyConfig);
+            _deathListener?.OnEnemyDeath(_enemyConfig);
             _returner?.ReturnPool(this);
         }
     }

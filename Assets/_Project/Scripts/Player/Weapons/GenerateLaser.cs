@@ -12,12 +12,12 @@ namespace _Project.Scripts.Player.Weapons
 
         [SerializeField] private LaserConfig _laserConfig;
 
-        public int CurrentAmmonLaser { get; private set; }
-        public bool IsReloading { get; private set; }
+        private int _currentAmmonLaser;
+        private bool _isReloading;
 
         private void Start()
         {
-            CurrentAmmonLaser = _laserConfig.MaxAmountLaser;
+            _currentAmmonLaser = _laserConfig.MaxAmountLaser;
             ShowInfo();
 
             OnReloadProgress?.Invoke(_laserConfig.ReloadTime);
@@ -27,14 +27,14 @@ namespace _Project.Scripts.Player.Weapons
         {
             int minCountLazer = 0;
 
-            if (IsReloading || CurrentAmmonLaser <= 0)
+            if (_isReloading || _currentAmmonLaser <= 0)
                 return false;
 
-            CurrentAmmonLaser--;
+            _currentAmmonLaser--;
 
             ShowInfo();
 
-            if (CurrentAmmonLaser <= minCountLazer)
+            if (_currentAmmonLaser <= minCountLazer)
                 StartCoroutine(ReloadLaser());
 
             return true;
@@ -42,7 +42,7 @@ namespace _Project.Scripts.Player.Weapons
 
         private IEnumerator ReloadLaser()
         {
-            IsReloading = true;
+            _isReloading = true;
 
             float timer = _laserConfig.ReloadTime;
             float targetTime = 0f;
@@ -55,16 +55,16 @@ namespace _Project.Scripts.Player.Weapons
                 yield return null;
             }
 
-            CurrentAmmonLaser = _laserConfig.MaxAmountLaser;
+            _currentAmmonLaser = _laserConfig.MaxAmountLaser;
             ShowInfo();
 
             OnReloadProgress?.Invoke(_laserConfig.ReloadTime);
-            IsReloading = false;
+            _isReloading = false;
         }
 
         private void ShowInfo()
         {
-            OnLaserChanged?.Invoke(CurrentAmmonLaser);
+            OnLaserChanged?.Invoke(_currentAmmonLaser);
         }
     }
 }
