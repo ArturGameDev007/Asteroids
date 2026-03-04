@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f04d50dfe2f446b8bddfd4efbba0b600, type: 3}
-  m_Name: UfoConfig
+  m_Script: {fileID: 11500000, guid: fd92ae2e2b824f09b68a9a73f7904ba0, type: 3}
+  m_Name: Laser 1
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 1.5
-  <SpawnOffset>k__BackingField: 2
-  <Delay>k__BackingField: 3
-  <ScoreForKill>k__BackingField: 10
-  <RotationSpeed>k__BackingField: 30
+  <Speed>k__BackingField: 5
+  <LifeTime>k__BackingField: 2.5
+  <MaxAmountLaser>k__BackingField: 20
+  <ReloadTime>k__BackingField: 5
