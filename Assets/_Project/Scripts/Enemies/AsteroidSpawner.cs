@@ -7,7 +7,6 @@ namespace _Project.Scripts.Enemies
         public override void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager)
         {
             base.Initialize(pool, enemyManager);
-            Debug.Log("Asteroid Spawner инициализирован синхронно");
         }
 
         protected override void ConfigureSpawn(Enemy enemy, Vector2 spawnPosition)
