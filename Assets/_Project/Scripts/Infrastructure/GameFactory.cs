@@ -53,7 +53,6 @@ namespace _Project.Scripts.Infrastructure
                 shoot?.Initialize(performanceShip.GenerateLaser, shooter);
                 
                 performanceShip.ViewCurrentAmountLaser.Initialize();
-        
                 performanceShip.Construct(performanceShip.CoordinateDisplay, performanceShip.ViewCurrentAmountLaser, performanceShip.GenerateLaser);
             }
         }
@@ -68,8 +67,7 @@ namespace _Project.Scripts.Infrastructure
             {
                 LoseView loseView = new LoseView(endGameContainer.LoseViewUIComponents);
 
-                presenter = new LosePresenter();
-                presenter.Construct(scoreData, loseView);
+                presenter = new LosePresenter(scoreData, loseView);
                 presenter.Enable();
             }
             else

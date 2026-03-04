@@ -9,11 +9,17 @@ namespace _Project.Scripts.UI.GameScreen
         
         public event Action OnRestartClick;
 
-        public void Construct(ILoseModel model, ILoseView view)
+        public LosePresenter(ILoseModel loseModel, ILoseView loseView)
         {
-            _loseModel = model;
-            _loseView = view;
+            _loseModel = loseModel;
+            _loseView = loseView;
         }
+
+        // public void Construct(ILoseModel model, ILoseView view)
+        // {
+        //     _loseModel = model;
+        //     _loseView = view;
+        // }
 
         public void Open(int finalScore)
         {
