@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c4c02f83889714ebe64f3921c17e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _asteroidConfig: {fileID: 11400000, guid: 0bbf676da3c204346bee310ffa08f1e8, type: 2}
+  _asteroidConfig: {fileID: 11400000, guid: f4e617410dc6d854aa651578f3e3f029, type: 2}
 --- !u!114 &-5789825315768880599
 MonoBehaviour:
   m_ObjectHideFlags: 0
