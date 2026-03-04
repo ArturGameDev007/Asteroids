@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 724d730869ae41ad87edf8f85cf6c7c3, type: 3}
-  m_Name: Laser
+  m_Script: {fileID: 11500000, guid: ce24268ad9604ef7ba9a44cf74aed221, type: 3}
+  m_Name: Asteroid
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 5
-  <LifeTime>k__BackingField: 2.5
+  <Speed>k__BackingField: 1.5
+  <SpawnOffset>k__BackingField: 2
+  <Delay>k__BackingField: 3
+  <ScoreForKill>k__BackingField: 5

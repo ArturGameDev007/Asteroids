@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _ufoConfig: {fileID: 11400000, guid: 611a46d51a4cfab4098c550d82d1002b, type: 2}
+  _ufoConfig: {fileID: 11400000, guid: bf4556624593afb4294ac4387713fd1b, type: 2}
 --- !u!114 &9105957324695588644
 MonoBehaviour:
   m_ObjectHideFlags: 0
