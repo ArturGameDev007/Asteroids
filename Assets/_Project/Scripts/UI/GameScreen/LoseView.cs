@@ -1,49 +1,39 @@
 using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    [RequireComponent(typeof(Canvas))]
-    public class LoseView : MonoBehaviour, ILoseView
+    public class LoseView : ILoseView, IDisposable
     {
         public event Action OnRestartRequested;
+        private readonly LoseUIComponents _loseUIComponents;
 
-        [SerializeField] private TextMeshProUGUI _textScore;
-        
-        [field: SerializeField] public Button  RestartButton {get; private set;}
-
-        private Canvas _canvas;
-
-        public void Construct(Button button)
+        public LoseView(LoseUIComponents loseUIComponents)
         {
-            _canvas = GetComponent<Canvas>();
-            
-            RestartButton = button;
-            RestartButton?.onClick.AddListener(OnRestart);
+            _loseUIComponents = loseUIComponents;
+            _loseUIComponents.RestartButton?.onClick.AddListener(OnRestart);
         }
 
         public void SetScore(int score)
         {
-            _textScore.text = $"Score: {score.ToString()}";
+            _loseUIComponents.TextScore.text = $"Score: {score.ToString()}";
         }
 
         public void ShowPanel()
         {
-            _canvas.gameObject.SetActive(true);
-            RestartButton.interactable = true;
+            _loseUIComponents.Canvas.gameObject.SetActive(true);
+            _loseUIComponents.RestartButton.interactable = true;
         }
 
         public void HidePanel()
         {
-            _canvas.gameObject.SetActive(true);
-            RestartButton.interactable = false;
+            _loseUIComponents.Canvas.gameObject.SetActive(false);
+            _loseUIComponents.RestartButton.interactable = false;
         }
 
-        private void OnDestroy()
+        public void Dispose()
         {
-            RestartButton.onClick.RemoveListener(OnRestart);
+            _loseUIComponents.RestartButton.onClick.RemoveListener(OnRestart);
         }
 
         private void OnRestart()
