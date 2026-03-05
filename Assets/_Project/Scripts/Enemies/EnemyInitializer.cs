@@ -11,24 +11,12 @@ namespace _Project.Scripts.Enemies
             _generatorEnemies = generatorEnemies;
         }
 
-        public void SetupAsteroid(ObjectPool<Enemy> pool, IEnemyDeathListener manager)
+        public void SetupAllSpawners(ObjectPool<Enemy> asteroidPool,  ObjectPool<Enemy> ufoPool, IEnemyDeathListener manager, Transform player)
         {
-            foreach (var enemy in _generatorEnemies)
+            foreach (var spawner in _generatorEnemies)
             {
-                if (enemy.TryGetComponent(out AsteroidSpawner asteroidSpawner))
-                    asteroidSpawner.Initialize(pool, manager);
-            }
-        }
-
-        public void SetupUfo(ObjectPool<Enemy> pool, IEnemyDeathListener manager, Transform player)
-        {
-            foreach (var enemy in _generatorEnemies)
-            {
-                if (enemy.TryGetComponent(out UfoSpawner ufoSpawner))
-                {
-                    ufoSpawner.Construct(player);
-                    ufoSpawner.Initialize(pool, manager);
-                }
+                ObjectPool<Enemy> targetPool = spawner is UfoSpawner ? ufoPool : asteroidPool;
+                spawner.Initialize(targetPool, manager, player);
             }
         }
     }

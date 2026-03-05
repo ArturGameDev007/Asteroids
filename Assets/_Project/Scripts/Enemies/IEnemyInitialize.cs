@@ -4,8 +4,6 @@ namespace _Project.Scripts.Enemies
 {
     public interface IEnemyInitialize
     {
-        public void SetupAsteroid(ObjectPool<Enemy> pool, IEnemyDeathListener manager);
-
-        public void SetupUfo(ObjectPool<Enemy> pool, IEnemyDeathListener manager, Transform player);
+        public void SetupAllSpawners(ObjectPool<Enemy> asteroidPool,  ObjectPool<Enemy> ufoPool, IEnemyDeathListener manager, Transform player);
     }
 }

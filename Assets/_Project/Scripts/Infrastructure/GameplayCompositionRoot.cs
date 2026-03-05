@@ -118,9 +118,7 @@ namespace _Project.Scripts.Infrastructure
         private void SetupSystems()
         {
             IEnemyInitialize initializer = new EnemyInitializer(_generatorEnemies);
-
-            initializer.SetupAsteroid(_asteroidPool, _enemyManager);
-            initializer.SetupUfo(_ufoPool, _enemyManager, _controller.transform);
+            initializer.SetupAllSpawners(_asteroidPool, _ufoPool, _enemyManager, _controller.transform);
 
             _deathTracker.Initialize(_scoreData, _enemyManager);
         }

@@ -6,8 +6,9 @@ namespace _Project.Scripts.Enemies
     {
         private Transform _player;
 
-        public void Construct(Transform player)
+        public override void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Transform player)
         {
+            base.Initialize(pool, enemyManager, player);
             _player = player;
         }
 
