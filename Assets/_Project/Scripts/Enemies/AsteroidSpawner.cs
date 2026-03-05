@@ -1,6 +1,7 @@
 using _Project.Scripts.Configs.Enemies;
 using UnityEngine;
 
+
 namespace _Project.Scripts.Enemies
 {
     public class AsteroidSpawner : GeneratorEnemies
