@@ -6,16 +6,13 @@ namespace _Project.Scripts.Enemies
 {
     public abstract class GeneratorEnemies
     {
-        // [Header("Settings EnemyConfig")]
-        protected EnemyConfig _config;
-
+        private EnemyConfig _config;
         private List<Enemy> _activeEnemies = new();
         
         private IEnemyDeathListener _enemyManager;
         private ObjectPool<Enemy> _pool;
         
         private Camera _camera;
-        // private Coroutine _spawnCoroutine;
         
         private float _positionX;
         private float _positionY;
@@ -39,12 +36,14 @@ namespace _Project.Scripts.Enemies
 
         public void Process(float  deltaTime)
         {
+            float minTimerThreshold = 0f;
+            
             if (!_isGameActive)
                 return;
             
             _spawnTimer -= deltaTime;
 
-            while (_spawnTimer <= 0f)
+            while (_spawnTimer <= minTimerThreshold)
             {
                 SpawnEntity(_pool);
                 _spawnTimer += _config.Delay;
@@ -54,16 +53,11 @@ namespace _Project.Scripts.Enemies
         public void StartSpawning()
         {
             _isGameActive = true;
-
-            // _spawnCoroutine = StartCoroutine(GeneratorEnemy(_pool,  _config.Delay));
         }
 
         public void StopSpawning()
         {
             _isGameActive = false;
-            
-            // if (_spawnCoroutine != null)
-            //     StopCoroutine(_spawnCoroutine);
         }
 
         public void StopAllEnemies()
@@ -76,19 +70,6 @@ namespace _Project.Scripts.Enemies
             _activeEnemies.Clear();
         }
         
-        // private IEnumerator GeneratorEnemy(ObjectPool<Enemy> pool, float delay)
-        // {
-        //     _isGameActive = true;
-        //
-        //     var wait = new WaitForSeconds(delay);
-        //
-        //     while (_isGameActive)
-        //     {
-        //         yield return wait;
-        //         SpawnEntity(pool);
-        //     }
-        // }
-
         private void SpawnEntity(ObjectPool<Enemy>  pool)
         {
             var enemy = pool.GetObject();

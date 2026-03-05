@@ -12,9 +12,7 @@ namespace _Project.Scripts.Enemies
         public void Process(float  deltaTime)
         {
             foreach (var generator in _generators)
-            {
                 generator.Process(deltaTime);
-            }
         }
 
         public void StartAll()

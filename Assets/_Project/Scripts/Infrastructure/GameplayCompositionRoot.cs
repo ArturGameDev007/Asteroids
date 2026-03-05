@@ -61,9 +61,7 @@ namespace _Project.Scripts.Infrastructure
         private EnemyDeathTracker _deathTracker;
         private EnemySpawnController _spawnController;
 
-        public Game Game { get; private set; }
-
-        public void Compose()
+        public Game Compose()
         {
             _mainCamera = Camera.main;
             _gameFactory = new GameFactory();
@@ -83,7 +81,7 @@ namespace _Project.Scripts.Infrastructure
 
             SetupSystems();
 
-            Game = new Game(_gameFactory, _endGameScreen, _spawnController, _player, _controllable, _shootable,
+            return new Game(_gameFactory, _endGameScreen, _spawnController, _player, _controllable, _shootable,
                 _restartGame, _scoreData, _deathTracker);
         }
 

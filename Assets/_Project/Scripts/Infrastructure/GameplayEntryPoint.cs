@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure
@@ -7,24 +6,26 @@ namespace _Project.Scripts.Infrastructure
     {
         [SerializeField] private GameplayCompositionRoot _gameplayCompositionRoot;
 
+        private Game _game;
+        
         private void Awake()
         {
-            _gameplayCompositionRoot.Compose();
+            _game = _gameplayCompositionRoot.Compose();
         }
 
         private void Start()
         {
-            _gameplayCompositionRoot.Game.Initialize();
+            _game.Initialize();
         }
 
         private void Update()
         {
-            _gameplayCompositionRoot.Game.UpdateSpawn(Time.deltaTime);
+            _game.UpdateSpawn(Time.deltaTime);
         }
 
         private void OnDestroy()
         {
-            _gameplayCompositionRoot.Game.Dispose();
+            _game.Dispose();
         }
     }
 }
