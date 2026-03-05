@@ -47,6 +47,11 @@ namespace _Project.Scripts.Infrastructure
             _enemySpawnController.StartAll();
         }
 
+        public void UpdateSpawn(float deltaTime)
+        {
+            _enemySpawnController.Process(deltaTime);
+        }
+        
         public void Dispose()
         {
             _player.OnGameOver -= OnGameOver;

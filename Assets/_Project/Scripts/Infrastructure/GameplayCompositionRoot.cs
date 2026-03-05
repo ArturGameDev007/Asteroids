@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts.Configs.Enemies;
 using _Project.Scripts.Configs.PoolObjects;
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
@@ -19,6 +20,10 @@ namespace _Project.Scripts.Infrastructure
 
         [Header("Pool Config")]
         [SerializeField] private PoolConfig _poolConfig;
+        
+        [Header("Enemy Configs")]
+        [SerializeField] private EnemyConfig _asteroidConfig;
+        [SerializeField] private EnemyConfig _ufoConfig;
 
         [Header("Prefabs")]
         [SerializeField] private PlayerController _shipPrefab;
@@ -26,7 +31,8 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private Laser _laserPrefabs;
         [SerializeField] private Enemy _asteroidPrefabs;
         [SerializeField] private Enemy _ufoPrefabs;
-        [SerializeField] private GeneratorEnemies[] _generatorEnemies;
+        
+        private GeneratorEnemies[] _generatorEnemies;
 
         private IGameFactory _gameFactory;
         private IControllable _controllable;
@@ -64,12 +70,14 @@ namespace _Project.Scripts.Infrastructure
             _weaponShooter = new WeaponShooter();
             _restartGame = new RestartGame();
             _enemyManager = new EnemyManager();
-            _spawnController = new EnemySpawnController(_generatorEnemies);
             _scoreData = new ScoreData();
             _deathTracker = new EnemyDeathTracker();
 
             CreateGameEntities();
             SetupPools();
+
+            CreateSpawners();
+            _spawnController = new EnemySpawnController(_generatorEnemies);
 
             _weaponShooter.Initialize(_bulletPool, _laserPool);
 
@@ -113,6 +121,11 @@ namespace _Project.Scripts.Infrastructure
             _ufoPool = new ObjectPool<Enemy>(_ufoPrefabs, _poolConfig.UfoPoolSize, "UFO", enemiesContainer);
             _bulletPool = new ObjectPool<Bullet>(_bulletPrefabs, _poolConfig.BulletPoolSize, "Shoot", projectilesContainer);
             _laserPool = new ObjectPool<Laser>(_laserPrefabs, _poolConfig.LaserPoolSize, "Shoot", projectilesContainer);
+        }
+
+        private void CreateSpawners()
+        {
+            _generatorEnemies = new GeneratorEnemies[] { new AsteroidSpawner(_asteroidConfig), new UfoSpawner(_ufoConfig) };
         }
 
         private void SetupSystems()

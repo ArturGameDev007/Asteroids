@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure
@@ -14,6 +15,11 @@ namespace _Project.Scripts.Infrastructure
         private void Start()
         {
             _gameplayCompositionRoot.Game.Initialize();
+        }
+
+        private void Update()
+        {
+            _gameplayCompositionRoot.Game.UpdateSpawn(Time.deltaTime);
         }
 
         private void OnDestroy()

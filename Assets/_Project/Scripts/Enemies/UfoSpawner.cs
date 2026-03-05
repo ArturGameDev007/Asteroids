@@ -1,3 +1,4 @@
+using _Project.Scripts.Configs.Enemies;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
@@ -5,6 +6,8 @@ namespace _Project.Scripts.Enemies
     public class UfoSpawner : GeneratorEnemies
     {
         private Transform _player;
+
+        public UfoSpawner(EnemyConfig config) : base(config){}
 
         public override void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Transform player)
         {

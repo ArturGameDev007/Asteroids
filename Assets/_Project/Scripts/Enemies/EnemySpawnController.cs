@@ -9,6 +9,14 @@ namespace _Project.Scripts.Enemies
             _generators = generators;
         }
 
+        public void Process(float  deltaTime)
+        {
+            foreach (var generator in _generators)
+            {
+                generator.Process(deltaTime);
+            }
+        }
+
         public void StartAll()
         {
             foreach (var generator in _generators) 
