@@ -22,8 +22,7 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private PoolConfig _poolConfig;
         
         [Header("Enemy Configs")]
-        [SerializeField] private EnemyConfig _asteroidConfig;
-        [SerializeField] private EnemyConfig _ufoConfig;
+        [SerializeField] private EnemyConfig[] _enemyConfigs;
 
         [Header("Prefabs")]
         [SerializeField] private PlayerController _shipPrefab;
@@ -123,7 +122,10 @@ namespace _Project.Scripts.Infrastructure
 
         private void CreateSpawners()
         {
-            _generatorEnemies = new GeneratorEnemies[] { new AsteroidSpawner(_asteroidConfig), new UfoSpawner(_ufoConfig) };
+            _generatorEnemies = new GeneratorEnemies[_enemyConfigs.Length];
+
+            for (int i = 0; i < _enemyConfigs.Length; i++)
+                _generatorEnemies[i] = _enemyConfigs[i].CreateSpawn();
         }
 
         private void SetupSystems()

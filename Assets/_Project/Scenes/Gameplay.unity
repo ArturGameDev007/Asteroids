@@ -331,8 +331,9 @@ MonoBehaviour:
     _performanceShip: {fileID: 2094023753586929040, guid: a752461b71d007d41a3f9643f9183b0f, type: 3}
     _endGameScreen: {fileID: 5460865261052969232, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
     _poolConfig: {fileID: 11400000, guid: 8b60ae3e0c03f6a42b06288f24a86e2f, type: 2}
-    _asteroidConfig: {fileID: 11400000, guid: f4e617410dc6d854aa651578f3e3f029, type: 2}
-    _ufoConfig: {fileID: 11400000, guid: c730927372f184849ace991e8aa06ab8, type: 2}
+    _enemyConfigs:
+    - {fileID: 11400000, guid: f4e617410dc6d854aa651578f3e3f029, type: 2}
+    - {fileID: 11400000, guid: c730927372f184849ace991e8aa06ab8, type: 2}
     _shipPrefab: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
     _bulletPrefabs: {fileID: 3242289843733358288, guid: 12deaaaf3585eb74d92fb178f7fc9366, type: 3}
     _laserPrefabs: {fileID: 7444338288434493993, guid: 84b5391dff2e8fd41bfb6478ea67a667, type: 3}
