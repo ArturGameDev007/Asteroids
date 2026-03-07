@@ -1,6 +1,7 @@
 ﻿using _Project.Scripts.Player;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.UI.PerformanceShip
 {
@@ -9,14 +10,15 @@ namespace _Project.Scripts.UI.PerformanceShip
         [Header("Text")]
         [SerializeField] private TextMeshProUGUI _coordinateText;
         
-        [Header("Character")]
-        [SerializeField] private PlayerController _targetValue;
-        [SerializeField] private Rigidbody2D _rigidbody2D;
+        // [Header("Character")]
+        private PlayerController _shipController;
+        private Rigidbody2D _rigidbody2D;
         
-        public void Initialize(PlayerController shipController, Rigidbody2D head)
+        [Inject]
+        public void Construct(PlayerController shipController)
         {
-            _targetValue = shipController;
-            _rigidbody2D = head;
+            _shipController = shipController;
+            _rigidbody2D = shipController.GetComponent<Rigidbody2D>();
         }
 
         private void Update()
@@ -26,9 +28,9 @@ namespace _Project.Scripts.UI.PerformanceShip
 
         private void Performance()
         {
-            Vector3 direction = _targetValue.transform.position;
+            Vector3 direction = _shipController.transform.position;
 
-            float rotationAngleZ = _targetValue.transform.localEulerAngles.z;
+            float rotationAngleZ = _shipController.transform.localEulerAngles.z;
             float speed = _rigidbody2D.velocity.magnitude;
 
             string displayText = string.Format("<b>" + "X={0:F2}, Y={1:F2}\nAngleZ: {2:F1}\nSpeed: {3:F3}" + "</b>",
