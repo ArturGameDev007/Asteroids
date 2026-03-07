@@ -1,6 +1,5 @@
 using _Project.Scripts.Player.Weapons;
 using UnityEngine;
-using Zenject;
 
 namespace _Project.Scripts.UI.PerformanceShip
 {
@@ -9,13 +8,5 @@ namespace _Project.Scripts.UI.PerformanceShip
         [field: SerializeField] public CoordinateDisplay CoordinateDisplay { get; private set; }
         [field: SerializeField] public ViewCurrentAmountLaser ViewCurrentAmountLaser { get; private set; }
         [field: SerializeField] public GenerateLaser GenerateLaser { get; private set; }
-        
-        [Inject]
-        public void Construct(CoordinateDisplay coordinateDisplay,  ViewCurrentAmountLaser viewCurrentAmountLaser,  GenerateLaser generateLaser)
-        {
-            CoordinateDisplay = coordinateDisplay;
-            ViewCurrentAmountLaser = viewCurrentAmountLaser;
-            GenerateLaser = generateLaser;
-        }
     }
 }

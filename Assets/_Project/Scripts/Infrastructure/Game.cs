@@ -41,7 +41,6 @@ namespace _Project.Scripts.Infrastructure
         {
             _scoreData?.Reset();
             _player.ClearState();
-
             _player.OnGameOver += OnGameOver;
 
             _controller?.EnableControl();
