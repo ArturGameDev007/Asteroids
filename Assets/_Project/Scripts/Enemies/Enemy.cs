@@ -21,7 +21,7 @@ namespace _Project.Scripts.Enemies
             Head2D = GetComponent<Rigidbody2D>();
         }
 
-        public void Initialize(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, EnemyConfig enemyConfig)
+        public void Construct(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, EnemyConfig enemyConfig)
         {
             _returner = returner;
             _deathListener = deathListener;

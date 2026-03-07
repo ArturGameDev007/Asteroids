@@ -1,4 +1,5 @@
 using System;
+using Zenject;
 
 namespace _Project.Scripts.UI.GameScreen
 {
@@ -9,6 +10,7 @@ namespace _Project.Scripts.UI.GameScreen
         
         public event Action OnRestartClick;
 
+        [Inject]
         public LosePresenter(ILoseModel loseModel, ILoseView loseView)
         {
             _loseModel = loseModel;
@@ -19,17 +21,13 @@ namespace _Project.Scripts.UI.GameScreen
         {
             _loseModel.SaveResult(finalScore);
             _loseView.ShowPanel();
+            
+            Enable();
         }
 
         public void Close()
         {
             _loseView.HidePanel();
-        }
-        
-        public void Enable()
-        {
-            Subscribe();
-            UpdateScoreView();
         }
 
         public void Dispose()
@@ -38,6 +36,12 @@ namespace _Project.Scripts.UI.GameScreen
             
             if (_loseView is IDisposable disposableView) 
                 disposableView.Dispose();
+        }
+        
+        private void Enable()
+        {
+            Subscribe();
+            UpdateScoreView();
         }
         
         private void Subscribe()

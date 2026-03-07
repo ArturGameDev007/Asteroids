@@ -1,84 +1,28 @@
-using _Project.Scripts.Player;
-using _Project.Scripts.Player.Weapons;
-using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
-using _Project.Scripts.UI.PerformanceShip;
-using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Infrastructure
 {
     public class GameFactory : IGameFactory
     {
-        public void CreateBackground(Canvas prefab, Camera mainCamera)
+        private readonly IInstantiator _instantiator;
+
+        public GameFactory(IInstantiator instantiator)
         {
-            int orderInLayer = -5;
-
-            Canvas background = Object.Instantiate(prefab);
-            SetHierarchy(background.transform, 3);
-
-            BackgroundView backgroundView = new BackgroundView(background);
-            backgroundView.Construct(mainCamera, orderInLayer);
+            _instantiator = instantiator;
         }
 
-        public void CreatePlayer(PlayerController prefab, out PlayerController controller, out InputForShoot shoot, out ICollisionHandler collisionHandler)
+        public LosePresenter CreateEndGameScreen(EndGameView prefab, ILoseModel scoreData)
         {
-            if (prefab == null)
-                throw new MissingReferenceException("Префаб игрока не передан!");
-
-            PlayerController playerObject = Object.Instantiate(prefab);
-            SetHierarchy(playerObject.transform, 2);
-
-            playerObject.TryGetComponent(out controller);
-            playerObject.TryGetComponent(out shoot);
-            playerObject.TryGetComponent(out collisionHandler);
-
-            if (controller == null || shoot == null || collisionHandler == null)
-                Debug.LogError("На префабе игрока не хватает компонентов!");
-        }
-
-        public void CreatePerformanceShip(PerformanceShipView prefab, PlayerController player,
-            InputForShoot shoot, WeaponShooter shooter)
-        {
-            PerformanceShipView performanceShip = Object.Instantiate(prefab);
-            SetHierarchy(performanceShip.transform, 4);
-
-            if (performanceShip.TryGetComponent(out CoordinateDisplay display))
-            {
-                Rigidbody2D head = player?.GetComponent<Rigidbody2D>();
-                display?.Initialize(player, head);
-            }
+            EndGameView endGameView = _instantiator.InstantiatePrefabForComponent<EndGameView>(prefab);
             
-            if (performanceShip.GenerateLaser != null && performanceShip.ViewCurrentAmountLaser != null)
+            if (endGameView.TryGetComponent(out LoseView loseView))
             {
-                shoot?.Initialize(performanceShip.GenerateLaser, shooter);
-                
-                performanceShip.ViewCurrentAmountLaser.Initialize();
-                performanceShip.Construct(performanceShip.CoordinateDisplay, performanceShip.ViewCurrentAmountLaser, performanceShip.GenerateLaser);
+                var presenter = new LosePresenter(scoreData, loseView);
+                return presenter;
             }
-        }
 
-        public void CreateEndGameScreen(EndGameView prefab, ScoreData scoreData,
-            out LosePresenter presenter)
-        {
-            EndGameView endGameContainer = Object.Instantiate(prefab);
-            SetHierarchy(endGameContainer.transform, 5);
-            
-            if (endGameContainer.TryGetComponent(out LoseView loseView))
-            {
-                loseView.Construct(loseView.RestartButton);
-                
-                presenter = new LosePresenter(scoreData, loseView);
-                presenter.Enable();
-            }
-            else
-            {
-                presenter = null;
-            }
-        }
-
-        private void SetHierarchy(Transform target, int index)
-        {
-            target.SetSiblingIndex(index);
+            return null;
         }
     }
 }

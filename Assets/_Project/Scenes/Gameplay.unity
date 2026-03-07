@@ -282,7 +282,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1985787631
+--- !u!1 &1865790111
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -290,22 +290,56 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1985787633}
-  - component: {fileID: 1985787635}
+  - component: {fileID: 1865790114}
+  - component: {fileID: 1865790113}
+  - component: {fileID: 1865790115}
+  - component: {fileID: 1865790116}
   m_Layer: 0
-  m_Name: Gameplay
+  m_Name: SceneContext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1985787633
+--- !u!114 &1865790113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865790111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1865790115}
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &1865790114
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985787631}
+  m_GameObject: {fileID: 1865790111}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -314,35 +348,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1985787635
+--- !u!114 &1865790115
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985787631}
+  m_GameObject: {fileID: 1865790111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2871a8193e4f2d8c4182fe7ed9736a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainCamera: {fileID: 519420031}
+  _backgroundCanvas: {fileID: 1257377806477324128, guid: 706471e4a7448cf4c83df1b0cad6e350, type: 3}
+  _performanceShip: {fileID: 2094023753586929040, guid: a752461b71d007d41a3f9643f9183b0f, type: 3}
+  _endGameScreen: {fileID: 5460865261052969232, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+  _poolConfig: {fileID: 11400000, guid: 8b60ae3e0c03f6a42b06288f24a86e2f, type: 2}
+  _enemyConfigs:
+  - {fileID: 11400000, guid: f4e617410dc6d854aa651578f3e3f029, type: 2}
+  - {fileID: 11400000, guid: c730927372f184849ace991e8aa06ab8, type: 2}
+  _shipPrefab: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+  _bulletPrefabs: {fileID: 3242289843733358288, guid: 12deaaaf3585eb74d92fb178f7fc9366, type: 3}
+  _laserPrefabs: {fileID: 7444338288434493993, guid: 84b5391dff2e8fd41bfb6478ea67a667, type: 3}
+  _asteroidPrefabs: {fileID: -7679916661727130133, guid: 851e842e4e4f2c341abf89a4f0472a8d, type: 3}
+  _ufoPrefabs: {fileID: 2687539046242588937, guid: 68a4a0e7d19928745b3e0dadee7bdb46, type: 3}
+--- !u!114 &1865790116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865790111}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c292813b9dab54da9e7432cb89007a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameplayCompositionRoot:
-    _backgroundCanvas: {fileID: 1257377806477324128, guid: 706471e4a7448cf4c83df1b0cad6e350, type: 3}
-    _performanceShip: {fileID: 2094023753586929040, guid: a752461b71d007d41a3f9643f9183b0f, type: 3}
-    _endGameScreen: {fileID: 5460865261052969232, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
-    _poolConfig: {fileID: 11400000, guid: 8b60ae3e0c03f6a42b06288f24a86e2f, type: 2}
-    _enemyConfigs:
-    - {fileID: 11400000, guid: f4e617410dc6d854aa651578f3e3f029, type: 2}
-    - {fileID: 11400000, guid: c730927372f184849ace991e8aa06ab8, type: 2}
-    _shipPrefab: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
-    _bulletPrefabs: {fileID: 3242289843733358288, guid: 12deaaaf3585eb74d92fb178f7fc9366, type: 3}
-    _laserPrefabs: {fileID: 7444338288434493993, guid: 84b5391dff2e8fd41bfb6478ea67a667, type: 3}
-    _asteroidPrefabs: {fileID: -7679916661727130133, guid: 851e842e4e4f2c341abf89a4f0472a8d, type: 3}
-    _ufoPrefabs: {fileID: 2687539046242588937, guid: 68a4a0e7d19928745b3e0dadee7bdb46, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 1985787633}
   - {fileID: 597685459}
+  - {fileID: 1865790114}

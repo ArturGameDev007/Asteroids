@@ -1,15 +1,13 @@
 ﻿using System;
 using _Project.Scripts.Configs.Enemies;
-using UnityEngine;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    [Serializable]
     public class ScoreData: ILoseModel
     {
         public event Action OnScoreChanged;
 
-        [field: SerializeField] public int Score { get; private set; }
+        public int Score { get; private set; }
         
         private int _zeroCountScore = 0;
 

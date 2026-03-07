@@ -1,14 +1,17 @@
 ﻿using _Project.Scripts.Configs.Enemies;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Enemies
 {
     public class FlyingSaucerController : Enemy
     {
-        [SerializeField] private Transform _target;
         [SerializeField] private UfoConfig _ufoConfig;
         
-        public void Construct(Transform target)
+        private Transform _target;
+        
+        [Inject]
+        public void Construct([Inject(Id = "Player")] Transform target)
         {
             _target = target;
         }

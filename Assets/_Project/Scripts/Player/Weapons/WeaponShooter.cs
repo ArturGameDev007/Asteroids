@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Enemies;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Player.Weapons
 {
@@ -14,6 +15,7 @@ namespace _Project.Scripts.Player.Weapons
         private float _laserCooldown = 0.5f;
         private float _nextBulletShootTime;
 
+        [Inject]
         public void Initialize(ObjectPool<Bullet> bulletPool, ObjectPool<Laser> laserPool)
         {
             _bulletPool = bulletPool;

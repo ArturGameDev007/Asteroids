@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Configs.Enemies;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Enemies
 {
@@ -20,17 +21,13 @@ namespace _Project.Scripts.Enemies
         private float _spawnTimer;
         private bool _isGameActive;
 
-        protected GeneratorEnemies(EnemyConfig config)
+        [Inject]
+        protected GeneratorEnemies(EnemyConfig config, ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Camera camera)
         {
             _config = config;
-        }
-
-        public virtual void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Transform player)
-        {
-            _camera = Camera.main;
+            _camera = camera;
             _pool = pool;
             _enemyManager = enemyManager;
-
             _spawnTimer = _config.Delay;
         }
 
@@ -63,7 +60,7 @@ namespace _Project.Scripts.Enemies
         public void StopAllEnemies()
         {
             _isGameActive = false;
-            
+
             foreach (var enemy in _activeEnemies)
                 enemy.StopPhysics(true);
         
@@ -81,7 +78,7 @@ namespace _Project.Scripts.Enemies
             
             enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
-            enemy.Initialize(pool, _enemyManager, _config);
+            enemy.Construct(pool, _enemyManager, _config);
             
             ConfigureSpawn(enemy, spawnPosition);
             

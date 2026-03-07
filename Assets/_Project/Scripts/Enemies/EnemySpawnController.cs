@@ -1,9 +1,12 @@
+using Zenject;
+
 namespace _Project.Scripts.Enemies
 {
     public class EnemySpawnController
     {
         private readonly GeneratorEnemies[] _generators;
 
+        [Inject]
         public EnemySpawnController(GeneratorEnemies[] generators)
         {
             _generators = generators;
