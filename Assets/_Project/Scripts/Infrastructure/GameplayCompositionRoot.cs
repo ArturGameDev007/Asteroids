@@ -90,7 +90,7 @@
 //             _gameFactory.CreatePlayer(_shipPrefab, out  _controller,  out _shoot, out _collisionHandler);
 //             InitializePlayer(_collisionHandler);
 //             
-//             _gameFactory.CreatePerformanceShip(_performanceShip, _controller, _shoot, _weaponShooter);
+//             _gameFactory.Create er, _shoot, _weaponShooter);
 //         }
 //
 //         private void InitializePlayer(ICollisionHandler collisionHandler)

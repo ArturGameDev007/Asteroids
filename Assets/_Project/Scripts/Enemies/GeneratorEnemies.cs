@@ -22,7 +22,7 @@ namespace _Project.Scripts.Enemies
         private bool _isGameActive;
 
         [Inject]
-        protected GeneratorEnemies(EnemyConfig config, ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Transform player, Camera camera)
+        protected GeneratorEnemies(EnemyConfig config, ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Camera camera)
         {
             _config = config;
             _camera = camera;

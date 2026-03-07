@@ -11,7 +11,7 @@ namespace _Project.Scripts.Enemies
         [Inject]
         public UfoSpawner(EnemyConfig config, [Inject(Id = "UfoPool")] ObjectPool<Enemy> pool,
             IEnemyDeathListener enemyManager, [Inject(Id = "Player")] Transform player, Camera camera)
-            : base(config, pool, enemyManager, player, camera)
+            : base(config, pool, enemyManager, camera)
         {
             _player = player;
         }

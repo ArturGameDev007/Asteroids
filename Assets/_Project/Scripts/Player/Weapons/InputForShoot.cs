@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Player.Weapons
 {
@@ -20,7 +21,8 @@ namespace _Project.Scripts.Player.Weapons
         
         private bool _isPaused;
 
-        public void Initialize(GenerateLaser laser, WeaponShooter shooter)
+        [Inject]
+        public void Construct(GenerateLaser laser, WeaponShooter shooter)
         {
             _laserAmmo = laser;
             _shooter = shooter;

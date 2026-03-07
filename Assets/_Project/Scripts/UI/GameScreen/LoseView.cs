@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace _Project.Scripts.UI.GameScreen
 {
@@ -14,12 +15,12 @@ namespace _Project.Scripts.UI.GameScreen
         [field: SerializeField] public Button RestartButton { get; private set; }
         
         private Canvas _canvas;
-
-        public void Construct(Button restartButton)
+        
+        [Inject]
+        public void Construct()
         {
             _canvas = GetComponent<Canvas>();
             
-            RestartButton = restartButton;
             RestartButton?.onClick.AddListener(OnRestart);
         }
         

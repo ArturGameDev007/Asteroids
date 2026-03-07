@@ -1,21 +1,21 @@
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.UI.Background
 {
     public class BackgroundView
     {
-        private Canvas _canvas;
+        private const int ORDER_IN_LAYER = -5;
+        
+        private readonly Canvas _canvas;
 
-        public BackgroundView(Canvas canvas)
+        [Inject]
+        public BackgroundView([Inject(Id = "Background_UI")] Canvas canvas, Camera mainCamera)
         {
             _canvas = canvas;
-        }
-
-        public void Construct(Camera mainCamera, int orderInLayer)
-        {
             _canvas.renderMode = RenderMode.ScreenSpaceCamera;
             _canvas.worldCamera = mainCamera;
-            _canvas.sortingOrder = orderInLayer;
+            _canvas.sortingOrder = ORDER_IN_LAYER;
         }
     }
 }

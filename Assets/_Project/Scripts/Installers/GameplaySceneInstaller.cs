@@ -4,6 +4,7 @@ using _Project.Scripts.Enemies;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
+using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using UnityEngine;
@@ -34,7 +35,6 @@ namespace _Project.Scripts.Installers
         [SerializeField] private Enemy _asteroidPrefabs;
         [SerializeField] private Enemy _ufoPrefabs;
 
-
         public override void InstallBindings()
         {
             Container.Bind<Camera>().FromInstance(_mainCamera).AsSingle();
@@ -43,10 +43,11 @@ namespace _Project.Scripts.Installers
             Container.Bind<IEnemyDeathListener>().To<EnemyManager>().AsSingle();
             Container.Bind<RestartGame>().AsSingle();
             Container.Bind<ILoseModel>().To<ScoreData>().AsSingle();
-            Container.Bind<EnemyDeathTracker>().AsSingle();
-
-            Container.Bind<PerformanceShipView>().FromInstance(_performanceShip).AsSingle();
             Container.Bind<EndGameView>().FromInstance(_endGameScreen).AsSingle();
+            
+            BindBackgroundUI();
+            BindPerformanceUI();
+            // BindEndGameUI();
 
             BindPlayer();
             BindPools();
@@ -55,20 +56,49 @@ namespace _Project.Scripts.Installers
             Container.BindInterfacesAndSelfTo<Game>().AsSingle().NonLazy();
         }
 
+        private void BindBackgroundUI()
+        {
+            Container.Bind<Canvas>().WithId("Background_UI").FromComponentInNewPrefab(_backgroundCanvas).AsSingle();
+            Container.Bind<BackgroundView>().AsSingle().NonLazy();
+        }
+
         private void BindPlayer()
         {
-            Container.Bind<PlayerController>().FromComponentInNewPrefab(_shipPrefab).AsSingle();
+            // Container.Bind<PlayerController>().FromComponentInNewPrefab(_shipPrefab).AsSingle();
+            
+            Container.Bind(typeof(PlayerController), typeof(InputForShoot), typeof(HandlerCrashWithEnemy))
+                .FromComponentInNewPrefab(_shipPrefab).AsSingle();
+            
+            Container.Bind<Transform>().WithId("Player").FromResolveGetter<PlayerController>(player => player.transform);
 
+            // Container.Bind<InputForShoot>().FromComponentInNewPrefab(_shipPrefab).AsSingle();
+            Container.Bind<ICollisionHandler>().To<HandlerCrashWithEnemy>().FromResolve();
             Container.Bind<IInputService>().To<InputController>().AsSingle();
-            Container.Bind<InputForShoot>().FromComponentOnRoot().AsSingle();
-            
-            Container.Bind<ICollisionHandler>().To<HandlerCrashWithEnemy>().FromComponentOnRoot().AsSingle();
-            
             Container.Bind<IControllable>().To<PlayerControllerAdapter>().AsSingle();
             Container.Bind<IShootable>().To<PlayerShootProvider>().AsSingle();
             
             Container.Bind<Character>().AsSingle();
         }
+
+        private void BindPerformanceUI()
+        {
+            // Container.Bind<PerformanceShipView>().FromComponentInNewPrefab(_performanceShip).AsSingle().NonLazy();
+            //
+            // Container.Bind<CoordinateDisplay>().FromComponentInHierarchy().AsSingle();
+            // Container.Bind<ViewCurrentAmountLaser>().FromComponentInHierarchy().AsSingle();
+            // Container.Bind<GenerateLaser>().FromComponentInHierarchy().AsSingle();
+            
+            Container.Bind(typeof(PerformanceShipView), typeof(CoordinateDisplay), 
+                    typeof(ViewCurrentAmountLaser), typeof(GenerateLaser))
+                .FromComponentInNewPrefab(_performanceShip)
+                .AsSingle()
+                .NonLazy();
+        }
+
+        // private void BindEndGameUI()
+        // {
+        //     Container.Bind<EndGameView>().FromComponentInNewPrefab(_endGameScreen).AsSingle();
+        // }
         
         private void BindPools()
         {
@@ -80,12 +110,12 @@ namespace _Project.Scripts.Installers
             Container.Bind<ObjectPool<Enemy>>()
                 .WithId("AsteroidPool")
                 .FromInstance(new ObjectPool<Enemy>(_asteroidPrefabs, _poolConfig.AsteroidPoolSize, "Asteroid", enemiesContainer))
-                .AsSingle();
+                .AsCached();
             
             Container.Bind<ObjectPool<Enemy>>()
                 .WithId("UfoPool")
                 .FromInstance(new ObjectPool<Enemy>(_ufoPrefabs, _poolConfig.UfoPoolSize, "UFO", enemiesContainer))
-                .AsSingle();
+                .AsCached();
             
             Transform projectilesContainer = new GameObject("Weapons_Category").transform;
             projectilesContainer.parent = rootPool;
@@ -93,13 +123,14 @@ namespace _Project.Scripts.Installers
             Container.Bind<ObjectPool<Bullet>>()
                 // .WithId("AsteroidPool")
                 .FromInstance(new ObjectPool<Bullet>(_bulletPrefabs, _poolConfig.BulletPoolSize, "Shoot", projectilesContainer))
-                .AsSingle();
+                .AsCached();
             
             Container.Bind<ObjectPool<Laser>>()
                 // .WithId("UfoPool")
                 .FromInstance(new ObjectPool<Laser>(_laserPrefabs, _poolConfig.LaserPoolSize, "Shoot", projectilesContainer))
-                .AsSingle();
+                .AsCached();
         }
+        
         
         private void BindSpawners()
         {

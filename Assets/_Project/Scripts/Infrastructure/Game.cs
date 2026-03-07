@@ -56,10 +56,6 @@ namespace _Project.Scripts.Infrastructure
             _enemySpawnController.Process(deltaTime);
         }
 
-        // public void UpdateSpawn(float deltaTime)
-        // {
-        // }
-        
         public void Dispose()
         {
             _player.OnGameOver -= OnGameOver;
@@ -86,8 +82,11 @@ namespace _Project.Scripts.Infrastructure
 
             ShowLoseScreen();
 
-            _losePresenter.OnRestartClick += OnRestartButtonClick;
-            _losePresenter.Open(_scoreData.Score);
+            if (_losePresenter != null)
+            {
+                _losePresenter.OnRestartClick += OnRestartButtonClick;
+                _losePresenter.Open(_scoreData.Score);
+            }
         }
 
         private void ShowLoseScreen()

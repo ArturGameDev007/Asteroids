@@ -21,6 +21,7 @@ namespace _Project.Scripts.UI.GameScreen
         {
             _loseModel.SaveResult(finalScore);
             _loseView.ShowPanel();
+            Enable();
         }
 
         public void Close()
