@@ -1,5 +1,6 @@
 using _Project.Scripts.Configs.Enemies;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Enemies
 {
@@ -7,13 +8,19 @@ namespace _Project.Scripts.Enemies
     {
         private Transform _player;
 
-        public UfoSpawner(EnemyConfig config) : base(config){}
-
-        public override void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Transform player)
+        [Inject]
+        public UfoSpawner(EnemyConfig config, [Inject(Id = "UfoPool")] ObjectPool<Enemy> pool,
+            IEnemyDeathListener enemyManager, [Inject(Id = "Player")] Transform player, Camera camera)
+            : base(config, pool, enemyManager, player, camera)
         {
-            base.Initialize(pool, enemyManager, player);
             _player = player;
         }
+
+        // public override void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Transform player, Camera  camera)
+        // {
+        //     base.Initialize(pool, enemyManager, player,  camera);
+        //     _player = player;
+        // }
 
         protected override void ConfigureSpawn(Enemy enemy, Vector2 _)
         {

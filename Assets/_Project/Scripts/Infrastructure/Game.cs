@@ -2,10 +2,12 @@ using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.GameScreen;
+using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class Game
+    public class Game: IInitializable, ITickable, IDisposable
     {
         private readonly IGameFactory _gameFactory;
         private readonly EndGameView _endGameScreen;
@@ -14,14 +16,15 @@ namespace _Project.Scripts.Infrastructure
         private readonly IControllable _controller;
         private readonly IShootable _shoot;
         private readonly RestartGame _restartGame;
-        private readonly ScoreData _scoreData;
+        private readonly ILoseModel _scoreData;
         private readonly EnemyDeathTracker _deathTracker;
 
         private LosePresenter _losePresenter;
 
+        [Inject]
         public Game(IGameFactory gameFactory, EndGameView endGameScreen, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot,
-            RestartGame restartGame, ScoreData scoreData, EnemyDeathTracker  deathTracker)
+            RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker  deathTracker)
         {
             _gameFactory = gameFactory;
             _endGameScreen = endGameScreen;
@@ -47,10 +50,15 @@ namespace _Project.Scripts.Infrastructure
             _enemySpawnController.StartAll();
         }
 
-        public void UpdateSpawn(float deltaTime)
+        public void Tick()
         {
+            float deltaTime = Time.deltaTime;
             _enemySpawnController.Process(deltaTime);
         }
+
+        // public void UpdateSpawn(float deltaTime)
+        // {
+        // }
         
         public void Dispose()
         {
@@ -84,7 +92,7 @@ namespace _Project.Scripts.Infrastructure
 
         private void ShowLoseScreen()
         {
-            _gameFactory.CreateEndGameScreen(_endGameScreen, _scoreData, out _losePresenter);
+            _losePresenter = _gameFactory.CreateEndGameScreen(_endGameScreen, _scoreData);
         }
 
         private void OnRestartButtonClick()

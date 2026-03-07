@@ -1,4 +1,3 @@
-using _Project.Scripts.Enemies;
 using UnityEngine;
 
 namespace _Project.Scripts.Configs.Enemies
@@ -11,6 +10,6 @@ namespace _Project.Scripts.Configs.Enemies
         [field: SerializeField] public float Delay { get; private set; } = 3f;
         [field: SerializeField] public int ScoreForKill { get; private set; }
 
-        public abstract GeneratorEnemies CreateSpawn();
+        // public abstract GeneratorEnemies CreateSpawn();
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Zenject;
 
 namespace _Project.Scripts.UI.GameScreen
 {
@@ -9,6 +10,7 @@ namespace _Project.Scripts.UI.GameScreen
         
         public event Action OnRestartClick;
 
+        [Inject]
         public LosePresenter(ILoseModel loseModel, ILoseView loseView)
         {
             _loseModel = loseModel;

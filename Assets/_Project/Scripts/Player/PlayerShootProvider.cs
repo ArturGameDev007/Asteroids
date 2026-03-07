@@ -1,4 +1,5 @@
 using _Project.Scripts.Player.Weapons;
+using Zenject;
 
 namespace _Project.Scripts.Player
 {
@@ -6,6 +7,7 @@ namespace _Project.Scripts.Player
     {
         private InputForShoot _input;
 
+        [Inject]
         public PlayerShootProvider(InputForShoot input)
         {
             _input = input;

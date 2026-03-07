@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Configs.Enemies;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Enemies
 {
@@ -20,19 +21,19 @@ namespace _Project.Scripts.Enemies
         private float _spawnTimer;
         private bool _isGameActive;
 
-        protected GeneratorEnemies(EnemyConfig config)
+        [Inject]
+        protected GeneratorEnemies(EnemyConfig config, ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Transform player, Camera camera)
         {
             _config = config;
-        }
-
-        public virtual void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Transform player)
-        {
-            _camera = Camera.main;
+            _camera = camera;
             _pool = pool;
             _enemyManager = enemyManager;
-
             _spawnTimer = _config.Delay;
         }
+
+        // public virtual void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Transform player, Camera camera)
+        // {
+        // }
 
         public void Process(float  deltaTime)
         {

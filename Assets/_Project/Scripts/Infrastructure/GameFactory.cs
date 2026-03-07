@@ -57,8 +57,7 @@ namespace _Project.Scripts.Infrastructure
             }
         }
 
-        public void CreateEndGameScreen(EndGameView prefab, ScoreData scoreData,
-            out LosePresenter presenter)
+        public LosePresenter CreateEndGameScreen(EndGameView prefab, ILoseModel scoreData)
         {
             EndGameView endGameContainer = Object.Instantiate(prefab);
             SetHierarchy(endGameContainer.transform, 5);
@@ -67,13 +66,12 @@ namespace _Project.Scripts.Infrastructure
             {
                 loseView.Construct(loseView.RestartButton);
                 
-                presenter = new LosePresenter(scoreData, loseView);
+                var presenter = new LosePresenter(scoreData, loseView);
+                
                 presenter.Enable();
             }
-            else
-            {
-                presenter = null;
-            }
+
+            return null;
         }
 
         private void SetHierarchy(Transform target, int index)
