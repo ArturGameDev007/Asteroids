@@ -8,6 +8,7 @@ using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Installers
@@ -20,7 +21,7 @@ namespace _Project.Scripts.Installers
         [Header("Prefabs UI-Background")]
         [SerializeField] private Canvas _backgroundCanvas;
         [SerializeField] private PerformanceShipView _performanceShip;
-        [SerializeField] private EndGameView _endGameScreen;
+        [SerializeField] private EndGameView _endGameScreenPrefab;
 
         [Header("Pool Config")]
         [SerializeField] private PoolConfig _poolConfig;
@@ -43,7 +44,7 @@ namespace _Project.Scripts.Installers
             Container.Bind<IEnemyDeathListener>().To<EnemyManager>().AsSingle();
             Container.Bind<RestartGame>().AsSingle();
             Container.Bind<ILoseModel>().To<ScoreData>().AsSingle();
-            Container.Bind<EndGameView>().FromInstance(_endGameScreen).AsSingle();
+            Container.BindInstance(_endGameScreenPrefab).AsSingle();
             
             BindBackgroundUI();
             BindPerformanceUI();
