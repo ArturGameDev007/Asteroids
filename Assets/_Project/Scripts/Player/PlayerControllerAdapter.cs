@@ -1,9 +1,12 @@
+using Zenject;
+
 namespace _Project.Scripts.Player
 {
     public class PlayerControllerAdapter : IControllable
     {
         private PlayerController _playerController;
 
+        [Inject]
         public PlayerControllerAdapter(PlayerController playerController)
         {
             _playerController = playerController;

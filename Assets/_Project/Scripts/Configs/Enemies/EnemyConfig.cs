@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Configs.Enemies
 {
-    public class EnemyConfig : ScriptableObject
+    public abstract class EnemyConfig : ScriptableObject
     {
         [field: Header("General Settings")]
         [field: SerializeField] public float Speed { get; private set; } = 1.5f;

@@ -1,5 +1,6 @@
 using _Project.Scripts.Configs.Player;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Player
 {
@@ -18,6 +19,7 @@ namespace _Project.Scripts.Player
 
         private Vector3 _startPosition;
 
+        [Inject]
         public void Construct(IInputService controllerInput)
         {
             _controllerInput = controllerInput;

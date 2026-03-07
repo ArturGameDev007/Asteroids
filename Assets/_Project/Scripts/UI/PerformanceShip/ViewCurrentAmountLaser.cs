@@ -1,6 +1,7 @@
 ﻿using _Project.Scripts.Player.Weapons;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.UI.PerformanceShip
 {
@@ -12,9 +13,10 @@ namespace _Project.Scripts.UI.PerformanceShip
 
         private GenerateLaser _laser;
 
-        public void Initialize()
+        [Inject]
+        public void Construct(GenerateLaser laser)
         {
-            _laser = GetComponent<GenerateLaser>();
+            _laser = laser;
             Subscribe();
         }
 

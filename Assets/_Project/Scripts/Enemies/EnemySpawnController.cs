@@ -1,12 +1,21 @@
+using Zenject;
+
 namespace _Project.Scripts.Enemies
 {
     public class EnemySpawnController
     {
         private readonly GeneratorEnemies[] _generators;
 
+        [Inject]
         public EnemySpawnController(GeneratorEnemies[] generators)
         {
             _generators = generators;
+        }
+
+        public void Process(float  deltaTime)
+        {
+            foreach (var generator in _generators)
+                generator.Process(deltaTime);
         }
 
         public void StartAll()

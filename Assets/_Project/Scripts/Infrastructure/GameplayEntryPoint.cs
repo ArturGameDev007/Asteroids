@@ -1,24 +1,31 @@
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Infrastructure
 {
     public class GameplayEntryPoint : MonoBehaviour
     {
-        [SerializeField] private GameplayCompositionRoot _gameplayCompositionRoot;
+        private Game _game;
 
-        private void Awake()
+        [Inject]
+        public void Construct(Game game)
         {
-            _gameplayCompositionRoot.Compose();
+            _game = game;
         }
 
         private void Start()
         {
-            _gameplayCompositionRoot.Game.Initialize();
+           _game.Initialize();
+        }
+
+        private void Update()
+        {
+            _game.Tick();
         }
 
         private void OnDestroy()
         {
-            _gameplayCompositionRoot.Game.Dispose();
+            _game.Dispose();
         }
     }
 }

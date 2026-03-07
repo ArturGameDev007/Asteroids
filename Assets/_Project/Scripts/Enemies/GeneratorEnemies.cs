@@ -1,71 +1,72 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using _Project.Scripts.Configs.Enemies;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Enemies
 {
-    public abstract class GeneratorEnemies : MonoBehaviour
+    public abstract class GeneratorEnemies
     {
-        [Header("Settings EnemyConfig")]
-        [SerializeField] protected EnemyConfig _config;
-
+        private EnemyConfig _config;
         private List<Enemy> _activeEnemies = new();
         
         private IEnemyDeathListener _enemyManager;
         private ObjectPool<Enemy> _pool;
         
         private Camera _camera;
-        private Coroutine _spawnCoroutine;
         
         private float _positionX;
         private float _positionY;
 
+        private float _spawnTimer;
         private bool _isGameActive;
-        
-        public virtual void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager)
+
+        [Inject]
+        protected GeneratorEnemies(EnemyConfig config, ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Camera camera)
         {
-            _camera = Camera.main;
+            _config = config;
+            _camera = camera;
             _pool = pool;
             _enemyManager = enemyManager;
+            _spawnTimer = _config.Delay;
+        }
+
+        public void Process(float  deltaTime)
+        {
+            float minTimerThreshold = 0f;
+            
+            if (!_isGameActive)
+                return;
+            
+            _spawnTimer -= deltaTime;
+
+            while (_spawnTimer <= minTimerThreshold)
+            {
+                SpawnEntity(_pool);
+                _spawnTimer += _config.Delay;
+            }
         }
 
         public void StartSpawning()
         {
             _isGameActive = true;
-
-            _spawnCoroutine = StartCoroutine(GeneratorEnemy(_pool,  _config.Delay));
         }
 
         public void StopSpawning()
         {
             _isGameActive = false;
-            
-            if (_spawnCoroutine != null)
-                StopCoroutine(_spawnCoroutine);
         }
 
         public void StopAllEnemies()
         {
+            _isGameActive = false;
+
             foreach (var enemy in _activeEnemies)
                 enemy.StopPhysics(true);
         
             _activeEnemies.Clear();
         }
         
-        private IEnumerator GeneratorEnemy(ObjectPool<Enemy> pool, float delay)
-        {
-            _isGameActive = true;
-
-            var wait = new WaitForSeconds(delay);
-
-            while (_isGameActive)
-            {
-                yield return wait;
-                SpawnEntity(pool);
-            }
-        }
-
         private void SpawnEntity(ObjectPool<Enemy>  pool)
         {
             var enemy = pool.GetObject();
@@ -77,7 +78,7 @@ namespace _Project.Scripts.Enemies
             
             enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
-            enemy.Initialize(pool, _enemyManager, _config);
+            enemy.Construct(pool, _enemyManager, _config);
             
             ConfigureSpawn(enemy, spawnPosition);
             

@@ -1,4 +1,6 @@
+using _Project.Scripts.Configs.Enemies;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Enemies
 {
@@ -6,7 +8,10 @@ namespace _Project.Scripts.Enemies
     {
         private Transform _player;
 
-        public void Construct(Transform player)
+        [Inject]
+        public UfoSpawner(EnemyConfig config, [Inject(Id = "UfoPool")] ObjectPool<Enemy> pool,
+            IEnemyDeathListener enemyManager, [Inject(Id = "Player")] Transform player, Camera camera)
+            : base(config, pool, enemyManager, camera)
         {
             _player = player;
         }

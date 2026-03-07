@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Enemies;
+using Zenject;
 
 namespace _Project.Scripts.Player
 {
@@ -10,6 +11,7 @@ namespace _Project.Scripts.Player
         private IControllable _controllable;
         private ICollisionHandler _collisionHandler;
 
+        [Inject]
         public Character(IControllable controllable, ICollisionHandler collisionHandler)
         {
             _controllable = controllable;
