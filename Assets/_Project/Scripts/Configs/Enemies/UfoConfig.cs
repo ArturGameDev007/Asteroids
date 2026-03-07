@@ -7,10 +7,5 @@ namespace _Project.Scripts.Configs.Enemies
     {
         [field: Header("Ability Settings")]
         [field: SerializeField] public float RotationSpeed { get; private set; } = 30f;
-
-        // public override GeneratorEnemies CreateSpawn()
-        // {
-        //     return new UfoSpawner(this);
-        // }
     }
 }

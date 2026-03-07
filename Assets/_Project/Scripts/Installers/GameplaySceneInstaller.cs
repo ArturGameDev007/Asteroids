@@ -47,13 +47,12 @@ namespace _Project.Scripts.Installers
             
             BindBackgroundUI();
             BindPerformanceUI();
-            // BindEndGameUI();
 
             BindPlayer();
             BindPools();
             BindSpawners();
 
-            Container.BindInterfacesAndSelfTo<Game>().AsSingle().NonLazy();
+            Container.Bind<Game>().AsSingle();
         }
 
         private void BindBackgroundUI()
@@ -64,14 +63,11 @@ namespace _Project.Scripts.Installers
 
         private void BindPlayer()
         {
-            // Container.Bind<PlayerController>().FromComponentInNewPrefab(_shipPrefab).AsSingle();
-            
             Container.Bind(typeof(PlayerController), typeof(InputForShoot), typeof(HandlerCrashWithEnemy))
                 .FromComponentInNewPrefab(_shipPrefab).AsSingle();
             
             Container.Bind<Transform>().WithId("Player").FromResolveGetter<PlayerController>(player => player.transform);
 
-            // Container.Bind<InputForShoot>().FromComponentInNewPrefab(_shipPrefab).AsSingle();
             Container.Bind<ICollisionHandler>().To<HandlerCrashWithEnemy>().FromResolve();
             Container.Bind<IInputService>().To<InputController>().AsSingle();
             Container.Bind<IControllable>().To<PlayerControllerAdapter>().AsSingle();
@@ -82,12 +78,6 @@ namespace _Project.Scripts.Installers
 
         private void BindPerformanceUI()
         {
-            // Container.Bind<PerformanceShipView>().FromComponentInNewPrefab(_performanceShip).AsSingle().NonLazy();
-            //
-            // Container.Bind<CoordinateDisplay>().FromComponentInHierarchy().AsSingle();
-            // Container.Bind<ViewCurrentAmountLaser>().FromComponentInHierarchy().AsSingle();
-            // Container.Bind<GenerateLaser>().FromComponentInHierarchy().AsSingle();
-            
             Container.Bind(typeof(PerformanceShipView), typeof(CoordinateDisplay), 
                     typeof(ViewCurrentAmountLaser), typeof(GenerateLaser))
                 .FromComponentInNewPrefab(_performanceShip)
@@ -95,11 +85,6 @@ namespace _Project.Scripts.Installers
                 .NonLazy();
         }
 
-        // private void BindEndGameUI()
-        // {
-        //     Container.Bind<EndGameView>().FromComponentInNewPrefab(_endGameScreen).AsSingle();
-        // }
-        
         private void BindPools()
         {
             Transform rootPool = new GameObject("All_Objects_Pools").transform;
@@ -121,26 +106,21 @@ namespace _Project.Scripts.Installers
             projectilesContainer.parent = rootPool;
             
             Container.Bind<ObjectPool<Bullet>>()
-                // .WithId("AsteroidPool")
-                .FromInstance(new ObjectPool<Bullet>(_bulletPrefabs, _poolConfig.BulletPoolSize, "Shoot", projectilesContainer))
+                .FromInstance(new ObjectPool<Bullet>(_bulletPrefabs, _poolConfig.BulletPoolSize, "Bullet", projectilesContainer))
                 .AsCached();
             
             Container.Bind<ObjectPool<Laser>>()
-                // .WithId("UfoPool")
-                .FromInstance(new ObjectPool<Laser>(_laserPrefabs, _poolConfig.LaserPoolSize, "Shoot", projectilesContainer))
+                .FromInstance(new ObjectPool<Laser>(_laserPrefabs, _poolConfig.LaserPoolSize, "Laser", projectilesContainer))
                 .AsCached();
         }
         
-        
         private void BindSpawners()
         {
-            Container.Bind<GeneratorEnemies>().To<AsteroidSpawner>().AsSingle().WithArguments(_enemyConfigs[0]);
-            Container.Bind<GeneratorEnemies>().To<UfoSpawner>().AsSingle().WithArguments(_enemyConfigs[1]);
+            Container.Bind<GeneratorEnemies>().To<AsteroidSpawner>().AsCached().WithArguments(_enemyConfigs[0]);
+            Container.Bind<GeneratorEnemies>().To<UfoSpawner>().AsCached().WithArguments(_enemyConfigs[1]);
             
             Container.BindInterfacesAndSelfTo<EnemyDeathTracker>().AsSingle();
-
             Container.Bind<EnemySpawnController>().AsSingle();
-            Container.Bind<IEnemyInitialize>().To<EnemyInitializer>().AsSingle();
         }
     }
 }

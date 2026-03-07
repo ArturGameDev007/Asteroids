@@ -31,10 +31,6 @@ namespace _Project.Scripts.Enemies
             _spawnTimer = _config.Delay;
         }
 
-        // public virtual void Initialize(ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Transform player, Camera camera)
-        // {
-        // }
-
         public void Process(float  deltaTime)
         {
             float minTimerThreshold = 0f;
@@ -64,7 +60,7 @@ namespace _Project.Scripts.Enemies
         public void StopAllEnemies()
         {
             _isGameActive = false;
-            
+
             foreach (var enemy in _activeEnemies)
                 enemy.StopPhysics(true);
         
@@ -82,7 +78,7 @@ namespace _Project.Scripts.Enemies
             
             enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
-            enemy.Initialize(pool, _enemyManager, _config);
+            enemy.Construct(pool, _enemyManager, _config);
             
             ConfigureSpawn(enemy, spawnPosition);
             

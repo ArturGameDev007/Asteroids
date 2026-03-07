@@ -10,7 +10,6 @@ namespace _Project.Scripts.UI.PerformanceShip
         [Header("Text")]
         [SerializeField] private TextMeshProUGUI _coordinateText;
         
-        // [Header("Character")]
         private PlayerController _shipController;
         private Rigidbody2D _rigidbody2D;
         

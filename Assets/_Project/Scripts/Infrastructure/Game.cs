@@ -52,8 +52,7 @@ namespace _Project.Scripts.Infrastructure
 
         public void Tick()
         {
-            float deltaTime = Time.deltaTime;
-            _enemySpawnController.Process(deltaTime);
+            _enemySpawnController.Process(Time.deltaTime);
         }
 
         public void Dispose()
