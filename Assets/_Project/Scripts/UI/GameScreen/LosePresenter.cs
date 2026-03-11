@@ -10,26 +10,12 @@ namespace _Project.Scripts.UI.GameScreen
         
         public event Action OnRestartClick;
 
-        // [Inject]
         public LosePresenter(ILoseModel loseModel, ILoseView loseView)
         {
             _loseModel = loseModel;
             _loseView = loseView;
         }
-
-        public void Open(int finalScore)
-        {
-            _loseModel.SaveResult(finalScore);
-            _loseView.ShowPanel();
-            
-            Initialize();
-        }
-
-        public void Close()
-        {
-            _loseView.HidePanel();
-        }
-
+        
         public void Initialize()
         {
             _loseModel.OnScoreChanged += UpdateScoreView;
@@ -37,34 +23,25 @@ namespace _Project.Scripts.UI.GameScreen
 
             UpdateScoreView();
         }
-
+        
         public void Dispose()
         {
             _loseModel.OnScoreChanged -= UpdateScoreView;
             _loseView.OnRestartRequested -= OnRestartRequested;
-            // Unsubscribe();
-            
-            if (_loseView is IDispose disposableView) 
-                disposableView.Dispose();
         }
-        
-        // private void Enable()
-        // {
-        //     Subscribe();
-        //     UpdateScoreView();
-        // }
-        
-        // private void Subscribe()
-        // {
-        //     _loseModel.OnScoreChanged += UpdateScoreView;
-        //     _loseView.OnRestartRequested += OnRestartRequested;
-        // }
-        //
-        // private void Unsubscribe()
-        // {
-        //     _loseModel.OnScoreChanged -= UpdateScoreView;
-        //     _loseView.OnRestartRequested -= OnRestartRequested;
-        // }
+
+        public void Open(int finalScore)
+        {
+            _loseModel.SaveResult(finalScore);
+            _loseView.ShowPanel();
+
+            UpdateScoreView();
+        }
+
+        public void Close()
+        {
+            _loseView.HidePanel();
+        }
 
         private void UpdateScoreView()
         {

@@ -9,7 +9,7 @@ namespace _Project.Scripts.Infrastructure
     public class Game
     {
         private readonly IGameFactory _gameFactory;
-        private readonly LoseView _endGameScreen;
+        private readonly LoseView _loseView;
         private readonly EnemySpawnController _enemySpawnController;
         private readonly Character _player;
         private readonly IControllable _controller;
@@ -20,12 +20,12 @@ namespace _Project.Scripts.Infrastructure
 
         private LosePresenter _losePresenter;
 
-        public Game(IGameFactory gameFactory, LoseView endGameScreen, EnemySpawnController enemySpawnController,
+        public Game(IGameFactory gameFactory, LoseView loseView, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot,
             RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker  deathTracker)
         {
             _gameFactory = gameFactory;
-            _endGameScreen = endGameScreen;
+            _loseView = loseView;
             _enemySpawnController = enemySpawnController;
             _player = player;
             _controller = controller;
@@ -87,7 +87,7 @@ namespace _Project.Scripts.Infrastructure
 
         private void ShowLoseScreen()
         {
-            _losePresenter = _gameFactory.CreateEndGameScreen(_endGameScreen, _scoreData);
+            _losePresenter = _gameFactory.CreateEndGameScreen(_loseView, _scoreData);
         }
 
         private void OnRestartButtonClick()

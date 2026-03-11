@@ -78,7 +78,6 @@ namespace _Project.Scripts.Installers
             Container.Bind<IInputService>().To<InputController>().AsSingle();
             Container.Bind<IControllable>().To<PlayerControllerAdapter>().AsSingle();
             Container.Bind<IShootable>().To<PlayerShootProvider>().AsSingle();
-            
             Container.BindInterfacesAndSelfTo<Character>().AsSingle();
         }
 
@@ -89,13 +88,6 @@ namespace _Project.Scripts.Installers
                 .FromComponentInNewPrefab(_performanceShip)
                 .AsSingle()
                 .NonLazy();
-            //
-            //
-            // Container.BindInterfacesAndSelfTo<PerformanceShipView>().FromComponentInNewPrefab(_performanceShip).AsSingle().NonLazy();
-            //
-            // Container.BindInterfacesAndSelfTo<ViewCurrentAmountLaser>().FromResolve().AsSingle();
-            // Container.Bind<CoordinateDisplay>().FromResolve().AsSingle();
-            // Container.Bind<GenerateLaser>().FromResolve().AsSingle();
         }
 
         private void BindPools()
