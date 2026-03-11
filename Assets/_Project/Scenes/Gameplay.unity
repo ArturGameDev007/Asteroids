@@ -362,7 +362,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 519420031}
   _backgroundCanvas: {fileID: 1257377806477324128, guid: 706471e4a7448cf4c83df1b0cad6e350, type: 3}
   _performanceShip: {fileID: 2094023753586929040, guid: a752461b71d007d41a3f9643f9183b0f, type: 3}
-  _endGameScreenPrefab: {fileID: 5460865261052969232, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+  _endGameScreenPrefab: {fileID: 1796660822261427583, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
   _poolConfig: {fileID: 11400000, guid: 8b60ae3e0c03f6a42b06288f24a86e2f, type: 2}
   _enemyConfigs:
   - {fileID: 11400000, guid: f4e617410dc6d854aa651578f3e3f029, type: 2}

@@ -20,7 +20,7 @@ namespace _Project.Scripts.Installers
         [Header("Prefabs UI-Background")]
         [SerializeField] private Canvas _backgroundCanvas;
         [SerializeField] private PerformanceShipView _performanceShip;
-        [SerializeField] private EndGameView _endGameScreenPrefab;
+        [SerializeField] private LoseView _endGameScreenPrefab;
 
         [Header("Pool Config")]
         [SerializeField] private PoolConfig _poolConfig;

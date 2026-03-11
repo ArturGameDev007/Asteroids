@@ -9,7 +9,7 @@ namespace _Project.Scripts.Infrastructure
     public class Game
     {
         private readonly IGameFactory _gameFactory;
-        private readonly EndGameView _endGameScreen;
+        private readonly LoseView _endGameScreen;
         private readonly EnemySpawnController _enemySpawnController;
         private readonly Character _player;
         private readonly IControllable _controller;
@@ -20,7 +20,7 @@ namespace _Project.Scripts.Infrastructure
 
         private LosePresenter _losePresenter;
 
-        public Game(IGameFactory gameFactory, EndGameView endGameScreen, EnemySpawnController enemySpawnController,
+        public Game(IGameFactory gameFactory, LoseView endGameScreen, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot,
             RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker  deathTracker)
         {

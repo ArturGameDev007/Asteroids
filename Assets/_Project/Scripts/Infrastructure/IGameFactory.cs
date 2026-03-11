@@ -4,6 +4,6 @@ namespace _Project.Scripts.Infrastructure
 {
     public interface IGameFactory
     {
-        public LosePresenter CreateEndGameScreen(EndGameView prefab, ILoseModel scoreData);
+        public LosePresenter CreateEndGameScreen(LoseView prefab, ILoseModel scoreData);
     }
 }
