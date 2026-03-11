@@ -1,13 +1,11 @@
 using _Project.Scripts.Player.Weapons;
-using Zenject;
 
 namespace _Project.Scripts.Player
 {
     public class PlayerShootProvider : IShootable
     {
-        private InputForShoot _input;
+        private readonly InputForShoot _input;
 
-        [Inject]
         public PlayerShootProvider(InputForShoot input)
         {
             _input = input;

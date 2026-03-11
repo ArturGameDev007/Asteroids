@@ -1,19 +1,16 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Configs.Enemies;
 using UnityEngine;
-using Zenject;
 
 namespace _Project.Scripts.Enemies
 {
     public abstract class GeneratorEnemies
     {
-        private EnemyConfig _config;
-        private List<Enemy> _activeEnemies = new();
-        
-        private IEnemyDeathListener _enemyManager;
-        private ObjectPool<Enemy> _pool;
-        
-        private Camera _camera;
+        private readonly EnemyConfig _config;
+        private readonly List<Enemy> _activeEnemies = new();
+        private readonly IEnemyDeathListener _enemyManager;
+        private readonly ObjectPool<Enemy> _pool;
+        private readonly Camera _camera;
         
         private float _positionX;
         private float _positionY;
@@ -21,7 +18,6 @@ namespace _Project.Scripts.Enemies
         private float _spawnTimer;
         private bool _isGameActive;
 
-        [Inject]
         protected GeneratorEnemies(EnemyConfig config, ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Camera camera)
         {
             _config = config;

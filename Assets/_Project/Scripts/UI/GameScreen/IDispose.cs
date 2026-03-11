@@ -1,6 +1,6 @@
 namespace _Project.Scripts.UI.GameScreen
 {
-    public interface IDisposable
+    public interface IDispose
     {
         public void Dispose();
     }

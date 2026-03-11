@@ -62,7 +62,7 @@ namespace _Project.Scripts.Infrastructure
                 _losePresenter?.Dispose();
             }
             
-            _player?.Destruct();
+            _player?.Dispose();
             _deathTracker?.Dispose();
         }
 

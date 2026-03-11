@@ -7,7 +7,7 @@ using Zenject;
 namespace _Project.Scripts.UI.GameScreen
 {
     [RequireComponent(typeof(Canvas))]
-    public class LoseView : MonoBehaviour, ILoseView, IDisposable
+    public class LoseView : MonoBehaviour, ILoseView, IDispose
     {
         public event Action OnRestartRequested;
         

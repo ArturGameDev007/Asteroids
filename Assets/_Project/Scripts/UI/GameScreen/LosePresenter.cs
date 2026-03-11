@@ -3,14 +3,14 @@ using Zenject;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    public class LosePresenter
+    public class LosePresenter: IInitializable, IDisposable
     {
-        private ILoseModel _loseModel;
-        private ILoseView _loseView;
+        private readonly ILoseModel _loseModel;
+        private readonly ILoseView _loseView;
         
         public event Action OnRestartClick;
 
-        [Inject]
+        // [Inject]
         public LosePresenter(ILoseModel loseModel, ILoseView loseView)
         {
             _loseModel = loseModel;
@@ -22,7 +22,7 @@ namespace _Project.Scripts.UI.GameScreen
             _loseModel.SaveResult(finalScore);
             _loseView.ShowPanel();
             
-            Enable();
+            Initialize();
         }
 
         public void Close()
@@ -30,31 +30,41 @@ namespace _Project.Scripts.UI.GameScreen
             _loseView.HidePanel();
         }
 
-        public void Dispose()
-        {
-            Unsubscribe();
-            
-            if (_loseView is IDisposable disposableView) 
-                disposableView.Dispose();
-        }
-        
-        private void Enable()
-        {
-            Subscribe();
-            UpdateScoreView();
-        }
-        
-        private void Subscribe()
+        public void Initialize()
         {
             _loseModel.OnScoreChanged += UpdateScoreView;
             _loseView.OnRestartRequested += OnRestartRequested;
+
+            UpdateScoreView();
         }
 
-        private void Unsubscribe()
+        public void Dispose()
         {
             _loseModel.OnScoreChanged -= UpdateScoreView;
             _loseView.OnRestartRequested -= OnRestartRequested;
+            // Unsubscribe();
+            
+            if (_loseView is IDispose disposableView) 
+                disposableView.Dispose();
         }
+        
+        // private void Enable()
+        // {
+        //     Subscribe();
+        //     UpdateScoreView();
+        // }
+        
+        // private void Subscribe()
+        // {
+        //     _loseModel.OnScoreChanged += UpdateScoreView;
+        //     _loseView.OnRestartRequested += OnRestartRequested;
+        // }
+        //
+        // private void Unsubscribe()
+        // {
+        //     _loseModel.OnScoreChanged -= UpdateScoreView;
+        //     _loseView.OnRestartRequested -= OnRestartRequested;
+        // }
 
         private void UpdateScoreView()
         {
