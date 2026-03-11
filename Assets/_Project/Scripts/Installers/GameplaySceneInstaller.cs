@@ -8,7 +8,6 @@ using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Installers
@@ -53,7 +52,13 @@ namespace _Project.Scripts.Installers
             BindPools();
             BindSpawners();
 
+            BindGameplayInfrastructure();
+        }
+
+        private void BindGameplayInfrastructure()
+        {
             Container.Bind<Game>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameplayEntryPoint>().AsSingle();
         }
 
         private void BindBackgroundUI()

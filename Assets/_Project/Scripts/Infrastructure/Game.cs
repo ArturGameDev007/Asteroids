@@ -3,11 +3,10 @@ using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
-using Zenject;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class Game: IInitializable, ITickable, IDisposable
+    public class Game
     {
         private readonly IGameFactory _gameFactory;
         private readonly EndGameView _endGameScreen;
@@ -21,7 +20,6 @@ namespace _Project.Scripts.Infrastructure
 
         private LosePresenter _losePresenter;
 
-        [Inject]
         public Game(IGameFactory gameFactory, EndGameView endGameScreen, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot,
             RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker  deathTracker)
