@@ -22,6 +22,9 @@ namespace _Project.Scripts.UI.PerformanceShip
         {
             _laser.OnLaserChanged += OnShowInfoLaser;
             _laser.OnReloadProgress += OnShowRollbackLaser;
+
+            OnShowInfoLaser(_laser.CurrentAmmonLaser);
+            OnShowRollbackLaser(_laser.LaserConfig.ReloadTime);
         }
 
         private void OnDestroy()

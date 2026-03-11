@@ -19,8 +19,6 @@ namespace _Project.Scripts.Enemies
             _pool = new Queue<T>(initialCount);
             _container = new GameObject($"[Pool_{containerName}]").transform;
             _container.SetParent(parent);
-
-            AddObjects(initialCount);
         }
 
         public T GetObject()
@@ -37,14 +35,6 @@ namespace _Project.Scripts.Enemies
         {
             _pool.Enqueue(objectType);
             objectType.gameObject.SetActive(false);
-        }
-
-        private void AddObjects(int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                CreateNewObject(false);
-            }
         }
 
         private T CreateNewObject(bool isActive)

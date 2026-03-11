@@ -17,10 +17,11 @@ namespace _Project.Scripts.Installers
         [Header("Camera")]
         [SerializeField] private Camera _mainCamera;
         
-        [Header("Prefabs UI-Background")]
-        [SerializeField] private Canvas _backgroundCanvas;
-        [SerializeField] private PerformanceShipView _performanceShip;
+        [Header("Prefab UI-LoseScreen")]
         [SerializeField] private LoseView _endGameScreenPrefab;
+
+        [Header("Container For Objects Pools")]
+        [SerializeField] private Transform _containerForPools;
 
         [Header("Pool Config")]
         [SerializeField] private PoolConfig _poolConfig;
@@ -63,8 +64,8 @@ namespace _Project.Scripts.Installers
 
         private void BindBackgroundUI()
         {
-            Container.Bind<Canvas>().WithId("Background_UI").FromComponentInNewPrefab(_backgroundCanvas).AsSingle();
-            Container.BindInterfacesTo<BackgroundView>().AsSingle().NonLazy();
+            Container.Bind<Canvas>().WithId("Background_UI").FromComponentInHierarchy().AsSingle();
+            Container.BindInterfacesTo<BackgroundView>().AsSingle();
         }
 
         private void BindPlayer()
@@ -78,6 +79,7 @@ namespace _Project.Scripts.Installers
             Container.Bind<IInputService>().To<InputController>().AsSingle();
             Container.Bind<IControllable>().To<PlayerControllerAdapter>().AsSingle();
             Container.Bind<IShootable>().To<PlayerShootProvider>().AsSingle();
+            
             Container.BindInterfacesAndSelfTo<Character>().AsSingle();
         }
 
@@ -85,17 +87,15 @@ namespace _Project.Scripts.Installers
         {
             Container.Bind(typeof(PerformanceShipView), typeof(CoordinateDisplay), 
                     typeof(ViewCurrentAmountLaser), typeof(GenerateLaser))
-                .FromComponentInNewPrefab(_performanceShip)
+                .FromComponentInHierarchy()
                 .AsSingle()
                 .NonLazy();
         }
 
         private void BindPools()
         {
-            Transform rootPool = new GameObject("All_Objects_Pools").transform;
-
             Transform enemiesContainer = new GameObject("Enemies_Category").transform;
-            enemiesContainer.parent = rootPool;
+            enemiesContainer.parent = _containerForPools;
             
             Container.Bind<ObjectPool<Enemy>>().WithId("AsteroidPool").AsCached()
                 .WithArguments(_asteroidPrefabs, _poolConfig.AsteroidPoolSize, "Asteroid", enemiesContainer);
@@ -104,7 +104,7 @@ namespace _Project.Scripts.Installers
                 .WithArguments(_ufoPrefabs, _poolConfig.UfoPoolSize, "UFO", enemiesContainer);
             
             Transform projectilesContainer = new GameObject("Weapons_Category").transform;
-            projectilesContainer.parent = rootPool;
+            projectilesContainer.parent = _containerForPools;
             
             Container.Bind<ObjectPool<Bullet>>().AsCached()
                 .WithArguments(_bulletPrefabs, _poolConfig.BulletPoolSize, "Bullet", projectilesContainer);
