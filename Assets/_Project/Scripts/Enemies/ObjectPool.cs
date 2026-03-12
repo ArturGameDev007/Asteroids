@@ -2,7 +2,6 @@
 using _Project.Scripts.Player;
 using UnityEngine;
 using Zenject;
-using Object = UnityEngine.Object;
 
 namespace _Project.Scripts.Enemies
 {
@@ -43,7 +42,6 @@ namespace _Project.Scripts.Enemies
 
         private T CreateNewObject(bool isActive)
         {
-            // var newObject = Object.Instantiate(_prefabs, _container);
             var newObject = _instantiator.InstantiatePrefabForComponent<T>(_prefabs, _container);
 
             newObject.gameObject.SetActive(isActive);
