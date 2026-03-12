@@ -319,7 +319,8 @@ PrefabInstance:
       propertyPath: <LaserConfig>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: 5af8147623699184a97642e29d65253d, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2094023753586929040, guid: a752461b71d007d41a3f9643f9183b0f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

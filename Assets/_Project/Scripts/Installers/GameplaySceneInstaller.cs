@@ -17,7 +17,7 @@ namespace _Project.Scripts.Installers
         [Header("Camera")]
         [SerializeField] private Camera _mainCamera;
         
-        [Header("Prefab UI-LoseScreen")]
+        [Header("Prefabs UI")]
         [SerializeField] private LoseView _endGameScreenPrefab;
 
         [Header("Container For Objects Pools")]
@@ -85,11 +85,11 @@ namespace _Project.Scripts.Installers
 
         private void BindPerformanceUI()
         {
-            Container.Bind(typeof(PerformanceShipView), typeof(CoordinateDisplay), 
-                    typeof(ViewCurrentAmountLaser), typeof(GenerateLaser))
-                .FromComponentInHierarchy()
-                .AsSingle()
-                .NonLazy();
+            Container.Bind<GenerateLaser>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<ICoordinateView>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<ILaserView>().FromComponentInHierarchy().AsSingle();
+            
+            Container.BindInterfacesAndSelfTo<PerformancePresenter>().AsSingle().NonLazy();
         }
 
         private void BindPools()
