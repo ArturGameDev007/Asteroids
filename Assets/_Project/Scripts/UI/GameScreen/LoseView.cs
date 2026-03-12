@@ -7,7 +7,7 @@ using Zenject;
 namespace _Project.Scripts.UI.GameScreen
 {
     [RequireComponent(typeof(Canvas))]
-    public class LoseView : MonoBehaviour, ILoseView, IDisposable
+    public class LoseView : MonoBehaviour, ILoseView
     {
         public event Action OnRestartRequested;
         
@@ -20,10 +20,18 @@ namespace _Project.Scripts.UI.GameScreen
         public void Construct()
         {
             _canvas = GetComponent<Canvas>();
-            
+        }
+
+        private void Start()
+        {
             RestartButton?.onClick.AddListener(OnRestart);
         }
         
+        private void OnDestroy()
+        {
+            RestartButton.onClick.RemoveListener(OnRestart);
+        }
+
         public void SetScore(int score)
         {
             _textScore.text = $"Score: {score.ToString()}";
@@ -39,11 +47,6 @@ namespace _Project.Scripts.UI.GameScreen
         {
             _canvas.gameObject.SetActive(false);
             RestartButton.interactable = false;
-        }
-
-        public void Dispose()
-        {
-            RestartButton.onClick.RemoveListener(OnRestart);
         }
 
         private void OnRestart()

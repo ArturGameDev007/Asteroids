@@ -1,22 +1,20 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Enemies;
 using UnityEngine;
-using Zenject;
 
 namespace _Project.Scripts.Player.Weapons
 {
     public class WeaponShooter
     {
-        private List<TimedPoolObject> _activeProjectiles = new();
+        private readonly List<TimedPoolObject> _activeProjectiles = new();
 
-        private ObjectPool<Bullet> _bulletPool;
-        private ObjectPool<Laser> _laserPool;
+        private readonly ObjectPool<Bullet> _bulletPool;
+        private readonly ObjectPool<Laser> _laserPool;
 
         private float _laserCooldown = 0.5f;
         private float _nextBulletShootTime;
 
-        [Inject]
-        public void Initialize(ObjectPool<Bullet> bulletPool, ObjectPool<Laser> laserPool)
+        public WeaponShooter(ObjectPool<Bullet> bulletPool, ObjectPool<Laser> laserPool)
         {
             _bulletPool = bulletPool;
             _laserPool = laserPool;
@@ -30,10 +28,10 @@ namespace _Project.Scripts.Player.Weapons
             _nextBulletShootTime = Time.time + _laserCooldown;
 
             Bullet bullet = _bulletPool.GetObject();
-            
+
             bullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             bullet.Initialize(_bulletPool);
-            
+
             _activeProjectiles.Add(bullet);
         }
 
@@ -46,7 +44,7 @@ namespace _Project.Scripts.Player.Weapons
 
             laser.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             laser.Initialize(_laserPool);
-            
+
             _activeProjectiles.Add(laser);
         }
 

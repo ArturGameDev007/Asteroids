@@ -5,7 +5,7 @@ using Zenject;
 namespace _Project.Scripts.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IPlayerController
     {
         private const float X_ANGLE = 0f;
         private const float Y_ANGLE = 0f;

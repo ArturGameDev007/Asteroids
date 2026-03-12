@@ -1,20 +1,23 @@
+using System;
 using _Project.Scripts.Configs.Enemies;
 using _Project.Scripts.Enemies;
 using Zenject;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    public class EnemyDeathTracker
+    public class EnemyDeathTracker: IInitializable, IDisposable
     {
-        private ILoseModel _scoreData;
-        private IEnemyDeathListener _enemy;
+        private readonly ILoseModel _scoreData;
+        private readonly IEnemyDeathListener _enemy;
 
-        [Inject]
         public EnemyDeathTracker(ILoseModel scoreData, IEnemyDeathListener enemy)
         {
             _scoreData = scoreData;
             _enemy = enemy;
-            
+        }
+        
+        public void Initialize()
+        {
             _enemy.OnEnemyKilled += OnEnemyDied;
         }
 

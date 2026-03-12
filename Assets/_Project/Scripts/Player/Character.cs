@@ -4,23 +4,25 @@ using Zenject;
 
 namespace _Project.Scripts.Player
 {
-    public class Character
+    public class Character : IInitializable, IDisposable
     {
         public event Action OnGameOver;
-        
-        private IControllable _controllable;
-        private ICollisionHandler _collisionHandler;
 
-        [Inject]
+        private readonly IControllable _controllable;
+        private readonly ICollisionHandler _collisionHandler;
+
         public Character(IControllable controllable, ICollisionHandler collisionHandler)
         {
             _controllable = controllable;
             _collisionHandler = collisionHandler;
-            
+        }
+
+        public void Initialize()
+        {
             _collisionHandler.OnCollisionDetected += ProcessCollision;
         }
 
-        public void Destruct()
+        public void Dispose()
         {
             _collisionHandler.OnCollisionDetected -= ProcessCollision;
         }

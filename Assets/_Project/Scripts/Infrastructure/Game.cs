@@ -3,14 +3,13 @@ using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
-using Zenject;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class Game: IInitializable, ITickable, IDisposable
+    public class Game
     {
         private readonly IGameFactory _gameFactory;
-        private readonly EndGameView _endGameScreen;
+        private readonly LoseView _loseView;
         private readonly EnemySpawnController _enemySpawnController;
         private readonly Character _player;
         private readonly IControllable _controller;
@@ -21,13 +20,12 @@ namespace _Project.Scripts.Infrastructure
 
         private LosePresenter _losePresenter;
 
-        [Inject]
-        public Game(IGameFactory gameFactory, EndGameView endGameScreen, EnemySpawnController enemySpawnController,
+        public Game(IGameFactory gameFactory, LoseView loseView, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot,
             RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker  deathTracker)
         {
             _gameFactory = gameFactory;
-            _endGameScreen = endGameScreen;
+            _loseView = loseView;
             _enemySpawnController = enemySpawnController;
             _player = player;
             _controller = controller;
@@ -64,7 +62,7 @@ namespace _Project.Scripts.Infrastructure
                 _losePresenter?.Dispose();
             }
             
-            _player?.Destruct();
+            _player?.Dispose();
             _deathTracker?.Dispose();
         }
 
@@ -89,7 +87,7 @@ namespace _Project.Scripts.Infrastructure
 
         private void ShowLoseScreen()
         {
-            _losePresenter = _gameFactory.CreateEndGameScreen(_endGameScreen, _scoreData);
+            _losePresenter = _gameFactory.CreateEndGameScreen(_loseView, _scoreData);
         }
 
         private void OnRestartButtonClick()

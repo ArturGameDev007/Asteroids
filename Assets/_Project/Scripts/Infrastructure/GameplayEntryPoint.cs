@@ -1,29 +1,28 @@
-using UnityEngine;
+using System;
 using Zenject;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class GameplayEntryPoint : MonoBehaviour
+    public class GameplayEntryPoint : IInitializable, ITickable, IDisposable
     {
-        private Game _game;
+        private readonly Game _game;
 
-        [Inject]
-        public void Construct(Game game)
+        public GameplayEntryPoint(Game game)
         {
             _game = game;
         }
 
-        private void Start()
+        public void Initialize()
         {
-           _game.Initialize();
+            _game.Initialize();
         }
 
-        private void Update()
+        public void Tick()
         {
             _game.Tick();
         }
 
-        private void OnDestroy()
+        public void Dispose()
         {
             _game.Dispose();
         }

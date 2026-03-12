@@ -2,6 +2,7 @@
 using System.Collections;
 using _Project.Scripts.Configs.Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Player.Weapons
 {
@@ -10,31 +11,32 @@ namespace _Project.Scripts.Player.Weapons
         public event Action<int> OnLaserChanged;
         public event Action<float> OnReloadProgress;
 
-        [SerializeField] private LaserConfig _laserConfig;
+        [field: SerializeField] public LaserConfig LaserConfig { get; private set; }
 
-        private int _currentAmmonLaser;
         private bool _isReloading;
+
+        public int CurrentAmmonLaser { get; private set; }
 
         private void Start()
         {
-            _currentAmmonLaser = _laserConfig.MaxAmountLaser;
+            CurrentAmmonLaser = LaserConfig.MaxAmountLaser;
             ShowInfo();
 
-            OnReloadProgress?.Invoke(_laserConfig.ReloadTime);
+            OnReloadProgress?.Invoke(LaserConfig.ReloadTime);
         }
 
         public bool TrySpendAmmo()
         {
             int minCountLazer = 0;
 
-            if (_isReloading || _currentAmmonLaser <= 0)
+            if (_isReloading || CurrentAmmonLaser <= 0)
                 return false;
 
-            _currentAmmonLaser--;
+            CurrentAmmonLaser--;
 
             ShowInfo();
 
-            if (_currentAmmonLaser <= minCountLazer)
+            if (CurrentAmmonLaser <= minCountLazer)
                 StartCoroutine(ReloadLaser());
 
             return true;
@@ -44,27 +46,27 @@ namespace _Project.Scripts.Player.Weapons
         {
             _isReloading = true;
 
-            float timer = _laserConfig.ReloadTime;
+            float timer = LaserConfig.ReloadTime;
             float targetTime = 0f;
 
             while (timer > targetTime)
             {
                 timer -= Time.deltaTime;
                 OnReloadProgress?.Invoke(timer);
-                
+
                 yield return null;
             }
 
-            _currentAmmonLaser = _laserConfig.MaxAmountLaser;
+            CurrentAmmonLaser = LaserConfig.MaxAmountLaser;
             ShowInfo();
 
-            OnReloadProgress?.Invoke(_laserConfig.ReloadTime);
+            OnReloadProgress?.Invoke(LaserConfig.ReloadTime);
             _isReloading = false;
         }
 
         private void ShowInfo()
         {
-            OnLaserChanged?.Invoke(_currentAmmonLaser);
+            OnLaserChanged?.Invoke(CurrentAmmonLaser);
         }
     }
 }

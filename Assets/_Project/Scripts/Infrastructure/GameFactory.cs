@@ -12,13 +12,14 @@ namespace _Project.Scripts.Infrastructure
             _instantiator = instantiator;
         }
 
-        public LosePresenter CreateEndGameScreen(EndGameView prefab, ILoseModel scoreData)
+        public LosePresenter CreateEndGameScreen(LoseView prefab, ILoseModel scoreData)
         {
-            EndGameView endGameView = _instantiator.InstantiatePrefabForComponent<EndGameView>(prefab);
-            
-            if (endGameView.TryGetComponent(out LoseView loseView))
+            LoseView loseView = _instantiator.InstantiatePrefabForComponent<LoseView>(prefab);
+
+            if (loseView != null)
             {
                 var presenter = new LosePresenter(scoreData, loseView);
+                presenter.Initialize();
                 return presenter;
             }
 
