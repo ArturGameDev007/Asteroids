@@ -70,7 +70,7 @@ namespace _Project.Scripts.Installers
 
         private void BindPlayer()
         {
-            Container.Bind(typeof(PlayerController), typeof(InputForShoot), typeof(HandlerCrashWithEnemy))
+            Container.Bind(typeof(PlayerController), typeof(InputForShoot), typeof(HandlerCrashWithEnemy), typeof(GenerateLaser))
                 .FromComponentInNewPrefab(_shipPrefab).AsSingle();
             
             Container.Bind<Transform>().WithId("Player").FromResolveGetter<PlayerController>(player => player.transform);
@@ -85,7 +85,6 @@ namespace _Project.Scripts.Installers
 
         private void BindPerformanceUI()
         {
-            Container.Bind<GenerateLaser>().FromComponentInHierarchy().AsSingle();
             Container.Bind<ICoordinateView>().FromComponentInHierarchy().AsSingle();
             Container.Bind<ILaserView>().FromComponentInHierarchy().AsSingle();
             

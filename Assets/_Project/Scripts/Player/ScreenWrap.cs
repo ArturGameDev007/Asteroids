@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Player
 {
@@ -9,27 +10,30 @@ namespace _Project.Scripts.Player
         private float _objectWidth;
         private float _objectHeight;
 
-        private Camera _main;
+        private Camera _cameraMain;
         private Vector3 _position;
+
+        [Inject]
+        public void Construct(Camera cameraMain)
+        {
+            _cameraMain = Camera.main;
+        }
 
         private void Start()
         {
-            _main = Camera.main;
-
             BoundsScreen();
         }
-
+        
         private void Update()
         {
             CheckForScreenWrap();
-            
-            _position = _main.transform.position;
         }
 
         private void BoundsScreen()
         {
-            Vector3 screenBounds = _main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _position.z));
-            
+            Vector3 screenBounds =
+                _cameraMain.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _position.z));
+
             _screenWidth = screenBounds.x;
             _screenHeight = screenBounds.y;
         }
@@ -52,4 +56,3 @@ namespace _Project.Scripts.Player
         }
     }
 }
-
