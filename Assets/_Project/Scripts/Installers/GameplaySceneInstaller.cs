@@ -70,8 +70,8 @@ namespace _Project.Scripts.Installers
 
         private void BindPlayer()
         {
-            Container.Bind(typeof(PlayerController), typeof(InputForShoot), typeof(HandlerCrashWithEnemy), typeof(GenerateLaser))
-                .FromComponentInNewPrefab(_shipPrefab).AsSingle();
+            Container.Bind(typeof(PlayerController), typeof(InputForShoot), typeof(HandlerCrashWithEnemy),
+                    typeof(GenerateLaser)).FromComponentInNewPrefab(_shipPrefab).AsSingle();
             
             Container.Bind<Transform>().WithId("Player").FromResolveGetter<PlayerController>(player => player.transform);
 
@@ -79,7 +79,6 @@ namespace _Project.Scripts.Installers
             Container.Bind<IInputService>().To<InputController>().AsSingle();
             Container.Bind<IControllable>().To<PlayerControllerAdapter>().AsSingle();
             Container.Bind<IShootable>().To<PlayerShootProvider>().AsSingle();
-            
             Container.BindInterfacesAndSelfTo<Character>().AsSingle();
         }
 
@@ -101,7 +100,7 @@ namespace _Project.Scripts.Installers
             
             Container.Bind<ObjectPool<Enemy>>().WithId("UfoPool").AsCached()
                 .WithArguments(_ufoPrefabs, _poolConfig.UfoPoolSize, "UFO", enemiesContainer);
-            
+
             Transform projectilesContainer = new GameObject("Weapons_Category").transform;
             projectilesContainer.parent = _containerForPools;
             

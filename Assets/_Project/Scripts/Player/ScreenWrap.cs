@@ -16,14 +16,14 @@ namespace _Project.Scripts.Player
         [Inject]
         public void Construct(Camera cameraMain)
         {
-            _cameraMain = Camera.main;
+            _cameraMain = cameraMain;
         }
 
         private void Start()
         {
             BoundsScreen();
         }
-        
+
         private void Update()
         {
             CheckForScreenWrap();

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7030455677931118529}
   - component: {fileID: 6625449025738942762}
   - component: {fileID: 6076999410980347914}
-  - component: {fileID: 7483078181205018531}
   - component: {fileID: -894732123707215643}
   - component: {fileID: 5186580437313053410}
+  - component: {fileID: 5852455639232002081}
   m_Layer: 8
   m_Name: Ship-Player
   m_TagString: Untagged
@@ -213,18 +213,6 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 3242289843733358288, guid: 12deaaaf3585eb74d92fb178f7fc9366, type: 3}
   _pointShootForlaser: {fileID: 8547953513106730109}
   _pointShootForBullet: {fileID: 2059019129757481366}
---- !u!114 &7483078181205018531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121580277768540567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bf8978c140f7a6439bd39bb5fffab47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-894732123707215643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +238,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <LaserConfig>k__BackingField: {fileID: 11400000, guid: 5af8147623699184a97642e29d65253d, type: 2}
+--- !u!114 &5852455639232002081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121580277768540567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf8978c140f7a6439bd39bb5fffab47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1953773673319353019
 GameObject:
   m_ObjectHideFlags: 0
