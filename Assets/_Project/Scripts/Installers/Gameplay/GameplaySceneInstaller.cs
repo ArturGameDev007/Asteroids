@@ -10,7 +10,7 @@ using _Project.Scripts.UI.PerformanceShip;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Installers
+namespace _Project.Scripts.Installers.Gameplay
 {
     public class GameplaySceneInstaller : MonoInstaller
     {
