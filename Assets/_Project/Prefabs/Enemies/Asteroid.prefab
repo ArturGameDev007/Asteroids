@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -5098912282397029430}
   - component: {fileID: 734868441189055790}
   - component: {fileID: -7679916661727130133}
-  - component: {fileID: -5789825315768880599}
+  - component: {fileID: -4721055904035275540}
   m_Layer: 7
   m_Name: Asteroid
   m_TagString: Enemy
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _asteroidConfig: {fileID: 11400000, guid: f4e617410dc6d854aa651578f3e3f029, type: 2}
---- !u!114 &-5789825315768880599
+--- !u!114 &-4721055904035275540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

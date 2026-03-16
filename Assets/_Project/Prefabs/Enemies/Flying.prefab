@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3623481144781250868}
   - component: {fileID: 6872781815636317615}
   - component: {fileID: 2687539046242588937}
-  - component: {fileID: 9105957324695588644}
+  - component: {fileID: -1895366960235508766}
   m_Layer: 6
   m_Name: Flying
   m_TagString: Enemy
@@ -172,9 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32700fd763936344f864888182b0abad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
   _ufoConfig: {fileID: 11400000, guid: c730927372f184849ace991e8aa06ab8, type: 2}
---- !u!114 &9105957324695588644
+--- !u!114 &-1895366960235508766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
