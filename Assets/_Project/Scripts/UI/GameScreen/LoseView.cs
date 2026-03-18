@@ -12,9 +12,11 @@ namespace _Project.Scripts.UI.GameScreen
     {
         public event Action OnRestartRequested;
 
+        [Header("Texts Scores")]
         [SerializeField] private TextMeshProUGUI _textScore;
         [SerializeField] private TextMeshProUGUI _textBestResult;
 
+        [field: Header("Button")]
         [field: SerializeField] public Button RestartButton { get; private set; }
 
         private ISaveService _saveService;
