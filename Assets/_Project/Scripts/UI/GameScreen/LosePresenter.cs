@@ -9,11 +9,11 @@ namespace _Project.Scripts.UI.GameScreen
         private readonly ILoseModel _loseModel;
         private readonly ILoseView _loseView;
         
-        private readonly AnalyticsService _analyticsService;
+        private readonly IAnalyticsService _analyticsService;
         
         public event Action OnRestartClick;
 
-        public LosePresenter(ILoseModel loseModel, ILoseView loseView,  AnalyticsService analyticsService)
+        public LosePresenter(ILoseModel loseModel, ILoseView loseView,  IAnalyticsService analyticsService)
         {
             _loseModel = loseModel;
             _loseView = loseView;
@@ -41,7 +41,7 @@ namespace _Project.Scripts.UI.GameScreen
             _loseView.ShowPanel();
             _loseView.SetStats(shots, lasers, destroyedEnemies);
             
-            _analyticsService.SendGameEnd(shots, lasers, destroyedEnemies);
+            _analyticsService.LogGameEnd(shots, lasers, destroyedEnemies);
 
             UpdateScoreView();
         }

@@ -12,7 +12,7 @@ namespace _Project.Scripts.Player.Weapons
         private readonly ObjectPool<Bullet> _bulletPool;
         private readonly ObjectPool<Laser> _laserPool;
         
-        private readonly AnalyticsService _analyticsService;
+        private readonly IAnalyticsService _analyticsService;
 
         private float _laserCooldown = 0.5f;
         private float _nextBulletShootTime;
@@ -20,7 +20,7 @@ namespace _Project.Scripts.Player.Weapons
         public int ShotsCount { get; private set; }
         public int LaserUsed { get; private set; }
 
-        public WeaponShooter(ObjectPool<Bullet> bulletPool, ObjectPool<Laser> laserPool, AnalyticsService analyticsService)
+        public WeaponShooter(ObjectPool<Bullet> bulletPool, ObjectPool<Laser> laserPool, IAnalyticsService analyticsService)
         {
             _bulletPool = bulletPool;
             _laserPool = laserPool;
@@ -52,7 +52,7 @@ namespace _Project.Scripts.Player.Weapons
             Laser laser = _laserPool.GetObject();
             
             LaserUsed++;
-            _analyticsService.SendLaserUsed();
+            _analyticsService.LogLaserUsed();
 
             laser.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             laser.Initialize(_laserPool);

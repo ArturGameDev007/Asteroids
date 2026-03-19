@@ -9,9 +9,7 @@ namespace _Project.Scripts.Installers.Project
         public override void InstallBindings()
         {
             Container.Bind<ISaveService>().To<LocalSaveService>().AsSingle();
-            // Container.Bind<IAnalyticsService>().To<FirebaseAnalyticsService>().AsSingle();
-            Container.BindInterfacesTo<FirebaseAnalyticsService>().AsSingle();
-            Container.Bind<AnalyticsService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<FirebaseAnalyticsService>().AsSingle();
         }
     }
 }

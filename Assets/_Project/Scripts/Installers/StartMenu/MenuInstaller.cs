@@ -1,4 +1,3 @@
-using _Project.Scripts.Services.Analytics;
 using _Project.Scripts.UI.StartMenu;
 using UnityEngine;
 using Zenject;
@@ -16,9 +15,7 @@ namespace _Project.Scripts.Installers.StartMenu
 
         private void BindStartMenu()
         {
-            Container.BindInterfacesTo<MenuStartLogger>().AsSingle().NonLazy();
             Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
-            
             Container.Bind<StartMenuView>().FromComponentInHierarchy().AsSingle();
 
             Container.BindInterfacesTo<StartMenuPresenter>().AsSingle();

@@ -7,9 +7,9 @@ namespace _Project.Scripts.Infrastructure
     public class GameFactory : IGameFactory
     {
         private readonly IInstantiator _instantiator;
-        private readonly AnalyticsService _analyticsService;
+        private readonly IAnalyticsService _analyticsService;
 
-        public GameFactory(IInstantiator instantiator, AnalyticsService analyticsService)
+        public GameFactory(IInstantiator instantiator, IAnalyticsService analyticsService)
         {
             _instantiator = instantiator;
             _analyticsService = analyticsService;
