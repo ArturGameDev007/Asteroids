@@ -12,6 +12,8 @@ namespace _Project.Scripts.Services.Analytics
         private const string PARAMETR_DESTROYED_ENEMIES = "Amount_Destroyed_Enemies";
         private const string EVENT_LASER_USED = "Laser_Used";
 
+        private bool _wasUsedLaser;
+
         public async void Initialize()
         {
             await FirebaseApp.CheckAndFixDependenciesAsync();
@@ -19,6 +21,7 @@ namespace _Project.Scripts.Services.Analytics
 
         public void LogGameStart()
         {
+            _wasUsedLaser = false;
             FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLevelStart);
             Debug.Log("<color=green>[Analytics]</color> Start Game");
         }
@@ -39,8 +42,13 @@ namespace _Project.Scripts.Services.Analytics
 
         public void LogLaserUsed()
         {
+            if (_wasUsedLaser)
+                return;
+            
             FirebaseAnalytics.LogEvent(EVENT_LASER_USED);
             Debug.Log("<color=cyan>[Analytics]</color> Laser Used Sent");
+            
+            _wasUsedLaser = true;
         }
     }
 }

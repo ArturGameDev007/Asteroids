@@ -13,7 +13,7 @@ namespace _Project.Scripts.Player.Weapons
         private readonly ObjectPool<Laser> _laserPool;
         
         private readonly IAnalyticsService _analyticsService;
-
+        
         private float _laserCooldown = 0.5f;
         private float _nextBulletShootTime;
         

@@ -21,7 +21,10 @@ namespace _Project.Scripts.UI.GameScreen
         public void Initialize()
         {
             _enemy.OnEnemyKilled += OnEnemyDied;
-            KillCount = 0;
+
+            int minValueDestroyed = 0;
+            
+            KillCount = minValueDestroyed;
         }
 
         public void Dispose()

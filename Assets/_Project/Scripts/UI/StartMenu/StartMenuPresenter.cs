@@ -20,7 +20,6 @@ namespace _Project.Scripts.UI.StartMenu
         public void Initialize()
         {
             _startMenuView.StartButton.onClick.AddListener(OnStartClicked);
-            _analyticsService.LogGameStart();
         }
 
         public void Dispose()
@@ -30,6 +29,7 @@ namespace _Project.Scripts.UI.StartMenu
 
         private void OnStartClicked()
         {
+            _analyticsService.LogGameStart();
             _sceneLoader.LoadScene();
         }
     }
