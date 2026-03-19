@@ -11,8 +11,12 @@ namespace _Project.Scripts.Installers.StartMenu
         
         public override void InstallBindings()
         {
+            BindStartMenu();
+        }
+
+        private void BindStartMenu()
+        {
             Container.BindInterfacesTo<MenuStartLogger>().AsSingle().NonLazy();
-            
             Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
             
             Container.Bind<StartMenuView>().FromComponentInHierarchy().AsSingle();
