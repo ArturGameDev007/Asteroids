@@ -36,8 +36,7 @@ namespace _Project.Scripts.Services.Analytics
             };
 
             FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLevelEnd, parameters);
-            Debug.Log(
-                $"<color=green>Firebase Sent:</color> Shots: {amountShots}, Lasers: {amountUsedLaser}, Kills: {amountDestroyedEnemies}");
+            Debug.Log($"<color=green>Firebase Sent:</color> Shots: {amountShots}, Lasers: {amountUsedLaser}, Kills: {amountDestroyedEnemies}");
         }
 
         public void LogLaserUsed()
