@@ -7,6 +7,8 @@ namespace _Project.Scripts.UI.GameScreen
         public event Action OnRestartRequested;
         
         public void SetScore(int score);
+
+        public void SetStats(int shots, int laser,  int destroyedEnemies);
         
         public void ShowPanel();
         

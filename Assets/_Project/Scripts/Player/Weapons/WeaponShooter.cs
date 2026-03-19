@@ -13,6 +13,9 @@ namespace _Project.Scripts.Player.Weapons
 
         private float _laserCooldown = 0.5f;
         private float _nextBulletShootTime;
+        
+        public int ShotsCount { get; private set; }
+        public int LaserUsed { get; private set; }
 
         public WeaponShooter(ObjectPool<Bullet> bulletPool, ObjectPool<Laser> laserPool)
         {
@@ -29,6 +32,8 @@ namespace _Project.Scripts.Player.Weapons
 
             Bullet bullet = _bulletPool.GetObject();
 
+            ShotsCount++;
+
             bullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             bullet.Initialize(_bulletPool);
 
@@ -41,6 +46,8 @@ namespace _Project.Scripts.Player.Weapons
                 return;
 
             Laser laser = _laserPool.GetObject();
+            
+            LaserUsed++;
 
             laser.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             laser.Initialize(_laserPool);

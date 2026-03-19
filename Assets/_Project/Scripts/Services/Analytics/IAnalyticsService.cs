@@ -4,7 +4,7 @@ namespace _Project.Scripts.Services.Analytics
     {
         public void LogGameStart();
         
-        public void LogGameEnd();
+        public void LogGameEnd(int amountShots, int amountUsedLaser, int amountDestroyedEnemies);
         
         public void LogLaserUsed();
     }

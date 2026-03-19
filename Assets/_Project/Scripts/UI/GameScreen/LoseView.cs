@@ -16,6 +16,11 @@ namespace _Project.Scripts.UI.GameScreen
         [SerializeField] private TextMeshProUGUI _textScore;
         [SerializeField] private TextMeshProUGUI _textBestResult;
 
+        [Header("Stats")]
+        [SerializeField] private TextMeshProUGUI _textAmountShots;
+        [SerializeField] private TextMeshProUGUI _textAmountUsedLaser;
+        [SerializeField] private TextMeshProUGUI _textAmountDestroyedEnemies;
+
         [field: Header("Button")]
         [field: SerializeField] public Button RestartButton { get; private set; }
 
@@ -44,6 +49,13 @@ namespace _Project.Scripts.UI.GameScreen
             _textScore.text = $"Score: {score.ToString()}";
             
             ShowBestScoreResult(score);
+        }
+        
+        public void SetStats(int shots, int laser, int destroyedEnemies)
+        {
+            _textAmountShots.text = $"Amount Shots: {shots.ToString()}";
+            _textAmountUsedLaser.text = $"Used Laser: {laser.ToString()}";
+            _textAmountDestroyedEnemies.text = $"Destroyed Enemies: {destroyedEnemies.ToString()}";
         }
 
         private void ShowBestScoreResult(int currentScore)

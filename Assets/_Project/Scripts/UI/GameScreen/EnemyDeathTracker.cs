@@ -9,6 +9,8 @@ namespace _Project.Scripts.UI.GameScreen
     {
         private readonly ILoseModel _scoreData;
         private readonly IEnemyDeathListener _enemy;
+        
+        public int KillCount { get; private set; }
 
         public EnemyDeathTracker(ILoseModel scoreData, IEnemyDeathListener enemy)
         {
@@ -19,6 +21,7 @@ namespace _Project.Scripts.UI.GameScreen
         public void Initialize()
         {
             _enemy.OnEnemyKilled += OnEnemyDied;
+            KillCount = 0;
         }
 
         public void Dispose()
@@ -28,6 +31,7 @@ namespace _Project.Scripts.UI.GameScreen
 
         private void OnEnemyDied(EnemyConfig config)
         {
+            KillCount++;
             _scoreData.AddScore(config);
         }
     }

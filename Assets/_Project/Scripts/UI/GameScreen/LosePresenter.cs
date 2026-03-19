@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts.Services.Analytics;
 using Zenject;
 
 namespace _Project.Scripts.UI.GameScreen
@@ -8,12 +9,15 @@ namespace _Project.Scripts.UI.GameScreen
         private readonly ILoseModel _loseModel;
         private readonly ILoseView _loseView;
         
+        private readonly AnalyticsService _analyticsService;
+        
         public event Action OnRestartClick;
 
-        public LosePresenter(ILoseModel loseModel, ILoseView loseView)
+        public LosePresenter(ILoseModel loseModel, ILoseView loseView,  AnalyticsService analyticsService)
         {
             _loseModel = loseModel;
             _loseView = loseView;
+            _analyticsService = analyticsService;
         }
         
         public void Initialize()
@@ -30,10 +34,14 @@ namespace _Project.Scripts.UI.GameScreen
             _loseView.OnRestartRequested -= OnRestartRequested;
         }
 
-        public void Open(int finalScore)
+        public void Open(int finalScore, int shots, int lasers, int destroyedEnemies)
         {
             _loseModel.SaveResult(finalScore);
+            
             _loseView.ShowPanel();
+            _loseView.SetStats(shots, lasers, destroyedEnemies);
+            
+            _analyticsService.SendGameEnd(shots, lasers, destroyedEnemies);
 
             UpdateScoreView();
         }
