@@ -14,16 +14,22 @@ namespace _Project.Scripts.Services.Analytics
 
         private bool _wasUsedLaser;
 
-        public async void Initialize()
+        public void Initialize()
         {
-            await FirebaseApp.CheckAndFixDependenciesAsync();
+            var task =  FirebaseApp.CheckAndFixDependenciesAsync();
+            
+            task.GetAwaiter().GetResult();
+            
+            Debug.Log("Firebase initialized");
         }
 
         public void LogGameStart()
         {
             _wasUsedLaser = false;
+            
             FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLevelStart);
-            Debug.Log("<color=green>[Analytics]</color> Start Game");
+            
+            Debug.Log("[Analytics]: Start Game.");
         }
 
         public void LogGameEnd(int amountShots, int amountUsedLaser, int amountDestroyedEnemies)
@@ -36,7 +42,7 @@ namespace _Project.Scripts.Services.Analytics
             };
 
             FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLevelEnd, parameters);
-            Debug.Log($"<color=green>Firebase Sent:</color> Shots: {amountShots}, Lasers: {amountUsedLaser}, Kills: {amountDestroyedEnemies}");
+            Debug.Log($"[Analytics]: Shots: {amountShots}, Lasers: {amountUsedLaser}, Destroyed: {amountDestroyedEnemies}.");
         }
 
         public void LogLaserUsed()
@@ -45,7 +51,7 @@ namespace _Project.Scripts.Services.Analytics
                 return;
             
             FirebaseAnalytics.LogEvent(EVENT_LASER_USED);
-            Debug.Log("<color=cyan>[Analytics]</color> Laser Used Sent");
+            Debug.Log("[Analytics]: Laser Used.");
             
             _wasUsedLaser = true;
         }
