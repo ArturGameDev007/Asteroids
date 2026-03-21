@@ -15,4 +15,4 @@ MonoBehaviour:
   <Speed>k__BackingField: 1.5
   <SpawnOffset>k__BackingField: 2
   <Delay>k__BackingField: 3
-  <ScoreForKill>k__BackingField: 5
+  <ScoreForKill>k__BackingField: 10

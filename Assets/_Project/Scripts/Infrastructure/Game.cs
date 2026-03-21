@@ -14,6 +14,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly Character _player;
         private readonly IControllable _controller;
         private readonly IShootable _shoot;
+        private readonly WeaponShooter _weaponShooter;
         private readonly RestartGame _restartGame;
         private readonly ILoseModel _scoreData;
         private readonly EnemyDeathTracker _deathTracker;
@@ -21,7 +22,7 @@ namespace _Project.Scripts.Infrastructure
         private LosePresenter _losePresenter;
 
         public Game(IGameFactory gameFactory, LoseView loseView, EnemySpawnController enemySpawnController,
-            Character player, IControllable controller, IShootable shoot,
+            Character player, IControllable controller, IShootable shoot, WeaponShooter weaponShooter,
             RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker  deathTracker)
         {
             _gameFactory = gameFactory;
@@ -30,6 +31,7 @@ namespace _Project.Scripts.Infrastructure
             _player = player;
             _controller = controller;
             _shoot = shoot;
+            _weaponShooter = weaponShooter;
             _restartGame = restartGame;
             _scoreData = scoreData;
             _deathTracker = deathTracker;
@@ -81,7 +83,8 @@ namespace _Project.Scripts.Infrastructure
             if (_losePresenter != null)
             {
                 _losePresenter.OnRestartClick += OnRestartButtonClick;
-                _losePresenter.Open(_scoreData.Score);
+                
+                _losePresenter.Open(_scoreData.Score, _weaponShooter.ShotsCount, _weaponShooter.LaserUsed, _deathTracker.KillCount);
             }
         }
 
