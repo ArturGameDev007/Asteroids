@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Services.Analytics;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 namespace _Project.Scripts.UI.StartMenu
@@ -29,8 +30,9 @@ namespace _Project.Scripts.UI.StartMenu
 
         private void OnStartClicked()
         {
+            _startMenuView.StartButton.interactable = false;
             _analyticsService.LogGameStart();
-            _sceneLoader.LoadScene();
+            _sceneLoader.LoadSceneAsync().Forget();
         }
     }
 }
