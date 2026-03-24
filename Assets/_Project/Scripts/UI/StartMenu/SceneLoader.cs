@@ -11,14 +11,13 @@ namespace _Project.Scripts.UI.StartMenu
 
         private readonly IResourceLoader _resourceLoader;
         private readonly AssetReference _assetReference;
-        
+
         private ILoadingView _loadingView;
 
-        public SceneLoader(AssetReference assetReference, IResourceLoader resourceLoader, ILoadingView  loadingView)
+        public SceneLoader(AssetReference assetReference, IResourceLoader resourceLoader)
         {
             _assetReference = assetReference;
             _resourceLoader = resourceLoader;
-            _loadingView = loadingView;
         }
 
         public async UniTask LoadSceneAsync()
@@ -26,7 +25,10 @@ namespace _Project.Scripts.UI.StartMenu
             _loadingView = await _resourceLoader.LoadAsset<LoadingView>(_assetReference);
             _loadingView.Show();
 
-            await UniTask.WhenAll(UniTask.Delay(LOADING_TIME), Addressables.LoadSceneAsync(GAME_SCENE_NAME).ToUniTask());
+            var sceneHandle = Addressables.LoadSceneAsync(GAME_SCENE_NAME, activateOnLoad: false);
+
+            await UniTask.WhenAll(UniTask.Delay(LOADING_TIME), sceneHandle.ToUniTask());
+            await sceneHandle.Result.ActivateAsync().ToUniTask();
         }
     }
 }
