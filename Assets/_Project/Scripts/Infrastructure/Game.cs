@@ -1,6 +1,7 @@
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
+using _Project.Scripts.Services.Analytics;
 using _Project.Scripts.UI.GameScreen;
 using UnityEngine;
 
@@ -18,12 +19,13 @@ namespace _Project.Scripts.Infrastructure
         private readonly RestartGame _restartGame;
         private readonly ILoseModel _scoreData;
         private readonly EnemyDeathTracker _deathTracker;
+        private readonly IAnalyticsService  _analyticsService;
 
         private LosePresenter _losePresenter;
 
         public Game(IGameFactory gameFactory, LoseView loseView, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot, WeaponShooter weaponShooter,
-            RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker  deathTracker)
+            RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker  deathTracker, IAnalyticsService  analyticsService)
         {
             _gameFactory = gameFactory;
             _loseView = loseView;
@@ -35,6 +37,7 @@ namespace _Project.Scripts.Infrastructure
             _restartGame = restartGame;
             _scoreData = scoreData;
             _deathTracker = deathTracker;
+            _analyticsService = analyticsService;
         }
 
         public void Initialize()
@@ -77,6 +80,8 @@ namespace _Project.Scripts.Infrastructure
             _shoot.StopAllShoots();
             
             _enemySpawnController.StopAndClearAll();
+            
+            _analyticsService.LogGameEnd(_weaponShooter.ShotsCount, _weaponShooter.LaserUsed,_deathTracker.KillCount);
 
             ShowLoseScreen();
 
@@ -84,7 +89,7 @@ namespace _Project.Scripts.Infrastructure
             {
                 _losePresenter.OnRestartClick += OnRestartButtonClick;
                 
-                _losePresenter.Open(_scoreData.Score, _weaponShooter.ShotsCount, _weaponShooter.LaserUsed, _deathTracker.KillCount);
+                _losePresenter.Open(_scoreData.Score);
             }
         }
 
