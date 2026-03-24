@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7065692539280915795}
   - component: {fileID: 2161749661718850183}
   m_Layer: 5
-  m_Name: UI-LoadScene
+  m_Name: UI_LoadScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

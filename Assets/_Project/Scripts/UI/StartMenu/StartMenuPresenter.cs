@@ -28,15 +28,11 @@ namespace _Project.Scripts.UI.StartMenu
         {
             _startMenuView = await _resourceLoader.LoadAsset<StartMenuView>(_viewReferences);
             _startMenuView.StartButton.onClick.AddListener(OnStartClicked);
-            
-            // _startMenuView.StartButton.onClick.AddListener(OnStartClicked);
         }
 
         public void Dispose()
         {
-            // _startMenuView.StartButton.onClick.RemoveListener(OnStartClicked);
             _startMenuView.StartButton.onClick.RemoveListener(OnStartClicked);
-            
         }
 
         private void OnStartClicked()

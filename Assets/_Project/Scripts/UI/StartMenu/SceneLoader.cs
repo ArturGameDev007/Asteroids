@@ -1,6 +1,5 @@
 using _Project.Scripts.Services.AsyncLoader;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace _Project.Scripts.UI.StartMenu
@@ -12,33 +11,22 @@ namespace _Project.Scripts.UI.StartMenu
 
         private readonly IResourceLoader _resourceLoader;
         private readonly AssetReference _assetReference;
-        // private readonly ILoadingView _loadingView;
+        
+        private ILoadingView _loadingView;
 
-        public SceneLoader(AssetReference assetReference, IResourceLoader resourceLoader)
+        public SceneLoader(AssetReference assetReference, IResourceLoader resourceLoader, ILoadingView  loadingView)
         {
-            // _loadingView = loadingView;
             _assetReference = assetReference;
             _resourceLoader = resourceLoader;
+            _loadingView = loadingView;
         }
-
-        // public void LoadScene()
-        // {
-        //     SceneManager.LoadScene(GAME_SCENE_NAME);
-        // }
 
         public async UniTask LoadSceneAsync()
         {
-            // var prefab = await _resourceLoader.LoadAsset<GameObject>(_assetReference);
-            // var loadingView=Object.Instantiate(prefab);
+            _loadingView = await _resourceLoader.LoadAsset<LoadingView>(_assetReference);
+            _loadingView.Show();
 
-            var loadingView = await _resourceLoader.LoadAsset<LoadingView>(_assetReference);
-
-            loadingView.Show();
-
-            // _loadingView.Show();
-
-            await UniTask.Delay(LOADING_TIME);
-            await Addressables.LoadSceneAsync(GAME_SCENE_NAME).ToUniTask();
+            await UniTask.WhenAll(UniTask.Delay(LOADING_TIME), Addressables.LoadSceneAsync(GAME_SCENE_NAME).ToUniTask());
         }
     }
 }
