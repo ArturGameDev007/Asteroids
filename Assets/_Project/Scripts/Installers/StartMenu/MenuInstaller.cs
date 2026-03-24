@@ -8,15 +8,15 @@ namespace _Project.Scripts.Installers.StartMenu
 {
     public class MenuInstaller : MonoInstaller
     {
-        [SerializeField] private AssetReference _startMenuView;
+        // [SerializeField] private StartMenuView _startMenuView;
         [SerializeField] private AssetReference _loadingView;
         
         public override void InstallBindings()
         {
+            Container.BindInterfacesTo<StartMenuPresenter>().AsSingle();
+            Container.Bind<StartMenuView>().FromComponentInHierarchy().AsSingle();
+            
             Container.Bind<IResourceLoader>().To<AddressableResourceLoader>().AsSingle();
-            
-            Container.BindInterfacesTo<StartMenuPresenter>().AsSingle().WithArguments(_startMenuView);
-            
             Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle().WithArguments(_loadingView);
         }
     }
