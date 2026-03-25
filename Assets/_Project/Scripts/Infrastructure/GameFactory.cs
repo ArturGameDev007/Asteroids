@@ -1,5 +1,7 @@
-using _Project.Scripts.Services.Analytics;
+using _Project.Scripts.Services.AsyncLoader;
 using _Project.Scripts.UI.GameScreen;
+using Cysharp.Threading.Tasks;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace _Project.Scripts.Infrastructure
@@ -7,25 +9,28 @@ namespace _Project.Scripts.Infrastructure
     public class GameFactory : IGameFactory
     {
         private readonly IInstantiator _instantiator;
-        // private readonly IAnalyticsService _analyticsService;
-
-        public GameFactory(IInstantiator instantiator)
+        private readonly IResourceLoader _resourceLoader;
+        private readonly ILoseModel _loseModel;
+        private readonly AssetReference _assetReference;
+        
+        public GameFactory(IInstantiator instantiator, IResourceLoader resourceLoader, AssetReference assetReference, ILoseModel loseModel)
         {
             _instantiator = instantiator;
+            _resourceLoader = resourceLoader;
+            _assetReference = assetReference;
+            _loseModel = loseModel;
         }
 
-        public LosePresenter CreateEndGameScreen(LoseView prefab, ILoseModel scoreData)
+        public async UniTask<LosePresenter> CreateLoseScreenAsync()
         {
+            var prefab = await _resourceLoader.LoadAssetAsync<LoseView>(_assetReference);
+            
             LoseView loseView = _instantiator.InstantiatePrefabForComponent<LoseView>(prefab);
+            
+            var presenter= new LosePresenter(loseView, _loseModel);
+            presenter.Initialize();
 
-            if (loseView != null)
-            {
-                var presenter = new LosePresenter(scoreData, loseView);
-                presenter.Initialize();
-                return presenter;
-            }
-
-            return null;
+            return presenter;
         }
     }
 }

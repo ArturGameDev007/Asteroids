@@ -568,7 +568,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 519420031}
-  _endGameScreenPrefab: {fileID: 1796660822261427583, guid: 6fae862322a154f4da4d0199be03797b, type: 3}
+  _endGameScreenPrefabReference:
+    m_AssetGUID: 6fae862322a154f4da4d0199be03797b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   _containerForPools: {fileID: 1869544803}
   _poolConfig: {fileID: 11400000, guid: 8b60ae3e0c03f6a42b06288f24a86e2f, type: 2}
   _enemyConfigs:

@@ -8,7 +8,6 @@ namespace _Project.Scripts.Installers.StartMenu
 {
     public class MenuInstaller : MonoInstaller
     {
-        // [SerializeField] private StartMenuView _startMenuView;
         [SerializeField] private AssetReference _loadingView;
         
         public override void InstallBindings()

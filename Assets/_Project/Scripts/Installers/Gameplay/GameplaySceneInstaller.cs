@@ -4,10 +4,12 @@ using _Project.Scripts.Enemies;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
+using _Project.Scripts.Services.AsyncLoader;
 using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace _Project.Scripts.Installers.Gameplay
@@ -17,8 +19,8 @@ namespace _Project.Scripts.Installers.Gameplay
         [Header("Camera")]
         [SerializeField] private Camera _mainCamera;
         
-        [Header("Prefabs UI")]
-        [SerializeField] private LoseView _endGameScreenPrefab;
+        [Header("Prefab UI")]
+        [SerializeField] private AssetReference _endGameScreenPrefabReference;
 
         [Header("Container For Objects Pools")]
         [SerializeField] private Transform _containerForPools;
@@ -38,13 +40,15 @@ namespace _Project.Scripts.Installers.Gameplay
 
         public override void InstallBindings()
         {
+            Container.Bind<IResourceLoader>().To<AddressableResourceLoader>().AsSingle();
+            
             Container.Bind<Camera>().FromInstance(_mainCamera).AsSingle();
             Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
             Container.Bind<WeaponShooter>().AsSingle();
             Container.Bind<IEnemyDeathListener>().To<EnemyManager>().AsSingle();
             Container.Bind<RestartGame>().AsSingle();
             Container.Bind<ILoseModel>().To<ScoreData>().AsSingle();
-            Container.BindInstance(_endGameScreenPrefab).AsSingle();
+            Container.BindInstance(_endGameScreenPrefabReference).AsSingle();
             
             BindBackgroundUI();
             BindPerformanceUI();

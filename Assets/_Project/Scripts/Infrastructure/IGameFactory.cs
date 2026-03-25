@@ -1,9 +1,10 @@
 using _Project.Scripts.UI.GameScreen;
+using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.Infrastructure
 {
     public interface IGameFactory
     {
-        public LosePresenter CreateEndGameScreen(LoseView prefab, ILoseModel scoreData);
+        public UniTask<LosePresenter> CreateLoseScreenAsync();
     }
 }

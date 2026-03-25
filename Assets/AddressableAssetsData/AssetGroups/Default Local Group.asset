@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: b9ddb264db6874041ac0c06280118d4e
   m_SerializeEntries:
+  - m_GUID: 6fae862322a154f4da4d0199be03797b
+    m_Address: Assets/_Project/Prefabs/UI/UI-EndGameScreen.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fa60998387ce22348b2accd7a3f2ae8a
     m_Address: Assets/_Project/Prefabs/UI/StartMenu/UI-LoadScene.prefab
     m_ReadOnly: 0

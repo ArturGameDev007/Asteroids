@@ -3,19 +3,20 @@ using Zenject;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    public class LosePresenter: IInitializable, IDisposable
+    public class LosePresenter : IInitializable, IDisposable
     {
         private readonly ILoseModel _loseModel;
-        private readonly ILoseView _loseView;
-        
+
+        private ILoseView _loseView;
+
         public event Action OnRestartClick;
 
-        public LosePresenter(ILoseModel loseModel, ILoseView loseView)
+        public LosePresenter(ILoseView loseView, ILoseModel loseModel)
         {
-            _loseModel = loseModel;
             _loseView = loseView;
+            _loseModel = loseModel;
         }
-        
+
         public void Initialize()
         {
             _loseModel.OnScoreChanged += UpdateScoreView;
@@ -23,12 +24,21 @@ namespace _Project.Scripts.UI.GameScreen
 
             UpdateScoreView();
         }
-        
+
         public void Dispose()
         {
             _loseModel.OnScoreChanged -= UpdateScoreView;
-            _loseView.OnRestartRequested -= OnRestartRequested;
+
+            if (_loseView != null)
+                _loseView.OnRestartRequested -= OnRestartRequested;
         }
+
+        // public async UniTask ShowScreenAsync()
+        // {
+        //     _loseView = await _resourceLoader.LoadAsset<LoseView>(_assetReference);
+        //
+        //     UpdateScoreView();
+        // }
 
         public void Open(int finalScore)
         {
@@ -37,10 +47,10 @@ namespace _Project.Scripts.UI.GameScreen
 
             UpdateScoreView();
         }
-        
+
         public void Close()
         {
-            _loseView.HidePanel();
+            _loseView?.HidePanel();
         }
 
         private void UpdateScoreView()

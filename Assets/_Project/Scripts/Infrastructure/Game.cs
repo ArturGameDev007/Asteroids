@@ -2,15 +2,17 @@ using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.Services.Analytics;
+using _Project.Scripts.Services.AsyncLoader;
 using _Project.Scripts.UI.GameScreen;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace _Project.Scripts.Infrastructure
 {
     public class Game
     {
         private readonly IGameFactory _gameFactory;
-        private readonly LoseView _loseView;
         private readonly EnemySpawnController _enemySpawnController;
         private readonly Character _player;
         private readonly IControllable _controller;
@@ -19,16 +21,18 @@ namespace _Project.Scripts.Infrastructure
         private readonly RestartGame _restartGame;
         private readonly ILoseModel _scoreData;
         private readonly EnemyDeathTracker _deathTracker;
-        private readonly IAnalyticsService  _analyticsService;
+        private readonly IAnalyticsService _analyticsService;
 
         private LosePresenter _losePresenter;
 
-        public Game(IGameFactory gameFactory, LoseView loseView, EnemySpawnController enemySpawnController,
+        private bool _isGameOver;
+
+        public Game(IGameFactory gameFactory, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot, WeaponShooter weaponShooter,
-            RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker  deathTracker, IAnalyticsService  analyticsService)
+            RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker deathTracker,
+            IAnalyticsService analyticsService)
         {
             _gameFactory = gameFactory;
-            _loseView = loseView;
             _enemySpawnController = enemySpawnController;
             _player = player;
             _controller = controller;
@@ -66,36 +70,35 @@ namespace _Project.Scripts.Infrastructure
                 _losePresenter.OnRestartClick -= OnRestartButtonClick;
                 _losePresenter?.Dispose();
             }
-            
+
             _player?.Dispose();
             _deathTracker?.Dispose();
         }
 
-        private void OnGameOver()
+        private async void OnGameOver()
         {
+            if (_isGameOver)
+                return;
+            
+            _isGameOver = true;
+            
             _controller?.StopPhysics();
             _controller?.DisableControl();
 
             _shoot.DisableControl();
             _shoot.StopAllShoots();
-            
-            _enemySpawnController.StopAndClearAll();
-            
-            _analyticsService.LogGameEnd(_weaponShooter.ShotsCount, _weaponShooter.LaserUsed,_deathTracker.KillCount);
 
-            ShowLoseScreen();
+            _enemySpawnController.StopAndClearAll();
+
+            _analyticsService.LogGameEnd(_weaponShooter.ShotsCount, _weaponShooter.LaserUsed, _deathTracker.KillCount);
+
+            _losePresenter = await _gameFactory.CreateLoseScreenAsync();
 
             if (_losePresenter != null)
             {
                 _losePresenter.OnRestartClick += OnRestartButtonClick;
-                
                 _losePresenter.Open(_scoreData.Score);
             }
-        }
-
-        private void ShowLoseScreen()
-        {
-            _losePresenter = _gameFactory.CreateEndGameScreen(_loseView, _scoreData);
         }
 
         private void OnRestartButtonClick()
