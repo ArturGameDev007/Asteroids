@@ -2,7 +2,6 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using Object = System.Object;
 
 namespace _Project.Scripts.Services.AsyncLoader
 {

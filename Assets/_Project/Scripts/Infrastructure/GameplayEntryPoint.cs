@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 namespace _Project.Scripts.Infrastructure
@@ -14,7 +15,7 @@ namespace _Project.Scripts.Infrastructure
 
         public void Initialize()
         {
-            _game.Initialize();
+            _game.InitializeAsync().Forget();
         }
 
         public void Tick()

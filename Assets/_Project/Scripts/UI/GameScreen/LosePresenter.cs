@@ -33,13 +33,6 @@ namespace _Project.Scripts.UI.GameScreen
                 _loseView.OnRestartRequested -= OnRestartRequested;
         }
 
-        // public async UniTask ShowScreenAsync()
-        // {
-        //     _loseView = await _resourceLoader.LoadAsset<LoseView>(_assetReference);
-        //
-        //     UpdateScoreView();
-        // }
-
         public void Open(int finalScore)
         {
             _loseModel.SaveResult(finalScore);

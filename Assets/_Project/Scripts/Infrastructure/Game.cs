@@ -12,6 +12,7 @@ namespace _Project.Scripts.Infrastructure
 {
     public class Game
     {
+        private readonly EnemyResourceManager _enemyResourceManager;
         private readonly IGameFactory _gameFactory;
         private readonly EnemySpawnController _enemySpawnController;
         private readonly Character _player;
@@ -25,13 +26,15 @@ namespace _Project.Scripts.Infrastructure
 
         private LosePresenter _losePresenter;
 
+        private bool _isInitialized;
         private bool _isGameOver;
 
-        public Game(IGameFactory gameFactory, EnemySpawnController enemySpawnController,
+        public Game(EnemyResourceManager enemyResourceManager, IGameFactory gameFactory, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot, WeaponShooter weaponShooter,
             RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker deathTracker,
             IAnalyticsService analyticsService)
         {
+            _enemyResourceManager = enemyResourceManager;
             _gameFactory = gameFactory;
             _enemySpawnController = enemySpawnController;
             _player = player;
@@ -44,8 +47,10 @@ namespace _Project.Scripts.Infrastructure
             _analyticsService = analyticsService;
         }
 
-        public void Initialize()
+        public async UniTask InitializeAsync()
         {
+            await _enemyResourceManager.LoadEnemiesAsync();
+            
             _scoreData?.Reset();
             _player.ClearState();
             _player.OnGameOver += OnGameOver;
@@ -54,10 +59,15 @@ namespace _Project.Scripts.Infrastructure
             _shoot.EnableControl();
 
             _enemySpawnController.StartAll();
+            
+            _isInitialized = true;
         }
 
         public void Tick()
         {
+            if (!_isInitialized)
+                return;
+
             _enemySpawnController.Process(Time.deltaTime);
         }
 
@@ -70,6 +80,8 @@ namespace _Project.Scripts.Infrastructure
                 _losePresenter.OnRestartClick -= OnRestartButtonClick;
                 _losePresenter?.Dispose();
             }
+            
+            _enemyResourceManager.UnloadEnemies();
 
             _player?.Dispose();
             _deathTracker?.Dispose();
@@ -79,9 +91,9 @@ namespace _Project.Scripts.Infrastructure
         {
             if (_isGameOver)
                 return;
-            
+
             _isGameOver = true;
-            
+
             _controller?.StopPhysics();
             _controller?.DisableControl();
 

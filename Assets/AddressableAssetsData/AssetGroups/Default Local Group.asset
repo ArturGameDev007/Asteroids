@@ -17,8 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: b9ddb264db6874041ac0c06280118d4e
   m_SerializeEntries:
+  - m_GUID: 68a4a0e7d19928745b3e0dadee7bdb46
+    m_Address: Assets/_Project/Prefabs/Enemies/Flying.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6fae862322a154f4da4d0199be03797b
     m_Address: Assets/_Project/Prefabs/UI/UI-EndGameScreen.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 851e842e4e4f2c341abf89a4f0472a8d
+    m_Address: Assets/_Project/Prefabs/Enemies/Asteroid.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
