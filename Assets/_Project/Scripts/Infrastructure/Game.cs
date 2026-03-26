@@ -2,17 +2,16 @@ using _Project.Scripts.Enemies;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.Services.Analytics;
-using _Project.Scripts.Services.AsyncLoader;
 using _Project.Scripts.UI.GameScreen;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace _Project.Scripts.Infrastructure
 {
     public class Game
     {
         private readonly EnemyResourceManager _enemyResourceManager;
+        private readonly ProjectileResourceManager _projectileResourceManager;
         private readonly IGameFactory _gameFactory;
         private readonly EnemySpawnController _enemySpawnController;
         private readonly Character _player;
@@ -29,12 +28,14 @@ namespace _Project.Scripts.Infrastructure
         private bool _isInitialized;
         private bool _isGameOver;
 
-        public Game(EnemyResourceManager enemyResourceManager, IGameFactory gameFactory, EnemySpawnController enemySpawnController,
+        public Game(EnemyResourceManager enemyResourceManager, ProjectileResourceManager projectileResourceManager,
+            IGameFactory gameFactory, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot, WeaponShooter weaponShooter,
             RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker deathTracker,
             IAnalyticsService analyticsService)
         {
             _enemyResourceManager = enemyResourceManager;
+            _projectileResourceManager = projectileResourceManager;
             _gameFactory = gameFactory;
             _enemySpawnController = enemySpawnController;
             _player = player;
@@ -49,8 +50,11 @@ namespace _Project.Scripts.Infrastructure
 
         public async UniTask InitializeAsync()
         {
-            await _enemyResourceManager.LoadEnemiesAsync();
-            
+            var loadEnemiesAsync = _enemyResourceManager.LoadEnemiesAsync();
+            var loadShots = _projectileResourceManager.LoadShotsAsync();
+
+            await UniTask.WhenAll(loadEnemiesAsync, loadShots);
+
             _scoreData?.Reset();
             _player.ClearState();
             _player.OnGameOver += OnGameOver;
@@ -59,7 +63,7 @@ namespace _Project.Scripts.Infrastructure
             _shoot.EnableControl();
 
             _enemySpawnController.StartAll();
-            
+
             _isInitialized = true;
         }
 
@@ -80,8 +84,9 @@ namespace _Project.Scripts.Infrastructure
                 _losePresenter.OnRestartClick -= OnRestartButtonClick;
                 _losePresenter?.Dispose();
             }
-            
+
             _enemyResourceManager.UnloadEnemies();
+            _projectileResourceManager.UnloadShots();
 
             _player?.Dispose();
             _deathTracker?.Dispose();

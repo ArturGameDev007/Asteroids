@@ -33,8 +33,11 @@ namespace _Project.Scripts.Installers.Gameplay
 
         [Header("Prefabs")]
         [SerializeField] private PlayerController _shipPrefab;
-        [SerializeField] private Bullet _bulletPrefabs;
-        [SerializeField] private Laser _laserPrefabs;
+        // [SerializeField] private Bullet _bulletPrefabs;
+        // [SerializeField] private Laser _laserPrefabs;
+        [Header("Load Shots Async")]
+        [SerializeField] private AssetReference _bulletPrefabReference;
+        [SerializeField] private AssetReference _laserPrefabReference;
         
         [Header("Load Prefabs Async")]
         [SerializeField] private AssetReference[] _enemyRefences;
@@ -113,10 +116,12 @@ namespace _Project.Scripts.Installers.Gameplay
             projectilesContainer.parent = _containerForPools;
 
             Container.Bind<ObjectPool<Bullet>>().AsCached()
-                .WithArguments(_bulletPrefabs, _poolConfig.BulletPoolSize, "Bullet", projectilesContainer);
+                .WithArguments(default(Bullet), _poolConfig.BulletPoolSize, "Bullet", projectilesContainer);
 
             Container.Bind<ObjectPool<Laser>>().AsCached()
-                .WithArguments(_laserPrefabs, _poolConfig.LaserPoolSize, "Laser", projectilesContainer);
+                .WithArguments(default(Laser), _poolConfig.LaserPoolSize, "Laser", projectilesContainer);
+
+            Container.Bind<ProjectileResourceManager>().AsSingle().WithArguments(_bulletPrefabReference, _laserPrefabReference);
         }
 
         private void BindSpawners()

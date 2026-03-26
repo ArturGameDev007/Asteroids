@@ -1,0 +1,45 @@
+using _Project.Scripts.Enemies;
+using _Project.Scripts.Services.AsyncLoader;
+using Cysharp.Threading.Tasks;
+using UnityEngine.AddressableAssets;
+
+namespace _Project.Scripts.Player.Weapons
+{
+    public class ProjectileResourceManager
+    {
+        private readonly IResourceLoader _resourceLoader;
+
+        private readonly AssetReference _bulletReference;
+        private readonly AssetReference _laserReference;
+
+        private readonly ObjectPool<Bullet> _bulletPool;
+        private readonly ObjectPool<Laser> _laserPool;
+        
+        public ProjectileResourceManager(IResourceLoader resourceLoader, AssetReference bulletReference,
+            AssetReference laserReference, ObjectPool<Bullet> bulletPool, ObjectPool<Laser> laserPool)
+        {
+            _resourceLoader = resourceLoader;
+            _bulletReference = bulletReference;
+            _laserReference = laserReference;
+            _bulletPool = bulletPool;
+            _laserPool = laserPool;
+        }
+
+        public async UniTask LoadShotsAsync()
+        {
+            var bullet = _resourceLoader.LoadAssetAsync<Bullet>(_bulletReference);
+            var laser = _resourceLoader.LoadAssetAsync<Laser>(_laserReference);
+            
+            var (loadedBulet, loadedLaser) = await UniTask.WhenAll(bullet, laser);
+            
+            _bulletPool.Prefab = loadedBulet;
+            _laserPool.Prefab = loadedLaser;
+        }
+
+        public void UnloadShots()
+        {
+            _resourceLoader.UnloadAsset(_bulletReference);
+            _resourceLoader.UnloadAsset(_laserReference);
+        }
+    }
+}
