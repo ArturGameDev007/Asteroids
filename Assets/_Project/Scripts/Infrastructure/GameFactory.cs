@@ -14,6 +14,9 @@ namespace _Project.Scripts.Infrastructure
         private readonly ILoseModel _loseModel;
         private readonly AssetReference _loseScreenReference;
         
+        // private readonly PlayerFactory _playerFactory;
+        // private readonly AssetReference _playerReference;
+        
         public GameFactory(IInstantiator instantiator, IResourceLoader resourceLoader, AssetReference loseScreenReference, ILoseModel loseModel)
         {
             _instantiator = instantiator;
@@ -24,11 +27,11 @@ namespace _Project.Scripts.Infrastructure
 
         // public async UniTask<PlayerController> CreatePlayerAsync()
         // {
-        //     var player = await _playerFactory.LoadAsync();
+        //     // var asset = await _playerFactory.LoadAsync();
         //     
-        //     Player = _instantiator.InstantiatePrefabForComponent<PlayerController>(player);
+        //     PlayerController player = _instantiator.InstantiatePrefabForComponent<PlayerController>(asset);
         //
-        //     return Player;
+        //     return player;
         // }
 
         public async UniTask<LosePresenter> CreateLoseScreenAsync()
@@ -42,10 +45,5 @@ namespace _Project.Scripts.Infrastructure
 
             return presenter;
         }
-        
-        // public void Unload()
-        // {
-        //    _playerFactory.Unload();
-        // }
     }
 }

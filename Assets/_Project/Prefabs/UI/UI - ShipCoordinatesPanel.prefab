@@ -49,7 +49,6 @@ GameObject:
   - component: {fileID: 4810474119508003121}
   - component: {fileID: 3323797721636029055}
   - component: {fileID: 4959263912404664997}
-  - component: {fileID: 6610810285733574452}
   m_Layer: 5
   m_Name: NumberOfLaser
   m_TagString: Untagged
@@ -187,19 +186,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textlaser: {fileID: 3323797721636029055}
   _rollbackLasera: {fileID: 2068647093855257191}
---- !u!114 &6610810285733574452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2230635320058244871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4116b32e0fc4d641af7df852d9bfca4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <LaserConfig>k__BackingField: {fileID: 0}
 --- !u!1 &3124299325127568440
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,8 +11,6 @@ namespace _Project.Scripts.Infrastructure
 {
     public class Game
     {
-        private readonly PlayerController _playerController;
-        private readonly PerformancePresenter _performancePresenter;
         private readonly EnemyResourceManager _enemyResourceManager;
         private readonly ProjectileResourceManager _projectileResourceManager;
         private readonly IGameFactory _gameFactory;
@@ -31,15 +29,15 @@ namespace _Project.Scripts.Infrastructure
         private bool _isInitialized;
         private bool _isGameOver;
 
-        public Game(PlayerController playerController, PerformancePresenter performancePresenter, EnemyResourceManager enemyResourceManager,
+        public Game(
+            EnemyResourceManager enemyResourceManager,
             ProjectileResourceManager projectileResourceManager,
             IGameFactory gameFactory, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot, WeaponShooter weaponShooter,
             RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker deathTracker,
             IAnalyticsService analyticsService)
         {
-            _playerController = playerController;
-            _performancePresenter = performancePresenter;
+
             _enemyResourceManager = enemyResourceManager;
             _projectileResourceManager = projectileResourceManager;
             _gameFactory = gameFactory;
@@ -56,12 +54,16 @@ namespace _Project.Scripts.Infrastructure
 
         public async UniTask InitializeAsync()
         {
+            // var loadPlayerAsync = _playerResourceManager.LoadAsync();
             var loadEnemiesAsync = _enemyResourceManager.LoadEnemiesAsync();
             var loadShotsAsync = _projectileResourceManager.LoadShotsAsync();
 
             await UniTask.WhenAll(loadEnemiesAsync, loadShotsAsync);
 
-            _performancePresenter.Setup(_playerController);
+            // PlayerController playerController = loadPlayerAsync.GetAwaiter().GetResult();
+            
+            // _performancePresenter.SetupPlayer(playerController);
+            
 
             _scoreData?.Reset();
             _player.ClearState();
@@ -93,7 +95,6 @@ namespace _Project.Scripts.Infrastructure
                 _losePresenter?.Dispose();
             }
 
-            // _playerFactory.Unload();
             _enemyResourceManager.UnloadEnemies();
             _projectileResourceManager.UnloadShots();
 

@@ -14,7 +14,7 @@ namespace _Project.Scripts.Enemies
         {
             _player = player;
         }
-
+        
         protected override void ConfigureSpawn(Enemy enemy, Vector2 _)
         {
             if (enemy.TryGetComponent(out FlyingSaucerController flyingSaucerController))

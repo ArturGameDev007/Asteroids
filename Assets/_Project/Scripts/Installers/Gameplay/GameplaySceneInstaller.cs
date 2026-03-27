@@ -79,10 +79,15 @@ namespace _Project.Scripts.Installers.Gameplay
         {
             Container.Bind(typeof(PlayerController), typeof(InputForShoot), typeof(HandlerCrashWithEnemy),
                 typeof(GenerateLaser)).FromComponentInNewPrefab(_shipPrefab).AsSingle();
-            
+
             Container.Bind<Transform>().WithId("Player")
                 .FromResolveGetter<PlayerController>(player => player.transform);
 
+            Container.Bind<IMovableEntity>().To<PlayerController>().FromResolve();
+            Container.Bind<ILaserState>().To<GenerateLaser>().FromResolve();
+            
+            // Container.Bind<PlayerResourceManager>().AsSingle().WithArguments(_shipPrefabReference);
+            
             Container.Bind<ICollisionHandler>().To<HandlerCrashWithEnemy>().FromResolve();
             Container.Bind<IInputService>().To<InputController>().AsSingle();
             Container.Bind<IControllable>().To<PlayerControllerAdapter>().AsSingle();
