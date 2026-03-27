@@ -31,14 +31,13 @@ namespace _Project.Scripts.Installers.Gameplay
         [Header("Enemy Configs")]
         [SerializeField] private EnemyConfig[] _enemyConfigs;
 
-        [Header("Prefabs")]
+        // [Header("Prefabs")]
         [SerializeField] private PlayerController _shipPrefab;
-        // [SerializeField] private Bullet _bulletPrefabs;
-        // [SerializeField] private Laser _laserPrefabs;
-        [Header("Load Shots Async")]
+        [Header("Load Async: Player & Shots")]
+        // [SerializeField] private AssetReference _shipPrefabReference;
         [SerializeField] private AssetReference _bulletPrefabReference;
         [SerializeField] private AssetReference _laserPrefabReference;
-        
+
         [Header("Load Prefabs Async")]
         [SerializeField] private AssetReference[] _enemyRefences;
 
@@ -80,7 +79,7 @@ namespace _Project.Scripts.Installers.Gameplay
         {
             Container.Bind(typeof(PlayerController), typeof(InputForShoot), typeof(HandlerCrashWithEnemy),
                 typeof(GenerateLaser)).FromComponentInNewPrefab(_shipPrefab).AsSingle();
-
+            
             Container.Bind<Transform>().WithId("Player")
                 .FromResolveGetter<PlayerController>(player => player.transform);
 
@@ -96,7 +95,7 @@ namespace _Project.Scripts.Installers.Gameplay
             Container.Bind<ICoordinateView>().FromComponentInHierarchy().AsSingle();
             Container.Bind<ILaserView>().FromComponentInHierarchy().AsSingle();
 
-            Container.BindInterfacesAndSelfTo<PerformancePresenter>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<PerformancePresenter>().AsSingle();
         }
 
         private void BindPools()
@@ -121,7 +120,8 @@ namespace _Project.Scripts.Installers.Gameplay
             Container.Bind<ObjectPool<Laser>>().AsCached()
                 .WithArguments(default(Laser), _poolConfig.LaserPoolSize, "Laser", projectilesContainer);
 
-            Container.Bind<ProjectileResourceManager>().AsSingle().WithArguments(_bulletPrefabReference, _laserPrefabReference);
+            Container.Bind<ProjectileResourceManager>().AsSingle()
+                .WithArguments(_bulletPrefabReference, _laserPrefabReference);
         }
 
         private void BindSpawners()

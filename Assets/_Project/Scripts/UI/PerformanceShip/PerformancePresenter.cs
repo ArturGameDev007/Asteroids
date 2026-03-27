@@ -6,33 +6,71 @@ using Zenject;
 
 namespace _Project.Scripts.UI.PerformanceShip
 {
-    public class PerformancePresenter: IInitializable, ITickable, IDisposable
+    public class PerformancePresenter: ITickable, IDisposable
     {
         private readonly ICoordinateView _coordinateView;
         private readonly ILaserView _laserView;
-        private readonly PlayerController _shipController;
-        private readonly GenerateLaser _laser;
-        private readonly Rigidbody2D _rigidbody2D;
+        private PlayerController _shipController;
+        private GenerateLaser _laser;
+        private Rigidbody2D _rigidbody2D;
 
-        public PerformancePresenter(ICoordinateView coordinateView, ILaserView laserView, PlayerController shipController, GenerateLaser laser)
+        private bool _isReady;
+
+        // public PerformancePresenter(ICoordinateView coordinateView, ILaserView laserView, PlayerController shipController, GenerateLaser laser)
+        // {
+        //     _coordinateView = coordinateView;
+        //     _laserView = laserView;
+        //     _shipController = shipController;
+        //     _laser = laser;
+        //     _rigidbody2D = shipController.GetComponent<Rigidbody2D>();
+        // }
+        //
+        public PerformancePresenter(ICoordinateView coordinateView, ILaserView laserView)
         {
             _coordinateView = coordinateView;
             _laserView = laserView;
-            _shipController = shipController;
-            _laser = laser;
-            _rigidbody2D = shipController.GetComponent<Rigidbody2D>();
         }
 
-        public void Initialize()
+        // public void Initialize()
+        // {
+        //     _laser.OnLaserChanged += OnShowInfoLaser;
+        //     _laser.OnReloadProgress += OnShowRollbackLaser;
+        //
+        //     OnShowInfoLaser(_laser.CurrentAmmonLaser);
+        //     OnShowRollbackLaser(_laser.LaserConfig.ReloadTime);
+        // }
+
+        public void Tick()
         {
+            if (!_isReady)
+                return;
+            
+            UpdateUICoordinate();
+        }
+
+        public void Setup(PlayerController playerController)
+        {
+            _shipController = playerController;
+            
+            _laser = playerController.GetComponent<GenerateLaser>();
+            _rigidbody2D = playerController.GetComponent<Rigidbody2D>();
+
             _laser.OnLaserChanged += OnShowInfoLaser;
             _laser.OnReloadProgress += OnShowRollbackLaser;
 
             OnShowInfoLaser(_laser.CurrentAmmonLaser);
             OnShowRollbackLaser(_laser.LaserConfig.ReloadTime);
+        
+            _isReady = true;
         }
 
-        public void Tick()
+        public void Dispose()
+        {
+            _laser.OnLaserChanged -= OnShowInfoLaser;
+            _laser.OnReloadProgress -= OnShowRollbackLaser;
+        }
+
+        private void UpdateUICoordinate()
         {
             Vector3 direction = _shipController.transform.position;
 
@@ -43,12 +81,6 @@ namespace _Project.Scripts.UI.PerformanceShip
                 direction.x, direction.y, rotationAngleZ, speed);
 
             _coordinateView.SetCoordinateText(displayText);
-        }
-
-        public void Dispose()
-        {
-            _laser.OnLaserChanged -= OnShowInfoLaser;
-            _laser.OnReloadProgress -= OnShowRollbackLaser;
         }
         
         private void OnShowInfoLaser(int value)

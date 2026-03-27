@@ -13,18 +13,20 @@ namespace _Project.Scripts.Player
 
         public PlayerController Player { get; private set; }
 
-        public PlayerFactory(IInstantiator instantiator, IResourceLoader resourceLoader, [Inject(Id = "ShipRef")] AssetReference assetReference)
+        public PlayerFactory(IInstantiator instantiator, IResourceLoader resourceLoader, AssetReference assetReference)
         {
             _instantiator = instantiator;
             _resourceLoader = resourceLoader;
             _assetReference = assetReference;
         }
 
-        public async UniTask LoadAsync()
+        public async UniTask<PlayerController> LoadAsync()
         {
             var prefab = await _resourceLoader.LoadAssetAsync<PlayerController>(_assetReference);
 
-            Player = _instantiator.InstantiatePrefabForComponent<PlayerController>(prefab);
+            Player= _instantiator.InstantiatePrefabForComponent<PlayerController>(prefab);
+
+            return Player;
         }
 
         public void Unload()
