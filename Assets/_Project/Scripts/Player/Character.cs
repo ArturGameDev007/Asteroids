@@ -8,29 +8,33 @@ namespace _Project.Scripts.Player
     {
         public event Action OnGameOver;
 
-        private readonly IControllable _controllable;
+        // private readonly IControllable _controllable;
         private readonly ICollisionHandler _collisionHandler;
 
-        public Character(IControllable controllable, ICollisionHandler collisionHandler)
+        public Character(ICollisionHandler collisionHandler)
         {
-            _controllable = controllable;
+            // _controllable = controllable;
             _collisionHandler = collisionHandler;
         }
 
         public void Initialize()
         {
+            if (_collisionHandler == null)
+                return;
+
             _collisionHandler.OnCollisionDetected += ProcessCollision;
         }
 
         public void Dispose()
         {
-            _collisionHandler.OnCollisionDetected -= ProcessCollision;
+            if (_collisionHandler != null)
+                _collisionHandler.OnCollisionDetected -= ProcessCollision;
         }
 
-        public void ClearState()
-        {
-            _controllable?.ResetState();
-        }
+        // public void ClearState()
+        // {
+        //     _controllable?.ResetState();
+        // }
 
         private void ProcessCollision(IEnemy enemy)
         {

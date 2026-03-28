@@ -11,7 +11,7 @@ namespace _Project.Scripts.Enemies
         private Transform _target;
         
         [Inject]
-        public void Construct([Inject(Id = "Player")] Transform target)
+        public void Construct(Transform target)
         {
             _target = target;
         }

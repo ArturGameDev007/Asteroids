@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.Player.Weapons
 {
-    public class GenerateLaser : MonoBehaviour,ILaserState
+    public class GenerateLaser : MonoBehaviour, ILaserState
     {
         public event Action<int> OnLaserChanged;
         public event Action<float> OnReloadProgress;

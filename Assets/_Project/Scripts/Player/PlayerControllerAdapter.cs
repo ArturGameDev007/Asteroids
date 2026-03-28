@@ -1,32 +1,35 @@
+using Zenject;
+
 namespace _Project.Scripts.Player
 {
     public class PlayerControllerAdapter : IControllable
     {
-        private readonly PlayerController _playerController;
+        // private PlayerController _playerController;
+        private readonly IMovableEntity _movableEntity;
 
-        public PlayerControllerAdapter(PlayerController playerController)
+        public PlayerControllerAdapter(IMovableEntity playerController)
         {
-            _playerController = playerController;
+            _movableEntity = playerController;
         }
 
         public void ResetState()
         {
-            _playerController.ResetState();
+            _movableEntity?.ResetState();
         }
 
         public void EnableControl()
         {
-            _playerController.SetPaused(false);
+            _movableEntity?.SetPaused(false);
         }
         
         public void DisableControl()
         {
-            _playerController.SetPaused(true);
+            _movableEntity?.SetPaused(true);
         }
 
         public void StopPhysics()
         {
-            _playerController.StopPhysics();
+            _movableEntity?.StopPhysics();
         }
     }
 }

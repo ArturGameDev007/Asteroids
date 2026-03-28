@@ -3,32 +3,37 @@ using Zenject;
 
 namespace _Project.Scripts.Player.Weapons
 {
-    public class InputForShoot : MonoBehaviour
+    public class InputForShoot : MonoBehaviour, IInputPauseHandler
     {
         private const int INPUT_MOUSE_LEFT = 0;
         private const int INPUT_MOUSE_RIGHT = 1;
 
         [Header("Points Weapons")]
         [SerializeField] private Transform _pointShootForlaser;
+
         [SerializeField] private Transform _pointShootForBullet;
 
-        private GenerateLaser _laserAmmo;
+
+        // private GenerateLaser _laserAmmo;
+        private ILaserState _laserState;
         private WeaponShooter _shooter;
-        
-        private bool _isPaused;
+
+        private bool _isPaused = true;
 
         [Inject]
-        public void Construct(GenerateLaser laser, WeaponShooter shooter)
+        public void Construct(ILaserState laser, WeaponShooter shooter)
         {
-            _laserAmmo = laser;
+            _laserState = laser;
             _shooter = shooter;
+            
+            _isPaused = false;
         }
 
         private void Update()
         {
-            if (_isPaused)
+            if (_isPaused || _laserState == null || _shooter == null)
                 return;
-            
+
             InputBulletShoot();
             InputLaserShoot();
         }
@@ -52,7 +57,7 @@ namespace _Project.Scripts.Player.Weapons
         private void InputLaserShoot()
         {
             if (Input.GetMouseButtonDown(INPUT_MOUSE_RIGHT))
-                if (_laserAmmo.TrySpendAmmo())
+                if (_laserState.TrySpendAmmo())
                     _shooter.ShootLaser(_pointShootForlaser);
         }
     }
