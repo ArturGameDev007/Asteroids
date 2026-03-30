@@ -19,7 +19,7 @@ namespace _Project.Scripts.Installers.Gameplay
         [Header("Camera")]
         [SerializeField] private Camera _mainCamera;
 
-        [Header("Prefab UI")]
+        [Header("Prefabs UI")]
         [SerializeField] private AssetReference _endGameScreenPrefabReference;
         [SerializeField] private AssetReference _shipPerfomancePrefabReference;
 
@@ -32,10 +32,8 @@ namespace _Project.Scripts.Installers.Gameplay
         [Header("Enemy Configs")]
         [SerializeField] private EnemyConfig[] _enemyConfigs;
 
-        // [Header("Prefabs")]
-        [SerializeField] private PlayerController _shipPrefab;
         [Header("Load Async: Player & Shots")]
-        // [SerializeField] private AssetReference _shipPrefabReference;
+        [SerializeField] private AssetReference _shipPrefabReference;
         [SerializeField] private AssetReference _bulletPrefabReference;
         [SerializeField] private AssetReference _laserPrefabReference;
 
@@ -52,12 +50,13 @@ namespace _Project.Scripts.Installers.Gameplay
             Container.Bind<IEnemyDeathListener>().To<EnemyManager>().AsSingle();
             Container.Bind<RestartGame>().AsSingle();
             Container.Bind<ILoseModel>().To<ScoreData>().AsSingle();
+            
             Container.BindInstance(_endGameScreenPrefabReference).AsSingle();
 
             BindBackgroundUI();
-            
+
             BindPlayer();
-            
+
             BindPerformanceUI();
 
             BindPools();
@@ -80,85 +79,20 @@ namespace _Project.Scripts.Installers.Gameplay
 
         private void BindPlayer()
         {
-            // Container.Bind<Transform>().WithId("Player")
-            //     .FromResolveGetter<PlayerController>(player => player.transform);
-            // Container.Bind(typeof(PlayerController), typeof(InputForShoot), typeof(HandlerCrashWithEnemy),
-            //     typeof(GenerateLaser)).FromMethod(provider => provider.Container.Resolve<PlayerProvider>().Player).AsCached();
-            // Container.Bind<PlayerResourceManager>().AsSingle().WithArguments(_shipPrefabReference);
-            //
-            // Container.Bind<PlayerProvider>().AsSingle();
-            //
-            // Container.Bind<PlayerController>()
-            //     .FromMethod(ctx => ctx.Container.Resolve<PlayerProvider>().Player)
-            //     .AsCached();
-            
-            //
-            // Container.Bind<InputForShoot>()
-            //     .FromResolveGetter<PlayerController>(pc => pc?.GetComponent<InputForShoot>())
-            //     .AsCached();
-            //
-            // Container.Bind<HandlerCrashWithEnemy>()
-            //     .FromResolveGetter<PlayerController>(pc => pc?.GetComponent<HandlerCrashWithEnemy>())
-            //     .AsCached();
-            //
-            // Container.Bind<GenerateLaser>()
-            //     .FromResolveGetter<PlayerController>(pc => pc?.GetComponent<GenerateLaser>())
-            //     .AsCached();
-            
-            // Container.Bind(typeof(PlayerController), typeof(InputForShoot), typeof(HandlerCrashWithEnemy),
-            //     typeof(GenerateLaser)).FromComponentInNewPrefab(_shipPrefab).AsSingle();
+            Container.Bind<PlayerResourceManager>().AsSingle().WithArguments(_shipPrefabReference);
 
-            // Container.Bind<PlayerResourceManager>().AsSingle().WithArguments(_shipPrefab);
-            //
-            // // Container.Bind<IPlayerProvider>().To<PlayerProvider>().AsSingle();
-            // Container.BindInterfacesAndSelfTo<PlayerProvider>().AsSingle();
-            //
-            // Container.Bind<PlayerController>().FromResolveGetter<IPlayerProvider>(player => player.Player);
-            // Container.Bind<InputForShoot>().FromResolveGetter<IPlayerProvider>(pc => pc.Player?.GetComponent<InputForShoot>());
-            // Container.Bind<HandlerCrashWithEnemy>().FromResolveGetter<IPlayerProvider>(pc => pc.Player?.GetComponent<HandlerCrashWithEnemy>());
-            // Container.Bind<GenerateLaser>().FromResolveGetter<IPlayerProvider>(pc => pc.Player?.GetComponent<GenerateLaser>());
-            // Container.BindInstance(_shipPrefab).AsSingle();
-            // Container.Bind<PlayerResourceManager>().AsSingle();
+            Container.Bind<IPlayerProvider>().To<PlayerProvider>().AsSingle();
 
-            // Container.Bind<PlayerResourceManager>().AsSingle().WithArguments(_shipPrefab);
-            //
-            // Container.Bind<IPlayerProvider>().To<PlayerProvider>().AsSingle();
-            // Container.Bind<ILaserState>().To<GenerateLaser>().FromResolve();
-            // Container.Bind<ICollisionHandler>().To<HandlerCrashWithEnemy>().FromResolve();
-            // Container.Bind<Transform>().WithId("Player").FromResolveGetter<IPlayerProvider>(p => p.Player?.transform);
-            // Container.Bind<IMovableEntity>().To<PlayerController>().FromResolve();
-            // Container.Bind<IInputPauseHandler>().To<InputForShoot>().FromResolve();
-            // Container.Bind<ICollisionHandler>().To<HandlerCrashWithEnemy>().FromResolve();
-            // Container.Bind<ILaserState>().To<GenerateLaser>().FromResolve();
-            
-            Container.Bind(typeof(IMovableEntity), typeof(IInputPauseHandler), typeof(ICollisionHandler),
-                     typeof(ILaserState)).FromComponentInNewPrefab(_shipPrefab).AsSingle();
-            
-            // Container.BindInstance(_shipPrefabReference).AsSingle();
-            
-            // Container.Bind<PlayerResourceManager>().AsSingle().WithArguments(_shipPrefabReference);
-            
-            // Container.Bind<IPlayerProvider>().To<PlayerProvider>().AsSingle();
-
-            // Container.Bind<IMovableEntity>().FromResolveGetter<IPlayerProvider>(player => player.Player);
-
-            Container.Bind<Transform>().FromResolveGetter<IMovableEntity>(player => player.PlayerTransform);
-            
             Container.Bind<IInputService>().To<InputController>().AsSingle();
             Container.Bind<IControllable>().To<PlayerControllerAdapter>().AsSingle();
             Container.Bind<IShootable>().To<PlayerShootProvider>().AsSingle();
+            
             Container.BindInterfacesAndSelfTo<Character>().AsSingle();
         }
 
         private void BindPerformanceUI()
         {
             Container.Bind<CoordinateResourceManager>().AsSingle().WithArguments(_shipPerfomancePrefabReference);
-            
-            // Container.Bind<ICoordinateView>().FromComponentInHierarchy().AsSingle();
-            // Container.Bind<ILaserView>().FromComponentInHierarchy().AsSingle();
-
-            // Container.Bind<ILaserView>().To<ViewCurrentAmountLaser>().AsSingle();
-
             Container.BindInterfacesAndSelfTo<PerformancePresenter>().AsSingle();
         }
 

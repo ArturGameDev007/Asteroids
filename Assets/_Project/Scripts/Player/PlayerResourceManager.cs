@@ -1,6 +1,5 @@
 using _Project.Scripts.Services.AsyncLoader;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
@@ -24,14 +23,6 @@ namespace _Project.Scripts.Player
             _playerProvider = playerProvider;
         }
 
-        // public PlayerResourceManager(IInstantiator instantiator, IPlayerProvider playerProvider,
-        //     PlayerController player)
-        // {
-        //     _instantiator = instantiator;
-        //     _playerProvider = playerProvider;
-        //     _player = player;
-        // }
-
         public async UniTask<PlayerController> LoadAsync()
         {
             var prefab = await _resourceLoader.LoadAssetAsync<PlayerController>(_playerReference);
@@ -41,17 +32,6 @@ namespace _Project.Scripts.Player
         
             return asset;
         }
-
-
-        // public PlayerController GetPrefab()
-        // {
-        //     var prefab = _instantiator.InstantiatePrefab(_player.gameObject);
-        //     var controller = prefab.GetComponent<PlayerController>();
-        //
-        //     _playerProvider.Setup(controller);
-        //
-        //     return controller;
-        // }
 
         public void Unload()
         {

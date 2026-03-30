@@ -11,9 +11,8 @@ namespace _Project.Scripts.Infrastructure
 {
     public class Game
     {
-        // private readonly PlayerResourceManager _playerResourceManager;
+        private readonly PlayerResourceManager _playerResourceManager;
         private readonly CoordinateResourceManager  _coordinateResourceManager;
-        // private readonly PerformancePresenter _performancePresenter;
         private readonly EnemyResourceManager _enemyResourceManager;
         private readonly ProjectileResourceManager _projectileResourceManager;
         private readonly IGameFactory _gameFactory;
@@ -32,7 +31,7 @@ namespace _Project.Scripts.Infrastructure
         private bool _isInitialized;
         private bool _isGameOver;
 
-        public Game(CoordinateResourceManager coordinateResourceManager,
+        public Game(PlayerResourceManager playerResourceManager, CoordinateResourceManager coordinateResourceManager,
             EnemyResourceManager enemyResourceManager,
             ProjectileResourceManager projectileResourceManager,
             IGameFactory gameFactory, EnemySpawnController enemySpawnController,
@@ -40,9 +39,8 @@ namespace _Project.Scripts.Infrastructure
             RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker deathTracker,
             IAnalyticsService analyticsService)
         {
-            // _playerResourceManager  = playerResourceManager;
+            _playerResourceManager  = playerResourceManager;
             _coordinateResourceManager = coordinateResourceManager;
-            // _performancePresenter = performancePresenter;
             _enemyResourceManager = enemyResourceManager;
             _projectileResourceManager = projectileResourceManager;
             _gameFactory = gameFactory;
@@ -59,18 +57,14 @@ namespace _Project.Scripts.Infrastructure
 
         public async UniTask InitializeAsync()
         {
-            // var loadPlayer = _playerResourceManager.GetPrefab();
-            // var loadPlayerAsync = _playerResourceManager.LoadAsync();
+            var loadPlayerAsync = _playerResourceManager.LoadAsync();
             var loadCoordinateAsync = _coordinateResourceManager.LoadAsyncPerformanceShip();
             var loadEnemiesAsync = _enemyResourceManager.LoadEnemiesAsync();
             var loadShotsAsync = _projectileResourceManager.LoadShotsAsync();
 
-            await UniTask.WhenAll(loadCoordinateAsync, loadEnemiesAsync, loadShotsAsync);
-
-            // _performancePresenter.Setup(loadPlayer, loadPlayer.GetComponent<ILaserState>());
+            await UniTask.WhenAll(loadPlayerAsync, loadCoordinateAsync, loadEnemiesAsync, loadShotsAsync);
 
             _scoreData?.Reset();
-            // _player.ClearState();
             _player.OnGameOver += OnGameOver;
 
             _controller?.ResetState();
@@ -100,7 +94,7 @@ namespace _Project.Scripts.Infrastructure
                 _losePresenter?.Dispose();
             }
 
-            // _playerResourceManager.Unload();
+            _playerResourceManager.Unload();
             _coordinateResourceManager.Unload();
             _enemyResourceManager.UnloadEnemies();
             _projectileResourceManager.UnloadShots();

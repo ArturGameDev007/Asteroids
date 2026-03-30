@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: b9ddb264db6874041ac0c06280118d4e
   m_SerializeEntries:
-  - m_GUID: a752461b71d007d41a3f9643f9183b0f
-    m_Address: Assets/_Project/Prefabs/UI/UI - ShipCoordinatesPanel.prefab
+  - m_GUID: 77fd289117485cb4482536e1624733f6
+    m_Address: Assets/_Project/Prefabs/Player/Ship-Player.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

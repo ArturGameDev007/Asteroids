@@ -15,15 +15,16 @@ namespace _Project.Scripts.Player.Weapons
 
 
         // private GenerateLaser _laserAmmo;
-        private ILaserState _laserState;
+        private IPlayerProvider _playerProvider;
+        // private ILaserState _laserState;
         private WeaponShooter _shooter;
 
         private bool _isPaused = true;
 
         [Inject]
-        public void Construct(ILaserState laser, WeaponShooter shooter)
+        public void Construct(IPlayerProvider laser, WeaponShooter shooter)
         {
-            _laserState = laser;
+            _playerProvider = laser;
             _shooter = shooter;
             
             _isPaused = false;
@@ -31,7 +32,7 @@ namespace _Project.Scripts.Player.Weapons
 
         private void Update()
         {
-            if (_isPaused || _laserState == null || _shooter == null)
+            if (_isPaused || _playerProvider == null || _shooter == null)
                 return;
 
             InputBulletShoot();
@@ -57,7 +58,7 @@ namespace _Project.Scripts.Player.Weapons
         private void InputLaserShoot()
         {
             if (Input.GetMouseButtonDown(INPUT_MOUSE_RIGHT))
-                if (_laserState.TrySpendAmmo())
+                if (_playerProvider.LaserState.TrySpendAmmo())
                     _shooter.ShootLaser(_pointShootForlaser);
         }
     }

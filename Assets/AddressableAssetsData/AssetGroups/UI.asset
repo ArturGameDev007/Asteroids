@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a752461b71d007d41a3f9643f9183b0f
+    m_Address: Assets/_Project/Prefabs/UI/UI - ShipCoordinatesPanel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fa60998387ce22348b2accd7a3f2ae8a
     m_Address: Assets/_Project/Prefabs/UI/StartMenu/UI-LoadScene.prefab
     m_ReadOnly: 0

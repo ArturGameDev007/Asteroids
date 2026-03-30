@@ -476,7 +476,11 @@ MonoBehaviour:
   _enemyConfigs:
   - {fileID: 11400000, guid: f4e617410dc6d854aa651578f3e3f029, type: 2}
   - {fileID: 11400000, guid: c730927372f184849ace991e8aa06ab8, type: 2}
-  _shipPrefab: {fileID: 6625449025738942762, guid: 77fd289117485cb4482536e1624733f6, type: 3}
+  _shipPrefabReference:
+    m_AssetGUID: 77fd289117485cb4482536e1624733f6
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   _bulletPrefabReference:
     m_AssetGUID: 12deaaaf3585eb74d92fb178f7fc9366
     m_SubObjectName: 

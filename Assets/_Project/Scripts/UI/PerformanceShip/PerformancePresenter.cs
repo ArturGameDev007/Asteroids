@@ -1,6 +1,5 @@
 using System;
 using _Project.Scripts.Player;
-using _Project.Scripts.Player.Weapons;
 using UnityEngine;
 using Zenject;
 
@@ -9,16 +8,14 @@ namespace _Project.Scripts.UI.PerformanceShip
     public class PerformancePresenter : ITickable, IDisposable
     {
         private readonly CoordinateResourceManager _coordinateResourceManager;
-        private readonly IMovableEntity _movableEntity;
-        private readonly ILaserState _laserState;
+        private readonly IPlayerProvider _playerProvider;
 
         private bool _isInitialized;
 
-        public PerformancePresenter(CoordinateResourceManager coordinateResourceManager,  IMovableEntity movableEntity, ILaserState laserState)
+        public PerformancePresenter(CoordinateResourceManager coordinateResourceManager, IPlayerProvider playerProvider)
         {
             _coordinateResourceManager = coordinateResourceManager;
-            _movableEntity = movableEntity;
-            _laserState = laserState;
+            _playerProvider = playerProvider;
         }
 
         public void Tick()
@@ -26,7 +23,7 @@ namespace _Project.Scripts.UI.PerformanceShip
             if (_coordinateResourceManager.View == null)
                 return;
 
-            if (_movableEntity == null || _laserState == null)
+            if (_playerProvider.Player == null || _playerProvider.LaserState == null)
                 return;
 
             if (!_isInitialized)
@@ -34,33 +31,42 @@ namespace _Project.Scripts.UI.PerformanceShip
 
             UpdateUICoordinate();
         }
-        
+
         private void InitializeUICoordinate()
         {
-            _laserState.OnLaserChanged += OnShowInfoLaser;
-            _laserState.OnReloadProgress += OnShowRollbackLaser;
+            var laserState = _playerProvider.LaserState;
 
-            OnShowInfoLaser(_laserState.CurrentAmmonLaser);
-            OnShowRollbackLaser(_laserState.ReloadTime);
+            if (laserState == null)
+                return;
+
+            laserState.OnLaserChanged += OnShowInfoLaser;
+            laserState.OnReloadProgress += OnShowRollbackLaser;
+
+            OnShowInfoLaser(laserState.CurrentAmmonLaser);
+            OnShowRollbackLaser(laserState.ReloadTime);
 
             _isInitialized = true;
         }
 
         public void Dispose()
         {
-            if (_isInitialized && _laserState != null)
+            var laserState = _playerProvider.LaserState;
+
+            if (_isInitialized && laserState != null)
             {
-                _laserState.OnLaserChanged -= OnShowInfoLaser;
-                _laserState.OnReloadProgress -= OnShowRollbackLaser;
+                laserState.OnLaserChanged -= OnShowInfoLaser;
+                laserState.OnReloadProgress -= OnShowRollbackLaser;
             }
         }
 
         private void UpdateUICoordinate()
         {
-            Vector3 direction = _movableEntity.Position;
+            var movable = _playerProvider.Player;
 
-            float rotationAngleZ = _movableEntity.RotationAngleZ;
-            float speed = _movableEntity.Speed;
+            Vector3 direction = movable.Position;
+
+            float rotationAngleZ = movable.RotationAngleZ;
+            float speed = movable.Speed;
 
             string displayText = string.Format("<b>" + "X={0:F2}, Y={1:F2}\nAngleZ: {2:F1}\nSpeed: {3:F3}" + "</b>",
                 direction.x, direction.y, rotationAngleZ, speed);

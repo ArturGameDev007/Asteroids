@@ -9,26 +9,43 @@ namespace _Project.Scripts.Player
         public event Action OnGameOver;
 
         // private readonly IControllable _controllable;
-        private readonly ICollisionHandler _collisionHandler;
+        // private readonly ICollisionHandler _collisionHandler;
+        private readonly IPlayerProvider _playerProvider;
 
-        public Character(ICollisionHandler collisionHandler)
+        private bool _isInitialized;
+
+        public Character(IPlayerProvider playerProvider)
         {
             // _controllable = controllable;
-            _collisionHandler = collisionHandler;
+            _playerProvider = playerProvider;
         }
 
         public void Initialize()
         {
-            if (_collisionHandler == null)
+            if (_playerProvider == null)
                 return;
 
-            _collisionHandler.OnCollisionDetected += ProcessCollision;
+            _playerProvider.OnPlayerReady += Subscribe;
         }
 
         public void Dispose()
         {
-            if (_collisionHandler != null)
-                _collisionHandler.OnCollisionDetected -= ProcessCollision;
+            _playerProvider.OnPlayerReady -= Unsubscribe;
+            
+            // if (_playerProvider != null)
+            //     _playerProvider.CollisionHandler.OnCollisionDetected -= ProcessCollision;
+        }
+
+        private void Subscribe()
+        {
+            if (!_isInitialized)
+                _playerProvider.CollisionHandler.OnCollisionDetected += ProcessCollision;
+        }
+
+        private void Unsubscribe()
+        {
+            if (_playerProvider != null)
+                _playerProvider.CollisionHandler.OnCollisionDetected -= ProcessCollision;
         }
 
         // public void ClearState()
