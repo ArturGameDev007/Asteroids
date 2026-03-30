@@ -16,6 +16,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly EnemyResourceManager _enemyResourceManager;
         private readonly ProjectileResourceManager _projectileResourceManager;
         private readonly IGameFactory _gameFactory;
+        private readonly LoseResourceManager  _loseResourceManager;
         private readonly EnemySpawnController _enemySpawnController;
         private readonly Character _player;
         private readonly IControllable _controller;
@@ -34,7 +35,7 @@ namespace _Project.Scripts.Infrastructure
         public Game(PlayerResourceManager playerResourceManager, CoordinateResourceManager coordinateResourceManager,
             EnemyResourceManager enemyResourceManager,
             ProjectileResourceManager projectileResourceManager,
-            IGameFactory gameFactory, EnemySpawnController enemySpawnController,
+            IGameFactory gameFactory, LoseResourceManager loseResourceManager, EnemySpawnController enemySpawnController,
             Character player, IControllable controller, IShootable shoot, WeaponShooter weaponShooter,
             RestartGame restartGame, ILoseModel scoreData, EnemyDeathTracker deathTracker,
             IAnalyticsService analyticsService)
@@ -44,6 +45,7 @@ namespace _Project.Scripts.Infrastructure
             _enemyResourceManager = enemyResourceManager;
             _projectileResourceManager = projectileResourceManager;
             _gameFactory = gameFactory;
+            _loseResourceManager = loseResourceManager;
             _enemySpawnController = enemySpawnController;
             _player = player;
             _controller = controller;
@@ -98,6 +100,7 @@ namespace _Project.Scripts.Infrastructure
             _coordinateResourceManager.Unload();
             _enemyResourceManager.UnloadEnemies();
             _projectileResourceManager.UnloadShots();
+            _loseResourceManager.Unload();
 
             _player?.Dispose();
             _deathTracker?.Dispose();
@@ -120,7 +123,9 @@ namespace _Project.Scripts.Infrastructure
 
             _analyticsService.LogGameEnd(_weaponShooter.ShotsCount, _weaponShooter.LaserUsed, _deathTracker.KillCount);
 
-            _losePresenter = await _gameFactory.CreateLoseScreenAsync();
+            var prefab = await _loseResourceManager.LoseScreenLoadAsync();
+            
+            _losePresenter = _gameFactory.CreateLoseScreen(prefab);                
 
             if (_losePresenter != null)
             {

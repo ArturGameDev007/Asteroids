@@ -51,8 +51,8 @@ namespace _Project.Scripts.Installers.Gameplay
             Container.Bind<RestartGame>().AsSingle();
             Container.Bind<ILoseModel>().To<ScoreData>().AsSingle();
             
-            Container.BindInstance(_endGameScreenPrefabReference).AsSingle();
-
+            Container.Bind<LoseResourceManager>().AsSingle().WithArguments(_endGameScreenPrefabReference);
+            
             BindBackgroundUI();
 
             BindPlayer();

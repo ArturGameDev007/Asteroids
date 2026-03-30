@@ -1,13 +1,12 @@
-using _Project.Scripts.Player;
 using _Project.Scripts.UI.GameScreen;
-using Cysharp.Threading.Tasks;
+using _Project.Scripts.UI.PerformanceShip;
 
 namespace _Project.Scripts.Infrastructure
 {
     public interface IGameFactory
     {
-        // public UniTask<PlayerController> CreatePlayerAsync();
+        // public PerformancePresenter CreatePerformanceShip(CoordinateDisplay view);
         
-        public UniTask<LosePresenter> CreateLoseScreenAsync();
+        public LosePresenter CreateLoseScreen(LoseView prefab);
     }
 }

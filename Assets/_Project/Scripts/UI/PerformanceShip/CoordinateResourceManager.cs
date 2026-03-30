@@ -1,3 +1,4 @@
+using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Services.AsyncLoader;
 using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;
@@ -7,6 +8,7 @@ namespace _Project.Scripts.UI.PerformanceShip
 {
     public class CoordinateResourceManager
     {
+        private readonly IGameFactory _gameFactory;
         private readonly IInstantiator _instantiator;
         private readonly IResourceLoader _resourceLoader;
         private readonly AssetReference _assetReference;
