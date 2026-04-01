@@ -1,6 +1,7 @@
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Services.AsyncLoader;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace _Project.Scripts.Player.Weapons
@@ -27,19 +28,21 @@ namespace _Project.Scripts.Player.Weapons
 
         public async UniTask LoadShotsAsync()
         {
-            var bullet = _resourceLoader.LoadAssetAsync<Bullet>(_bulletReference);
-            var laser = _resourceLoader.LoadAssetAsync<Laser>(_laserReference);
-            
-            var (loadedBulet, loadedLaser) = await UniTask.WhenAll(bullet, laser);
-            
-            _bulletPool.Prefab = loadedBulet;
-            _laserPool.Prefab = loadedLaser;
+            await UniTask.WhenAll(
+                BindPrefabToPool(_bulletReference, _bulletPool),
+                BindPrefabToPool(_laserReference, _laserPool)
+            );
         }
 
         public void UnloadShots()
         {
             _resourceLoader.UnloadAsset(_bulletReference);
             _resourceLoader.UnloadAsset(_laserReference);
+        }
+
+        private async UniTask BindPrefabToPool<T>(AssetReference assetReference, ObjectPool<T> pool) where T : Component
+        {
+            pool.Prefab = await _resourceLoader.LoadAssetAsync<T>(assetReference);
         }
     }
 }
