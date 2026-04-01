@@ -1,4 +1,3 @@
-using System;
 using _Project.Scripts.Configs.Player;
 using UnityEngine;
 using Zenject;
@@ -20,10 +19,9 @@ namespace _Project.Scripts.Player
 
         private Vector3 _startPosition;
 
-        public Transform PlayerTransform => transform;
         public Vector3 Position => transform.position;
         public float RotationAngleZ => transform.rotation.eulerAngles.z;
-        public float Speed => _head2D.velocity.magnitude;
+        public float Speed =>_head2D.velocity.magnitude;
 
         [Inject]
         public void Construct(IInputService controllerInput)

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using _Project.Scripts.Player;
 using UnityEngine;
 using Zenject;
 
@@ -13,7 +12,6 @@ namespace _Project.Scripts.Enemies
         private readonly Transform _container;
 
         public T Prefab { get; set; }
-        private Character _player;
 
         public ObjectPool(IInstantiator prefabInstantiator, T prefab, int initialCount,
             string containerName, Transform parent)

@@ -46,7 +46,7 @@ namespace _Project.Scripts.Installers.Gameplay
 
             Container.Bind<Camera>().FromInstance(_mainCamera).AsSingle();
             Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
-            Container.Bind<WeaponShooter>().AsSingle();
+            Container.Bind<IWeaponShooter>().To<WeaponShooter>().AsSingle();
             Container.Bind<IEnemyDeathListener>().To<EnemyManager>().AsSingle();
             Container.Bind<RestartGame>().AsSingle();
             Container.Bind<ILoseModel>().To<ScoreData>().AsSingle();

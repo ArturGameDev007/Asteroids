@@ -10,10 +10,19 @@ namespace _Project.Scripts.Player.Weapons
     {
         [SerializeField] private ShootingConfig _shootingConfig;
 
+        private DirectionShot _directionShot;
         private CancellationTokenSource _cancellationTokenSource;
+
+        private void Awake()
+        {
+            _directionShot = GetComponent<DirectionShot>();
+        }
 
         private void OnEnable()
         {
+            if (_directionShot != null)
+                _directionShot.enabled = true;
+            
             StopLifeTimer();
             
             _cancellationTokenSource = new CancellationTokenSource();
@@ -34,6 +43,14 @@ namespace _Project.Scripts.Player.Weapons
                 _cancellationTokenSource.Dispose();
                 _cancellationTokenSource = null;
             }
+        }
+
+        public void ForceReturn()
+        {
+            gameObject.SetActive(false);
+            
+            StopLifeTimer();
+            ReturnToPool();
         }
 
         private async UniTaskVoid ReturnRoutineAsync()

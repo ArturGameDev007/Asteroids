@@ -10,19 +10,15 @@ namespace _Project.Scripts.Player.Weapons
 
         [Header("Points Weapons")]
         [SerializeField] private Transform _pointShootForlaser;
-
         [SerializeField] private Transform _pointShootForBullet;
 
-
-        // private GenerateLaser _laserAmmo;
         private IPlayerProvider _playerProvider;
-        // private ILaserState _laserState;
-        private WeaponShooter _shooter;
+        private IWeaponShooter _shooter;
 
         private bool _isPaused = true;
 
         [Inject]
-        public void Construct(IPlayerProvider laser, WeaponShooter shooter)
+        public void Construct(IPlayerProvider laser, IWeaponShooter shooter)
         {
             _playerProvider = laser;
             _shooter = shooter;

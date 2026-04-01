@@ -8,15 +8,13 @@ namespace _Project.Scripts.Player
     {
         public event Action OnGameOver;
 
-        // private readonly IControllable _controllable;
-        // private readonly ICollisionHandler _collisionHandler;
         private readonly IPlayerProvider _playerProvider;
 
         private bool _isInitialized;
+        private bool _isDead;
 
         public Character(IPlayerProvider playerProvider)
         {
-            // _controllable = controllable;
             _playerProvider = playerProvider;
         }
 
@@ -31,9 +29,11 @@ namespace _Project.Scripts.Player
         public void Dispose()
         {
             _playerProvider.OnPlayerReady -= Unsubscribe;
-            
-            // if (_playerProvider != null)
-            //     _playerProvider.CollisionHandler.OnCollisionDetected -= ProcessCollision;
+        }
+
+        public void Revive()
+        {
+            _isDead = false;
         }
 
         private void Subscribe()
@@ -48,13 +48,12 @@ namespace _Project.Scripts.Player
                 _playerProvider.CollisionHandler.OnCollisionDetected -= ProcessCollision;
         }
 
-        // public void ClearState()
-        // {
-        //     _controllable?.ResetState();
-        // }
-
         private void ProcessCollision(IEnemy enemy)
         {
+            if (_isDead)
+                return;
+            
+            _isDead = true;
             OnGameOver?.Invoke();
         }
     }

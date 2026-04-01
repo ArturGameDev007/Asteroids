@@ -28,7 +28,11 @@ namespace _Project.Scripts.Services.AsyncLoader
 
         public void UnloadAsset(AssetReference assetID)
         {
-            assetID.ReleaseAsset();
+            // assetID.ReleaseAsset();
+            if (assetID != null && assetID.Asset != null)
+            {
+                assetID.ReleaseAsset();
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 using _Project.Scripts.UI.GameScreen;
-using _Project.Scripts.UI.PerformanceShip;
 using Zenject;
 
 namespace _Project.Scripts.Infrastructure
