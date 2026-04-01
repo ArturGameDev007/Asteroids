@@ -3,36 +3,34 @@ using Zenject;
 
 namespace _Project.Scripts.Player.Weapons
 {
-    public class InputForShoot : MonoBehaviour
+    public class InputForShoot : MonoBehaviour, IInputPauseHandler
     {
         private const int INPUT_MOUSE_LEFT = 0;
         private const int INPUT_MOUSE_RIGHT = 1;
-
-        [Header("Prefabs Weapons")]
-        [SerializeField] private Laser _prefabLaser;
-        [SerializeField] private Bullet _bulletPrefab;
 
         [Header("Points Weapons")]
         [SerializeField] private Transform _pointShootForlaser;
         [SerializeField] private Transform _pointShootForBullet;
 
-        private GenerateLaser _laserAmmo;
-        private WeaponShooter _shooter;
-        
-        private bool _isPaused;
+        private IPlayerProvider _playerProvider;
+        private IWeaponShooter _shooter;
+
+        private bool _isPaused = true;
 
         [Inject]
-        public void Construct(GenerateLaser laser, WeaponShooter shooter)
+        public void Construct(IPlayerProvider laser, IWeaponShooter shooter)
         {
-            _laserAmmo = laser;
+            _playerProvider = laser;
             _shooter = shooter;
+            
+            _isPaused = false;
         }
 
         private void Update()
         {
-            if (_isPaused)
+            if (_isPaused || _playerProvider == null || _shooter == null)
                 return;
-            
+
             InputBulletShoot();
             InputLaserShoot();
         }
@@ -56,7 +54,7 @@ namespace _Project.Scripts.Player.Weapons
         private void InputLaserShoot()
         {
             if (Input.GetMouseButtonDown(INPUT_MOUSE_RIGHT))
-                if (_laserAmmo.TrySpendAmmo())
+                if (_playerProvider.LaserState.TrySpendAmmo())
                     _shooter.ShootLaser(_pointShootForlaser);
         }
     }

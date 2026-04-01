@@ -1,64 +1,89 @@
 using System;
 using _Project.Scripts.Player;
-using _Project.Scripts.Player.Weapons;
 using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.UI.PerformanceShip
 {
-    public class PerformancePresenter: IInitializable, ITickable, IDisposable
+    public class PerformancePresenter : ITickable, IDisposable
     {
-        private readonly ICoordinateView _coordinateView;
-        private readonly ILaserView _laserView;
-        private readonly PlayerController _shipController;
-        private readonly GenerateLaser _laser;
-        private readonly Rigidbody2D _rigidbody2D;
+        private readonly CoordinateResourceManager _coordinateResourceManager;
+        private readonly IPlayerProvider _playerProvider;
 
-        public PerformancePresenter(ICoordinateView coordinateView, ILaserView laserView, PlayerController shipController, GenerateLaser laser)
+        private bool _isInitialized;
+
+        public PerformancePresenter(CoordinateResourceManager coordinateResourceManager, IPlayerProvider playerProvider)
         {
-            _coordinateView = coordinateView;
-            _laserView = laserView;
-            _shipController = shipController;
-            _laser = laser;
-            _rigidbody2D = shipController.GetComponent<Rigidbody2D>();
-        }
-
-        public void Initialize()
-        {
-            _laser.OnLaserChanged += OnShowInfoLaser;
-            _laser.OnReloadProgress += OnShowRollbackLaser;
-
-            OnShowInfoLaser(_laser.CurrentAmmonLaser);
-            OnShowRollbackLaser(_laser.LaserConfig.ReloadTime);
+            _coordinateResourceManager = coordinateResourceManager;
+            _playerProvider = playerProvider;
         }
 
         public void Tick()
         {
-            Vector3 direction = _shipController.transform.position;
+            if (_coordinateResourceManager.View == null)
+                return;
 
-            float rotationAngleZ = _shipController.transform.localEulerAngles.z;
-            float speed = _rigidbody2D.velocity.magnitude;
+            if (_playerProvider.Player == null || _playerProvider.LaserState == null)
+                return;
 
-            string displayText = string.Format("<b>" + "X={0:F2}, Y={1:F2}\nAngleZ: {2:F1}\nSpeed: {3:F3}" + "</b>",
-                direction.x, direction.y, rotationAngleZ, speed);
+            if (!_isInitialized)
+                InitializeUICoordinate();
 
-            _coordinateView.SetCoordinateText(displayText);
+            UpdateUICoordinate();
+        }
+
+        private void InitializeUICoordinate()
+        {
+            var laserState = _playerProvider.LaserState;
+
+            if (laserState == null)
+                return;
+
+            laserState.OnLaserChanged += OnShowInfoLaser;
+            laserState.OnReloadProgress += OnShowRollbackLaser;
+
+            OnShowInfoLaser(laserState.CurrentAmmonLaser);
+            OnShowRollbackLaser(laserState.ReloadTime);
+
+            _isInitialized = true;
         }
 
         public void Dispose()
         {
-            _laser.OnLaserChanged -= OnShowInfoLaser;
-            _laser.OnReloadProgress -= OnShowRollbackLaser;
+            var laserState = _playerProvider.LaserState;
+
+            if (_isInitialized && laserState != null)
+            {
+                laserState.OnLaserChanged -= OnShowInfoLaser;
+                laserState.OnReloadProgress -= OnShowRollbackLaser;
+            }
         }
-        
+
+        private void UpdateUICoordinate()
+        {
+            var movable = _playerProvider.Player;
+
+            Vector3 direction = movable.Position;
+
+            float rotationAngleZ = movable.RotationAngleZ;
+            float speed = movable.Speed;
+
+            string displayText = string.Format("<b>" + "X={0:F2}, Y={1:F2}\nAngleZ: {2:F1}\nSpeed: {3:F3}" + "</b>",
+                direction.x, direction.y, rotationAngleZ, speed);
+
+            _coordinateResourceManager.View.SetCoordinateText(displayText);
+        }
+
         private void OnShowInfoLaser(int value)
         {
-            _laserView.SetAmmonText($"Laser<br>Ammon: {value.ToString()}");
+            if (_coordinateResourceManager.View is ILaserView view)
+                view.SetAmmonText($"Laser<br>Ammon: {value.ToString()}");
         }
-        
+
         private void OnShowRollbackLaser(float time)
         {
-            _laserView.SetReloadText($"Reload Time: {time.ToString("F1")}s");
+            if (_coordinateResourceManager.View is ILaserView view)
+                view.SetReloadText($"Reload Time: {time.ToString("F1")}s");
         }
     }
 }

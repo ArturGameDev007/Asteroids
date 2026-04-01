@@ -1,4 +1,5 @@
 ﻿using _Project.Scripts.Configs.Enemies;
+using _Project.Scripts.Player;
 using UnityEngine;
 using Zenject;
 
@@ -8,18 +9,21 @@ namespace _Project.Scripts.Enemies
     {
         [SerializeField] private UfoConfig _ufoConfig;
         
-        private Transform _target;
+        private IPlayerProvider _playerProvider;
         
         [Inject]
-        public void Construct([Inject(Id = "Player")] Transform target)
+        public void Construct(IPlayerProvider target)
         {
-            _target = target;
+            _playerProvider = target;
         }
-        
+
         protected override void Move()
         {
+            if (_playerProvider.Player == null || _playerProvider.PlayerTransform == null)
+                return;
+            
             Vector2 currentPosition = Head2D.position;
-            Vector2 targetPosition = _target.position;
+            Vector2 targetPosition = _playerProvider.PlayerTransform.position;
             
             Vector2 directionToPlayer = (targetPosition - currentPosition).normalized;
             RotateTowardPlayer(directionToPlayer);

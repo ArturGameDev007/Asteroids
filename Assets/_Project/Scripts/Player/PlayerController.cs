@@ -5,7 +5,7 @@ using Zenject;
 namespace _Project.Scripts.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerController : MonoBehaviour, IPlayerController
+    public class PlayerController : MonoBehaviour, IPlayerController, IMovableEntity
     {
         private const float X_ANGLE = 0f;
         private const float Y_ANGLE = 0f;
@@ -19,6 +19,10 @@ namespace _Project.Scripts.Player
 
         private Vector3 _startPosition;
 
+        public Vector3 Position => transform.position;
+        public float RotationAngleZ => transform.rotation.eulerAngles.z;
+        public float Speed =>_head2D.velocity.magnitude;
+
         [Inject]
         public void Construct(IInputService controllerInput)
         {
@@ -27,12 +31,8 @@ namespace _Project.Scripts.Player
             if (_head2D == null)
                 _head2D = GetComponent<Rigidbody2D>();
 
-            _isPaused = false;
-        }
-
-        private void Start()
-        {
             _startPosition = transform.position;
+            _isPaused = false;
         }
 
         private void Update()
@@ -63,9 +63,12 @@ namespace _Project.Scripts.Player
         {
             _isPaused = false;
 
-            _head2D.simulated = true;
-            _head2D.velocity = Vector2.zero;
-            _head2D.angularVelocity = 0f;
+            if (_head2D != null)
+            {
+                _head2D.simulated = true;
+                _head2D.velocity = Vector2.zero;
+                _head2D.angularVelocity = 0f;
+            }
 
             transform.position = _startPosition;
             transform.rotation = Quaternion.identity;

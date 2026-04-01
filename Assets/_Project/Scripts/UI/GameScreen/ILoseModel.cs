@@ -7,9 +7,9 @@ namespace _Project.Scripts.UI.GameScreen
     {
         public event Action OnScoreChanged;
         
-        public void Reset();
-        
         public int Score { get; }
+        
+        public void Reset();
 
         public void AddScore(EnemyConfig  config);
         

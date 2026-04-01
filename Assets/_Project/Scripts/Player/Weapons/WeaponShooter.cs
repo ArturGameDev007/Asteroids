@@ -5,22 +5,23 @@ using UnityEngine;
 
 namespace _Project.Scripts.Player.Weapons
 {
-    public class WeaponShooter
+    public class WeaponShooter : IWeaponShooter
     {
         private readonly List<TimedPoolObject> _activeProjectiles = new();
 
         private readonly ObjectPool<Bullet> _bulletPool;
         private readonly ObjectPool<Laser> _laserPool;
-        
+
         private readonly IAnalyticsService _analyticsService;
-        
+
         private float _laserCooldown = 0.5f;
         private float _nextBulletShootTime;
-        
+
         public int ShotsCount { get; private set; }
         public int LaserUsed { get; private set; }
 
-        public WeaponShooter(ObjectPool<Bullet> bulletPool, ObjectPool<Laser> laserPool, IAnalyticsService analyticsService)
+        public WeaponShooter(ObjectPool<Bullet> bulletPool, ObjectPool<Laser> laserPool,
+            IAnalyticsService analyticsService)
         {
             _bulletPool = bulletPool;
             _laserPool = laserPool;
@@ -50,7 +51,7 @@ namespace _Project.Scripts.Player.Weapons
                 return;
 
             Laser laser = _laserPool.GetObject();
-            
+
             LaserUsed++;
             _analyticsService.LogLaserUsed();
 
@@ -62,12 +63,17 @@ namespace _Project.Scripts.Player.Weapons
 
         public void StopAllShoots()
         {
-            foreach (var projectile in _activeProjectiles)
+            for (int i = _activeProjectiles.Count - 1; i >= 0; i--)
             {
-                projectile.StopLifeTimer();
+                var projectile = _activeProjectiles[i];
 
-                if (projectile.TryGetComponent(out DirectionShot directionShot))
-                    directionShot.StopMovement();
+                if (projectile != null)
+                {
+                    if (projectile.TryGetComponent(out DirectionShot directionShot))
+                        directionShot.StopMovement();
+
+                    projectile.ForceReturn();
+                }
             }
 
             _activeProjectiles.Clear();

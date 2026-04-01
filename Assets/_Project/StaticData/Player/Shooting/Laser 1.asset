@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd92ae2e2b824f09b68a9a73f7904ba0, type: 3}
   m_Name: Laser 1
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 5
+  <Speed>k__BackingField: 8
   <LifeTime>k__BackingField: 2.5
   <MaxAmountLaser>k__BackingField: 20
   <ReloadTime>k__BackingField: 5

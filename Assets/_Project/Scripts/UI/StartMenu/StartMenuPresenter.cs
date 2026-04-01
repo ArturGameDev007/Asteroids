@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Services.Analytics;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 namespace _Project.Scripts.UI.StartMenu
@@ -7,13 +8,13 @@ namespace _Project.Scripts.UI.StartMenu
     public class StartMenuPresenter : IInitializable, IDisposable
     {
         private readonly ISceneLoader _sceneLoader;
-        private readonly StartMenuView _startMenuView;
         private readonly IAnalyticsService _analyticsService;
+        private readonly StartMenuView _startMenuView;
 
-        public StartMenuPresenter(ISceneLoader sceneLoader, StartMenuView startMenuView,  IAnalyticsService analyticsService)
+        public StartMenuPresenter(StartMenuView startMenuView, ISceneLoader sceneLoader,  IAnalyticsService analyticsService)
         {
-            _sceneLoader = sceneLoader;
             _startMenuView = startMenuView;
+            _sceneLoader = sceneLoader;
             _analyticsService = analyticsService;
         }
 
@@ -29,8 +30,10 @@ namespace _Project.Scripts.UI.StartMenu
 
         private void OnStartClicked()
         {
+            _startMenuView.StartButton.interactable = false;
+            
             _analyticsService.LogGameStart();
-            _sceneLoader.LoadScene();
+            _sceneLoader.LoadSceneAsync().Forget();
         }
     }
 }

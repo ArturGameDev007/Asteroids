@@ -1,25 +1,22 @@
 using System;
-using _Project.Scripts.Services.Analytics;
 using Zenject;
 
 namespace _Project.Scripts.UI.GameScreen
 {
-    public class LosePresenter: IInitializable, IDisposable
+    public class LosePresenter : IInitializable, IDisposable
     {
         private readonly ILoseModel _loseModel;
-        private readonly ILoseView _loseView;
-        
-        private readonly IAnalyticsService _analyticsService;
-        
+
+        private ILoseView _loseView;
+
         public event Action OnRestartClick;
 
-        public LosePresenter(ILoseModel loseModel, ILoseView loseView,  IAnalyticsService analyticsService)
+        public LosePresenter(ILoseView loseView, ILoseModel loseModel)
         {
-            _loseModel = loseModel;
             _loseView = loseView;
-            _analyticsService = analyticsService;
+            _loseModel = loseModel;
         }
-        
+
         public void Initialize()
         {
             _loseModel.OnScoreChanged += UpdateScoreView;
@@ -27,28 +24,26 @@ namespace _Project.Scripts.UI.GameScreen
 
             UpdateScoreView();
         }
-        
+
         public void Dispose()
         {
             _loseModel.OnScoreChanged -= UpdateScoreView;
-            _loseView.OnRestartRequested -= OnRestartRequested;
+
+            if (_loseView != null)
+                _loseView.OnRestartRequested -= OnRestartRequested;
         }
 
-        public void Open(int finalScore, int shots, int lasers, int destroyedEnemies)
+        public void Open(int finalScore)
         {
             _loseModel.SaveResult(finalScore);
-            
             _loseView.ShowPanel();
-            _loseView.SetStats(shots, lasers, destroyedEnemies);
-            
-            _analyticsService.LogGameEnd(shots, lasers, destroyedEnemies);
 
             UpdateScoreView();
         }
 
         public void Close()
         {
-            _loseView.HidePanel();
+            _loseView?.HidePanel();
         }
 
         private void UpdateScoreView()

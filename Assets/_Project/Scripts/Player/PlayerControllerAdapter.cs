@@ -2,31 +2,31 @@ namespace _Project.Scripts.Player
 {
     public class PlayerControllerAdapter : IControllable
     {
-        private readonly PlayerController _playerController;
+        private readonly IPlayerProvider _playerProvider;
 
-        public PlayerControllerAdapter(PlayerController playerController)
+        public PlayerControllerAdapter(IPlayerProvider playerController)
         {
-            _playerController = playerController;
+            _playerProvider = playerController;
         }
 
         public void ResetState()
         {
-            _playerController.ResetState();
+            _playerProvider.MovableEntity?.ResetState();
         }
 
         public void EnableControl()
         {
-            _playerController.SetPaused(false);
+            _playerProvider.MovableEntity?.SetPaused(false);
         }
-        
+
         public void DisableControl()
         {
-            _playerController.SetPaused(true);
+            _playerProvider.MovableEntity?.SetPaused(true);
         }
 
         public void StopPhysics()
         {
-            _playerController.StopPhysics();
+            _playerProvider.MovableEntity?.StopPhysics();
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
 using _Project.Scripts.Configs.Player;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.Player.Weapons
 {
-    public class GenerateLaser : MonoBehaviour
+    public class GenerateLaser : MonoBehaviour, ILaserState
     {
         public event Action<int> OnLaserChanged;
         public event Action<float> OnReloadProgress;
@@ -15,6 +14,7 @@ namespace _Project.Scripts.Player.Weapons
 
         private bool _isReloading;
 
+        public float ReloadTime => LaserConfig.ReloadTime;
         public int CurrentAmmonLaser { get; private set; }
 
         private void Start()
@@ -37,12 +37,12 @@ namespace _Project.Scripts.Player.Weapons
             ShowInfo();
 
             if (CurrentAmmonLaser <= minCountLazer)
-                StartCoroutine(ReloadLaser());
+                ReloadLaserAsync().Forget();
 
             return true;
         }
-
-        private IEnumerator ReloadLaser()
+        
+        private async UniTaskVoid ReloadLaserAsync()
         {
             _isReloading = true;
 
@@ -54,7 +54,7 @@ namespace _Project.Scripts.Player.Weapons
                 timer -= Time.deltaTime;
                 OnReloadProgress?.Invoke(timer);
 
-                yield return null;
+                await UniTask.Yield();
             }
 
             CurrentAmmonLaser = LaserConfig.MaxAmountLaser;

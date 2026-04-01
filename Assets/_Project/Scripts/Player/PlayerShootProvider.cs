@@ -4,26 +4,26 @@ namespace _Project.Scripts.Player
 {
     public class PlayerShootProvider : IShootable
     {
-        private readonly InputForShoot _input;
-
-        public PlayerShootProvider(InputForShoot input)
+        private readonly IPlayerProvider _input;
+        
+        public PlayerShootProvider(IPlayerProvider input)
         {
             _input = input;
         }
 
         public void EnableControl()
         {
-            _input.SetPause(false);
+            _input?.InputPauseHandler.SetPause(false);
         }
 
         public void DisableControl()
         {
-            _input.SetPause(true);
+            _input?.InputPauseHandler.SetPause(true);
         }
 
         public void StopAllShoots()
         {
-            _input.StopShoots();
+            _input?.InputPauseHandler.StopShoots();
         }
     }
 }

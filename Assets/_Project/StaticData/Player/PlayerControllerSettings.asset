@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf2e56ee0c54c54965af9864391eaae, type: 3}
   m_Name: PlayerControllerSettings
   m_EditorClassIdentifier: 
-  <RotationSpeed>k__BackingField: 90
-  <ForceInput>k__BackingField: 6
+  <RotationSpeed>k__BackingField: 170
+  <ForceInput>k__BackingField: 9

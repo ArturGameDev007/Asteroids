@@ -1,4 +1,3 @@
-using _Project.Scripts.Services.Analytics;
 using _Project.Scripts.UI.GameScreen;
 using Zenject;
 
@@ -7,26 +6,22 @@ namespace _Project.Scripts.Infrastructure
     public class GameFactory : IGameFactory
     {
         private readonly IInstantiator _instantiator;
-        private readonly IAnalyticsService _analyticsService;
+        private readonly ILoseModel _loseModel;
 
-        public GameFactory(IInstantiator instantiator, IAnalyticsService analyticsService)
+        public GameFactory(IInstantiator instantiator, ILoseModel loseModel)
         {
             _instantiator = instantiator;
-            _analyticsService = analyticsService;
+            _loseModel = loseModel;
         }
 
-        public LosePresenter CreateEndGameScreen(LoseView prefab, ILoseModel scoreData)
+        public LosePresenter CreateLoseScreen(LoseView prefab)
         {
             LoseView loseView = _instantiator.InstantiatePrefabForComponent<LoseView>(prefab);
 
-            if (loseView != null)
-            {
-                var presenter = new LosePresenter(scoreData, loseView, _analyticsService);
-                presenter.Initialize();
-                return presenter;
-            }
+            var presenter = new LosePresenter(loseView, _loseModel);
+            presenter.Initialize();
 
-            return null;
+            return presenter;
         }
     }
 }

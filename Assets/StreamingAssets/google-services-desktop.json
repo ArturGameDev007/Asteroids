@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "400730966662",
-    "project_id": "asteroids-fb14e",
-    "storage_bucket": "asteroids-fb14e.firebasestorage.app"
+    "project_number": "718472771936",
+    "project_id": "asteroid-77580",
+    "storage_bucket": "asteroid-77580.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:400730966662:android:6f39b567cb2c5cf4ef9f07",
+        "mobilesdk_app_id": "1:718472771936:android:0babcbdbe1be7c8fcdc605",
         "android_client_info": {
-          "package_name": "com.Artur.Asteroids"
+          "package_name": "com.ArturGameArcade2D.Asteroid"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDY-nkr7JRRC5JhFxzWx4-7n3MSX8-Qo7o"
+          "current_key": "AIzaSyCqIvsJnPLWugihwjHhNAri0pR9goftMjk"
         }
       ],
       "services": {

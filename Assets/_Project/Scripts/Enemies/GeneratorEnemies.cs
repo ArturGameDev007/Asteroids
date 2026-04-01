@@ -58,7 +58,11 @@ namespace _Project.Scripts.Enemies
             _isGameActive = false;
 
             foreach (var enemy in _activeEnemies)
+            {
                 enemy.StopPhysics(true);
+                enemy.gameObject.SetActive(false);
+                _pool.ReturnPool(enemy);
+            }
         
             _activeEnemies.Clear();
         }

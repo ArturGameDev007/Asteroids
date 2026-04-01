@@ -19,8 +19,6 @@ namespace _Project.Scripts.Services.Analytics
             var task =  FirebaseApp.CheckAndFixDependenciesAsync();
             
             task.GetAwaiter().GetResult();
-            
-            Debug.Log("Firebase initialized");
         }
 
         public void LogGameStart()
@@ -28,8 +26,6 @@ namespace _Project.Scripts.Services.Analytics
             _wasUsedLaser = false;
             
             FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLevelStart);
-            
-            Debug.Log("[Analytics]: Start Game.");
         }
 
         public void LogGameEnd(int amountShots, int amountUsedLaser, int amountDestroyedEnemies)
@@ -42,7 +38,6 @@ namespace _Project.Scripts.Services.Analytics
             };
 
             FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLevelEnd, parameters);
-            Debug.Log($"[Analytics]: Shots: {amountShots}, Lasers: {amountUsedLaser}, Destroyed: {amountDestroyedEnemies}.");
         }
 
         public void LogLaserUsed()
@@ -51,7 +46,6 @@ namespace _Project.Scripts.Services.Analytics
                 return;
             
             FirebaseAnalytics.LogEvent(EVENT_LASER_USED);
-            Debug.Log("[Analytics]: Laser Used.");
             
             _wasUsedLaser = true;
         }
