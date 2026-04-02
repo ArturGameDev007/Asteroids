@@ -48,7 +48,7 @@ namespace _Project.Scripts.UI.GameScreen
 
         private void UpdateScoreView()
         {
-            _loseView.SetScore(_loseModel.Score);
+            _loseView.SetScore(_loseModel.Score, _loseModel.BestScore);
         }
 
         private void OnRestartRequested()

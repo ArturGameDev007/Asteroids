@@ -1,5 +1,4 @@
 using System;
-using _Project.Scripts.Services.Save;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,14 +18,12 @@ namespace _Project.Scripts.UI.GameScreen
         [field: Header("Button")]
         [field: SerializeField] public Button RestartButton { get; private set; }
 
-        private ISaveService _saveService;
         private Canvas _canvas;
 
         [Inject]
-        public void Construct(ISaveService saveService)
+        public void Construct()
         {
             _canvas = GetComponent<Canvas>();
-            _saveService = saveService;
         }
 
         private void Start()
@@ -39,24 +36,10 @@ namespace _Project.Scripts.UI.GameScreen
             RestartButton.onClick.RemoveListener(OnRestart);
         }
 
-        public void SetScore(int score)
+        public void SetScore(int score, int  bestScore)
         {
             _textScore.text = $"Score: {score.ToString()}";
-            
-            ShowBestScoreResult(score);
-        }
-
-        private void ShowBestScoreResult(int currentScore)
-        {
-            SaveData data = _saveService.Load();
-
-            if (currentScore > data.BestResult)
-            {
-                data.BestResult = currentScore;
-                _saveService.Save(data);
-            }
-
-            _textBestResult.text = $"Best Result: {data.BestResult.ToString()}";
+            _textBestResult.text = $"Best Result: {bestScore.ToString()}";
         }
 
         public void ShowPanel()

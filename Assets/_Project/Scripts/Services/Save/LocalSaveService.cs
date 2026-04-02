@@ -16,12 +16,9 @@ namespace _Project.Scripts.Services.Save
 
         public SaveData Load()
         {
-            int minValue = 0;
-            
             if (!PlayerPrefs.HasKey(BEST_SCORE_DATA))
             {
                 var resultData = new SaveData();
-                resultData.BestResult = minValue;
                 return resultData;
             }
             

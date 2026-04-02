@@ -8,6 +8,7 @@ namespace _Project.Scripts.UI.GameScreen
         public event Action OnScoreChanged;
         
         public int Score { get; }
+        public int BestScore { get; }
         
         public void Reset();
 

@@ -6,7 +6,7 @@ namespace _Project.Scripts.UI.GameScreen
     {
         public event Action OnRestartRequested;
         
-        public void SetScore(int score);
+        public void SetScore(int score,  int bestScore);
 
         public void ShowPanel();
         
