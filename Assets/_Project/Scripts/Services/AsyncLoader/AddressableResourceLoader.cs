@@ -2,12 +2,13 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Object = UnityEngine.Object;
 
 namespace _Project.Scripts.Services.AsyncLoader
 {
     public class AddressableResourceLoader : IResourceLoader
     {
-        public async UniTask<T> LoadAssetAsync<T>(AssetReference assetID)
+        public async UniTask<T> LoadAssetAsync<T>(AssetReference assetID) where T : Object
         {
             if (typeof(Component).IsAssignableFrom(typeof(T)))
             {
@@ -22,17 +23,14 @@ namespace _Project.Scripts.Services.AsyncLoader
 
             var genericHandle = assetID.LoadAssetAsync<T>();
             var asset = await genericHandle;
-            
+
             return asset;
         }
 
         public void UnloadAsset(AssetReference assetID)
         {
-            // assetID.ReleaseAsset();
             if (assetID != null && assetID.Asset != null)
-            {
                 assetID.ReleaseAsset();
-            }
         }
     }
 }

@@ -1,6 +1,6 @@
+using System.Threading.Tasks;
 using Firebase;
 using Firebase.Analytics;
-using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.Services.Analytics
@@ -13,16 +13,18 @@ namespace _Project.Scripts.Services.Analytics
         private const string EVENT_LASER_USED = "Laser_Used";
 
         private bool _wasUsedLaser;
+        private bool _isInitialized;
 
         public void Initialize()
         {
-            var task =  FirebaseApp.CheckAndFixDependenciesAsync();
-            
-            task.GetAwaiter().GetResult();
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(InitializeFirebase);
         }
 
         public void LogGameStart()
         {
+            if (!_isInitialized)
+                return;
+            
             _wasUsedLaser = false;
             
             FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventLevelStart);
@@ -48,6 +50,15 @@ namespace _Project.Scripts.Services.Analytics
             FirebaseAnalytics.LogEvent(EVENT_LASER_USED);
             
             _wasUsedLaser = true;
+        }
+        
+        private void InitializeFirebase(Task<DependencyStatus> task)
+        {
+            if (task.Result == DependencyStatus.Available)
+            {
+                _isInitialized = true;
+                FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
+            }
         }
     }
 }

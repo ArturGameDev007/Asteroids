@@ -22,13 +22,15 @@ namespace _Project.Scripts.Player
         {
             if (_playerProvider == null)
                 return;
-
+            
             _playerProvider.OnPlayerReady += Subscribe;
         }
 
         public void Dispose()
         {
-            _playerProvider.OnPlayerReady -= Unsubscribe;
+            _playerProvider.OnPlayerReady -= Subscribe;
+            
+            Unsubscribe();
         }
 
         public void Revive()
@@ -39,13 +41,19 @@ namespace _Project.Scripts.Player
         private void Subscribe()
         {
             if (!_isInitialized)
+            {
+                _isInitialized = true;
                 _playerProvider.CollisionHandler.OnCollisionDetected += ProcessCollision;
+            }
         }
 
         private void Unsubscribe()
         {
             if (_playerProvider != null)
+            {
                 _playerProvider.CollisionHandler.OnCollisionDetected -= ProcessCollision;
+                _isInitialized = false;
+            }
         }
 
         private void ProcessCollision(IEnemy enemy)

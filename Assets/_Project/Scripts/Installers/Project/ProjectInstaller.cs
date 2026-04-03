@@ -12,6 +12,7 @@ namespace _Project.Scripts.Installers.Project
             Container.Bind<ISaveService>().To<LocalSaveService>().AsSingle();
             Container.BindInterfacesAndSelfTo<FirebaseAnalyticsService>().AsSingle();
             Container.BindInterfacesAndSelfTo<UnityAdsService>().AsSingle();
+            Container.Bind<IAdsRewardsType>().To<AdsRewardsType>().AsSingle();
         }
     }
 }

@@ -4,9 +4,9 @@ namespace _Project.Scripts.Services.Ads
 {
     public interface IAdsService
     {
-        public event Action OnAdsFinished;
+        public event Action<string> OnAdsFinished; 
         
-        public void ShowAdsReward();
+        public void ShowAdsReward(string type);
         public void ShowAdsInterstitial();
     }
 }

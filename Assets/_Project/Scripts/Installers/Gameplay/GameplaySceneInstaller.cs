@@ -1,3 +1,4 @@
+using System;
 using _Project.Scripts.Configs.Enemies;
 using _Project.Scripts.Configs.PoolObjects;
 using _Project.Scripts.Enemies;
@@ -67,8 +68,13 @@ namespace _Project.Scripts.Installers.Gameplay
 
         private void BindGameplayInfrastructure()
         {
+            Container.Bind<GameLoader>().AsSingle();
+            Container.Bind<GameplayController>().AsSingle();
+            
             Container.Bind<Game>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayEntryPoint>().AsSingle();
+
+            Container.BindInterfacesAndSelfTo<LoseManager>().AsSingle();
         }
 
         private void BindBackgroundUI()
