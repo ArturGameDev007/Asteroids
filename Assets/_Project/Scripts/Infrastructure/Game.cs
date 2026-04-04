@@ -1,6 +1,7 @@
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.Services.Analytics;
+using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.UI.GameScreen;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace _Project.Scripts.Infrastructure
 {
     public class Game
     {
+        private readonly IRemoteConfigs  _remoteConfigs;
         private readonly GameLoader  _gameLoader;
         private readonly GameplayController _gameplayController;
         private readonly LoseManager _loseManager;
@@ -22,11 +24,12 @@ namespace _Project.Scripts.Infrastructure
 
         private bool _isInitialized;
 
-        public Game(GameLoader gameLoader, GameplayController  gameplayController, LoseManager  loseManager,
+        public Game(IRemoteConfigs remoteConfigs, GameLoader gameLoader, GameplayController  gameplayController, LoseManager  loseManager,
             Character player, IWeaponShooter weaponShooter,
             ILoseModel scoreData, EnemyDeathTracker deathTracker,
             IAnalyticsService analyticsService)
         {
+            _remoteConfigs = remoteConfigs;
             _gameLoader = gameLoader;
             _gameplayController = gameplayController;
             _loseManager = loseManager;
@@ -39,6 +42,7 @@ namespace _Project.Scripts.Infrastructure
 
         public async UniTask InitializeAsync()
         {
+            await _remoteConfigs.Initialize();
             await _gameLoader.LoadAllAsync();
             
             _scoreData?.Reset();

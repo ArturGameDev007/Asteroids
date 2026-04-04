@@ -6,6 +6,7 @@ using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.Services.AsyncLoader;
+using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
@@ -27,11 +28,14 @@ namespace _Project.Scripts.Installers.Gameplay
         [Header("Container For Objects Pools")]
         [SerializeField] private Transform _containerForPools;
 
-        [Header("Pool Config")]
-        [SerializeField] private PoolConfig _poolConfig;
+        // [Header("Pool Config")]
+        // [SerializeField] private PoolConfig _poolConfig;
 
-        [Header("Enemy Configs")]
-        [SerializeField] private EnemyConfig[] _enemyConfigs;
+        // [Header("Enemy Configs")]
+        // [SerializeField] private EnemyConfig[] _enemyConfigs;
+        
+        [Header("RemoteDataConfigs")]
+        [SerializeField] private RemoteConfigsData  _remoteConfigsData;
 
         [Header("Load Async: Player & Shots")]
         [SerializeField] private AssetReference _shipPrefabReference;
@@ -44,6 +48,7 @@ namespace _Project.Scripts.Installers.Gameplay
         public override void InstallBindings()
         {
             Container.Bind<IResourceLoader>().To<AddressableResourceLoader>().AsSingle();
+            Container.BindInstance(_remoteConfigsData).AsSingle();
 
             Container.Bind<Camera>().FromInstance(_mainCamera).AsSingle();
             Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
@@ -108,10 +113,10 @@ namespace _Project.Scripts.Installers.Gameplay
             enemiesContainer.parent = _containerForPools;
 
             Container.Bind<ObjectPool<Enemy>>().WithId("AsteroidPool").AsCached()
-                .WithArguments(default(Enemy), _poolConfig.AsteroidPoolSize, "Asteroid", enemiesContainer);
+                .WithArguments(default(Enemy), _remoteConfigsData.AsteroidPoolSize, "Asteroid", enemiesContainer);
 
             Container.Bind<ObjectPool<Enemy>>().WithId("UfoPool").AsCached()
-                .WithArguments(default(Enemy), _poolConfig.UfoPoolSize, "UFO", enemiesContainer);
+                .WithArguments(default(Enemy), _remoteConfigsData.UfoPoolSize, "UFO", enemiesContainer);
 
             Container.Bind<EnemyResourceManager>().AsSingle().WithArguments(_enemyRefences);
 
@@ -119,10 +124,10 @@ namespace _Project.Scripts.Installers.Gameplay
             projectilesContainer.parent = _containerForPools;
 
             Container.Bind<ObjectPool<Bullet>>().AsCached()
-                .WithArguments(default(Bullet), _poolConfig.BulletPoolSize, "Bullet", projectilesContainer);
+                .WithArguments(default(Bullet), _remoteConfigsData.BulletPoolSize, "Bullet", projectilesContainer);
 
             Container.Bind<ObjectPool<Laser>>().AsCached()
-                .WithArguments(default(Laser), _poolConfig.LaserPoolSize, "Laser", projectilesContainer);
+                .WithArguments(default(Laser), _remoteConfigsData.LaserPoolSize, "Laser", projectilesContainer);
 
             Container.Bind<ProjectileResourceManager>().AsSingle()
                 .WithArguments(_bulletPrefabReference, _laserPrefabReference);
@@ -130,8 +135,11 @@ namespace _Project.Scripts.Installers.Gameplay
 
         private void BindSpawners()
         {
-            Container.Bind<GeneratorEnemies>().To<AsteroidSpawner>().AsCached().WithArguments(_enemyConfigs[0]);
-            Container.Bind<GeneratorEnemies>().To<UfoSpawner>().AsCached().WithArguments(_enemyConfigs[1]);
+            // Container.Bind<GeneratorEnemies>().To<AsteroidSpawner>().AsCached().WithArguments(_enemyConfigs[0]);
+            // Container.Bind<GeneratorEnemies>().To<UfoSpawner>().AsCached().WithArguments(_enemyConfigs[1]);
+
+            Container.Bind<GeneratorEnemies>().To<AsteroidSpawner>().AsCached();
+            Container.Bind<GeneratorEnemies>().To<UfoSpawner>().AsCached();
 
             Container.BindInterfacesAndSelfTo<EnemyDeathTracker>().AsSingle();
             Container.Bind<EnemySpawnController>().AsSingle();

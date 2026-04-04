@@ -1,5 +1,6 @@
 ﻿using _Project.Scripts.Configs.Enemies;
 using _Project.Scripts.Player.Weapons;
+using _Project.Scripts.Services.RemoteConfigs;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
@@ -7,7 +8,8 @@ namespace _Project.Scripts.Enemies
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Enemy : MonoBehaviour, IEnemy
     {
-        private EnemyConfig _enemyConfig;
+        // private EnemyConfig _enemyConfig;
+        private RemoteConfigsData _enemyRemoteConfig;
         
         private IObjectReturner<Enemy> _returner;
         private IEnemyDeathListener _deathListener;
@@ -21,11 +23,11 @@ namespace _Project.Scripts.Enemies
             Head2D = GetComponent<Rigidbody2D>();
         }
 
-        public void Construct(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, EnemyConfig enemyConfig)
+        public void Construct(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, RemoteConfigsData enemyConfig)
         {
             _returner = returner;
             _deathListener = deathListener;
-            _enemyConfig = enemyConfig;
+            _enemyRemoteConfig = enemyConfig;
         }
 
         private void FixedUpdate()
@@ -54,7 +56,7 @@ namespace _Project.Scripts.Enemies
 
         private void Kill()
         {
-            _deathListener?.OnEnemyDeath(_enemyConfig);
+            _deathListener?.OnEnemyDeath(_enemyRemoteConfig);
             _returner?.ReturnPool(this);
         }
     }

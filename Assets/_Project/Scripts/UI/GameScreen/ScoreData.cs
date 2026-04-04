@@ -1,5 +1,6 @@
 ﻿using System;
 using _Project.Scripts.Configs.Enemies;
+using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.Services.Save;
 
 namespace _Project.Scripts.UI.GameScreen
@@ -26,7 +27,7 @@ namespace _Project.Scripts.UI.GameScreen
             OnScoreChanged?.Invoke();
         }
 
-        public void AddScore(EnemyConfig  config)
+        public void AddScore(RemoteConfigsData  config)
         {
             Score += config.ScoreForKill;
             OnScoreChanged?.Invoke();

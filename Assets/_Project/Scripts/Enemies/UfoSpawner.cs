@@ -1,4 +1,5 @@
 using _Project.Scripts.Configs.Enemies;
+using _Project.Scripts.Services.RemoteConfigs;
 using UnityEngine;
 using Zenject;
 
@@ -6,9 +7,9 @@ namespace _Project.Scripts.Enemies
 {
     public class UfoSpawner : GeneratorEnemies
     {
-        public UfoSpawner(EnemyConfig config, [Inject(Id = "UfoPool")] ObjectPool<Enemy> pool,
+        public UfoSpawner(RemoteConfigsData remoteConfig, [Inject(Id = "UfoPool")] ObjectPool<Enemy> pool,
             IEnemyDeathListener enemyManager, Camera camera)
-            : base(config, pool, enemyManager, camera){}
+            : base(remoteConfig, pool, enemyManager, camera){}
         
         protected override void ConfigureSpawn(Enemy enemy, Vector2 _)
         {

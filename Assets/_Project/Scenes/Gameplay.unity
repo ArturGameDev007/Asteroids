@@ -472,10 +472,22 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   _containerForPools: {fileID: 1869544803}
-  _poolConfig: {fileID: 11400000, guid: 8b60ae3e0c03f6a42b06288f24a86e2f, type: 2}
-  _enemyConfigs:
-  - {fileID: 11400000, guid: f4e617410dc6d854aa651578f3e3f029, type: 2}
-  - {fileID: 11400000, guid: c730927372f184849ace991e8aa06ab8, type: 2}
+  _remoteConfigsData:
+    _forceInputShip: 0
+    _rotationSpeedShip: 0
+    _speedShoot: 0
+    _lifeTimeShoot: 0
+    _reloadTimeLaser: 0
+    _maxAmountLaser: 0
+    _enemySpeed: 1.5
+    _rotationSpeed: 30
+    _spawnOffset: 2
+    _delay: 3
+    _scoreForKill: 10
+    _asteroidPoolSize: 10
+    _ufoPoolSize: 10
+    _bulletPoolSize: 5
+    _laserPoolSize: 10
   _shipPrefabReference:
     m_AssetGUID: 77fd289117485cb4482536e1624733f6
     m_SubObjectName: 

@@ -1,5 +1,6 @@
 using _Project.Scripts.Services.Ads;
 using _Project.Scripts.Services.Analytics;
+using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.Services.Save;
 using Zenject;
 
@@ -10,9 +11,13 @@ namespace _Project.Scripts.Installers.Project
         public override void InstallBindings()
         {
             Container.Bind<ISaveService>().To<LocalSaveService>().AsSingle();
+            
             Container.BindInterfacesAndSelfTo<FirebaseAnalyticsService>().AsSingle();
+            
             Container.BindInterfacesAndSelfTo<UnityAdsService>().AsSingle();
             Container.Bind<IAdsRewardsType>().To<AdsRewardsType>().AsSingle();
+
+            Container.Bind<IRemoteConfigs>().To<FirebaseRemoteConfig>().AsSingle();
         }
     }
 }

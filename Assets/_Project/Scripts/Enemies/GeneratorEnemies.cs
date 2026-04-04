@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Configs.Enemies;
+using _Project.Scripts.Services.RemoteConfigs;
 using UnityEngine;
 
 namespace _Project.Scripts.Enemies
 {
     public abstract class GeneratorEnemies
     {
-        private readonly EnemyConfig _config;
+        private readonly RemoteConfigsData _remoteConfig;
         private readonly List<Enemy> _activeEnemies = new();
         private readonly IEnemyDeathListener _enemyManager;
         private readonly ObjectPool<Enemy> _pool;
@@ -18,13 +19,13 @@ namespace _Project.Scripts.Enemies
         private float _spawnTimer;
         private bool _isGameActive;
 
-        protected GeneratorEnemies(EnemyConfig config, ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Camera camera)
+        protected GeneratorEnemies(RemoteConfigsData remoteConfig, ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Camera camera)
         {
-            _config = config;
+            _remoteConfig = remoteConfig;
             _camera = camera;
             _pool = pool;
             _enemyManager = enemyManager;
-            _spawnTimer = _config.Delay;
+            // _spawnTimer = _remoteConfig.RemoteConfig.Delay;
         }
 
         public void Process(float  deltaTime)
@@ -39,7 +40,7 @@ namespace _Project.Scripts.Enemies
             while (_spawnTimer <= minTimerThreshold)
             {
                 SpawnEntity(_pool);
-                _spawnTimer += _config.Delay;
+                _spawnTimer += _remoteConfig.Delay;
             }
         }
 
@@ -78,7 +79,7 @@ namespace _Project.Scripts.Enemies
             
             enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
-            enemy.Construct(pool, _enemyManager, _config);
+            enemy.Construct(pool, _enemyManager, _remoteConfig);
             
             ConfigureSpawn(enemy, spawnPosition);
             
@@ -98,7 +99,7 @@ namespace _Project.Scripts.Enemies
             float ViewportMax = 1f;
             float CameraDistanceZ = 10f;
 
-            float margin = _config.SpawnOffset;
+            float margin = _remoteConfig.SpawnOffset;
             float randomPositionAlongSide = Random.value;
 
             Vector3 viewportPoint;
