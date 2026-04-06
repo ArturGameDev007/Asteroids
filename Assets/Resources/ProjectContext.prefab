@@ -74,3 +74,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef1beed62884021a57b9f455c8c7ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _remoteConfig:
+    _forceInputShip: 9
+    _rotationSpeedShip: 170
+    _speedShoot: 9
+    _lifeTimeShoot: 2.5
+    _reloadTimeLaser: 5
+    _maxAmountLaser: 20
+    _enemySpeed: 1.5
+    _rotationSpeed: 30
+    _spawnOffset: 2
+    _delay: 3
+    _scoreForKill: 20
+    _asteroidPoolSize: 10
+    _ufoPoolSize: 10
+    _bulletPoolSize: 10
+    _laserPoolSize: 10

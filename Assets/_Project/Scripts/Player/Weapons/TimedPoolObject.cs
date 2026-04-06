@@ -1,17 +1,27 @@
 using System;
 using System.Threading;
 using _Project.Scripts.Configs.Player;
+using _Project.Scripts.Services.RemoteConfigs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Player.Weapons
 {
     public abstract class TimedPoolObject : MonoBehaviour
     {
-        [SerializeField] private ShootingConfig _shootingConfig;
+        // [SerializeField] private ShootingConfig _shootingConfig;
+        
+        private RemoteConfigsData _remoteConfigs;
 
         private DirectionShot _directionShot;
         private CancellationTokenSource _cancellationTokenSource;
+
+        [Inject]
+        public void Construct(RemoteConfigsData remoteConfigs)
+        {
+            _remoteConfigs = remoteConfigs;
+        }
 
         private void Awake()
         {
@@ -58,7 +68,7 @@ namespace _Project.Scripts.Player.Weapons
             try
             {
                 int millisecondsDelay = 1000;
-                int delay = (int)(_shootingConfig.LifeTime * millisecondsDelay);
+                int delay = (int)(_remoteConfigs.LifeTimeShoot * millisecondsDelay);
                 
                 await UniTask.Delay(delay, cancellationToken: _cancellationTokenSource.Token);
                 

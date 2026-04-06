@@ -1,6 +1,3 @@
-using System;
-using _Project.Scripts.Configs.Enemies;
-using _Project.Scripts.Configs.PoolObjects;
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Player;
@@ -12,6 +9,7 @@ using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Installers.Gameplay
@@ -23,19 +21,10 @@ namespace _Project.Scripts.Installers.Gameplay
 
         [Header("Prefabs UI")]
         [SerializeField] private AssetReference _endGameScreenPrefabReference;
-        [SerializeField] private AssetReference _shipPerfomancePrefabReference;
+        [SerializeField] private AssetReference _shipPerformancePrefabReference;
 
         [Header("Container For Objects Pools")]
         [SerializeField] private Transform _containerForPools;
-
-        // [Header("Pool Config")]
-        // [SerializeField] private PoolConfig _poolConfig;
-
-        // [Header("Enemy Configs")]
-        // [SerializeField] private EnemyConfig[] _enemyConfigs;
-        
-        [Header("RemoteDataConfigs")]
-        [SerializeField] private RemoteConfigsData  _remoteConfigsData;
 
         [Header("Load Async: Player & Shots")]
         [SerializeField] private AssetReference _shipPrefabReference;
@@ -45,10 +34,15 @@ namespace _Project.Scripts.Installers.Gameplay
         [Header("Load Prefabs Async")]
         [SerializeField] private AssetReference[] _enemyRefences;
 
+
+        [SerializeField] private RemoteConfigsData _remoteConfigsData;
+
         public override void InstallBindings()
         {
-            Container.Bind<IResourceLoader>().To<AddressableResourceLoader>().AsSingle();
+            Container.Bind<IRemoteConfigs>().To<FirebaseRemoteConfig>().AsSingle();
             Container.BindInstance(_remoteConfigsData).AsSingle();
+            
+            Container.Bind<IResourceLoader>().To<AddressableResourceLoader>().AsSingle();
 
             Container.Bind<Camera>().FromInstance(_mainCamera).AsSingle();
             Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
@@ -103,7 +97,7 @@ namespace _Project.Scripts.Installers.Gameplay
 
         private void BindPerformanceUI()
         {
-            Container.Bind<CoordinateResourceManager>().AsSingle().WithArguments(_shipPerfomancePrefabReference);
+            Container.Bind<CoordinateResourceManager>().AsSingle().WithArguments(_shipPerformancePrefabReference);
             Container.BindInterfacesAndSelfTo<PerformancePresenter>().AsSingle();
         }
 
@@ -135,11 +129,8 @@ namespace _Project.Scripts.Installers.Gameplay
 
         private void BindSpawners()
         {
-            // Container.Bind<GeneratorEnemies>().To<AsteroidSpawner>().AsCached().WithArguments(_enemyConfigs[0]);
-            // Container.Bind<GeneratorEnemies>().To<UfoSpawner>().AsCached().WithArguments(_enemyConfigs[1]);
-
-            Container.Bind<GeneratorEnemies>().To<AsteroidSpawner>().AsCached();
-            Container.Bind<GeneratorEnemies>().To<UfoSpawner>().AsCached();
+            Container.Bind<GeneratorEnemies>().To<AsteroidSpawner>().AsCached().WithArguments(_remoteConfigsData);
+            Container.Bind<GeneratorEnemies>().To<UfoSpawner>().AsCached().WithArguments(_remoteConfigsData);
 
             Container.BindInterfacesAndSelfTo<EnemyDeathTracker>().AsSingle();
             Container.Bind<EnemySpawnController>().AsSingle();

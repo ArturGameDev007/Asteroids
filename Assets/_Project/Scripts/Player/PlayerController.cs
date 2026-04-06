@@ -1,4 +1,5 @@
 using _Project.Scripts.Configs.Player;
+using _Project.Scripts.Services.RemoteConfigs;
 using UnityEngine;
 using Zenject;
 
@@ -10,8 +11,9 @@ namespace _Project.Scripts.Player
         private const float X_ANGLE = 0f;
         private const float Y_ANGLE = 0f;
 
-        [SerializeField] private PlayerControllerConfig _playerControllerConfig;
+        // [SerializeField] private PlayerControllerConfig _playerControllerConfig;
 
+        private RemoteConfigsData _remoteConfigs;
         private IInputService _controllerInput;
         private Rigidbody2D _head2D;
 
@@ -24,9 +26,10 @@ namespace _Project.Scripts.Player
         public float Speed =>_head2D.velocity.magnitude;
 
         [Inject]
-        public void Construct(IInputService controllerInput)
+        public void Construct(IInputService controllerInput, RemoteConfigsData remoteConfigs)
         {
             _controllerInput = controllerInput;
+            _remoteConfigs = remoteConfigs;
 
             if (_head2D == null)
                 _head2D = GetComponent<Rigidbody2D>();
@@ -91,14 +94,16 @@ namespace _Project.Scripts.Player
             {
                 Vector2 direction = transform.up;
 
-                _head2D.AddForce(direction * _playerControllerConfig.ForceInput);
+                // _head2D.AddForce(direction * _playerControllerConfig.ForceInput);
+                _head2D.AddForce(direction * _remoteConfigs.ForceInputShip);
             }
         }
 
         private void HandleRotation()
         {
             float rotationHorizontal = _controllerInput.HorizontalInput;
-            float rotationAmount = -rotationHorizontal * _playerControllerConfig.RotationSpeed * Time.deltaTime;
+            // float rotationAmount = -rotationHorizontal * _playerControllerConfig.RotationSpeed * Time.deltaTime;
+            float rotationAmount = -rotationHorizontal * _remoteConfigs.RotationSpeedShip * Time.deltaTime;
 
             transform.Rotate(X_ANGLE, Y_ANGLE, rotationAmount);
         }

@@ -1,7 +1,9 @@
 ﻿using System;
 using _Project.Scripts.Configs.Player;
+using _Project.Scripts.Services.RemoteConfigs;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using Zenject;
 
 namespace _Project.Scripts.Player.Weapons
 {
@@ -10,19 +12,31 @@ namespace _Project.Scripts.Player.Weapons
         public event Action<int> OnLaserChanged;
         public event Action<float> OnReloadProgress;
 
-        [field: SerializeField] public LaserConfig LaserConfig { get; private set; }
+        // [field: SerializeField] public LaserConfig LaserConfig { get; private set; }
 
         private bool _isReloading;
+        
+        private RemoteConfigsData _remoteConfigs;
 
-        public float ReloadTime => LaserConfig.ReloadTime;
+        // public float ReloadTime => LaserConfig.ReloadTime;
+        public float ReloadTime => _remoteConfigs.ReloadTimeLaser;
         public int CurrentAmmonLaser { get; private set; }
+
+        private int MaxAmmo => _remoteConfigs.MaxAmountLaser;
+
+        [Inject]
+        public void Construct(RemoteConfigsData remoteConfigs)
+        {
+            _remoteConfigs = remoteConfigs;
+        }
 
         private void Start()
         {
-            CurrentAmmonLaser = LaserConfig.MaxAmountLaser;
+            // CurrentAmmonLaser = LaserConfig.MaxAmountLaser;
+            CurrentAmmonLaser = MaxAmmo;
             ShowInfo();
 
-            OnReloadProgress?.Invoke(LaserConfig.ReloadTime);
+            OnReloadProgress?.Invoke(ReloadTime);
         }
 
         public bool TrySpendAmmo()
@@ -46,7 +60,7 @@ namespace _Project.Scripts.Player.Weapons
         {
             _isReloading = true;
 
-            float timer = LaserConfig.ReloadTime;
+            float timer = ReloadTime;
             float targetTime = 0f;
 
             while (timer > targetTime)
@@ -57,10 +71,10 @@ namespace _Project.Scripts.Player.Weapons
                 await UniTask.Yield();
             }
 
-            CurrentAmmonLaser = LaserConfig.MaxAmountLaser;
+            CurrentAmmonLaser = MaxAmmo;
             ShowInfo();
 
-            OnReloadProgress?.Invoke(LaserConfig.ReloadTime);
+            OnReloadProgress?.Invoke(ReloadTime);
             _isReloading = false;
         }
 

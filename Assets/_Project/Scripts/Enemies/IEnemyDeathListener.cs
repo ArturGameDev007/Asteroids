@@ -1,5 +1,4 @@
 using System;
-using _Project.Scripts.Configs.Enemies;
 using _Project.Scripts.Services.RemoteConfigs;
 
 namespace _Project.Scripts.Enemies

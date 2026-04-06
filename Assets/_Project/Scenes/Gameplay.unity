@@ -466,28 +466,12 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  _shipPerfomancePrefabReference:
+  _shipPerformancePrefabReference:
     m_AssetGUID: a752461b71d007d41a3f9643f9183b0f
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   _containerForPools: {fileID: 1869544803}
-  _remoteConfigsData:
-    _forceInputShip: 0
-    _rotationSpeedShip: 0
-    _speedShoot: 0
-    _lifeTimeShoot: 0
-    _reloadTimeLaser: 0
-    _maxAmountLaser: 0
-    _enemySpeed: 1.5
-    _rotationSpeed: 30
-    _spawnOffset: 2
-    _delay: 3
-    _scoreForKill: 10
-    _asteroidPoolSize: 10
-    _ufoPoolSize: 10
-    _bulletPoolSize: 5
-    _laserPoolSize: 10
   _shipPrefabReference:
     m_AssetGUID: 77fd289117485cb4482536e1624733f6
     m_SubObjectName: 
@@ -512,6 +496,22 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1
+  _remoteConfigsData:
+    _forceInputShip: 9
+    _rotationSpeedShip: 170
+    _speedShoot: 8.5
+    _lifeTimeShoot: 2.5
+    _reloadTimeLaser: 5
+    _maxAmountLaser: 20
+    _enemySpeed: 1.5
+    _rotationSpeed: 30
+    _spawnOffset: 2
+    _delay: 3
+    _scoreForKill: 10
+    _asteroidPoolSize: 10
+    _ufoPoolSize: 10
+    _bulletPoolSize: 5
+    _laserPoolSize: 10
 --- !u!1 &1869544802
 GameObject:
   m_ObjectHideFlags: 0

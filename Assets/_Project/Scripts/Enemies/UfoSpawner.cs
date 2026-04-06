@@ -1,4 +1,3 @@
-using _Project.Scripts.Configs.Enemies;
 using _Project.Scripts.Services.RemoteConfigs;
 using UnityEngine;
 using Zenject;
