@@ -1,5 +1,4 @@
 using System;
-using _Project.Scripts.Configs.Enemies;
 using _Project.Scripts.Services.RemoteConfigs;
 
 namespace _Project.Scripts.UI.GameScreen
@@ -13,7 +12,7 @@ namespace _Project.Scripts.UI.GameScreen
         
         public void Reset();
 
-        public void AddScore(RemoteConfigsData  config);
+        public void AddScore(IRemoteConfigs  config);
         
         public void SaveResult(int score);
     }

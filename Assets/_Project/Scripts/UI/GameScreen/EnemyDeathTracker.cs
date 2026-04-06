@@ -1,5 +1,4 @@
 using System;
-using _Project.Scripts.Configs.Enemies;
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Services.RemoteConfigs;
 using Zenject;
@@ -33,7 +32,7 @@ namespace _Project.Scripts.UI.GameScreen
             _enemy.OnEnemyKilled -= OnEnemyDied;
         }
 
-        private void OnEnemyDied(RemoteConfigsData config)
+        private void OnEnemyDied(IRemoteConfigs config)
         {
             KillCount++;
             _scoreData.AddScore(config);

@@ -6,7 +6,7 @@ namespace _Project.Scripts.Enemies
 {
     public class UfoSpawner : GeneratorEnemies
     {
-        public UfoSpawner(RemoteConfigsData remoteConfig, [Inject(Id = "UfoPool")] ObjectPool<Enemy> pool,
+        public UfoSpawner(IRemoteConfigs remoteConfig, [Inject(Id = "UfoPool")] ObjectPool<Enemy> pool,
             IEnemyDeathListener enemyManager, Camera camera)
             : base(remoteConfig, pool, enemyManager, camera){}
         

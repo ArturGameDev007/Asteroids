@@ -5,8 +5,8 @@ namespace _Project.Scripts.Enemies
 {
     public interface IEnemyDeathListener
     {
-        public event Action<RemoteConfigsData> OnEnemyKilled;
+        public event Action<IRemoteConfigs> OnEnemyKilled;
         
-        public void OnEnemyDeath(RemoteConfigsData config);
+        public void OnEnemyDeath(IRemoteConfigs config);
     }
 }

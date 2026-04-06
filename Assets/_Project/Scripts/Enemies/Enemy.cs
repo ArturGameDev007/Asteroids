@@ -1,5 +1,4 @@
-﻿using _Project.Scripts.Configs.Enemies;
-using _Project.Scripts.Player.Weapons;
+﻿using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.Services.RemoteConfigs;
 using UnityEngine;
 
@@ -8,8 +7,7 @@ namespace _Project.Scripts.Enemies
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Enemy : MonoBehaviour, IEnemy
     {
-        // private EnemyConfig _enemyConfig;
-        private RemoteConfigsData _enemyRemoteConfig;
+        private IRemoteConfigs _enemyRemoteConfig;
         
         private IObjectReturner<Enemy> _returner;
         private IEnemyDeathListener _deathListener;
@@ -23,7 +21,7 @@ namespace _Project.Scripts.Enemies
             Head2D = GetComponent<Rigidbody2D>();
         }
 
-        public void Construct(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, RemoteConfigsData enemyConfig)
+        public void Construct(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, IRemoteConfigs enemyConfig)
         {
             _returner = returner;
             _deathListener = deathListener;

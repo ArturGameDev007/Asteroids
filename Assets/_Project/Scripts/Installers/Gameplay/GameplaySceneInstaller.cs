@@ -3,13 +3,11 @@ using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.Services.AsyncLoader;
-using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace _Project.Scripts.Installers.Gameplay
@@ -34,14 +32,8 @@ namespace _Project.Scripts.Installers.Gameplay
         [Header("Load Prefabs Async")]
         [SerializeField] private AssetReference[] _enemyRefences;
 
-
-        [SerializeField] private RemoteConfigsData _remoteConfigsData;
-
         public override void InstallBindings()
         {
-            Container.Bind<IRemoteConfigs>().To<FirebaseRemoteConfig>().AsSingle();
-            Container.BindInstance(_remoteConfigsData).AsSingle();
-            
             Container.Bind<IResourceLoader>().To<AddressableResourceLoader>().AsSingle();
 
             Container.Bind<Camera>().FromInstance(_mainCamera).AsSingle();
@@ -107,10 +99,10 @@ namespace _Project.Scripts.Installers.Gameplay
             enemiesContainer.parent = _containerForPools;
 
             Container.Bind<ObjectPool<Enemy>>().WithId("AsteroidPool").AsCached()
-                .WithArguments(default(Enemy), _remoteConfigsData.AsteroidPoolSize, "Asteroid", enemiesContainer);
+                .WithArguments(default(Enemy), "Asteroid", enemiesContainer);
 
             Container.Bind<ObjectPool<Enemy>>().WithId("UfoPool").AsCached()
-                .WithArguments(default(Enemy), _remoteConfigsData.UfoPoolSize, "UFO", enemiesContainer);
+                .WithArguments(default(Enemy), "UFO", enemiesContainer);
 
             Container.Bind<EnemyResourceManager>().AsSingle().WithArguments(_enemyRefences);
 
@@ -118,10 +110,10 @@ namespace _Project.Scripts.Installers.Gameplay
             projectilesContainer.parent = _containerForPools;
 
             Container.Bind<ObjectPool<Bullet>>().AsCached()
-                .WithArguments(default(Bullet), _remoteConfigsData.BulletPoolSize, "Bullet", projectilesContainer);
+                .WithArguments(default(Bullet), "Bullet", projectilesContainer);
 
             Container.Bind<ObjectPool<Laser>>().AsCached()
-                .WithArguments(default(Laser), _remoteConfigsData.LaserPoolSize, "Laser", projectilesContainer);
+                .WithArguments(default(Laser),  "Laser", projectilesContainer);
 
             Container.Bind<ProjectileResourceManager>().AsSingle()
                 .WithArguments(_bulletPrefabReference, _laserPrefabReference);
@@ -129,8 +121,8 @@ namespace _Project.Scripts.Installers.Gameplay
 
         private void BindSpawners()
         {
-            Container.Bind<GeneratorEnemies>().To<AsteroidSpawner>().AsCached().WithArguments(_remoteConfigsData);
-            Container.Bind<GeneratorEnemies>().To<UfoSpawner>().AsCached().WithArguments(_remoteConfigsData);
+            Container.Bind<GeneratorEnemies>().To<AsteroidSpawner>().AsCached();
+            Container.Bind<GeneratorEnemies>().To<UfoSpawner>().AsCached();
 
             Container.BindInterfacesAndSelfTo<EnemyDeathTracker>().AsSingle();
             Container.Bind<EnemySpawnController>().AsSingle();

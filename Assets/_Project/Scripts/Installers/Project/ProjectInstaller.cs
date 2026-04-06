@@ -9,7 +9,7 @@ namespace _Project.Scripts.Installers.Project
 {
     public class ProjectInstaller : MonoInstaller
     {
-        // [SerializeField] private RemoteConfigsData _remoteConfig;
+        [SerializeField] private RemoteConfigsData _remoteConfig;
         
         public override void InstallBindings()
         {
@@ -20,7 +20,8 @@ namespace _Project.Scripts.Installers.Project
             Container.BindInterfacesAndSelfTo<UnityAdsService>().AsSingle();
             Container.Bind<IAdsRewardsType>().To<AdsRewardsType>().AsSingle();
 
-            // Container.Bind<IRemoteConfigs>().To<FirebaseRemoteConfig>().AsSingle();
+            Container.Bind<IRemoteConfigs>().To<FirebaseRemoteConfig>().AsSingle();
+            Container.BindInstance(_remoteConfig).AsSingle();
         }
     }
 }

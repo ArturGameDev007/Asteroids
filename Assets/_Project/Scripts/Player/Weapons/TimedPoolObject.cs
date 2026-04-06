@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using _Project.Scripts.Configs.Player;
 using _Project.Scripts.Services.RemoteConfigs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -10,15 +9,13 @@ namespace _Project.Scripts.Player.Weapons
 {
     public abstract class TimedPoolObject : MonoBehaviour
     {
-        // [SerializeField] private ShootingConfig _shootingConfig;
-        
-        private RemoteConfigsData _remoteConfigs;
+        private IRemoteConfigs _remoteConfigs;
 
         private DirectionShot _directionShot;
         private CancellationTokenSource _cancellationTokenSource;
 
         [Inject]
-        public void Construct(RemoteConfigsData remoteConfigs)
+        public void Construct(IRemoteConfigs remoteConfigs)
         {
             _remoteConfigs = remoteConfigs;
         }
@@ -68,7 +65,7 @@ namespace _Project.Scripts.Player.Weapons
             try
             {
                 int millisecondsDelay = 1000;
-                int delay = (int)(_remoteConfigs.LifeTimeShoot * millisecondsDelay);
+                int delay = (int)(_remoteConfigs.RemoteConfig.LifeTimeShoot * millisecondsDelay);
                 
                 await UniTask.Delay(delay, cancellationToken: _cancellationTokenSource.Token);
                 

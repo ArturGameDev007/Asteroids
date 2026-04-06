@@ -12,27 +12,23 @@ namespace _Project.Scripts.Player.Weapons
         public event Action<int> OnLaserChanged;
         public event Action<float> OnReloadProgress;
 
-        // [field: SerializeField] public LaserConfig LaserConfig { get; private set; }
-
+        private IRemoteConfigs _remoteConfigs;
+        
         private bool _isReloading;
         
-        private RemoteConfigsData _remoteConfigs;
-
-        // public float ReloadTime => LaserConfig.ReloadTime;
-        public float ReloadTime => _remoteConfigs.ReloadTimeLaser;
+        public float ReloadTime => _remoteConfigs.RemoteConfig.ReloadTimeLaser;
+        private int MaxAmmo => _remoteConfigs.RemoteConfig.MaxAmountLaser;
+        
         public int CurrentAmmonLaser { get; private set; }
 
-        private int MaxAmmo => _remoteConfigs.MaxAmountLaser;
-
         [Inject]
-        public void Construct(RemoteConfigsData remoteConfigs)
+        public void Construct(IRemoteConfigs remoteConfigs)
         {
             _remoteConfigs = remoteConfigs;
         }
 
         private void Start()
         {
-            // CurrentAmmonLaser = LaserConfig.MaxAmountLaser;
             CurrentAmmonLaser = MaxAmmo;
             ShowInfo();
 

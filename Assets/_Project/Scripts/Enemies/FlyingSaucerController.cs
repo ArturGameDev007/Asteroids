@@ -1,5 +1,4 @@
-﻿using _Project.Scripts.Configs.Enemies;
-using _Project.Scripts.Player;
+﻿using _Project.Scripts.Player;
 using _Project.Scripts.Services.RemoteConfigs;
 using UnityEngine;
 using Zenject;
@@ -8,12 +7,11 @@ namespace _Project.Scripts.Enemies
 {
     public class FlyingSaucerController : Enemy
     {
-        // [SerializeField] private UfoConfig _ufoConfig;
-        private RemoteConfigsData _remoteConfigs;
+        private IRemoteConfigs _remoteConfigs;
         private IPlayerProvider _playerProvider;
         
         [Inject]
-        public void Construct(RemoteConfigsData remoteConfigs, IPlayerProvider target)
+        public void Construct(IRemoteConfigs remoteConfigs, IPlayerProvider target)
         {
             _remoteConfigs = remoteConfigs;
             _playerProvider = target;
@@ -30,7 +28,7 @@ namespace _Project.Scripts.Enemies
             Vector2 directionToPlayer = (targetPosition - currentPosition).normalized;
             RotateTowardPlayer(directionToPlayer);
             
-            Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, _remoteConfigs.EnemySpeed * Time.deltaTime);
+            Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, _remoteConfigs.RemoteConfig.EnemySpeed * Time.deltaTime);
             Head2D.MovePosition(directionMove);
         }
         
@@ -44,7 +42,7 @@ namespace _Project.Scripts.Enemies
             Quaternion targetRotation = Quaternion.Euler(new Vector3(rotateX, rotateY, angle));
         
             transform.rotation =
-                Quaternion.RotateTowards(transform.rotation, targetRotation, _remoteConfigs.RotationSpeed * Time.deltaTime);
+                Quaternion.RotateTowards(transform.rotation, targetRotation, _remoteConfigs.RemoteConfig.RotationSpeed * Time.deltaTime);
         }
     }
 }
