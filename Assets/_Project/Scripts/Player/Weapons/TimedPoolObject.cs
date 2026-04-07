@@ -65,7 +65,7 @@ namespace _Project.Scripts.Player.Weapons
             try
             {
                 int millisecondsDelay = 1000;
-                int delay = (int)(_remoteConfigs.RemoteConfig.LifeTimeShoot * millisecondsDelay);
+                int delay = (int)(_remoteConfigs.RemoteConfig.PlayerConfig.LifeTimeShoot * millisecondsDelay);
                 
                 await UniTask.Delay(delay, cancellationToken: _cancellationTokenSource.Token);
                 

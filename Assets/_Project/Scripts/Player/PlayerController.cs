@@ -91,14 +91,14 @@ namespace _Project.Scripts.Player
             {
                 Vector2 direction = transform.up;
 
-                _head2D.AddForce(direction * _remoteConfigs.RemoteConfig.ForceInputShip);
+                _head2D.AddForce(direction * _remoteConfigs.RemoteConfig.PlayerConfig.ForceInputShip);
             }
         }
 
         private void HandleRotation()
         {
             float rotationHorizontal = _controllerInput.HorizontalInput;
-            float rotationAmount = -rotationHorizontal * _remoteConfigs.RemoteConfig.RotationSpeedShip * Time.deltaTime;
+            float rotationAmount = -rotationHorizontal * _remoteConfigs.RemoteConfig.PlayerConfig.RotationSpeedShip * Time.deltaTime;
 
             transform.Rotate(X_ANGLE, Y_ANGLE, rotationAmount);
         }

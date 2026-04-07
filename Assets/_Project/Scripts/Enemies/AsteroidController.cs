@@ -23,7 +23,7 @@ namespace _Project.Scripts.Enemies
 
         protected override void Move()
         {
-            Head2D.velocity = _direction * _remoteConfigs.RemoteConfig.EnemySpeed;
+            Head2D.velocity = _direction * _remoteConfigs.RemoteConfig.EnemyConfigs.EnemySpeed;
         }
     }
 }

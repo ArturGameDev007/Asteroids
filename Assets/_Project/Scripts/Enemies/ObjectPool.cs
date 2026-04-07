@@ -63,17 +63,17 @@ namespace _Project.Scripts.Enemies
             if (type == typeof(Enemy))
             {
                 if (_containerName.Contains("Asteroid"))
-                    return _remoteConfigs.RemoteConfig.AsteroidPoolSize;
+                    return _remoteConfigs.RemoteConfig.PoolConfigs.AsteroidPoolSize;
                 
                 if (_containerName.Contains("UFO"))
-                    return _remoteConfigs.RemoteConfig.UfoPoolSize;
+                    return _remoteConfigs.RemoteConfig.PoolConfigs.UfoPoolSize;
             }
 
             if (type == typeof(Bullet))
-                return _remoteConfigs.RemoteConfig.BulletPoolSize;
+                return _remoteConfigs.RemoteConfig.PoolConfigs.BulletPoolSize;
             
             if (type == typeof(Laser))
-                return _remoteConfigs.RemoteConfig.LaserPoolSize;
+                return _remoteConfigs.RemoteConfig.PoolConfigs.LaserPoolSize;
 
             return minCountPoolSize;
         }

@@ -16,8 +16,8 @@ namespace _Project.Scripts.Player.Weapons
         
         private bool _isReloading;
         
-        public float ReloadTime => _remoteConfigs.RemoteConfig.ReloadTimeLaser;
-        private int MaxAmmo => _remoteConfigs.RemoteConfig.MaxAmountLaser;
+        public float ReloadTime => _remoteConfigs.RemoteConfig.PlayerConfig.ReloadTimeLaser;
+        private int MaxAmmo => _remoteConfigs.RemoteConfig.PlayerConfig.MaxAmountLaser;
         
         public int CurrentAmmonLaser { get; private set; }
 

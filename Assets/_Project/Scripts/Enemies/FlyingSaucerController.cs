@@ -28,7 +28,7 @@ namespace _Project.Scripts.Enemies
             Vector2 directionToPlayer = (targetPosition - currentPosition).normalized;
             RotateTowardPlayer(directionToPlayer);
             
-            Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, _remoteConfigs.RemoteConfig.EnemySpeed * Time.deltaTime);
+            Vector2 directionMove = Vector2.MoveTowards(currentPosition, targetPosition, _remoteConfigs.RemoteConfig.EnemyConfigs.EnemySpeed * Time.deltaTime);
             Head2D.MovePosition(directionMove);
         }
         
@@ -42,7 +42,7 @@ namespace _Project.Scripts.Enemies
             Quaternion targetRotation = Quaternion.Euler(new Vector3(rotateX, rotateY, angle));
         
             transform.rotation =
-                Quaternion.RotateTowards(transform.rotation, targetRotation, _remoteConfigs.RemoteConfig.RotationSpeed * Time.deltaTime);
+                Quaternion.RotateTowards(transform.rotation, targetRotation, _remoteConfigs.RemoteConfig.EnemyConfigs.RotationSpeed * Time.deltaTime);
         }
     }
 }

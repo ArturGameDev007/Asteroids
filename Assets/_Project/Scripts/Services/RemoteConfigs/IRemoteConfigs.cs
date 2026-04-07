@@ -4,7 +4,7 @@ namespace _Project.Scripts.Services.RemoteConfigs
 {
     public interface IRemoteConfigs
     {
-        public RemoteConfigsData RemoteConfig { get; }
+        public RemoteConfigsRoot RemoteConfig { get; }
         
         public Task Initialize();
     }

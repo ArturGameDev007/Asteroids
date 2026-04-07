@@ -9,7 +9,7 @@ namespace _Project.Scripts.Installers.Project
 {
     public class ProjectInstaller : MonoInstaller
     {
-        [SerializeField] private RemoteConfigsData _remoteConfig;
+        [SerializeField] private RemoteConfigsRoot _remoteConfig;
         
         public override void InstallBindings()
         {

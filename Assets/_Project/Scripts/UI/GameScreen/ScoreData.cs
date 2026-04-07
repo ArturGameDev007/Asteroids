@@ -28,7 +28,7 @@ namespace _Project.Scripts.UI.GameScreen
 
         public void AddScore(IRemoteConfigs  config)
         {
-            Score += config.RemoteConfig.ScoreForKill;
+            Score += config.RemoteConfig.EnemyConfigs.ScoreForKill;
             OnScoreChanged?.Invoke();
         }
 

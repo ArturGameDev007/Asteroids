@@ -21,7 +21,7 @@ namespace _Project.Scripts.Player.Weapons
 
         private void DirectionMove()
         {
-            transform.Translate(transform.up * (_remoteConfigs.RemoteConfig.SpeedShoot * Time.deltaTime), Space.World);
+            transform.Translate(transform.up * (_remoteConfigs.RemoteConfig.PlayerConfig.SpeedShoot * Time.deltaTime), Space.World);
         }
         
         public void StopMovement()

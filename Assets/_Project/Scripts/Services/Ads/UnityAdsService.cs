@@ -15,6 +15,7 @@ namespace _Project.Scripts.Services.Ads
 
         private string _adsRewardType;
         private bool _testMode = true;
+
         private bool _isRewardRequested;
 
         public void Initialize()
@@ -39,12 +40,6 @@ namespace _Project.Scripts.Services.Ads
         public void ShowAdsInterstitial()
         {
             ShowAds(INTERSTITIAL_ADS);
-        }
-
-        private void ShowAds(string placementId)
-        {
-            if (Advertisement.isInitialized)
-                Advertisement.Show(placementId, this);
         }
 
         public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
@@ -75,8 +70,11 @@ namespace _Project.Scripts.Services.Ads
                 else
                 {
                     ShowAdsInterstitial();
-                    OnAdsFinished?.Invoke(string.Empty);
                 }
+            }
+            else
+            {
+                OnAdsFinished?.Invoke(string.Empty);
             }
         }
 
@@ -89,12 +87,29 @@ namespace _Project.Scripts.Services.Ads
             }
         }
 
-        public void OnUnityAdsShowStart(string placementId){}
+        public void OnUnityAdsShowStart(string placementId)
+        {
+        }
 
-        public void OnUnityAdsShowClick(string placementId){}
+        public void OnUnityAdsShowClick(string placementId)
+        {
+        }
 
-        public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message){}
+        public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
+        {
+            OnAdsFinished?.Invoke(string.Empty);
+        }
 
-        public void OnInitializationFailed(UnityAdsInitializationError error, string message){}
+        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+        {
+        }
+        
+        private void ShowAds(string placementId)
+        {
+            if (Advertisement.isInitialized)
+                Advertisement.Show(placementId, this);
+            else
+                OnAdsFinished?.Invoke(string.Empty);
+        }
     }
 }

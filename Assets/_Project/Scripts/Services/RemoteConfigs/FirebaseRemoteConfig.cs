@@ -7,9 +7,9 @@ namespace _Project.Scripts.Services.RemoteConfigs
     {
         private const string GAME_CONFIGS = "Game_Configs";
         
-        public RemoteConfigsData RemoteConfig { get; private set; }
+        public RemoteConfigsRoot RemoteConfig { get; }
 
-        public FirebaseRemoteConfig(RemoteConfigsData remoteConfig)
+        public FirebaseRemoteConfig(RemoteConfigsRoot remoteConfig)
         {
             RemoteConfig = remoteConfig;
         }
@@ -17,16 +17,16 @@ namespace _Project.Scripts.Services.RemoteConfigs
         public async Task Initialize()
         {
             var dataFirebase = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance;
-
+            
             await dataFirebase.FetchAndActivateAsync();
 
             string json = dataFirebase.GetValue(GAME_CONFIGS).StringValue;
 
             if (!string.IsNullOrEmpty(json))
             {
-                RemoteConfig = JsonUtility.FromJson<RemoteConfigsData>(json);
+                // RemoteConfig = JsonUtility.FromJson<RemoteConfigsRoot>(json);
+                JsonUtility.FromJsonOverwrite(json, RemoteConfig);
             }
-            
         }
     }
 }

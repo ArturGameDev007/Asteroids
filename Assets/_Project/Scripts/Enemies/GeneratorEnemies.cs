@@ -38,7 +38,7 @@ namespace _Project.Scripts.Enemies
             while (_spawnTimer <= minTimerThreshold)
             {
                 SpawnEntity(_pool);
-                _spawnTimer += _remoteConfig.RemoteConfig.Delay;
+                _spawnTimer += _remoteConfig.RemoteConfig.EnemyConfigs.Delay;
             }
         }
 
@@ -97,7 +97,7 @@ namespace _Project.Scripts.Enemies
             float ViewportMax = 1f;
             float CameraDistanceZ = 10f;
 
-            float margin = _remoteConfig.RemoteConfig.SpawnOffset;
+            float margin = _remoteConfig.RemoteConfig.EnemyConfigs.SpawnOffset;
             float randomPositionAlongSide = Random.value;
 
             Vector3 viewportPoint;
