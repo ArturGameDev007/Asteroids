@@ -1,5 +1,4 @@
 ﻿using System;
-using _Project.Scripts.Configs.Player;
 using _Project.Scripts.Services.RemoteConfigs;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
