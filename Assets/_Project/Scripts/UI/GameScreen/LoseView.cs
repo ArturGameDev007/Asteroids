@@ -15,8 +15,8 @@ namespace _Project.Scripts.UI.GameScreen
         [SerializeField] private TextMeshProUGUI _textScore;
         [SerializeField] private TextMeshProUGUI _textBestResult;
 
-        [field: Header("Button")]
-        [field: SerializeField] public Button RestartButton { get; private set; }
+        [Header("Button")]
+        [SerializeField] private Button _restartButton;
 
         private Canvas _canvas;
 
@@ -28,12 +28,12 @@ namespace _Project.Scripts.UI.GameScreen
 
         private void Start()
         {
-            RestartButton?.onClick.AddListener(OnRestart);
+            _restartButton?.onClick.AddListener(OnRestart);
         }
 
         private void OnDestroy()
         {
-            RestartButton.onClick.RemoveListener(OnRestart);
+            _restartButton.onClick.RemoveListener(OnRestart);
         }
 
         public void SetScore(int score, int  bestScore)
@@ -45,13 +45,13 @@ namespace _Project.Scripts.UI.GameScreen
         public void ShowPanel()
         {
             _canvas.gameObject.SetActive(true);
-            RestartButton.interactable = true;
+            _restartButton.interactable = true;
         }
 
         public void HidePanel()
         {
             _canvas.gameObject.SetActive(false);
-            RestartButton.interactable = false;
+            _restartButton.interactable = false;
         }
 
         private void OnRestart()

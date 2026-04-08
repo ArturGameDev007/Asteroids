@@ -8,6 +8,8 @@ namespace _Project.Scripts.Services.Save
     {
         [field: SerializeField] public int BestResult { get; private set; }
 
+        public bool IsNoAdsPurchased;
+
         public void UpdateBestResult(int newValue)
         {
             if (newValue > BestResult)

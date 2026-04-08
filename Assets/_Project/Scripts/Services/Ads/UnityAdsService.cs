@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts.Services.Save;
 using UnityEngine.Advertisements;
 using Zenject;
 
@@ -12,11 +13,19 @@ namespace _Project.Scripts.Services.Ads
         private const string ANDROID_ID = "6078664";
         private const string REWARD_ADS = "Rewarded_Android";
         private const string INTERSTITIAL_ADS = "Interstitial_Android";
+        
+        private ISaveService _saveService;
 
         private string _adsRewardType;
         private bool _testMode = true;
 
         private bool _isRewardRequested;
+
+        [Inject]
+        public void Construct(ISaveService saveService)
+        {
+            _saveService = saveService;
+        }
 
         public void Initialize()
         {
@@ -33,7 +42,7 @@ namespace _Project.Scripts.Services.Ads
         {
             _adsRewardType = type;
             _isRewardRequested = true;
-
+            
             ShowAds(REWARD_ADS);
         }
 

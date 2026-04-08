@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace _Project.Scripts.Services.RemoteConfigs
 {
@@ -24,8 +24,7 @@ namespace _Project.Scripts.Services.RemoteConfigs
 
             if (!string.IsNullOrEmpty(json))
             {
-                // RemoteConfig = JsonUtility.FromJson<RemoteConfigsRoot>(json);
-                JsonUtility.FromJsonOverwrite(json, RemoteConfig);
+                JsonConvert.PopulateObject(json, RemoteConfig);
             }
         }
     }

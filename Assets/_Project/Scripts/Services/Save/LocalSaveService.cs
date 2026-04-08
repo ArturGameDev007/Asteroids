@@ -1,4 +1,5 @@
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace _Project.Scripts.Services.Save
 {
@@ -8,7 +9,7 @@ namespace _Project.Scripts.Services.Save
 
         public void Save(SaveData saveData)
         {
-            string json = JsonUtility.ToJson(saveData);
+            string json = JsonConvert.SerializeObject(saveData);
 
             PlayerPrefs.SetString(BEST_SCORE_DATA, json);
             PlayerPrefs.Save();
@@ -24,7 +25,7 @@ namespace _Project.Scripts.Services.Save
             
             string json = PlayerPrefs.GetString(BEST_SCORE_DATA);
 
-            return JsonUtility.FromJson<SaveData>(json);
+            return JsonConvert.DeserializeObject<SaveData>(json);
         }
     }
 }

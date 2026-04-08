@@ -1,5 +1,6 @@
 using _Project.Scripts.Services.Ads;
 using _Project.Scripts.Services.Analytics;
+using _Project.Scripts.Services.Purchases;
 using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.Services.Save;
 using UnityEngine;
@@ -22,6 +23,8 @@ namespace _Project.Scripts.Installers.Project
 
             Container.Bind<IRemoteConfigs>().To<FirebaseRemoteConfig>().AsSingle();
             Container.BindInstance(_remoteConfig).AsSingle();
+
+            Container.BindInterfacesAndSelfTo<IAPService>().AsSingle();
         }
     }
 }
