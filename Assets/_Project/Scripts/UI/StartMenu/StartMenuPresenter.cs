@@ -47,12 +47,12 @@ namespace _Project.Scripts.UI.StartMenu
 
         private void OnBuyNoAdsClicked()
         {
-            _apService.BuyNoAds();
+            _apService.BuyProduct(_apService.NoAdsID);
         }
 
         private void HandlePurchaseComplete()
         {
-            _startMenuView.BuyNoAdsButton.gameObject.SetActive(false);
+            _startMenuView.BuyNoAdsButton.interactable = false;
         }
     }
 }

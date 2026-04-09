@@ -11,6 +11,7 @@ namespace _Project.Scripts.Services.Purchases
         public event Action OnPurchaseComplete;
 
         private const string NO_ADS_ID = "no_ads";
+        public string NoAdsID => NO_ADS_ID;
 
         private readonly ISaveService _saveService;
         private IStoreController _storeController;
@@ -42,25 +43,22 @@ namespace _Project.Scripts.Services.Purchases
             }
         }
 
-        public void BuyNoAds()
-        {
-            BuyProduct(NO_ADS_ID);
-        }
-
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
         {
-            if (args.purchasedProduct.definition.id == NO_ADS_ID)
+            string productId = args.purchasedProduct.definition.id;
+
+            switch (productId)
             {
-                var data = _saveService.Load();
-
-                data.IsNoAdsPurchased = true;
-
-                _saveService.Save(data);
-
-                OnPurchaseComplete?.Invoke();
-
-                Debug.Log($"Покупка отключение рекламы сохранена.");
+                case NO_ADS_ID:
+                    ApplyNoAds();
+                    break;
+                
+                default:
+                    Debug.LogWarning("Куплен неизвестный продукт.");
+                    break;
             }
+
+            OnPurchaseComplete?.Invoke();
 
             return PurchaseProcessingResult.Complete;
         }
@@ -80,6 +78,14 @@ namespace _Project.Scripts.Services.Purchases
 
         public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
         {
+        }
+
+        private void ApplyNoAds()
+        {
+            var data = _saveService.Load();
+            data.IsNoAdsPurchased = true;
+
+            _saveService.Save(data);
         }
     }
 }

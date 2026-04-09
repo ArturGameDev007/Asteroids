@@ -1,12 +1,13 @@
 using System;
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace _Project.Scripts.Services.Save
 {
     [Serializable]
     public class SaveData
     {
-        [field: SerializeField] public int BestResult { get; private set; }
+        [JsonProperty]
+        public int BestResult { get; private set; }
 
         public bool IsNoAdsPurchased;
 

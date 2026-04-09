@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using UnityEngine;
 
 namespace _Project.Scripts.Services.RemoteConfigs
 {
@@ -17,14 +17,14 @@ namespace _Project.Scripts.Services.RemoteConfigs
         public async Task Initialize()
         {
             var dataFirebase = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance;
-            
+
             await dataFirebase.FetchAndActivateAsync();
 
             string json = dataFirebase.GetValue(GAME_CONFIGS).StringValue;
 
             if (!string.IsNullOrEmpty(json))
             {
-                JsonConvert.PopulateObject(json, RemoteConfig);
+                JsonUtility.FromJsonOverwrite(json, RemoteConfig);
             }
         }
     }

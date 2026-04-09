@@ -13,16 +13,15 @@ namespace _Project.Scripts.Services.Ads
         private const string ANDROID_ID = "6078664";
         private const string REWARD_ADS = "Rewarded_Android";
         private const string INTERSTITIAL_ADS = "Interstitial_Android";
-        
-        private ISaveService _saveService;
+
+        private readonly ISaveService _saveService;
 
         private string _adsRewardType;
         private bool _testMode = true;
 
         private bool _isRewardRequested;
 
-        [Inject]
-        public void Construct(ISaveService saveService)
+        public UnityAdsService(ISaveService saveService)
         {
             _saveService = saveService;
         }
@@ -34,6 +33,11 @@ namespace _Project.Scripts.Services.Ads
 
         public void OnInitializationComplete()
         {
+            if (_saveService.Load().IsNoAdsPurchased)
+            {
+                return;
+            }
+
             Advertisement.Load(REWARD_ADS, this);
             Advertisement.Load(INTERSTITIAL_ADS, this);
         }
@@ -42,12 +46,15 @@ namespace _Project.Scripts.Services.Ads
         {
             _adsRewardType = type;
             _isRewardRequested = true;
-            
+
             ShowAds(REWARD_ADS);
         }
 
         public void ShowAdsInterstitial()
         {
+            if (_saveService.Load().IsNoAdsPurchased)
+                return;
+
             ShowAds(INTERSTITIAL_ADS);
         }
 
@@ -112,7 +119,7 @@ namespace _Project.Scripts.Services.Ads
         public void OnInitializationFailed(UnityAdsInitializationError error, string message)
         {
         }
-        
+
         private void ShowAds(string placementId)
         {
             if (Advertisement.isInitialized)

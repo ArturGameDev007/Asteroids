@@ -6,7 +6,8 @@ namespace _Project.Scripts.Services.Purchases
     {
         public event Action OnPurchaseComplete;
         
+        public string NoAdsID { get; }
+        
         public void BuyProduct(string productId);
-        public void BuyNoAds();
     }
 }
