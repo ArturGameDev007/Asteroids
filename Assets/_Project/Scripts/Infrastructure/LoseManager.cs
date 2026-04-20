@@ -2,6 +2,7 @@ using System;
 using _Project.Scripts.Services.Ads;
 using _Project.Scripts.UI.GameScreen;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.Infrastructure
@@ -20,11 +21,13 @@ namespace _Project.Scripts.Infrastructure
         private LosePresenter _losePresenter;
 
         public bool IsGameOver { get; private set; }
+        private bool _canInternet;
 
         private bool _canRevive;
         private bool _isWaitingForRevive;
 
-        public LoseManager(IAdsService adsService, IAdsRewardsType adsRewardsType, IGameFactory gameFactory, LoseResourceManager loseResourceManager,
+        public LoseManager(IAdsService adsService, IAdsRewardsType adsRewardsType, IGameFactory gameFactory,
+            LoseResourceManager loseResourceManager,
             ILoseModel scoreData, RestartGame restartGame)
         {
             _adsService = adsService;
@@ -46,19 +49,43 @@ namespace _Project.Scripts.Infrastructure
         {
             IsGameOver = true;
 
-            if (_canRevive)
+
+            if (_canRevive && Application.internetReachability != NetworkReachability.NotReachable)
             {
+                _canInternet = true;
                 _canRevive = false;
                 _isWaitingForRevive = true;
                 _adsService.ShowAdsReward(_adsRewardsType.Revive);
             }
             else
             {
+                _canInternet = false;
                 IsGameOver = true;
                 _isWaitingForRevive = false;
-                _adsService.ShowAdsInterstitial();
+                
+                if (_canInternet)
+                {
+                    _adsService.ShowAdsInterstitial();
+                }
+                
                 await ShowLoseScreen();
+                
             }
+
+            //
+            // if (_canRevive)
+            // {
+            //     _canRevive = false;
+            //     _isWaitingForRevive = true;
+            //     _adsService.ShowAdsReward(_adsRewardsType.Revive);
+            // }
+            // else
+            // {
+            //     IsGameOver = true;
+            //     _isWaitingForRevive = false;
+            //     _adsService.ShowAdsInterstitial();
+            //     await ShowLoseScreen();
+            // }
         }
 
         public void Dispose()

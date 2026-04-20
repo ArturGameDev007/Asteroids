@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Services.Save;
+using UnityEngine;
 using UnityEngine.Advertisements;
 using Zenject;
 
@@ -28,6 +29,12 @@ namespace _Project.Scripts.Services.Ads
 
         public void Initialize()
         {
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                Debug.Log("Интернет отсутсвует, игра сохраняет прогресс в офлайн-режиме.");
+                return;
+            }
+
             Advertisement.Initialize(ANDROID_ID, _testMode, this);
         }
 

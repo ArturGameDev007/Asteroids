@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.Services.RemoteConfigs
 {
@@ -6,6 +7,6 @@ namespace _Project.Scripts.Services.RemoteConfigs
     {
         public RemoteConfigsRoot RemoteConfig { get; }
         
-        public Task Initialize();
+        public UniTask Initialize();
     }
 }

@@ -10,8 +10,9 @@ namespace _Project.Scripts.Infrastructure
 {
     public class Game
     {
-        private readonly IRemoteConfigs  _remoteConfigs;
-        private readonly GameLoader  _gameLoader;
+        private readonly ISaveSynchronization _synchronizationService;
+        private readonly IRemoteConfigs _remoteConfigs;
+        private readonly GameLoader _gameLoader;
         private readonly GameplayController _gameplayController;
         private readonly LoseManager _loseManager;
         private readonly Character _player;
@@ -24,11 +25,14 @@ namespace _Project.Scripts.Infrastructure
 
         private bool _isInitialized;
 
-        public Game(IRemoteConfigs remoteConfigs, GameLoader gameLoader, GameplayController  gameplayController, LoseManager  loseManager,
+        public Game(ISaveSynchronization  synchronizationService,
+            IRemoteConfigs remoteConfigs, GameLoader gameLoader, GameplayController gameplayController,
+            LoseManager loseManager,
             Character player, IWeaponShooter weaponShooter,
             ILoseModel scoreData, EnemyDeathTracker deathTracker,
             IAnalyticsService analyticsService)
         {
+            _synchronizationService = synchronizationService;
             _remoteConfigs = remoteConfigs;
             _gameLoader = gameLoader;
             _gameplayController = gameplayController;
@@ -42,19 +46,20 @@ namespace _Project.Scripts.Infrastructure
 
         public async UniTask InitializeAsync()
         {
-            await _remoteConfigs.Initialize();
-            await _gameLoader.LoadAllAsync();
+            
+            await UniTask.WhenAll(_gameLoader.LoadAllAsync(),
+                _remoteConfigs.Initialize());
             
             _scoreData?.Reset();
-            
+
             _player.OnGameOver += OnGameOver;
             _loseManager.OnReviveRequested += OnRevive;
-            
+
             _gameplayController.ContinueGame();
 
             _isInitialized = true;
         }
-
+        
         public void Tick()
         {
             if (!_isInitialized || _loseManager.IsGameOver)
@@ -67,7 +72,7 @@ namespace _Project.Scripts.Infrastructure
         {
             _player.OnGameOver -= OnGameOver;
             _loseManager.OnReviveRequested -= OnRevive;
-            
+
             _gameLoader.UnloadAll();
             _loseManager.Unload();
 
@@ -79,10 +84,12 @@ namespace _Project.Scripts.Infrastructure
         {
             if (_loseManager.IsGameOver)
                 return;
-            
+
             _gameplayController.StopGameplay();
             _analyticsService.LogGameEnd(_weaponShooter.ShotsCount, _weaponShooter.LaserUsed, _deathTracker.KillCount);
             _loseManager.HandleGameOver().Forget();
+
+            _synchronizationService.SaveToCloud().Forget();
         }
 
         private void OnRevive()

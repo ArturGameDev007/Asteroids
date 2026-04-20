@@ -33,7 +33,7 @@ namespace _Project.Scripts.UI.GameScreen
 
         private void OnDestroy()
         {
-            _restartButton.onClick.RemoveListener(OnRestart);
+            _restartButton?.onClick.RemoveListener(OnRestart);
         }
 
         public void SetScore(int score, int  bestScore)

@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Project.Scripts.Services.RemoteConfigs
@@ -6,7 +8,7 @@ namespace _Project.Scripts.Services.RemoteConfigs
     public class FirebaseRemoteConfig : IRemoteConfigs
     {
         private const string GAME_CONFIGS = "Game_Configs";
-        
+
         public RemoteConfigsRoot RemoteConfig { get; }
 
         public FirebaseRemoteConfig(RemoteConfigsRoot remoteConfig)
@@ -14,17 +16,36 @@ namespace _Project.Scripts.Services.RemoteConfigs
             RemoteConfig = remoteConfig;
         }
 
-        public async Task Initialize()
+        public async UniTask Initialize()
         {
             var dataFirebase = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance;
-
-            await dataFirebase.FetchAndActivateAsync();
-
-            string json = dataFirebase.GetValue(GAME_CONFIGS).StringValue;
-
-            if (!string.IsNullOrEmpty(json))
+            string cachedJson = dataFirebase.GetValue(GAME_CONFIGS).StringValue;
+            
+            if (!string.IsNullOrEmpty(cachedJson))
             {
-                JsonUtility.FromJsonOverwrite(json, RemoteConfig);
+                JsonUtility.FromJsonOverwrite(cachedJson, RemoteConfig);
+            }
+            
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                Debug.Log("Нет связи. Берем локальные настройки.");
+                return;
+            }
+
+            try
+            {
+                await dataFirebase.FetchAndActivateAsync();
+
+                string json = dataFirebase.GetValue(GAME_CONFIGS).StringValue;
+
+                if (!string.IsNullOrEmpty(json))
+                {
+                    JsonUtility.FromJsonOverwrite(json, RemoteConfig);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"Firebase не отвечает. Не удалось взять данные - {e.Message}");
             }
         }
     }

@@ -49,7 +49,7 @@ namespace _Project.Scripts.Player
 
         private void Unsubscribe()
         {
-            if (_playerProvider != null)
+            if (_playerProvider != null && _playerProvider.CollisionHandler != null)
             {
                 _playerProvider.CollisionHandler.OnCollisionDetected -= ProcessCollision;
                 _isInitialized = false;

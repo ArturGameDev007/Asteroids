@@ -1,5 +1,8 @@
+using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Services.AsyncLoader;
+using _Project.Scripts.Services.CloudSave;
 using _Project.Scripts.UI.StartMenu;
+using _Project.Scripts.UI.StartMenu.SavesViewPanel;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -12,6 +15,11 @@ namespace _Project.Scripts.Installers.StartMenu
         
         public override void InstallBindings()
         {
+            Container.BindInterfacesTo<MenuInitializer>().AsSingle();
+            
+            Container.Bind<IConflictView>().FromComponentInHierarchy(includeInactive: true).AsSingle();
+            Container.BindInterfacesAndSelfTo<SaveDataTypePresenter>().AsSingle();
+            
             Container.BindInterfacesTo<StartMenuPresenter>().AsSingle();
             Container.Bind<StartMenuView>().FromComponentInHierarchy().AsSingle();
             
