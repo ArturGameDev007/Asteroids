@@ -49,7 +49,6 @@ namespace _Project.Scripts.Infrastructure
         {
             IsGameOver = true;
 
-
             if (_canRevive && Application.internetReachability != NetworkReachability.NotReachable)
             {
                 _canInternet = true;
@@ -71,21 +70,6 @@ namespace _Project.Scripts.Infrastructure
                 await ShowLoseScreen();
                 
             }
-
-            //
-            // if (_canRevive)
-            // {
-            //     _canRevive = false;
-            //     _isWaitingForRevive = true;
-            //     _adsService.ShowAdsReward(_adsRewardsType.Revive);
-            // }
-            // else
-            // {
-            //     IsGameOver = true;
-            //     _isWaitingForRevive = false;
-            //     _adsService.ShowAdsInterstitial();
-            //     await ShowLoseScreen();
-            // }
         }
 
         public void Dispose()

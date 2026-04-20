@@ -15,15 +15,8 @@ public class CloudSaveSample : ICloudSaveSample
 
     public async Task Save(SaveData saveData)
     {
-        // if (Application.internetReachability == NetworkReachability.NotReachable)
-        // {
-        //     return;
-        // }
-
         if (UnityServices.State != ServicesInitializationState.Initialized)
-        {
             return;
-        }
             
         if (!AuthenticationService.Instance.IsSignedIn)
             return;
@@ -38,11 +31,6 @@ public class CloudSaveSample : ICloudSaveSample
 
     public async Task<SaveData> Load()
     {
-        // if (Application.internetReachability == NetworkReachability.NotReachable)
-        // {
-        //     return null;
-        // }
-        
         if (UnityServices.State != ServicesInitializationState.Initialized)
         {
             Debug.LogWarning("Облачнве сервисы не иницилизированные - офлайн.");
@@ -50,9 +38,7 @@ public class CloudSaveSample : ICloudSaveSample
         }
 
         if (!AuthenticationService.Instance.IsSignedIn)
-        {
             return null;
-        }
 
         try
         {
@@ -60,9 +46,7 @@ public class CloudSaveSample : ICloudSaveSample
                 new HashSet<string> { DATA_KEY });
 
             if (playerData.TryGetValue(DATA_KEY, out var item))
-            {
                 return item.Value.GetAs<SaveData>();
-            }
         }
         catch (Exception e)
         {

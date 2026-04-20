@@ -16,14 +16,10 @@ namespace _Project.Scripts.Infrastructure
                 return;
             }
 
-            await UniTask.Yield();
-
             try
             {
                 if (UnityServices.State == ServicesInitializationState.Uninitialized)
-                {
                     await UnityServices.InitializeAsync().AsUniTask();
-                }
 
                 if (!AuthenticationService.Instance.IsSignedIn)
                 {
@@ -39,23 +35,6 @@ namespace _Project.Scripts.Infrastructure
             {
                 Debug.LogError($"Ошибка авторизации - {e.Message}");
             }
-
-            // if (!AuthenticationService.Instance.IsSignedIn)
-            // {
-            //     try
-            //     {
-            //         await AuthenticationService.Instance.SignInAnonymouslyAsync().AsUniTask();
-            //         Debug.Log($"Успешный вход. ID - {AuthenticationService.Instance.PlayerId}");
-            //     }
-            //     catch (Exception e)
-            //     {
-            //         Debug.LogError($"Ошибка авторизации - {e.Message}");
-            //     }
-            // }
-            // else
-            // {
-            //     Debug.LogWarning("Игрок уже авторизован, повторный вход не требуется.");
-            // }
         }
     }
 }
