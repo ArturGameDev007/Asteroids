@@ -5,10 +5,6 @@ namespace _Project.Scripts.Infrastructure
 {
     public interface ISaveSynchronization
     {
-        public UniTask GetActualSaveData();
-    
-        public UniTask SaveToCloud();
-        
-        public void SetPresenter(SaveDataTypePresenter presenter);
+        public UniTask GetActualSaveData(ISaveDataType saveDataType);
     }
 }

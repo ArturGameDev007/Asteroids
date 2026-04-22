@@ -8,33 +8,35 @@ namespace _Project.Scripts.Services.Purchases
 {
     public class IAPService : IInitializable, IIAPService, IStoreListener
     {
-        public event Action OnPurchaseComplete;
-
         private const string NO_ADS_ID = "no_ads";
-        public string NoAdsID => NO_ADS_ID;
+        
+        public event Action<string> OnPurchaseComplete;
 
         private readonly ISaveService _saveService;
+        private readonly IProductTypePurchase _productTypePurchase;
+        
         private IStoreController _storeController;
 
-        public IAPService(ISaveService saveService)
+        public IAPService(ISaveService saveService, IProductTypePurchase productTypePurchase)
         {
             _saveService = saveService;
+            _productTypePurchase = productTypePurchase;
         }
 
         public void Initialize()
         {
             var init = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
-            init.AddProduct(NO_ADS_ID, ProductType.NonConsumable);
+            init.AddProduct(_productTypePurchase.NoAdsID, ProductType.NonConsumable);
 
             UnityPurchasing.Initialize(this, init);
         }
 
-        public void BuyProduct(string productId)
+        public void BuyProduct(IProductTypePurchase productId)
         {
             if (_storeController != null)
             {
-                var product = _storeController.products.WithID(productId);
+                var product = _storeController.products.WithID(productId.NoAdsID);
 
                 if (product != null && product.availableToPurchase)
                 {
@@ -52,13 +54,13 @@ namespace _Project.Scripts.Services.Purchases
                 case NO_ADS_ID:
                     ApplyNoAds();
                     break;
-                
+
                 default:
                     Debug.LogWarning("Куплен неизвестный продукт.");
                     break;
             }
 
-            OnPurchaseComplete?.Invoke();
+            OnPurchaseComplete?.Invoke(productId);
 
             return PurchaseProcessingResult.Complete;
         }

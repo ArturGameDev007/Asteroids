@@ -13,11 +13,13 @@ namespace _Project.Scripts.UI.StartMenu.SavesViewPanel
         public event Action OnLocalButtonClick;
         public event Action OnCloudButtonClick;
 
+        [Header("Texts")]
+        [SerializeField] private TextMeshProUGUI _localInfoText;
+        [SerializeField] private TextMeshProUGUI _cloudInfoText;
+        
+        [Header("Buttons")]
         [SerializeField] private Button _localButton;
         [SerializeField] private Button _cloudButton;
-        
-        [field: SerializeField] public TextMeshProUGUI LocalInfoText { get; private set; }
-        [field: SerializeField] public TextMeshProUGUI CloudInfoText { get; private set; }
 
         private Canvas _canvas;
         
@@ -41,8 +43,8 @@ namespace _Project.Scripts.UI.StartMenu.SavesViewPanel
 
         public void ShowSavesView(SaveData local, SaveData cloud)
         {
-            LocalInfoText.text = FormatSaveInfo("Local", local);
-            CloudInfoText.text = FormatSaveInfo("Cloud", cloud);
+            _localInfoText.text = FormatSaveInfo("Local", local);
+            _cloudInfoText.text = FormatSaveInfo("Cloud", cloud);
         }
 
         private string FormatSaveInfo(string label, SaveData saveData)
@@ -52,7 +54,7 @@ namespace _Project.Scripts.UI.StartMenu.SavesViewPanel
 
             DateTime date = new DateTime(saveData.LastSaveTime).ToLocalTime();
 
-            var text = $"<b>{label}: {saveData.BestResult}</b>\n{date:dd/MM/yyyy, HH:mm}";
+            var text = $"<b>Best {label} Result: {saveData.BestResult}</b>\n{date:dd/MM/yyyy, HH:mm}";
 
             return text;
         }

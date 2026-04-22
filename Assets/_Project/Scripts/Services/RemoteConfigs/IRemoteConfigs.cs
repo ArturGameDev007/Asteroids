@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.Services.RemoteConfigs

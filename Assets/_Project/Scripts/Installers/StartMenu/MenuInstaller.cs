@@ -1,7 +1,7 @@
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Services.AsyncLoader;
-using _Project.Scripts.Services.CloudSave;
 using _Project.Scripts.UI.StartMenu;
+using _Project.Scripts.UI.StartMenu.BuyProductsPanel;
 using _Project.Scripts.UI.StartMenu.SavesViewPanel;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -25,6 +25,9 @@ namespace _Project.Scripts.Installers.StartMenu
             
             Container.Bind<IResourceLoader>().To<AddressableResourceLoader>().AsSingle();
             Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle().WithArguments(_loadingView);
+
+            Container.BindInterfacesAndSelfTo<ProductsView>().FromComponentInHierarchy().AsSingle();
+            Container.BindInterfacesTo<BuyProductsPresenter>().AsSingle();
         }
     }
 }

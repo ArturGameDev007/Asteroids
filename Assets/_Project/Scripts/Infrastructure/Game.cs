@@ -10,7 +10,6 @@ namespace _Project.Scripts.Infrastructure
 {
     public class Game
     {
-        private readonly ISaveSynchronization _synchronizationService;
         private readonly IRemoteConfigs _remoteConfigs;
         private readonly GameLoader _gameLoader;
         private readonly GameplayController _gameplayController;
@@ -25,14 +24,12 @@ namespace _Project.Scripts.Infrastructure
 
         private bool _isInitialized;
 
-        public Game(ISaveSynchronization  synchronizationService,
-            IRemoteConfigs remoteConfigs, GameLoader gameLoader, GameplayController gameplayController,
+        public Game(IRemoteConfigs remoteConfigs, GameLoader gameLoader, GameplayController gameplayController,
             LoseManager loseManager,
             Character player, IWeaponShooter weaponShooter,
             ILoseModel scoreData, EnemyDeathTracker deathTracker,
             IAnalyticsService analyticsService)
         {
-            _synchronizationService = synchronizationService;
             _remoteConfigs = remoteConfigs;
             _gameLoader = gameLoader;
             _gameplayController = gameplayController;
@@ -46,7 +43,6 @@ namespace _Project.Scripts.Infrastructure
 
         public async UniTask InitializeAsync()
         {
-            
             await UniTask.WhenAll(_gameLoader.LoadAllAsync(),
                 _remoteConfigs.Initialize());
             
@@ -88,8 +84,6 @@ namespace _Project.Scripts.Infrastructure
             _gameplayController.StopGameplay();
             _analyticsService.LogGameEnd(_weaponShooter.ShotsCount, _weaponShooter.LaserUsed, _deathTracker.KillCount);
             _loseManager.HandleGameOver().Forget();
-
-            _synchronizationService.SaveToCloud().Forget();
         }
 
         private void OnRevive()

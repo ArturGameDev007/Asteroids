@@ -5,7 +5,6 @@ using _Project.Scripts.Services.CloudSave;
 using _Project.Scripts.Services.Purchases;
 using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.Services.Save;
-using _Project.Scripts.UI.StartMenu.SavesViewPanel;
 using UnityEngine;
 using Zenject;
 
@@ -19,7 +18,8 @@ namespace _Project.Scripts.Installers.Project
         {
             Container.Bind<ICloudInitialize>().To<CloudInitializer>().AsSingle();
             Container.Bind<ICloudSaveSample>().To<CloudSaveSample>().AsSingle();
-            Container.Bind<ISaveSynchronization>().To<SaveSynchronizationService>().AsSingle();
+            
+            Container.BindInterfacesAndSelfTo<SaveSynchronizationService>().AsSingle();
             
             Container.Bind<ISaveService>().To<LocalSaveService>().AsSingle();
             
@@ -32,8 +32,7 @@ namespace _Project.Scripts.Installers.Project
             Container.BindInstance(_remoteConfig).AsSingle();
 
             Container.BindInterfacesAndSelfTo<IAPService>().AsSingle();
-            
-            
+            Container.Bind<IProductTypePurchase>().To<ProductTypePurchasePurchase>().AsSingle();
         }
     }
 }

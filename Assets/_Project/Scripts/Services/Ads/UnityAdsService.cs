@@ -87,13 +87,9 @@ namespace _Project.Scripts.Services.Ads
             if (placementId == REWARD_ADS)
             {
                 if (showCompletionState == UnityAdsShowCompletionState.COMPLETED)
-                {
                     OnAdsFinished?.Invoke(_adsRewardType);
-                }
                 else
-                {
                     ShowAdsInterstitial();
-                }
             }
             else
             {

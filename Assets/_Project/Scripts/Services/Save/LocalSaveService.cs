@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Newtonsoft.Json;
 
@@ -7,12 +8,16 @@ namespace _Project.Scripts.Services.Save
     {
         private const string BEST_SCORE_DATA = "BestScore";
 
+        public event Action OnSaved;
+
         public void Save(SaveData saveData)
         {
             string json = JsonConvert.SerializeObject(saveData);
 
             PlayerPrefs.SetString(BEST_SCORE_DATA, json);
             PlayerPrefs.Save();
+            
+            OnSaved?.Invoke();
         }
 
         public SaveData Load()

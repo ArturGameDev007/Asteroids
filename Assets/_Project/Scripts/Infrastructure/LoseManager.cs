@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Services.Ads;
+using _Project.Scripts.Services.Save;
 using _Project.Scripts.UI.GameScreen;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace _Project.Scripts.Infrastructure
     {
         public event Action OnReviveRequested;
 
+        private readonly ISaveService _saveService;
         private readonly IAdsService _adsService;
         private readonly IAdsRewardsType _adsRewardsType;
         private readonly IGameFactory _gameFactory;
@@ -21,15 +23,16 @@ namespace _Project.Scripts.Infrastructure
         private LosePresenter _losePresenter;
 
         public bool IsGameOver { get; private set; }
-        private bool _canInternet;
+        private bool _canInternet = Application.internetReachability != NetworkReachability.NotReachable;
 
         private bool _canRevive;
         private bool _isWaitingForRevive;
 
-        public LoseManager(IAdsService adsService, IAdsRewardsType adsRewardsType, IGameFactory gameFactory,
+        public LoseManager(ISaveService saveService, IAdsService adsService, IAdsRewardsType adsRewardsType, IGameFactory gameFactory,
             LoseResourceManager loseResourceManager,
             ILoseModel scoreData, RestartGame restartGame)
         {
+            _saveService = saveService;
             _adsService = adsService;
             _adsRewardsType = adsRewardsType;
             _gameFactory = gameFactory;
@@ -49,26 +52,34 @@ namespace _Project.Scripts.Infrastructure
         {
             IsGameOver = true;
 
-            if (_canRevive && Application.internetReachability != NetworkReachability.NotReachable)
+            if (_canRevive && _canInternet)
             {
-                _canInternet = true;
                 _canRevive = false;
                 _isWaitingForRevive = true;
                 _adsService.ShowAdsReward(_adsRewardsType.Revive);
             }
             else
             {
-                _canInternet = false;
                 IsGameOver = true;
                 _isWaitingForRevive = false;
+
+                bool noAds = _saveService.Load().IsNoAdsPurchased;
                 
-                if (_canInternet)
+                if (noAds)
                 {
+                    Debug.Log("Реклама отключена покупкой NoAds.");
+                }
+                else if (!_canInternet)
+                {
+                    Debug.Log("Реклама не показана: отсутствует интернет.");
+                }
+                else
+                {
+                    Debug.Log("Показана межстрочная реклама.");
                     _adsService.ShowAdsInterstitial();
                 }
                 
                 await ShowLoseScreen();
-                
             }
         }
 

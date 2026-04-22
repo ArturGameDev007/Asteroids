@@ -1,17 +1,19 @@
+using System;
 using _Project.Scripts.Services.CloudSave;
 using _Project.Scripts.Services.Save;
 using _Project.Scripts.UI.StartMenu.SavesViewPanel;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class SaveSynchronizationService : ISaveSynchronization
+    public class SaveSynchronizationService : ISaveSynchronization, IInitializable, IDisposable
     {
         private readonly ISaveService _localSaveService;
         private readonly ICloudSaveSample _cloudSaveSample;
 
-        private SaveDataTypePresenter _saveDataTypeTypePresenter;
+        private ISaveDataType _saveDataTypePresenter;
 
         public SaveSynchronizationService(ISaveService localSaveService, ICloudSaveSample cloudInitialize)
         {
@@ -19,14 +21,29 @@ namespace _Project.Scripts.Infrastructure
             _cloudSaveSample = cloudInitialize;
         }
 
-        public async UniTask GetActualSaveData()
+        public async UniTask GetActualSaveData(ISaveDataType presenter)
         {
             _localSaveService.Load();
 
-            CheckCloudUpdate().Forget();
+            CheckCloudUpdate(presenter).Forget();
         }
 
-        public async UniTask SaveToCloud()
+        public void Initialize()
+        {
+            _localSaveService.OnSaved += AutoSaveToCloud;
+        }
+
+        public void Dispose()
+        {
+            _localSaveService.OnSaved -= AutoSaveToCloud;
+        }
+
+        private void AutoSaveToCloud()
+        {
+            SaveToCloud().Forget();
+        }
+
+        private async UniTask SaveToCloud()
         {
             if (Application.internetReachability == NetworkReachability.NotReachable)
                 return;
@@ -40,12 +57,7 @@ namespace _Project.Scripts.Infrastructure
             }
         }
 
-        public void SetPresenter(SaveDataTypePresenter presenter)
-        {
-            _saveDataTypeTypePresenter = presenter;
-        }
-
-        private async UniTaskVoid CheckCloudUpdate()
+        private async UniTaskVoid CheckCloudUpdate(ISaveDataType presenter)
         {
             var localData = _localSaveService.Load();
 
@@ -65,9 +77,6 @@ namespace _Project.Scripts.Infrastructure
                 return;
             }
 
-            Debug.Log(
-                $"Local - {localData.BestResult}: {localData.LastSaveTime}, Cloud - {cloudData.BestResult}: {cloudData.LastSaveTime}");
-
             if (cloudData.LastSaveTime > localData.LastSaveTime)
             {
                 Debug.Log("Облачное сохранение новее.");
@@ -76,8 +85,8 @@ namespace _Project.Scripts.Infrastructure
             else if (localData.LastSaveTime > cloudData.LastSaveTime)
             {
                 Debug.Log("Локальное сохранение новее.");
-                
-                var choiceLocal = await _saveDataTypeTypePresenter.WaitUserChoice(localData, cloudData);
+
+                var choiceLocal = await presenter.WaitUserChoice(localData, cloudData);
 
                 SaveData saveSelect = choiceLocal ? localData : cloudData;
 

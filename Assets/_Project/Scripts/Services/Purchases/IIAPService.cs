@@ -4,10 +4,8 @@ namespace _Project.Scripts.Services.Purchases
 {
     public interface IIAPService
     {
-        public event Action OnPurchaseComplete;
+        public event Action<string> OnPurchaseComplete;
         
-        public string NoAdsID { get; }
-        
-        public void BuyProduct(string productId);
+        public void BuyProduct(IProductTypePurchase productId);
     }
 }

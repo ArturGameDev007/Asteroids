@@ -1,3 +1,4 @@
+using _Project.Scripts.UI.StartMenu.SavesViewPanel;
 using Cysharp.Threading.Tasks;
 using Zenject;
 
@@ -7,11 +8,13 @@ namespace _Project.Scripts.Infrastructure
     {
         private readonly ICloudInitialize _cloudInitializer;
         private readonly ISaveSynchronization _synchronizationService;
+        private readonly ISaveDataType _saveDataType;
 
-        public MenuInitializer(ICloudInitialize cloudInitializer, ISaveSynchronization synchronizationService)
+        public MenuInitializer(ICloudInitialize cloudInitializer, ISaveSynchronization synchronizationService, ISaveDataType saveDataType)
         {
             _cloudInitializer = cloudInitializer;
             _synchronizationService = synchronizationService;
+            _saveDataType = saveDataType;
         }
 
         public void Initialize()
@@ -22,8 +25,7 @@ namespace _Project.Scripts.Infrastructure
         private async UniTaskVoid StartSync()
         {
             await _cloudInitializer.InitializeCloud();
-            
-            await _synchronizationService.GetActualSaveData();
+            await _synchronizationService.GetActualSaveData(_saveDataType);
         }
     }
 }
