@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5d17a21594effb4e9591490b009e7aa, type: 3}
-  m_Name: Weapons_BundledAssetGroupSchema
+  m_Name: Core_BundledAssetGroupSchema
   m_EditorClassIdentifier: 
-  m_Group: {fileID: 11400000, guid: e9736774e57d52f45bd3615f39a91e24, type: 2}
+  m_Group: {fileID: 11400000, guid: 8799c6774f619954aa2685b11d9d86dd, type: 2}
   m_InternalBundleIdMode: 1
   m_Compression: 1
   m_IncludeAddressInCatalog: 1
@@ -34,9 +34,9 @@ MonoBehaviour:
   m_RedirectLimit: -1
   m_RetryCount: 0
   m_BuildPath:
-    m_Id: 95c1118ab17a7e4408cfc8eebf446feb
+    m_Id: 9b8d81ebc5f90b144990c46c13dd979c
   m_LoadPath:
-    m_Id: a9b406cd4f4332642b2b9b5275196271
+    m_Id: 25ad04f6051b2044b92d84697f23dbfa
   m_BundleMode: 0
   m_AssetBundleProviderType:
     m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null

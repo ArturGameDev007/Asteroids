@@ -14,9 +14,8 @@ namespace _Project.Scripts.Installers.Gameplay
 {
     public class GameplaySceneInstaller : MonoInstaller
     {
-        [Header("Camera")]
         [SerializeField] private Camera _mainCamera;
-
+        
         [Header("Prefabs UI")]
         [SerializeField] private AssetReference _endGameScreenPrefabReference;
         [SerializeField] private AssetReference _shipPerformancePrefabReference;
