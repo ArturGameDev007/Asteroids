@@ -63,7 +63,8 @@ namespace _Project.Scripts.Infrastructure
                 IsGameOver = true;
                 _isWaitingForRevive = false;
 
-                bool noAds = _saveService.Load().IsNoAdsPurchased;
+                var data = await _saveService.Load();
+                bool noAds = data.IsNoAdsPurchased;
                 
                 if (noAds)
                 {

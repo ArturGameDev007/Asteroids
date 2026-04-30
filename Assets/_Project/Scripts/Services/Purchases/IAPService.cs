@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using _Project.Scripts.Services.Save;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using Zenject;
@@ -8,14 +10,14 @@ namespace _Project.Scripts.Services.Purchases
 {
     public class IAPService : IInitializable, IIAPService, IStoreListener
     {
-        private const string NO_ADS_ID = "no_ads";
-        
         public event Action<string> OnPurchaseComplete;
 
         private readonly ISaveService _saveService;
         private readonly IProductTypePurchase _productTypePurchase;
-        
+
         private IStoreController _storeController;
+
+        private Dictionary<string, Func<UniTaskVoid>> _purchaseAction;
 
         public IAPService(ISaveService saveService, IProductTypePurchase productTypePurchase)
         {
@@ -26,10 +28,29 @@ namespace _Project.Scripts.Services.Purchases
         public void Initialize()
         {
             var init = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+            
+            _purchaseAction = new Dictionary<string, Func<UniTaskVoid>>();
 
-            init.AddProduct(_productTypePurchase.NoAdsID, ProductType.NonConsumable);
+            AddProducts(init, _purchaseAction);
 
             UnityPurchasing.Initialize(this, init);
+        }
+
+        private void AddProducts(ConfigurationBuilder init, Dictionary<string,  Func<UniTaskVoid>> typePurchase)
+        {
+            PurchaseData[] catalog =
+            {
+                new PurchaseData(_productTypePurchase.NoAdsID, ApplyNoAds)
+            };
+
+            for (int i = 0; i < catalog.Length; i++)
+            {
+                var item = catalog[i];
+
+                typePurchase.TryAdd(item.Id, item.TypeAction);
+
+                init.AddProduct(item.Id, ProductType.NonConsumable);
+            }
         }
 
         public void BuyProduct(IProductTypePurchase productId)
@@ -49,15 +70,13 @@ namespace _Project.Scripts.Services.Purchases
         {
             string productId = args.purchasedProduct.definition.id;
 
-            switch (productId)
+            if (_purchaseAction.TryGetValue(productId, out var action))
             {
-                case NO_ADS_ID:
-                    ApplyNoAds();
-                    break;
-
-                default:
-                    Debug.LogWarning("Куплен неизвестный продукт.");
-                    break;
+                action.Invoke().Forget();
+            }
+            else
+            {
+                Debug.LogWarning("Куплен неизвестный продукт.");
             }
 
             OnPurchaseComplete?.Invoke(productId);
@@ -82,12 +101,12 @@ namespace _Project.Scripts.Services.Purchases
         {
         }
 
-        private void ApplyNoAds()
+        private async UniTaskVoid ApplyNoAds()
         {
-            var data = _saveService.Load();
+            var data = await _saveService.Load();
             data.IsNoAdsPurchased = true;
 
-            _saveService.Save(data);
+            await _saveService.Save(data);
         }
     }
 }

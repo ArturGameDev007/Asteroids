@@ -292,34 +292,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1936171685941567549, guid: d61ca26c86719c44e827f7b6684326d0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1936171685941567549, guid: d61ca26c86719c44e827f7b6684326d0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1936171685941567549, guid: d61ca26c86719c44e827f7b6684326d0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1936171685941567549, guid: d61ca26c86719c44e827f7b6684326d0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1936171685941567549, guid: d61ca26c86719c44e827f7b6684326d0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 1936171685941567549, guid: d61ca26c86719c44e827f7b6684326d0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: _Project.Scripts.Infrastructure.LoadRemoteAddressables, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1936171685941567549, guid: d61ca26c86719c44e827f7b6684326d0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 8126987056425343539, guid: d61ca26c86719c44e827f7b6684326d0, type: 3}
       propertyPath: m_Name
       value: UI_Main_Menu

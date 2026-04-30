@@ -1,4 +1,6 @@
 using System;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Newtonsoft.Json;
 
@@ -10,7 +12,7 @@ namespace _Project.Scripts.Services.Save
 
         public event Action OnSaved;
 
-        public void Save(SaveData saveData)
+        public UniTask Save(SaveData saveData)
         {
             string json = JsonConvert.SerializeObject(saveData);
 
@@ -18,19 +20,21 @@ namespace _Project.Scripts.Services.Save
             PlayerPrefs.Save();
             
             OnSaved?.Invoke();
+            return UniTask.CompletedTask;
         }
 
-        public SaveData Load()
+        public UniTask<SaveData> Load()
         {
             if (!PlayerPrefs.HasKey(BEST_SCORE_DATA))
             {
                 var resultData = new SaveData();
-                return resultData;
+                return UniTask.FromResult(resultData);
             }
             
             string json = PlayerPrefs.GetString(BEST_SCORE_DATA);
 
-            return JsonConvert.DeserializeObject<SaveData>(json);
+            return UniTask.FromResult(JsonConvert.DeserializeObject<SaveData>(json));
+            // return JsonConvert.DeserializeObject<SaveData>(json);
         }
     }
 }

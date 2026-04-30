@@ -1,5 +1,4 @@
 using System;
-using _Project.Scripts.Services.CloudSave;
 using _Project.Scripts.Services.Save;
 using _Project.Scripts.UI.StartMenu.SavesViewPanel;
 using Cysharp.Threading.Tasks;
@@ -10,32 +9,32 @@ namespace _Project.Scripts.Infrastructure
 {
     public class SaveSynchronizationService : ISaveSynchronization, IInitializable, IDisposable
     {
-        private readonly ISaveService _localSaveService;
-        private readonly ICloudSaveSample _cloudSaveSample;
+        private readonly ISaveService _localSave;
+        private readonly ISaveService _cloudSave;
 
         private ISaveDataType _saveDataTypePresenter;
 
-        public SaveSynchronizationService(ISaveService localSaveService, ICloudSaveSample cloudInitialize)
+        public SaveSynchronizationService(ISaveService localSave, [Inject(Id = "Cloud")] ISaveService cloudSave)
         {
-            _localSaveService = localSaveService;
-            _cloudSaveSample = cloudInitialize;
+            _localSave = localSave;
+            _cloudSave = cloudSave;
         }
 
         public async UniTask GetActualSaveData(ISaveDataType presenter)
         {
-            _localSaveService.Load();
+            await _localSave.Load();
 
             CheckCloudUpdate(presenter).Forget();
         }
 
         public void Initialize()
         {
-            _localSaveService.OnSaved += AutoSaveToCloud;
+            _localSave.OnSaved += AutoSaveToCloud;
         }
-
+        
         public void Dispose()
         {
-            _localSaveService.OnSaved -= AutoSaveToCloud;
+            _localSave.OnSaved -= AutoSaveToCloud;
         }
 
         private void AutoSaveToCloud()
@@ -48,39 +47,44 @@ namespace _Project.Scripts.Infrastructure
             if (Application.internetReachability == NetworkReachability.NotReachable)
                 return;
 
-            var localData = _localSaveService.Load();
+            var localData = await _localSave.Load();
 
             if (localData != null)
             {
-                await _cloudSaveSample.Save(localData);
+                await _cloudSave.Save(localData);
                 Debug.Log("Данные сихронизированные с облаком.");
             }
         }
 
         private async UniTaskVoid CheckCloudUpdate(ISaveDataType presenter)
         {
-            var localData = _localSaveService.Load();
+            var localData = await _localSave.Load();
+            var cloudData = await _cloudSave.Load();
 
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
-                _localSaveService.Load();
+                _localSave.Load();
                 return;
             }
-
-            var cloudData = await _cloudSaveSample.Load();
 
             if (cloudData == null)
             {
                 if (localData != null)
-                    await _cloudSaveSample.Save(localData);
+                    await _cloudSave.Save(localData);
 
                 return;
             }
-
+            
+            if (localData.BestResult == cloudData.BestResult)
+            {
+                Debug.Log("Данные идентичны.");
+                return;
+            }
+            
             if (cloudData.LastSaveTime > localData.LastSaveTime)
             {
                 Debug.Log("Облачное сохранение новее.");
-                _localSaveService.Save(cloudData);
+                _localSave.Save(cloudData);
             }
             else if (localData.LastSaveTime > cloudData.LastSaveTime)
             {
@@ -90,8 +94,8 @@ namespace _Project.Scripts.Infrastructure
 
                 SaveData saveSelect = choiceLocal ? localData : cloudData;
 
-                _localSaveService.Save(saveSelect);
-                await _cloudSaveSample.Save(saveSelect);
+                _localSave.Save(saveSelect);
+                await _cloudSave.Save(saveSelect);
             }
             else
             {

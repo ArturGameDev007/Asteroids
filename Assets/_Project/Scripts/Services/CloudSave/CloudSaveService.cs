@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using _Project.Scripts.Services.CloudSave;
-using Unity.Services.CloudSave;
+using _Project.Scripts.Services.Save;
+using Cysharp.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
 using SaveData = _Project.Scripts.Services.Save.SaveData;
 
 
-public class CloudSaveSample : ICloudSaveSample
+public class CloudSaveService : ISaveService
 {
     private const string DATA_KEY = "PlayerSave";
+    
+    public event Action OnSaved;
 
-    public async Task Save(SaveData saveData)
+    public async UniTask Save(SaveData saveData)
     {
         if (UnityServices.State != ServicesInitializationState.Initialized)
             return;
@@ -22,14 +23,16 @@ public class CloudSaveSample : ICloudSaveSample
             return;
 
         var playerData = new Dictionary<string, object> { { DATA_KEY, saveData } };
-        var save = CloudSaveService.Instance.Data.Player.SaveAsync(playerData);
+        var save = Unity.Services.CloudSave.CloudSaveService.Instance.Data.Player.SaveAsync(playerData);
 
         await save;
+        
+        OnSaved?.Invoke();
 
         Debug.Log($"Saved data {string.Join(',', playerData)}");
     }
 
-    public async Task<SaveData> Load()
+    public async UniTask<SaveData> Load()
     {
         if (UnityServices.State != ServicesInitializationState.Initialized)
         {
@@ -42,7 +45,7 @@ public class CloudSaveSample : ICloudSaveSample
 
         try
         {
-            var playerData = await CloudSaveService.Instance.Data.Player.LoadAsync(
+            var playerData = await Unity.Services.CloudSave.CloudSaveService.Instance.Data.Player.LoadAsync(
                 new HashSet<string> { DATA_KEY });
 
             if (playerData.TryGetValue(DATA_KEY, out var item))

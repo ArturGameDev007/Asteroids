@@ -22,11 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2cda990e2423bbf4892e6590ba056729
-    m_Address: Gameplay
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 68a4a0e7d19928745b3e0dadee7bdb46
     m_Address: Flying
     m_ReadOnly: 0

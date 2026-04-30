@@ -1,6 +1,7 @@
 ﻿using System;
 using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.Services.Save;
+using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.UI.GameScreen
 {
@@ -9,6 +10,7 @@ namespace _Project.Scripts.UI.GameScreen
         public event Action OnScoreChanged;
         
         private readonly ISaveService _saveService;
+        private SaveData _saveData;
 
         public int Score { get; private set; }
         public int BestScore { get; private set; }
@@ -32,11 +34,11 @@ namespace _Project.Scripts.UI.GameScreen
             OnScoreChanged?.Invoke();
         }
 
-        public void SaveResult(int score)
+        public async UniTask SaveResult(int score)
         {
             Score = score;
 
-            var data = _saveService.Load();
+            var data = await _saveService.Load();
             data.UpdateBestResult(score);
             _saveService.Save(data);
 

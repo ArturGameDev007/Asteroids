@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Services.Save;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using Zenject;
@@ -40,13 +41,15 @@ namespace _Project.Scripts.Services.Ads
 
         public void OnInitializationComplete()
         {
-            if (_saveService.Load().IsNoAdsPurchased)
-            {
-                return;
-            }
-
-            Advertisement.Load(REWARD_ADS, this);
-            Advertisement.Load(INTERSTITIAL_ADS, this);
+            // if (_saveService.Load().IsNoAdsPurchased)
+            // {
+            //     return;
+            // }
+            //
+            // Advertisement.Load(REWARD_ADS, this);
+            // Advertisement.Load(INTERSTITIAL_ADS, this);
+            
+            CheckAndLoadAds().Forget();
         }
 
         public void ShowAdsReward(string type)
@@ -56,10 +59,33 @@ namespace _Project.Scripts.Services.Ads
 
             ShowAds(REWARD_ADS);
         }
-
+        
         public void ShowAdsInterstitial()
         {
-            if (_saveService.Load().IsNoAdsPurchased)
+            // if (_saveData.IsNoAdsPurchased)
+            //     return;
+            //
+            // ShowAds(INTERSTITIAL_ADS);
+            
+            InternalShowAdsInterstitial().Forget();
+        }
+
+        private async UniTaskVoid CheckAndLoadAds()
+        {
+            var data = await _saveService.Load();
+            
+            if (data.IsNoAdsPurchased)
+                return;
+
+            Advertisement.Load(REWARD_ADS, this);
+            Advertisement.Load(INTERSTITIAL_ADS, this);
+        }
+
+        private async UniTaskVoid InternalShowAdsInterstitial()
+        {
+            var data = await _saveService.Load();
+            
+            if (data.IsNoAdsPurchased)
                 return;
 
             ShowAds(INTERSTITIAL_ADS);

@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Services.RemoteConfigs;
+using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.UI.GameScreen
 {
@@ -14,6 +15,7 @@ namespace _Project.Scripts.UI.GameScreen
 
         public void AddScore(IRemoteConfigs  config);
         
-        public void SaveResult(int score);
+        // public void SaveResult(int score);
+        public UniTask SaveResult(int score);
     }
 }

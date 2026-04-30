@@ -1,7 +1,6 @@
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Services.Ads;
 using _Project.Scripts.Services.Analytics;
-using _Project.Scripts.Services.CloudSave;
 using _Project.Scripts.Services.Purchases;
 using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.Services.Save;
@@ -17,11 +16,10 @@ namespace _Project.Scripts.Installers.Project
         public override void InstallBindings()
         {
             Container.Bind<ICloudInitialize>().To<CloudInitializer>().AsSingle();
-            Container.Bind<ICloudSaveSample>().To<CloudSaveSample>().AsSingle();
+            Container.Bind<ISaveService>().To<LocalSaveService>().AsSingle();
+            Container.Bind<ISaveService>().WithId("Cloud").To<CloudSaveService>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<SaveSynchronizationService>().AsSingle();
-            
-            Container.Bind<ISaveService>().To<LocalSaveService>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<FirebaseAnalyticsService>().AsSingle();
             
