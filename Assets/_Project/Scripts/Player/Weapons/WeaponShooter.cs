@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Enemies;
 using _Project.Scripts.Services.Analytics;
+using _Project.Scripts.Services.Effects;
 using UnityEngine;
 
 namespace _Project.Scripts.Player.Weapons
@@ -13,6 +14,8 @@ namespace _Project.Scripts.Player.Weapons
         private readonly ObjectPool<Laser> _laserPool;
 
         private readonly IAnalyticsService _analyticsService;
+        
+        private readonly IEffectService _effectService;
 
         private float _laserCooldown = 0.5f;
         private float _nextBulletShootTime;
@@ -21,11 +24,12 @@ namespace _Project.Scripts.Player.Weapons
         public int LaserUsed { get; private set; }
 
         public WeaponShooter(ObjectPool<Bullet> bulletPool, ObjectPool<Laser> laserPool,
-            IAnalyticsService analyticsService)
+            IAnalyticsService analyticsService, IEffectService effectService)
         {
             _bulletPool = bulletPool;
             _laserPool = laserPool;
             _analyticsService = analyticsService;
+            _effectService = effectService;
         }
 
         public void ShootBullet(Transform spawnPoint)
@@ -41,6 +45,8 @@ namespace _Project.Scripts.Player.Weapons
 
             bullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             bullet.Initialize(_bulletPool);
+            
+            _effectService.PlayShoot(spawnPoint.position, spawnPoint.rotation);
 
             _activeProjectiles.Add(bullet);
         }
@@ -57,6 +63,8 @@ namespace _Project.Scripts.Player.Weapons
 
             laser.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
             laser.Initialize(_laserPool);
+            
+            _effectService.PlayShoot(spawnPoint.position, spawnPoint.rotation);
 
             _activeProjectiles.Add(laser);
         }

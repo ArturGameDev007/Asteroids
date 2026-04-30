@@ -3,6 +3,7 @@ using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.Services.AsyncLoader;
+using _Project.Scripts.Services.Effects;
 using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;

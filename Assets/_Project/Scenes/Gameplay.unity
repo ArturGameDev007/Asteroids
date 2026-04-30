@@ -496,22 +496,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1
-  _remoteConfigsData:
-    _forceInputShip: 9
-    _rotationSpeedShip: 170
-    _speedShoot: 8.5
-    _lifeTimeShoot: 2.5
-    _reloadTimeLaser: 5
-    _maxAmountLaser: 20
-    _enemySpeed: 1.5
-    _rotationSpeed: 30
-    _spawnOffset: 2
-    _delay: 3
-    _scoreForKill: 10
-    _asteroidPoolSize: 10
-    _ufoPoolSize: 10
-    _bulletPoolSize: 5
-    _laserPoolSize: 10
+  _shoots: {fileID: 1003271561417920025, guid: e6da1b0ac0b844fe2aceca9e3a6afc84, type: 3}
 --- !u!1 &1869544802
 GameObject:
   m_ObjectHideFlags: 0
