@@ -41,14 +41,6 @@ namespace _Project.Scripts.Services.Ads
 
         public void OnInitializationComplete()
         {
-            // if (_saveService.Load().IsNoAdsPurchased)
-            // {
-            //     return;
-            // }
-            //
-            // Advertisement.Load(REWARD_ADS, this);
-            // Advertisement.Load(INTERSTITIAL_ADS, this);
-            
             CheckAndLoadAds().Forget();
         }
 
@@ -62,11 +54,6 @@ namespace _Project.Scripts.Services.Ads
         
         public void ShowAdsInterstitial()
         {
-            // if (_saveData.IsNoAdsPurchased)
-            //     return;
-            //
-            // ShowAds(INTERSTITIAL_ADS);
-            
             InternalShowAdsInterstitial().Forget();
         }
 

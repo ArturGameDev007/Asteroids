@@ -19,21 +19,26 @@ namespace _Project.Scripts.Services.Effects
 
         public void PlayExplosionForKill(Vector3 position)
         {
-            var effect = _poolExplosion.GetObject();
-            effect.transform.position = position;
-            effect.Play();
+            var effect = PlayEffect(_poolExplosion, position,  Quaternion.identity);
             
             ReturnPool(effect, _poolExplosion).Forget();
         }
 
         public void PlayShoot(Vector3 position, Quaternion rotation)
         {
-            var effect = _poolShoot.GetObject();
-            effect.transform.position = position;
-            effect.transform.rotation = rotation;
-            effect.Play();
+
+            var effect = PlayEffect(_poolShoot, position,  rotation);
             
             ReturnPool(effect, _poolShoot).Forget();
+        }
+
+        private ParticleSystem PlayEffect(ObjectPool<ParticleSystem> effectPool, Vector3 position, Quaternion rotation)
+        {
+            var  effectInstance = effectPool.GetObject();
+            effectInstance.transform.SetPositionAndRotation(position, rotation);
+            effectInstance.Play();
+            
+            return effectInstance;
         }
 
         private async UniTaskVoid ReturnPool(ParticleSystem effect, ObjectPool<ParticleSystem> pool)

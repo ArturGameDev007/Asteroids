@@ -14,7 +14,6 @@ namespace _Project.Scripts.Player.Weapons
         private readonly ObjectPool<Laser> _laserPool;
 
         private readonly IAnalyticsService _analyticsService;
-        
         private readonly IEffectService _effectService;
 
         private float _laserCooldown = 0.5f;

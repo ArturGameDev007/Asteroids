@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Newtonsoft.Json;
@@ -20,6 +19,7 @@ namespace _Project.Scripts.Services.Save
             PlayerPrefs.Save();
             
             OnSaved?.Invoke();
+            
             return UniTask.CompletedTask;
         }
 
@@ -34,7 +34,6 @@ namespace _Project.Scripts.Services.Save
             string json = PlayerPrefs.GetString(BEST_SCORE_DATA);
 
             return UniTask.FromResult(JsonConvert.DeserializeObject<SaveData>(json));
-            // return JsonConvert.DeserializeObject<SaveData>(json);
         }
     }
 }
