@@ -32,6 +32,9 @@ namespace _Project.Scripts.Installers.Gameplay
         [Header("Load Prefabs Async")]
         [SerializeField] private AssetReference[] _enemyRefences;
 
+        [SerializeField] private ParticleSystem _effectExplosionKill;
+        [SerializeField] private ParticleSystem _effectPlayShoot;
+
         public override void InstallBindings()
         {
             Container.Bind<IResourceLoader>().To<AddressableResourceLoader>().AsSingle();
@@ -100,10 +103,13 @@ namespace _Project.Scripts.Installers.Gameplay
 
             Container.Bind<ObjectPool<Enemy>>().WithId("AsteroidPool").AsCached()
                 .WithArguments(default(Enemy), "Asteroid", enemiesContainer);
-
+            
             Container.Bind<ObjectPool<Enemy>>().WithId("UfoPool").AsCached()
                 .WithArguments(default(Enemy), "UFO", enemiesContainer);
 
+            Container.Bind<ObjectPool<ParticleSystem>>().WithId("ExplosionPool").AsCached()
+                .WithArguments(_effectExplosionKill, "ExplosionKills", enemiesContainer);
+            
             Container.Bind<EnemyResourceManager>().AsSingle().WithArguments(_enemyRefences);
 
             Transform projectilesContainer = new GameObject("Weapons_Category").transform;
@@ -114,9 +120,14 @@ namespace _Project.Scripts.Installers.Gameplay
 
             Container.Bind<ObjectPool<Laser>>().AsCached()
                 .WithArguments(default(Laser),  "Laser", projectilesContainer);
+            
+            Container.Bind<ObjectPool<ParticleSystem>>().WithId("ShootsPool").AsCached()
+                .WithArguments(_effectPlayShoot, "Shoots", projectilesContainer);
 
             Container.Bind<ProjectileResourceManager>().AsSingle()
                 .WithArguments(_bulletPrefabReference, _laserPrefabReference);
+            
+            Container.Bind<IEffectService>().To<EffectSystem>().AsSingle();
         }
 
         private void BindSpawners()

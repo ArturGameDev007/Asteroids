@@ -172,7 +172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32700fd763936344f864888182b0abad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ufoConfig: {fileID: 11400000, guid: c730927372f184849ace991e8aa06ab8, type: 2}
 --- !u!114 &-1895366960235508766
 MonoBehaviour:
   m_ObjectHideFlags: 0

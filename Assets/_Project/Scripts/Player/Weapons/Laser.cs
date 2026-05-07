@@ -1,4 +1,5 @@
 ﻿using _Project.Scripts.Enemies;
+using Zenject;
 
 namespace _Project.Scripts.Player.Weapons
 {
@@ -6,7 +7,8 @@ namespace _Project.Scripts.Player.Weapons
     {
         private IObjectReturner<Laser> _returner;
 
-        public void Initialize(IObjectReturner<Laser> returner)
+        [Inject]
+        public void Construct(IObjectReturner<Laser> returner)
         {
             _returner = returner;
         }

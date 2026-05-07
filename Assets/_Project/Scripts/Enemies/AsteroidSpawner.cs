@@ -6,9 +6,8 @@ namespace _Project.Scripts.Enemies
 {
     public class AsteroidSpawner : GeneratorEnemies
     {
-        public AsteroidSpawner(IRemoteConfigs remoteConfig, [Inject(Id = "AsteroidPool")] ObjectPool<Enemy> pool,
-            IEnemyDeathListener enemyManager, Camera camera)
-            : base(remoteConfig, pool, enemyManager, camera)
+        public AsteroidSpawner(IRemoteConfigs remoteConfig, [Inject(Id = "AsteroidPool")] ObjectPool<Enemy> pool, Camera camera)
+            : base(remoteConfig, pool, camera)
         {
         }
 

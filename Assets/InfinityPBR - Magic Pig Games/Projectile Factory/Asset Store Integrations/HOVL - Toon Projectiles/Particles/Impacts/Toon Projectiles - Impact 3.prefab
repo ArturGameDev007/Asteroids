@@ -4847,7 +4847,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 161852a92f31b914b8f1affca6c04673, type: 2}
+  - {fileID: 2100000, guid: 3254f6ec1a3d1a541a9911cf94af812e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9765,7 +9765,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9aaa13d175bcf1c4b8acc4d930ee06ee, type: 2}
+  - {fileID: 2100000, guid: 3254f6ec1a3d1a541a9911cf94af812e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9829,8 +9829,6 @@ GameObject:
   - component: {fileID: 7256437824159422656}
   - component: {fileID: 1003271561417920025}
   - component: {fileID: 2576036074281343622}
-  - component: {fileID: 3428296665446871946}
-  - component: {fileID: 2028799147319943867}
   m_Layer: 0
   m_Name: Toon Projectiles - Impact 3
   m_TagString: Untagged
@@ -14682,7 +14680,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 35f5e6dc715494f44b17248eee5426bd, type: 2}
+  - {fileID: 2100000, guid: 3254f6ec1a3d1a541a9911cf94af812e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14735,45 +14733,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &3428296665446871946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3936155096976807505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7820685bb7484defb2c7faf26b4ca931, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDestroy: 5
-  triggerWhenProjectileSet: 1
-  objectsToDisableImmediately: []
-  delayToDisableObjects: 0.05
-  reenableThemOnEnable: 1
---- !u!114 &2028799147319943867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3936155096976807505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28d7bc995371b47c5bc9ba8f796f58be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceMode: 1
-  force: 14
-  multipleImpulseForceByDuration: 0
-  applyForceInDirection: 1
-  areaRadius: 5
-  delay: 0
-  duration: -1
-  forwardMaxAngle: 30
-  drawDebugLine: 0
-  lineColor: {r: 1, g: 0, b: 1, a: 1}
 --- !u!1 &4636413089593451097
 GameObject:
   m_ObjectHideFlags: 0
@@ -14791,7 +14750,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6915624905192113151
 Transform:
   m_ObjectHideFlags: 0
@@ -19621,7 +19580,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: db0eda4c763c64d45a721c795ca1f355, type: 2}
+  - {fileID: 2100000, guid: 3254f6ec1a3d1a541a9911cf94af812e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24530,7 +24489,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d5dfb7b499f5de840871d37b9f54d073, type: 2}
+  - {fileID: 2100000, guid: 3254f6ec1a3d1a541a9911cf94af812e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -29457,7 +29416,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c95a4f2f3beafef4a8cd1750c8a53e43, type: 2}
+  - {fileID: 2100000, guid: 3254f6ec1a3d1a541a9911cf94af812e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -34357,7 +34316,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d2018a8d174b19a459390c54366c209a, type: 2}
+  - {fileID: 2100000, guid: 3254f6ec1a3d1a541a9911cf94af812e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

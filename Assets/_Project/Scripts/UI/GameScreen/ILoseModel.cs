@@ -15,7 +15,6 @@ namespace _Project.Scripts.UI.GameScreen
 
         public void AddScore(IRemoteConfigs  config);
         
-        // public void SaveResult(int score);
         public UniTask SaveResult(int score);
     }
 }

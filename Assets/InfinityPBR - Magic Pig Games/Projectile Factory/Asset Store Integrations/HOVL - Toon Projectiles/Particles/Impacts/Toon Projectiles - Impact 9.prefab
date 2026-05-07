@@ -19629,8 +19629,6 @@ GameObject:
   - component: {fileID: 5492042739212646901}
   - component: {fileID: 2903612003289072616}
   - component: {fileID: 6080863427924168121}
-  - component: {fileID: 1168170405581547878}
-  - component: {fileID: 2696555391379910534}
   m_Layer: 0
   m_Name: Toon Projectiles - Impact 9
   m_TagString: Untagged
@@ -19674,7 +19672,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -24473,7 +24471,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d5dfb7b499f5de840871d37b9f54d073, type: 2}
+  - {fileID: 2100000, guid: 3af350dbae8b64487b91e1e005f0d64a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24526,45 +24524,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &1168170405581547878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7275527552336947234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7820685bb7484defb2c7faf26b4ca931, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDestroy: 5
-  triggerWhenProjectileSet: 1
-  objectsToDisableImmediately: []
-  delayToDisableObjects: 0.05
-  reenableThemOnEnable: 1
---- !u!114 &2696555391379910534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7275527552336947234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28d7bc995371b47c5bc9ba8f796f58be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceMode: 1
-  force: 14
-  multipleImpulseForceByDuration: 0
-  applyForceInDirection: 1
-  areaRadius: 5
-  delay: 0
-  duration: -1
-  forwardMaxAngle: 30
-  drawDebugLine: 0
-  lineColor: {r: 1, g: 0, b: 1, a: 1}
 --- !u!1 &8202202642298811545
 GameObject:
   m_ObjectHideFlags: 0

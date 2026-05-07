@@ -44,7 +44,6 @@ namespace _Project.Scripts.Player.Weapons
             ShotsCount++;
 
             bullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
-            bullet.Initialize(_bulletPool);
             
             _effectService.PlayShoot(spawnPoint.position, spawnPoint.rotation);
 
@@ -62,7 +61,6 @@ namespace _Project.Scripts.Player.Weapons
             _analyticsService.LogLaserUsed();
 
             laser.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
-            laser.Initialize(_laserPool);
             
             _effectService.PlayShoot(spawnPoint.position, spawnPoint.rotation);
 

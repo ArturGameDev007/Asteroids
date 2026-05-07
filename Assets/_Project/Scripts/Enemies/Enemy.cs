@@ -1,6 +1,8 @@
 ﻿using _Project.Scripts.Player.Weapons;
+using _Project.Scripts.Services.Effects;
 using _Project.Scripts.Services.RemoteConfigs;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Enemies
 {
@@ -8,9 +10,9 @@ namespace _Project.Scripts.Enemies
     public abstract class Enemy : MonoBehaviour, IEnemy
     {
         private IRemoteConfigs _enemyRemoteConfig;
-        
         private IObjectReturner<Enemy> _returner;
         private IEnemyDeathListener _deathListener;
+        private IEffectService _effectService;
         
         protected Rigidbody2D Head2D { get; private set; }
 
@@ -21,11 +23,13 @@ namespace _Project.Scripts.Enemies
             Head2D = GetComponent<Rigidbody2D>();
         }
 
-        public void Construct(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, IRemoteConfigs enemyConfig)
+        [Inject]
+        public void Construct(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, IRemoteConfigs enemyConfig, IEffectService effectService)
         {
             _returner = returner;
             _deathListener = deathListener;
             _enemyRemoteConfig = enemyConfig;
+            _effectService = effectService;
         }
 
         private void FixedUpdate()
@@ -54,6 +58,7 @@ namespace _Project.Scripts.Enemies
 
         private void Kill()
         {
+            _effectService.PlayExplosionForKill(transform.position);
             _deathListener?.OnEnemyDeath(_enemyRemoteConfig);
             _returner?.ReturnPool(this);
         }

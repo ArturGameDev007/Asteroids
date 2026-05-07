@@ -9829,8 +9829,6 @@ GameObject:
   - component: {fileID: 8383689346667092849}
   - component: {fileID: 8338946214690005895}
   - component: {fileID: 4435390261589980450}
-  - component: {fileID: 5391453474599955224}
-  - component: {fileID: 7498930817694126301}
   m_Layer: 0
   m_Name: Toon Projectiles - Impact 7
   m_TagString: Untagged
@@ -14684,7 +14682,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13652c21ac9e0c0419a23ddb06f683fc, type: 2}
+  - {fileID: 2100000, guid: 3254f6ec1a3d1a541a9911cf94af812e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14737,45 +14735,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &5391453474599955224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4719407650885805218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7820685bb7484defb2c7faf26b4ca931, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDestroy: 5
-  triggerWhenProjectileSet: 1
-  objectsToDisableImmediately: []
-  delayToDisableObjects: 0.05
-  reenableThemOnEnable: 1
---- !u!114 &7498930817694126301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4719407650885805218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28d7bc995371b47c5bc9ba8f796f58be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceMode: 1
-  force: 14
-  multipleImpulseForceByDuration: 0
-  applyForceInDirection: 1
-  areaRadius: 5
-  delay: 0
-  duration: -1
-  forwardMaxAngle: 30
-  drawDebugLine: 0
-  lineColor: {r: 1, g: 0, b: 1, a: 1}
 --- !u!1 &5589074203853346924
 GameObject:
   m_ObjectHideFlags: 0

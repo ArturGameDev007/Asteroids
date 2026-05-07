@@ -8,7 +8,7 @@ namespace _Project.Scripts.Enemies
     {
         private readonly IRemoteConfigs _remoteConfig;
         private readonly List<Enemy> _activeEnemies = new();
-        private readonly IEnemyDeathListener _enemyManager;
+        // private readonly IEnemyDeathListener _enemyManager;
         private readonly ObjectPool<Enemy> _pool;
         private readonly Camera _camera;
         
@@ -18,12 +18,12 @@ namespace _Project.Scripts.Enemies
         private float _spawnTimer;
         private bool _isGameActive;
 
-        protected GeneratorEnemies(IRemoteConfigs remoteConfig, ObjectPool<Enemy> pool, IEnemyDeathListener enemyManager, Camera camera)
+        protected GeneratorEnemies(IRemoteConfigs remoteConfig, ObjectPool<Enemy> pool, Camera camera)
         {
             _remoteConfig = remoteConfig;
             _camera = camera;
             _pool = pool;
-            _enemyManager = enemyManager;
+            // _enemyManager = enemyManager;
         }
 
         public void Process(float  deltaTime)
@@ -77,7 +77,7 @@ namespace _Project.Scripts.Enemies
             
             enemy.transform.position = spawnPosition;
             enemy.gameObject.SetActive(true);
-            enemy.Construct(pool, _enemyManager, _remoteConfig);
+            // enemy.Construct(pool, _enemyManager, _remoteConfig);
             
             ConfigureSpawn(enemy, spawnPosition);
             

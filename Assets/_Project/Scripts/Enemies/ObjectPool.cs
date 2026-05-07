@@ -13,11 +13,11 @@ namespace _Project.Scripts.Enemies
 
         private readonly Queue<T> _pool;
         private readonly Transform _container;
-        
+
         private readonly string _containerName;
 
         private int _initialCount;
-        
+
         public T Prefab { get; set; }
 
         public ObjectPool(IInstantiator prefabInstantiator, IRemoteConfigs remoteConfigs, T prefab,
@@ -27,7 +27,7 @@ namespace _Project.Scripts.Enemies
             _remoteConfigs = remoteConfigs;
 
             Prefab = prefab;
-            
+
             _containerName = containerName;
 
             _initialCount = GetSizePool();
@@ -64,14 +64,14 @@ namespace _Project.Scripts.Enemies
             {
                 if (_containerName.Contains("Asteroid"))
                     return _remoteConfigs.RemoteConfig.PoolConfigs.AsteroidPoolSize;
-                
+
                 if (_containerName.Contains("UFO"))
                     return _remoteConfigs.RemoteConfig.PoolConfigs.UfoPoolSize;
             }
 
             if (type == typeof(Bullet))
                 return _remoteConfigs.RemoteConfig.PoolConfigs.BulletPoolSize;
-            
+
             if (type == typeof(Laser))
                 return _remoteConfigs.RemoteConfig.PoolConfigs.LaserPoolSize;
 
@@ -80,7 +80,17 @@ namespace _Project.Scripts.Enemies
 
         private T CreateNewObject(bool isActive)
         {
-            var newObject = _instantiator.InstantiatePrefabForComponent<T>(Prefab, _container);
+            T newObject;
+
+            if (Prefab is MonoBehaviour)
+            {
+                newObject = _instantiator.InstantiatePrefabForComponent<T>(Prefab, _container, new[] { this });
+            }
+            else
+            {
+               var g = _instantiator.InstantiatePrefab(Prefab, _container);
+               newObject = g.GetComponent<T>();
+            }
 
             newObject.gameObject.SetActive(isActive);
 

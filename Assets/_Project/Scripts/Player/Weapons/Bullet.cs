@@ -1,5 +1,6 @@
 ﻿using _Project.Scripts.Enemies;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Player.Weapons
 {
@@ -7,7 +8,8 @@ namespace _Project.Scripts.Player.Weapons
     {
         private IObjectReturner<Bullet> _returner;
 
-        public void Initialize(IObjectReturner<Bullet> returner)
+        [Inject]
+        public void Construct(IObjectReturner<Bullet> returner)
         {
             _returner = returner;
         }
