@@ -17,8 +17,23 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 454887ce48a940b479e8991d5fb053c8
   m_SerializeEntries:
+  - m_GUID: 0500964bb4ca14db59d2b3f4fc4f8fa2
+    m_Address: Toon Projectiles - Impact 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 12deaaaf3585eb74d92fb178f7fc9366
     m_Address: Bullet
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3254f6ec1a3d1a541a9911cf94af812e
+    m_Address: Shoot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5613f00d8bcc1d045acb65c536424ab4
+    m_Address: Kill
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -49,6 +64,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a752461b71d007d41a3f9643f9183b0f
     m_Address: UI - ShipCoordinatesPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da8b637323bd82e46b5283879200d26f
+    m_Address: Toon Projectiles - Impact 16
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

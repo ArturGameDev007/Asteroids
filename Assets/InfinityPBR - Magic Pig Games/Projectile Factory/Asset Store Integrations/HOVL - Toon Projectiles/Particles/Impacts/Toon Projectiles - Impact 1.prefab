@@ -9811,6 +9811,7 @@ GameObject:
   - component: {fileID: 2367853519802274705}
   - component: {fileID: 2595071307156621623}
   - component: {fileID: 508390152124810445}
+  - component: {fileID: 5108775788242901687}
   m_Layer: 0
   m_Name: Toon Projectiles - Impact 1
   m_TagString: Untagged
@@ -14724,6 +14725,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5108775788242901687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3751757043261429048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06680d622dc244ce9b68ee7bfeffcc6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4228776691771824223
 GameObject:
   m_ObjectHideFlags: 0

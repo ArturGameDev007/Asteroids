@@ -1,52 +1,59 @@
-using System;
 using _Project.Scripts.Enemies;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Zenject;
 
 namespace _Project.Scripts.Services.Effects
 {
     public class EffectSystem : IEffectService
     {
-        private readonly ObjectPool<ParticleSystem> _poolExplosion;
-        private readonly ObjectPool<ParticleSystem> _poolShoot;
+        private readonly ObjectPool<ExplosionEffect> _poolExplosion;
+        private readonly ObjectPool<ShootEffect> _poolShoot;
+        
+        private readonly IEffectResourceManager _resourceManager;
 
-        public EffectSystem([Inject(Id = "ExplosionPool")] ObjectPool<ParticleSystem> poolExplosion, [Inject(Id = "ShootsPool")] ObjectPool<ParticleSystem> poolShoot)
+        public EffectSystem(ObjectPool<ExplosionEffect> poolExplosion, ObjectPool<ShootEffect> poolShoot,
+            IEffectResourceManager resourceManager)
         {
             _poolExplosion = poolExplosion;
             _poolShoot = poolShoot;
+            _resourceManager = resourceManager;
         }
 
         public void PlayExplosionForKill(Vector3 position)
         {
-            var effect = PlayEffect(_poolExplosion, position,  Quaternion.identity);
+            if (_poolExplosion.Prefab == null)
+            {
+                _poolExplosion.Prefab = _resourceManager.ExplosionPrefab;
+            }
             
-            ReturnPool(effect, _poolExplosion).Forget();
+            PlayEffect(_poolExplosion, position, Quaternion.identity);
         }
 
         public void PlayShoot(Vector3 position, Quaternion rotation)
         {
+            if (_poolShoot.Prefab == null)
+            {
+                _poolShoot.Prefab = _resourceManager.ShootsPrefab;
+            }
 
-            var effect = PlayEffect(_poolShoot, position,  rotation);
-            
-            ReturnPool(effect, _poolShoot).Forget();
+            PlayEffect(_poolShoot, position, rotation);
         }
 
-        private ParticleSystem PlayEffect(ObjectPool<ParticleSystem> effectPool, Vector3 position, Quaternion rotation)
+        private T PlayEffect<T>(ObjectPool<T> effectPool, Vector3 position, Quaternion rotation) where T : MonoBehaviour
         {
-            var  effectInstance = effectPool.GetObject();
+            if (effectPool == null)
+                return null;
+
+            var effectInstance = effectPool.GetObject();
+
+            if (effectInstance == null)
+                return null;
+
             effectInstance.transform.SetPositionAndRotation(position, rotation);
-            effectInstance.Play();
-            
-            return effectInstance;
-        }
 
-        private async UniTaskVoid ReturnPool(ParticleSystem effect, ObjectPool<ParticleSystem> pool)
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(effect.main.duration));
-        
-            if (effect != null)
-                pool.ReturnPool(effect);
+            if (effectInstance.TryGetComponent(out ParticleSystem effect))
+                effect.Play();
+
+            return effectInstance;
         }
     }
 }

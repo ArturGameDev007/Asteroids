@@ -32,8 +32,12 @@ namespace _Project.Scripts.Installers.Gameplay
         [Header("Load Prefabs Async")]
         [SerializeField] private AssetReference[] _enemyRefences;
 
-        [SerializeField] private ParticleSystem _effectExplosionKill;
-        [SerializeField] private ParticleSystem _effectPlayShoot;
+        // [SerializeField] private ParticleSystem _effectExplosionKill;
+        // [SerializeField] private ParticleSystem _effectPlayShoot;
+        
+        [Header("Effects")]
+        [SerializeField] private AssetReference _effectExplosionKill;
+        [SerializeField] private AssetReference _effectPlayShoot;
 
         public override void InstallBindings()
         {
@@ -107,9 +111,6 @@ namespace _Project.Scripts.Installers.Gameplay
             Container.Bind<ObjectPool<Enemy>>().WithId("UfoPool").AsCached()
                 .WithArguments(default(Enemy), "UFO", enemiesContainer);
 
-            Container.Bind<ObjectPool<ParticleSystem>>().WithId("ExplosionPool").AsCached()
-                .WithArguments(_effectExplosionKill, "ExplosionKills", enemiesContainer);
-            
             Container.Bind<EnemyResourceManager>().AsSingle().WithArguments(_enemyRefences);
 
             Transform projectilesContainer = new GameObject("Weapons_Category").transform;
@@ -121,11 +122,17 @@ namespace _Project.Scripts.Installers.Gameplay
             Container.Bind<ObjectPool<Laser>>().AsCached()
                 .WithArguments(default(Laser),  "Laser", projectilesContainer);
             
-            Container.Bind<ObjectPool<ParticleSystem>>().WithId("ShootsPool").AsCached()
-                .WithArguments(_effectPlayShoot, "Shoots", projectilesContainer);
-
             Container.Bind<ProjectileResourceManager>().AsSingle()
                 .WithArguments(_bulletPrefabReference, _laserPrefabReference);
+
+            Container.Bind<IEffectResourceManager>().To<EffectResourceManager>().AsSingle()
+                .WithArguments(_effectExplosionKill, _effectPlayShoot);
+            
+            Container.Bind<ObjectPool<ExplosionEffect>>().AsCached()
+                .WithArguments(default(ExplosionEffect), "ExplosionKills", enemiesContainer);
+            
+            Container.Bind<ObjectPool<ShootEffect>>().AsCached()
+                .WithArguments(default(ShootEffect), "Shoots", projectilesContainer);
             
             Container.Bind<IEffectService>().To<EffectSystem>().AsSingle();
         }

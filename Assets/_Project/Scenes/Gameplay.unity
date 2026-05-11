@@ -496,8 +496,16 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1
-  _effectExplosionKill: {fileID: 2595071307156621623, guid: 0500964bb4ca14db59d2b3f4fc4f8fa2, type: 3}
-  _effectPlayShoot: {fileID: 2595071307156621623, guid: da8b637323bd82e46b5283879200d26f, type: 3}
+  _effectExplosionKill:
+    m_AssetGUID: 0500964bb4ca14db59d2b3f4fc4f8fa2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _effectPlayShoot:
+    m_AssetGUID: da8b637323bd82e46b5283879200d26f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1 &1869544802
 GameObject:
   m_ObjectHideFlags: 0
