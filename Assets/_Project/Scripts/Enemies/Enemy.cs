@@ -1,4 +1,5 @@
 ﻿using _Project.Scripts.Player.Weapons;
+using _Project.Scripts.Services.Audio.SFX;
 using _Project.Scripts.Services.Effects;
 using _Project.Scripts.Services.RemoteConfigs;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace _Project.Scripts.Enemies
         private IObjectReturner<Enemy> _returner;
         private IEnemyDeathListener _deathListener;
         private IEffectService _effectService;
+        private IAudioSystem _audioSystem;
         
         protected Rigidbody2D Head2D { get; private set; }
 
@@ -24,12 +26,13 @@ namespace _Project.Scripts.Enemies
         }
 
         [Inject]
-        public void Construct(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, IRemoteConfigs enemyConfig, IEffectService effectService)
+        public void Construct(IObjectReturner<Enemy> returner, IEnemyDeathListener deathListener, IRemoteConfigs enemyConfig, IEffectService effectService,  IAudioSystem audioSystem)
         {
             _returner = returner;
             _deathListener = deathListener;
             _enemyRemoteConfig = enemyConfig;
             _effectService = effectService;
+            _audioSystem = audioSystem;
         }
 
         private void FixedUpdate()
@@ -59,6 +62,7 @@ namespace _Project.Scripts.Enemies
         private void Kill()
         {
             _effectService.PlayExplosionForKill(transform.position);
+            _audioSystem.PlayExplosionForKillClip(transform.position);
             _deathListener?.OnEnemyDeath(_enemyRemoteConfig);
             _returner?.ReturnPool(this);
         }

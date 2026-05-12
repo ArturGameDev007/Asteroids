@@ -4,9 +4,6 @@ namespace _Project.Scripts.Services.Effects
 {
     public interface IEffectResourceManager
     {
-        public ExplosionEffect ExplosionPrefab { get; }
-        public ShootEffect ShootsPrefab { get; }
-        
         public UniTask LoadEffects();
     }
 }

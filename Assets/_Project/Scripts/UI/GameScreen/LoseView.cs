@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts.UI.GameScreen.AnamationPanel;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,7 @@ using Zenject;
 
 namespace _Project.Scripts.UI.GameScreen
 {
+    [RequireComponent(typeof(CanvasGroup))]
     [RequireComponent(typeof(Canvas))]
     public class LoseView : MonoBehaviour, ILoseView
     {
@@ -18,17 +20,23 @@ namespace _Project.Scripts.UI.GameScreen
 
         [Header("Button")]
         [SerializeField] private Button _restartButton;
+        
+        [SerializeField] private RectTransform _panelTransform;
 
         private Canvas _canvas;
-        private Transform _buttonTransform;
+        private CanvasGroup _canvasGroup;
+        
+        private Sequence _sequence;
+        private IAnimationWindow _windowAnimation;
+        
 
         [Inject]
-        public void Construct()
+        public void Construct(IAnimationWindow  windowAnimation)
         {
             _canvas = GetComponent<Canvas>();
-
-            if (_restartButton != null)
-                _buttonTransform = _restartButton.transform;
+            _canvasGroup = GetComponent<CanvasGroup>();
+            
+            _windowAnimation = windowAnimation;
         }
 
         private void Start()
@@ -45,9 +53,6 @@ namespace _Project.Scripts.UI.GameScreen
         {
             _textScore.text = $"Score: {score.ToString()}";
             _textBestResult.text = $"Best Result: {bestScore.ToString()}";
-
-            AnimateTexts(_textScore.transform, 0.5f);
-            AnimateTexts(_textBestResult.transform, 0.5f);
         }
 
         public void ShowPanel()
@@ -55,7 +60,7 @@ namespace _Project.Scripts.UI.GameScreen
             _canvas.gameObject.SetActive(true);
             _restartButton.interactable = true;
 
-            AnimateButton(_buttonTransform, 0.5f);
+            _windowAnimation.AnimatePanel(_panelTransform, _canvasGroup, 0.8f);
         }
 
         public void HidePanel()
@@ -67,23 +72,6 @@ namespace _Project.Scripts.UI.GameScreen
         private void OnRestart()
         {
             OnRestartRequested?.Invoke();
-        }
-
-        private void AnimateTexts(Transform transformText, float duration)
-        {
-            transformText.localScale = Vector3.zero;
-            transformText.DOScale(Vector3.one, duration).SetEase(Ease.OutBack);
-        }
-
-        private void AnimateButton(Transform button, float duration)
-        {
-            if (_buttonTransform ==  null)
-                return;
-            
-            Vector2 targetPosition = button.localPosition;
-            Vector2 startShift = targetPosition - new Vector2(0, 300f);
-            
-            button.DOLocalMove(targetPosition, duration).From(startShift).SetEase(Ease.OutBack).SetUpdate(true);
         }
     }
 }

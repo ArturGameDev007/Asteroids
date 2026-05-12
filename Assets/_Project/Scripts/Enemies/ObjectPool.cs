@@ -81,17 +81,6 @@ namespace _Project.Scripts.Enemies
         private T CreateNewObject(bool isActive)
         {
             var newObject = _instantiator.InstantiatePrefabForComponent<T>(Prefab, _container, new[] { this });
-
-            // if (Prefab is MonoBehaviour)
-            // {
-            //     newObject = _instantiator.InstantiatePrefabForComponent<T>(Prefab, _container, new[] { this });
-            // }
-            // else
-            // {
-            //    var g = _instantiator.InstantiatePrefab(Prefab, _container);
-            //    newObject = g.GetComponent<T>();
-            // }
-
             newObject.gameObject.SetActive(isActive);
 
             if (!isActive)

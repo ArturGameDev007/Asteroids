@@ -4,6 +4,7 @@ using _Project.Scripts.Services.Analytics;
 using _Project.Scripts.Services.Purchases;
 using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.Services.Save;
+using _Project.Scripts.UI.GameScreen.AnamationPanel;
 using UnityEngine;
 using Zenject;
 
@@ -31,6 +32,8 @@ namespace _Project.Scripts.Installers.Project
 
             Container.BindInterfacesAndSelfTo<IAPService>().AsSingle();
             Container.Bind<IProductTypePurchase>().To<ProductTypePurchasePurchase>().AsSingle();
+            
+            Container.Bind<IAnimationWindow>().To<AnimationWindow>().AsSingle();
         }
     }
 }

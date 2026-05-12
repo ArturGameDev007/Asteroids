@@ -3,6 +3,8 @@ using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.Services.AsyncLoader;
+using _Project.Scripts.Services.Audio.Background;
+using _Project.Scripts.Services.Audio.SFX;
 using _Project.Scripts.Services.Effects;
 using _Project.Scripts.UI.Background;
 using _Project.Scripts.UI.GameScreen;
@@ -32,12 +34,14 @@ namespace _Project.Scripts.Installers.Gameplay
         [Header("Load Prefabs Async")]
         [SerializeField] private AssetReference[] _enemyRefences;
 
-        // [SerializeField] private ParticleSystem _effectExplosionKill;
-        // [SerializeField] private ParticleSystem _effectPlayShoot;
-        
         [Header("Effects")]
         [SerializeField] private AssetReference _effectExplosionKill;
         [SerializeField] private AssetReference _effectPlayShoot;
+        
+        [Header("Audio SFX")]
+        [SerializeField] private AssetReference _explosionClip;
+        [SerializeField] private AssetReference _shootClip;
+        [SerializeField] private AssetReference _backgroundMusic;
 
         public override void InstallBindings()
         {
@@ -50,17 +54,14 @@ namespace _Project.Scripts.Installers.Gameplay
             Container.Bind<RestartGame>().AsSingle();
             Container.Bind<ILoseModel>().To<ScoreData>().AsSingle();
             
+            Container.Bind<IMusicBackgroundResourceManager>().To<MusicBackgroundResourceManager>().AsSingle().WithArguments(_backgroundMusic);
             Container.Bind<LoseResourceManager>().AsSingle().WithArguments(_endGameScreenPrefabReference);
             
             BindBackgroundUI();
-
             BindPlayer();
-
             BindPerformanceUI();
-
             BindPools();
             BindSpawners();
-
             BindGameplayInfrastructure();
         }
 
@@ -125,6 +126,12 @@ namespace _Project.Scripts.Installers.Gameplay
             Container.Bind<ProjectileResourceManager>().AsSingle()
                 .WithArguments(_bulletPrefabReference, _laserPrefabReference);
 
+            BindPoolEffects(enemiesContainer, projectilesContainer);
+            BindPoolSFX(projectilesContainer, enemiesContainer);
+        }
+
+        private void BindPoolEffects(Transform projectilesContainer, Transform enemiesContainer)
+        {
             Container.Bind<IEffectResourceManager>().To<EffectResourceManager>().AsSingle()
                 .WithArguments(_effectExplosionKill, _effectPlayShoot);
             
@@ -135,6 +142,19 @@ namespace _Project.Scripts.Installers.Gameplay
                 .WithArguments(default(ShootEffect), "Shoots", projectilesContainer);
             
             Container.Bind<IEffectService>().To<EffectSystem>().AsSingle();
+        }
+
+        private void BindPoolSFX(Transform projectilesContainer, Transform enemiesContainer)
+        {
+            Container.Bind<IAudioResourceManager>().To<AudioResourceManager>().AsSingle().WithArguments(_explosionClip, _shootClip);
+
+            Container.Bind<ObjectPool<ExplosionClip>>().AsCached()
+                .WithArguments(default(ExplosionClip), "ExplosionSFX", enemiesContainer);
+            
+            Container.Bind<ObjectPool<ShootClip>>().AsCached()
+                .WithArguments(default(ShootClip), "ShootSFX", projectilesContainer);
+            
+            Container.Bind<IAudioSystem>().To<AudioSystem>().AsSingle();
         }
 
         private void BindSpawners()

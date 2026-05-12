@@ -506,6 +506,21 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  _explosionClip:
+    m_AssetGUID: a48e21ce93c61004d9c7b0a760cc74ca
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _shootClip:
+    m_AssetGUID: 09347511ae274844d9689007b8aebbed
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _backgroundMusic:
+    m_AssetGUID: 33af0b8399fb6334694e74bb4fb39d29
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1 &1869544802
 GameObject:
   m_ObjectHideFlags: 0

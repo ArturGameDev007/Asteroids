@@ -1,6 +1,8 @@
 using _Project.Scripts.Player;
 using _Project.Scripts.Player.Weapons;
 using _Project.Scripts.Services.Analytics;
+using _Project.Scripts.Services.Audio.Background;
+using _Project.Scripts.Services.Audio.SFX;
 using _Project.Scripts.Services.Effects;
 using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.UI.GameScreen;
@@ -15,6 +17,8 @@ namespace _Project.Scripts.Infrastructure
         private readonly GameLoader _gameLoader;
         private readonly GameplayController _gameplayController;
         private readonly IEffectResourceManager _effectResourceManager;
+        private readonly IAudioResourceManager  _audioResourceManager;
+        private readonly IMusicBackgroundResourceManager _backgroundMusic;
         private readonly LoseManager _loseManager;
         private readonly Character _player;
         private readonly IWeaponShooter _weaponShooter;
@@ -27,7 +31,7 @@ namespace _Project.Scripts.Infrastructure
         private bool _isInitialized;
 
         public Game(IRemoteConfigs remoteConfigs, GameLoader gameLoader, GameplayController gameplayController, IEffectResourceManager  effectResourceManager,
-            LoseManager loseManager,
+            IAudioResourceManager audioResourceManager, IMusicBackgroundResourceManager backgroundMusic, LoseManager loseManager,
             Character player, IWeaponShooter weaponShooter,
             ILoseModel scoreData, EnemyDeathTracker deathTracker,
             IAnalyticsService analyticsService)
@@ -36,6 +40,8 @@ namespace _Project.Scripts.Infrastructure
             _gameLoader = gameLoader;
             _gameplayController = gameplayController;
             _effectResourceManager = effectResourceManager;
+            _audioResourceManager = audioResourceManager;
+            _backgroundMusic = backgroundMusic;
             _loseManager = loseManager;
             _player = player;
             _weaponShooter = weaponShooter;
@@ -46,8 +52,8 @@ namespace _Project.Scripts.Infrastructure
 
         public async UniTask InitializeAsync()
         {
-            await UniTask.WhenAll(_gameLoader.LoadAllAsync(),
-                _remoteConfigs.Initialize(), _effectResourceManager.LoadEffects());
+            await UniTask.WhenAll(_gameLoader.LoadAllAsync(), _remoteConfigs.Initialize(),
+                _effectResourceManager.LoadEffects(), _audioResourceManager.LoadClips(), _backgroundMusic.LoadMusic());
             
             _scoreData?.Reset();
 
@@ -87,10 +93,12 @@ namespace _Project.Scripts.Infrastructure
             _gameplayController.StopGameplay();
             _analyticsService.LogGameEnd(_weaponShooter.ShotsCount, _weaponShooter.LaserUsed, _deathTracker.KillCount);
             _loseManager.HandleGameOver().Forget();
+            _backgroundMusic.StopMusic();
         }
 
         private void OnRevive()
         {
+            _backgroundMusic.PlayMusic();
             _gameplayController.ContinueGame();
         }
     }
