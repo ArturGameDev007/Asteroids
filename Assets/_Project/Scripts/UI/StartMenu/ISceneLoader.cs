@@ -4,6 +4,6 @@ namespace _Project.Scripts.UI.StartMenu
 {
     public interface ISceneLoader
     {
-        public UniTask LoadSceneAsync();
+        public UniTask LoadSceneAsync(string sceneName);
     }
 }

@@ -4,6 +4,7 @@ using _Project.Scripts.Services.Analytics;
 using _Project.Scripts.Services.Purchases;
 using _Project.Scripts.Services.RemoteConfigs;
 using _Project.Scripts.Services.Save;
+using _Project.Scripts.UI.BackToStartMenu;
 using _Project.Scripts.UI.GameScreen.AnamationPanel;
 using UnityEngine;
 using Zenject;

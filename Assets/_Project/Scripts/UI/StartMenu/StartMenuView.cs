@@ -7,5 +7,6 @@ namespace _Project.Scripts.UI.StartMenu
     {
         [field: SerializeField] public Button StartButton { get; private set; }
         [field: SerializeField] public Button BuyProducts { get; private set; }
+        [field: SerializeField] public Button ExitGameButton { get; private set; }
     }
 }

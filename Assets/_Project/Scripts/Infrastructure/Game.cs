@@ -5,6 +5,7 @@ using _Project.Scripts.Services.Audio.Background;
 using _Project.Scripts.Services.Audio.SFX;
 using _Project.Scripts.Services.Effects;
 using _Project.Scripts.Services.RemoteConfigs;
+using _Project.Scripts.UI.BackToStartMenu;
 using _Project.Scripts.UI.GameScreen;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly IEffectResourceManager _effectResourceManager;
         private readonly IAudioResourceManager  _audioResourceManager;
         private readonly IMusicBackgroundResourceManager _backgroundMusic;
+        private readonly IBackToMenuManager _backToMenuManager;
         private readonly LoseManager _loseManager;
         private readonly Character _player;
         private readonly IWeaponShooter _weaponShooter;
@@ -31,7 +33,7 @@ namespace _Project.Scripts.Infrastructure
         private bool _isInitialized;
 
         public Game(IRemoteConfigs remoteConfigs, GameLoader gameLoader, GameplayController gameplayController, IEffectResourceManager  effectResourceManager,
-            IAudioResourceManager audioResourceManager, IMusicBackgroundResourceManager backgroundMusic, LoseManager loseManager,
+            IAudioResourceManager audioResourceManager, IMusicBackgroundResourceManager backgroundMusic, IBackToMenuManager backToMenuManager, LoseManager loseManager,
             Character player, IWeaponShooter weaponShooter,
             ILoseModel scoreData, EnemyDeathTracker deathTracker,
             IAnalyticsService analyticsService)
@@ -42,6 +44,7 @@ namespace _Project.Scripts.Infrastructure
             _effectResourceManager = effectResourceManager;
             _audioResourceManager = audioResourceManager;
             _backgroundMusic = backgroundMusic;
+            _backToMenuManager = backToMenuManager;
             _loseManager = loseManager;
             _player = player;
             _weaponShooter = weaponShooter;
@@ -53,7 +56,7 @@ namespace _Project.Scripts.Infrastructure
         public async UniTask InitializeAsync()
         {
             await UniTask.WhenAll(_gameLoader.LoadAllAsync(), _remoteConfigs.Initialize(),
-                _effectResourceManager.LoadEffects(), _audioResourceManager.LoadClips(), _backgroundMusic.LoadMusic());
+                _effectResourceManager.LoadEffects(), _audioResourceManager.LoadClips(), _backgroundMusic.LoadMusic(), _backToMenuManager.LoadBackButton());
             
             _scoreData?.Reset();
 

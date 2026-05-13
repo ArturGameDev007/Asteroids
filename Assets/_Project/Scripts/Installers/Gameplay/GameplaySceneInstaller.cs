@@ -7,6 +7,7 @@ using _Project.Scripts.Services.Audio.Background;
 using _Project.Scripts.Services.Audio.SFX;
 using _Project.Scripts.Services.Effects;
 using _Project.Scripts.UI.Background;
+using _Project.Scripts.UI.BackToStartMenu;
 using _Project.Scripts.UI.GameScreen;
 using _Project.Scripts.UI.PerformanceShip;
 using UnityEngine;
@@ -22,6 +23,7 @@ namespace _Project.Scripts.Installers.Gameplay
         [Header("Prefabs UI")]
         [SerializeField] private AssetReference _endGameScreenPrefabReference;
         [SerializeField] private AssetReference _shipPerformancePrefabReference;
+        [SerializeField] private AssetReference _backToStartMenu;
 
         [Header("Container For Objects Pools")]
         [SerializeField] private Transform _containerForPools;
@@ -42,7 +44,7 @@ namespace _Project.Scripts.Installers.Gameplay
         [SerializeField] private AssetReference _explosionClip;
         [SerializeField] private AssetReference _shootClip;
         [SerializeField] private AssetReference _backgroundMusic;
-
+        
         public override void InstallBindings()
         {
             Container.Bind<IResourceLoader>().To<AddressableResourceLoader>().AsSingle();
@@ -53,9 +55,13 @@ namespace _Project.Scripts.Installers.Gameplay
             Container.Bind<IEnemyDeathListener>().To<EnemyManager>().AsSingle();
             Container.Bind<RestartGame>().AsSingle();
             Container.Bind<ILoseModel>().To<ScoreData>().AsSingle();
-            
+
             Container.Bind<IMusicBackgroundResourceManager>().To<MusicBackgroundResourceManager>().AsSingle().WithArguments(_backgroundMusic);
             Container.Bind<LoseResourceManager>().AsSingle().WithArguments(_endGameScreenPrefabReference);
+            
+            Container.Bind<IGameplayView>().To<GameplayView>().FromComponentInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameplayPresenter>().AsSingle();
+            Container.Bind<IBackToMenuManager>().To<PanelBackToMenuResourceManager>().AsSingle().WithArguments(_backToStartMenu);
             
             BindBackgroundUI();
             BindPlayer();

@@ -9,7 +9,6 @@ namespace _Project.Scripts.UI.StartMenu
 {
     public class SceneLoader : ISceneLoader
     {
-        private const string GAME_SCENE_NAME = "Gameplay";
         private const int LOADING_TIME = 1500;
 
         private readonly IInstantiator _instantiator;
@@ -25,7 +24,7 @@ namespace _Project.Scripts.UI.StartMenu
             _resourceLoader = resourceLoader;
         }
 
-        public async UniTask LoadSceneAsync()
+        public async UniTask LoadSceneAsync(string sceneName)
         {
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
@@ -38,8 +37,8 @@ namespace _Project.Scripts.UI.StartMenu
             _loadingView = _instantiator.InstantiatePrefabForComponent<LoadingView>(prefab);
             _loadingView.Show();
 
-            var download = Addressables.DownloadDependenciesAsync(GAME_SCENE_NAME).ToUniTask();
-            var sceneHandle = Addressables.LoadSceneAsync(GAME_SCENE_NAME, activateOnLoad: false);
+            var download = Addressables.DownloadDependenciesAsync(sceneName).ToUniTask();
+            var sceneHandle = Addressables.LoadSceneAsync(sceneName, activateOnLoad: false);
             var delay = UniTask.Delay(LOADING_TIME);
 
             await UniTask.WhenAll(download, delay, sceneHandle.ToUniTask());

@@ -93,8 +93,4 @@ MonoBehaviour:
       _ufoPoolSize: 0
       _bulletPoolSize: 0
       _laserPoolSize: 0
-  _backgroundMusic:
-    m_AssetGUID: 33af0b8399fb6334694e74bb4fb39d29
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  _gameplayView: {fileID: 1766412570388683682, guid: a345c01491702504eaf86be723749742, type: 3}

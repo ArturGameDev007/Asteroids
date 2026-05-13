@@ -1,6 +1,7 @@
 using System;
 using _Project.Scripts.Services.Analytics;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.UI.StartMenu
@@ -25,12 +26,14 @@ namespace _Project.Scripts.UI.StartMenu
         {
             _startMenuView.StartButton.onClick.AddListener(OnStartClicked);
             _startMenuView.BuyProducts.onClick.AddListener(OnBuyProductsClicked);
+            _startMenuView.ExitGameButton.onClick.AddListener(OnExitClicked);
         }
 
         public void Dispose()
         {
             _startMenuView.StartButton.onClick.RemoveListener(OnStartClicked);
             _startMenuView.BuyProducts.onClick.RemoveListener(OnBuyProductsClicked);
+            _startMenuView.ExitGameButton.onClick.RemoveListener(OnExitClicked);
         }
 
         private void OnStartClicked()
@@ -38,12 +41,21 @@ namespace _Project.Scripts.UI.StartMenu
             _startMenuView.StartButton.interactable = false;
 
             _analyticsService.LogGameStart();
-            _sceneLoader.LoadSceneAsync().Forget();
+            _sceneLoader.LoadSceneAsync("Gameplay").Forget();
         }
 
         private void OnBuyProductsClicked()
         {
             _panelProducts.SetActive(true);
+        }
+
+        private void OnExitClicked()
+        {
+            Application.Quit();
+
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #endif
         }
     }
 }

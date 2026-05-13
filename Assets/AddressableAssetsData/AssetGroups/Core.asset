@@ -72,6 +72,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a345c01491702504eaf86be723749742
+    m_Address: UI-BackToStartMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a48e21ce93c61004d9c7b0a760cc74ca
     m_Address: ExplosionClip
     m_ReadOnly: 0
