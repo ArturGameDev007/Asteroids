@@ -55,8 +55,10 @@ namespace _Project.Scripts.Infrastructure
 
         public async UniTask InitializeAsync()
         {
-            await UniTask.WhenAll(_gameLoader.LoadAllAsync(), _remoteConfigs.Initialize(),
-                _effectResourceManager.LoadEffects(), _audioResourceManager.LoadClips(), _backgroundMusic.LoadMusic(), _backToMenuManager.LoadBackButton());
+            await UniTask.WhenAll(
+                _gameLoader.LoadAllAsync(), _remoteConfigs.Initialize(), _effectResourceManager.LoadEffects(), 
+                _audioResourceManager.LoadClips(), _backgroundMusic.LoadMusic(), _backToMenuManager.LoadBackButton()
+                );
             
             _scoreData?.Reset();
 

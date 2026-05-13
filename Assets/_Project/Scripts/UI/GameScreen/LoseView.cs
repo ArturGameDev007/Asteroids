@@ -21,6 +21,7 @@ namespace _Project.Scripts.UI.GameScreen
         [Header("Button")]
         [SerializeField] private Button _restartButton;
         
+        [Header("RectTransform")]
         [SerializeField] private RectTransform _panelTransform;
 
         private Canvas _canvas;
@@ -29,7 +30,6 @@ namespace _Project.Scripts.UI.GameScreen
         private Sequence _sequence;
         private IAnimationWindow _windowAnimation;
         
-
         [Inject]
         public void Construct(IAnimationWindow  windowAnimation)
         {
