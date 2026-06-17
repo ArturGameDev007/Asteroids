@@ -6,14 +6,16 @@ using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class GameLoader
+    public class GameLoader : IGameLoader
     {
         private readonly PlayerResourceManager _playerResourceManager;
         private readonly CoordinateResourceManager _coordinateResourceManager;
         private readonly EnemyResourceManager _enemyResourceManager;
         private readonly ProjectileResourceManager _projectileResourceManager;
 
-        public GameLoader(PlayerResourceManager playerResourceManager, CoordinateResourceManager coordinateResourceManager, EnemyResourceManager enemyResourceManager, ProjectileResourceManager projectileResourceManager)
+        public GameLoader(PlayerResourceManager playerResourceManager,
+            CoordinateResourceManager coordinateResourceManager, EnemyResourceManager enemyResourceManager,
+            ProjectileResourceManager projectileResourceManager)
         {
             _playerResourceManager = playerResourceManager;
             _coordinateResourceManager = coordinateResourceManager;

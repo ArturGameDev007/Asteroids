@@ -4,16 +4,17 @@ using _Project.Scripts.Player.Weapons;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class GameplayController
+    public class GameplayController : IGameplayController
     {
         private readonly EnemySpawnController _enemySpawnController;
         private readonly IControllable _controller;
         private readonly IShootable _shoot;
         private readonly Character _player;
 
-        private bool _isActive =  true;
+        private bool _isActive = true;
 
-        public GameplayController(EnemySpawnController enemySpawnController, IControllable controller, IShootable shoot, Character player)
+        public GameplayController(EnemySpawnController enemySpawnController, IControllable controller, IShootable shoot,
+            Character player)
         {
             _enemySpawnController = enemySpawnController;
             _controller = controller;
@@ -25,10 +26,10 @@ namespace _Project.Scripts.Infrastructure
         {
             if (!_isActive)
                 return;
-            
+
             _enemySpawnController.Process(deltaTime);
         }
-        
+
         public void ContinueGame()
         {
             _isActive = true;

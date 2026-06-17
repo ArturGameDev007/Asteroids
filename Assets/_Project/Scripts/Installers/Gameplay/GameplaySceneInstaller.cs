@@ -73,8 +73,8 @@ namespace _Project.Scripts.Installers.Gameplay
 
         private void BindGameplayInfrastructure()
         {
-            Container.Bind<GameLoader>().AsSingle();
-            Container.Bind<GameplayController>().AsSingle();
+            Container.Bind<IGameLoader>().To<GameLoader>().AsSingle();
+            Container.Bind<IGameplayController>().To<GameplayController>().AsSingle();
             
             Container.Bind<Game>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayEntryPoint>().AsSingle();

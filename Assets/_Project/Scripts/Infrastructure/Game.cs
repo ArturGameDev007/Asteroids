@@ -15,8 +15,8 @@ namespace _Project.Scripts.Infrastructure
     public class Game
     {
         private readonly IRemoteConfigs _remoteConfigs;
-        private readonly GameLoader _gameLoader;
-        private readonly GameplayController _gameplayController;
+        private readonly IGameLoader _gameLoader;
+        private readonly IGameplayController _gameplayController;
         private readonly IEffectResourceManager _effectResourceManager;
         private readonly IAudioResourceManager  _audioResourceManager;
         private readonly IMusicBackgroundResourceManager _backgroundMusic;
@@ -32,7 +32,7 @@ namespace _Project.Scripts.Infrastructure
 
         private bool _isInitialized;
 
-        public Game(IRemoteConfigs remoteConfigs, GameLoader gameLoader, GameplayController gameplayController, IEffectResourceManager  effectResourceManager,
+        public Game(IRemoteConfigs remoteConfigs, IGameLoader gameLoader, IGameplayController gameplayController, IEffectResourceManager  effectResourceManager,
             IAudioResourceManager audioResourceManager, IMusicBackgroundResourceManager backgroundMusic, IBackToMenuManager backToMenuManager, LoseManager loseManager,
             Character player, IWeaponShooter weaponShooter,
             ILoseModel scoreData, EnemyDeathTracker deathTracker,
